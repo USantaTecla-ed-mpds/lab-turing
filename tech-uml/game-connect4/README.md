@@ -19,16 +19,15 @@ Universo Santa Tecla
 [Youtube](https://www.youtube.com/watch?v=JBSbiilzg9U)
 ### vocabulary
 
-![Vocabulario]()  
+![Vocabulario](./docs/images/modeloConecta4.png)  
   
 ### initialState  
-  
-![Estado_inicial]()  
+
+![Estado_inicial](./docs/images/ConectaInicial.JPG)  
   
 ### finalState 
 
-![Estado_final]()  
-  
+![Estado_final](./docs/images/ConectaFinal.png)
 ### instructions  
   
 ![Instrucciones]()  
