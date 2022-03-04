@@ -1,0 +1,29 @@
+---
+Pile:
+  Tablau:
+    Column1: []
+    Column2: []
+    Column3: []
+    Column4: []
+    Column5: []
+    Column6: []
+    Column7: []
+    Waste: []
+    Card:
+      Rank: []
+      Suit:
+        Color: []
+        Club: []
+        Spade: []
+        Diamond: []
+        Heart: []
+    Stock: []
+    foundation:
+      SlotClub: []
+      SlotSpade: []
+      SlotDiamond: []
+      SlotHeart: []
+Player:
+  Move: []
+  Goal:
+    foundation: []
