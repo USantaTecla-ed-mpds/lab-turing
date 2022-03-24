@@ -1,0 +1,13 @@
+<svg height="300" width="200">
+  
+    <polygon points="100,20 180,180 20,180"
+  stroke="red" stroke-width=6 fill="transparent"/> 
+  <polygon points=" 180, 50 100, 220 20, 50,"
+           stroke="green" stroke-width=6 fill="transparent"/> 
+  <polygon points="100,75 140,120 60,120"
+  stroke="black" stroke-width=3 fill="transparent"/> 
+  <polygon points=" 130, 80 100, 130 70, 80,"
+           stroke="Blue" stroke-width=3 fill="transparent"/> 
+ </svg> 
+    
+
