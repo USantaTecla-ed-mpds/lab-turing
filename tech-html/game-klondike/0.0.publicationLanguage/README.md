@@ -4,6 +4,7 @@ Universo Santa Tecla
   
 ## requirements 
 
-* Escribe con un lenguaje de publicación (html/css, svg, ...) un tablero lo "más" parecido posible a la siguiente imagen
+* Escribe con un lenguaje de publicación (html) un tablero lo "más" parecido posible a la siguiente imagen del juego de Klondike
 
-![Tictactoe](../docs/images/klondike.png) 
+![Klondike](../0.0.publicationLanguage/image/klondike.png) 
+
