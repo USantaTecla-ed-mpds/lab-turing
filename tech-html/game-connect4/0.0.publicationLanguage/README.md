@@ -8,5 +8,5 @@ Universo Santa Tecla
 
 ![connect4](../0.0.publicationLanguage/image/conecta4.jpg) 
 
-![](tablero%20de%20Connect%204%20en%20HTML.txt)
+![](tablero de Connect 4 en HTML.txt)
 
