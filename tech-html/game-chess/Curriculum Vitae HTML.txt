@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <title>Curriculum Vitae</title>
+</head>
+<body>
+<h1>Curriculum Vitae</h1>
+<h2>Datos Personales:</h2>
+<tr>
+<td> 
+<p>Nombre: Michelle Torres Quiroz</p> 
+<p>Edad: 25 años</p> 
+<p>Domicilio: Av. Siempreviva N°17</p> 
+<p>Colonia: Anzures</p>
+<p>País: México DF. 04565</p> 
+<p>Teléfono: 55344595</p> 
+<p>Email: curriculum@gamil.com</p>  
+</td>
+  
+<td>
+<img src=https://www.pexels.com/es-es/foto/foto-de-retrato-de-mujer-hermosa-en-top-blanco-con-cuello-en-v-posando-2625122
+width ="100%"/>
+</td>
+</tr>
+<h3>Perfil:</h3> 
+  
+<tr>
+<td>
+<p>Emprendedora</p>
+<p>Negocios</p>
+</td>
+</tr>
+  
+<h4>Actitud:</h4> 
+<tr>
+<td>
+<p> Dinámica</p>
+<p> Responsable</p> 
+<p> Puntual</p> 
+<p> Liderazgo de grupos</p>
+<p> Visionaria</p> 
+<p> Motivadora</p> 
+<p> Estudio Académico: Universidad Autónoma</p>
+<p> Año:1996-2000</p>
+<p> Estudio Académico: Licenciada en derecho </p>
+<p> Año: 2001-2005</p>
+<p> Licenciada en ciencias de la comunicación</p>  
+
+</td>
+</tr>
+<h5>Actividad Laboral:</h5>
+  
+<td>
+<tr>
+ 
+<p>Empresa: Revista México</p>
+<p>Cargo: Asesor Jurídico</p>
+<p>Año: 2000-2011</p>
+<p>Empresa: Revista y periódico</p>
+<p>Cargo: Creadora de publicidad y edición</p> 
+<p>Año: 2000-2011</p>
+<p>Empresa: Revista y periódico</p> 
+<p>Cargo: Escritora de libros</p> 
+<p>Año: 2008-2011</p>
+<p>Empresa: website</p>
+<p>Cargo: Redactora de contenido</p>
+<p>Año: 2005-2011</p>
+
+</tr>
+</td>  
+</body>
