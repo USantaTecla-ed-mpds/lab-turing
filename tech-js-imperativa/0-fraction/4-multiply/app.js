@@ -12,4 +12,4 @@ console.writeln("Segunda fracción:");
 const numerador2   = console.readNumber("Introduce el numerador de la fracción: ");
 const denominador2 = console.readNumber("Introduce el denominador de la fracción: ");
 
-console.writeln(`La suma de la fracción ${numerador1}/${denominador1} y la fracción ${numerador2}/${denominador2} es la fraccion ${numerador1*denominador2+numerador2*denominador1}/${denominador1*denominador2}`);
+console.writeln(`El resultado de multiplicar la fracción ${numerador1}/${denominador1} por la fracción ${numerador2}/${denominador2} es la fraccion ${numerador1*numerador2}/${denominador1*denominador2}`);
