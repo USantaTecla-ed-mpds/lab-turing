@@ -1,15 +1,24 @@
 {
   "name": "tech-js-estructurada",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "JNO / Diego",
   "license": "ISC",
   "dependencies": {
     "console-mpds": "^1.0.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/USantaTecla-ed-mpds/lab-turing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/USantaTecla-ed-mpds/lab-turing/issues"
+  },
+  "homepage": "https://github.com/USantaTecla-ed-mpds/lab-turing#readme",
+  "description": ""
 }
