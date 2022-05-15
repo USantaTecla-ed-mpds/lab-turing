@@ -9,15 +9,16 @@ let userAnswer;
 let isFound=false;
 let counterAttemps=0;
 
-let maxOfIntervalSearched=MAXINTERVALDEFAULT/2;
+let maxOfIntervalSearched=MAXINTERVALDEFAULT;
 
 do{
-    userAnswer=console.readString(`¿Es menor, igual o mayor que ${maxOfIntervalSearched}?:`);
+    userAnswer=console.readString(`¿Es menor, igual o mayor que ${maxOfIntervalSearched/2}?:`);
     switch (userAnswer){
         case "menor":
             maxOfIntervalSearched/=2;
             break;
         case "mayor":
+            maxOfIntervalSearched/=2;
             maxOfIntervalSearched+=maxOfIntervalSearched/2;
             break;
         case "igual":
