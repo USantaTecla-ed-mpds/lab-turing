@@ -4,14 +4,16 @@
 const { Console } = require("console-mpds");
 const console = new Console();
 
-let serial="";
+let serial=[];
 let isZero;
 let isGreatherThanLast=true;
+let numberCounter=0;
 do{
-    newNumber= console.readString("Introduce números para formar una serie (acabando con 0): ");
-    isZero=newNumber==="0";
+    let newNumber= console.readNumber("Introduce números para formar una serie (acabando con 0): ");
+    isZero=newNumber===0;
     if(!isZero){
-        serial +=newNumber;
+        serial[numberCounter]=newNumber;
+        numberCounter++;
         if(serial.length>1){
             isGreatherThanLast &= newNumber>serial[serial.length-2];
         }
