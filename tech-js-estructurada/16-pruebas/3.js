@@ -13,7 +13,6 @@ let maxOfIntervalSearched=MAXINTERVALDEFAULT/2;
 
 do{
     userAnswer=console.readString(`¿Es menor, igual o mayor que ${maxOfIntervalSearched}?:`);
-    console.write(userAnswer);
     switch (userAnswer){
         case "menor":
             maxOfIntervalSearched/=2;
@@ -28,6 +27,6 @@ do{
             console.writeln(`Escribe una respuesta de las posibles (menor/mayor/igual)`);
     }
     counterAttemps++;
-}while(isFound);
+}while(!isFound);
 
 console.writeln(`He adivinado tu número ${maxOfIntervalSearched} en ${counterAttemps} intentos`);
