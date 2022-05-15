@@ -6,37 +6,42 @@ const { Console } = require("console-mpds");
 const console = new Console();
 
 let phrase = console.readString("Escribe una frase para determinar si es o no un PALÍNDROMO (sin mayúsculas):");
-
-let compactPhrase="";
-
+let compactPhraseArray=[];
 let j=0;
 for (let i=0;i<phrase.length;i++){
-
     if (phrase[i]!=" "){
-        compactPhrase[j]=phrase[i];
+        compactPhraseArray[j]=phrase[i];
         j++;
     }
 }
-
-for (let i=0;i<compactPhrase.length;i++){
-    switch(compactPhrase[i]){
+let reverseCompactPhraseArray=[];
+for (let i=0;i<compactPhraseArray.length;i++){
+    switch(compactPhraseArray[i]){
         case "á":
-            compactPhrase[i]="a";
+            compactPhraseArray[i]="a";
             break;
         case "é":
-            compactPhrase[i]="e";
+            compactPhraseArray[i]="e";
             break;
         case "í":
-            compactPhrase[i]="i";
+            compactPhraseArray[i]="e";
+            [i]="i";
             break;
         case "ó":
-            compactPhrase[i]="o";
+            compactPhraseArray[i]="o";
             break;
         case "ú":
-            compactPhrase[i]="u";
+            compactPhraseArray[i]="u";
             break;
         default:
-            //
     }
+    reverseCompactPhraseArray[(compactPhraseArray.length-1)-i]=compactPhraseArray[i];
 }
-console.writeln(compactPhrase);
+let isPalindrome=true;
+for (let letterIndex in compactPhraseArray){
+    isPalindrome &= compactPhraseArray[letterIndex]===reverseCompactPhraseArray[letterIndex];
+}
+console.writeln(`La frase "${phrase}" ${isPalindrome?"sí":"no"} es un palíndromo`);
+
+
+
