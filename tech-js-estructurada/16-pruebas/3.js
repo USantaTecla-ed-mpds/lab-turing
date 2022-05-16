@@ -4,7 +4,7 @@
 const { Console } = require("console-mpds");
 const console = new Console();
 
-const MAXINTERVALDEFAULT=100;
+const MAXINTERVALDEFAULT=1000000;
 let userAnswer;
 let isFound=false;
 let counterAttemps=0;
