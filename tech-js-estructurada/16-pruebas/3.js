@@ -11,17 +11,16 @@ let counterAttemps=0;
 
 let maxOfIntervalSearched=MAXINTERVALDEFAULT;
 let minOfIntervalSearched=0;
-let intervalToAsk=maxOfIntervalSearched/2;
+let middleInterval=maxOfIntervalSearched/2;
 do{
-    userAnswer=console.readString(`¿Es menor, igual o mayor que ${intervalToAsk}?:`);
+    userAnswer=console.readString(`¿Es menor, igual o mayor que ${middleInterval}?:`);
     switch (userAnswer){
         case "menor":
-            maxOfIntervalSearched=intervalToAsk;
-            intervalToAsk=(maxOfIntervalSearched-minOfIntervalSearched)/2;
+            maxOfIntervalSearched=middleInterval;
+            
             break;
         case "mayor":
-            minOfIntervalSearched=intervalToAsk;
-            intervalToAsk=3*(maxOfIntervalSearched)/4;
+            minOfIntervalSearched=middleInterval+1;
             break;
         case "igual":
             isFound=true;
@@ -29,6 +28,7 @@ do{
         default:
             console.writeln(`Escribe una respuesta de las posibles (menor/mayor/igual)`);
     }
+    middleInterval=((maxOfIntervalSearched+minOfIntervalSearched)-(maxOfIntervalSearched+minOfIntervalSearched)%2)/2;
     counterAttemps++;
 }while(!isFound);
 
