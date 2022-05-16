@@ -4,22 +4,24 @@
 const { Console } = require("console-mpds");
 const console = new Console();
 
-const MAXINTERVALDEFAULT=1000000;
+const MAXINTERVALDEFAULT=100;
 let userAnswer;
 let isFound=false;
 let counterAttemps=0;
 
 let maxOfIntervalSearched=MAXINTERVALDEFAULT;
-
+let minOfIntervalSearched=0;
+let intervalToAsk=maxOfIntervalSearched/2;
 do{
-    userAnswer=console.readString(`¿Es menor, igual o mayor que ${maxOfIntervalSearched/2}?:`);
+    userAnswer=console.readString(`¿Es menor, igual o mayor que ${intervalToAsk}?:`);
     switch (userAnswer){
         case "menor":
-            maxOfIntervalSearched/=2;
+            maxOfIntervalSearched=intervalToAsk;
+            intervalToAsk=(maxOfIntervalSearched-minOfIntervalSearched)/2;
             break;
         case "mayor":
-            maxOfIntervalSearched/=2;
-            maxOfIntervalSearched+=maxOfIntervalSearched/2;
+            minOfIntervalSearched=intervalToAsk;
+            intervalToAsk=3*(maxOfIntervalSearched)/4;
             break;
         case "igual":
             isFound=true;
