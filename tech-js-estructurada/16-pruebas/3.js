@@ -16,7 +16,7 @@ do{
     userAnswer=console.readString(`¿Es menor, igual o mayor que ${middleInterval}?:`);
     switch (userAnswer){
         case "menor":
-            maxOfIntervalSearched=middleInterval;
+            maxOfIntervalSearched=middleInterval-1;
             
             break;
         case "mayor":
