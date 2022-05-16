@@ -9,7 +9,7 @@ let isZero;
 let isGreatherThanLast=true;
 let numberCounter=0;
 do{
-    let newNumber= console.readNumber("Introduce números para formar una serie (acabando con 0): ");
+    const newNumber= console.readNumber("Introduce números para formar una serie (acabando con 0): ");
     isZero=newNumber===0;
     if(!isZero){
         serial[numberCounter]=newNumber;

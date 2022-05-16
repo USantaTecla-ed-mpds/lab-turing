@@ -4,32 +4,29 @@
 const { Console } = require("console-mpds");
 const console = new Console();
 
-const MAXINTERVALDEFAULT=1000000;
-let userAnswer;
-let isFound=false;
-let counterAttemps=0;
+let isFound = false;
+let counterAttemps = 0;
 
-let maxOfIntervalSearched=MAXINTERVALDEFAULT;
-let minOfIntervalSearched=0;
-let middleInterval=maxOfIntervalSearched/2;
-do{
-    userAnswer=console.readString(`¿Es menor, igual o mayor que ${middleInterval}?:`);
-    switch (userAnswer){
+let maxOfIntervalSearched = 1000000;
+let minOfIntervalSearched = 0;
+let middleInterval = maxOfIntervalSearched / 2;
+do {
+    let userAnswer = console.readString(`¿Es menor, igual o mayor que ${middleInterval}?:`);
+    switch (userAnswer) {
         case "menor":
-            maxOfIntervalSearched=middleInterval-1;
-            
+            maxOfIntervalSearched = middleInterval - 1;
             break;
         case "mayor":
-            minOfIntervalSearched=middleInterval+1;
+            minOfIntervalSearched = middleInterval + 1;
             break;
         case "igual":
-            isFound=true;
+            isFound = true;
             break;
         default:
             console.writeln(`Escribe una respuesta de las posibles (menor/mayor/igual)`);
     }
-    middleInterval=((maxOfIntervalSearched+minOfIntervalSearched)-(maxOfIntervalSearched+minOfIntervalSearched)%2)/2;
+    middleInterval = ((maxOfIntervalSearched + minOfIntervalSearched) - (maxOfIntervalSearched + minOfIntervalSearched) % 2) / 2;
     counterAttemps++;
-}while(!isFound);
+} while (!isFound);
 
-console.writeln(`He adivinado tu número ${maxOfIntervalSearched} en ${counterAttemps} intentos`);
+console.writeln(`He adivinado tu número ${middleInterval} en ${counterAttemps} intentos`);
