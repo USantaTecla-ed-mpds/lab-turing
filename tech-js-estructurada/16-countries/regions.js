@@ -508,10 +508,10 @@ const console = new Console();
 
 let regionsUniques = [REGIONS[0]];
 let indexRegions = 0;
-for (let i=0;i<REGIONS.length;i++ ) {
+for (let i=1;i<REGIONS.length;i++ ) {
 
     let j = 0;
-    while (REGIONS[i] != regionsUniques[j-1] && j < regionsUniques.length) {
+    while (REGIONS[i] != regionsUniques[j] && j < regionsUniques.length) {
         j++;
     }
     if (j === regionsUniques.length) {
@@ -520,5 +520,23 @@ for (let i=0;i<REGIONS.length;i++ ) {
     }
 }
 console.writeln(regionsUniques);
+
+let subRegions=[[""]];
+let indexSubRegions=0;
+for (let region of regionsUniques){
+    let j=0;
+    for (let i in REGIONS){
+        if(REGIONS[i]===region){
+            //TODO: Filtrar la subregion no esté ya en el subarray
+            subRegions[j][indexSubRegions]=SUBREGIONS[i];
+            indexSubRegions++;
+        }
+       
+    }
+    j++;
+}
+console.writeln(subRegions);
+
+for(let i=0,j=0;i<regionsUniques;)
 
 
