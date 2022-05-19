@@ -519,17 +519,12 @@ for (let i = 1; i < REGIONS.length; i++) {
         indexRegions++;
     }
 }
-console.writeln(regionsUniques);
-
 let subRegionsUniques = [[" "]];
 let indexSubRegions = 0;
-
 let j = 0;
 for (let region of regionsUniques) {
-
     for (let i in REGIONS) {
         if (REGIONS[i] === region) {
-            //TODO: Revisar por qué lo mete todo en el primero
             let k = 0;
             while (subRegionsUniques[j] != undefined && SUBREGIONS[i] != subRegionsUniques[j][k] && k < subRegionsUniques[j].length) {
                 k++;
@@ -538,7 +533,7 @@ for (let region of regionsUniques) {
                 if (subRegionsUniques[j] === undefined) {
                     subRegionsUniques[j] = [];
                 }
-                else if(SUBREGIONS[i]!=undefined){
+                else if (SUBREGIONS[i] != undefined) {
                     subRegionsUniques[j][indexSubRegions] = SUBREGIONS[i];
                 }
                 indexSubRegions++;
@@ -547,7 +542,6 @@ for (let region of regionsUniques) {
     }
     j++;
 }
-console.writeln(subRegionsUniques);
 for (let i in regionsUniques) {
     console.writeln(`${regionsUniques[i]}:`);
     for (let j in subRegionsUniques[i]) {
