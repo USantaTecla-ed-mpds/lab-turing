@@ -506,7 +506,7 @@ const SUBREGIONS = [
 const { Console } = require("console-mpds");
 const console = new Console();
 
-let regionsUniques = [REGIONS[0]];
+let regionsUniques = [];
 let indexRegions = 0;
 for (let i = 1; i < REGIONS.length; i++) {
 
@@ -519,21 +519,21 @@ for (let i = 1; i < REGIONS.length; i++) {
         indexRegions++;
     }
 }
-let subRegionsUniques = [[" "]];
+let subRegionsUniques = [];
 let indexSubRegions = 0;
 let j = 0;
 for (let region of regionsUniques) {
+    if (subRegionsUniques[j] === undefined) {
+        subRegionsUniques[j] = [];
+    }
     for (let i in REGIONS) {
         if (REGIONS[i] === region) {
             let k = 0;
-            while (subRegionsUniques[j] != undefined && SUBREGIONS[i] != subRegionsUniques[j][k] && k < subRegionsUniques[j].length) {
+            while (SUBREGIONS[i] != subRegionsUniques[j][k] && k < subRegionsUniques[j].length) {
                 k++;
             }
-            if (subRegionsUniques[j] === undefined || k === subRegionsUniques[j].length) {
-                if (subRegionsUniques[j] === undefined) {
-                    subRegionsUniques[j] = [];
-                }
-                else if (SUBREGIONS[i] != undefined) {
+            if (k === subRegionsUniques[j].length) {
+                if (SUBREGIONS[i] != undefined) {
                     subRegionsUniques[j][indexSubRegions] = SUBREGIONS[i];
                 }
                 indexSubRegions++;
