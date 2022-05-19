@@ -508,7 +508,7 @@ const console = new Console();
 
 let regionsUniques = [REGIONS[0]];
 let indexRegions = 0;
-for (let i=1;i<REGIONS.length;i++ ) {
+for (let i = 1; i < REGIONS.length; i++) {
 
     let j = 0;
     while (REGIONS[i] != regionsUniques[j] && j < regionsUniques.length) {
@@ -521,31 +521,37 @@ for (let i=1;i<REGIONS.length;i++ ) {
 }
 console.writeln(regionsUniques);
 
-let subRegions=[[""]];
-let indexSubRegions=0;
+let subRegionsUniques = [[" "]];
+let indexSubRegions = 0;
 
-for (let region of regionsUniques){
-    let j=0;
-    for (let i in REGIONS){
-        if(REGIONS[i]===region){
+let j = 0;
+for (let region of regionsUniques) {
+
+    for (let i in REGIONS) {
+        if (REGIONS[i] === region) {
             //TODO: Revisar por qué lo mete todo en el primero
-            let k=0;
-            while(SUBREGIONS[i] != subRegions[j][k] && k < subRegions[j].length){
+            let k = 0;
+            while (subRegionsUniques[j] != undefined && SUBREGIONS[i] != subRegionsUniques[j][k] && k < subRegionsUniques[j].length) {
                 k++;
             }
-            if (k === subRegions[j].length) {
-             subRegions[j][indexSubRegions]=SUBREGIONS[i];
-             indexSubRegions++;
+            if (subRegionsUniques[j] === undefined || k === subRegionsUniques[j].length) {
+                if (subRegionsUniques[j] === undefined) {
+                    subRegionsUniques[j] = [];
+                }
+                else if(SUBREGIONS[i]!=undefined){
+                    subRegionsUniques[j][indexSubRegions] = SUBREGIONS[i];
+                }
+                indexSubRegions++;
             }
-        } 
+        }
     }
     j++;
 }
-console.writeln(subRegions);
-for(let i in regionsUniques){
+console.writeln(subRegionsUniques);
+for (let i in regionsUniques) {
     console.writeln(`${regionsUniques[i]}:`);
-    for (let j in subRegions[i]){
-        console.writeln(`\t ${subRegions[i][j]}`);
+    for (let j in subRegionsUniques[i]) {
+        console.writeln(`\t ${subRegionsUniques[i][j]}`);
     }
 }
 
