@@ -528,7 +528,7 @@ for (let region of regionsUniques){
     let j=0;
     for (let i in REGIONS){
         if(REGIONS[i]===region){
-            //TODO: Filtrar la subregion no esté ya en el subarray
+            //TODO: Revisar por qué lo mete todo en el primero
             let k=0;
             while(SUBREGIONS[i] != subRegions[j][k] && k < subRegions[j].length){
                 k++;
