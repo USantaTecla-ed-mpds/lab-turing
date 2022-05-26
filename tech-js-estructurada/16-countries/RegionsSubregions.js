@@ -520,28 +520,29 @@ for (let i = 1; i < REGIONS.length; i++) {
     }
 }
 let subRegionsUniques = [];
-let indexSubRegions = 0;
-let j = 0;
+indexRegions = 0;
 for (let region of regionsUniques) {
-    if (subRegionsUniques[j] === undefined) {
-        subRegionsUniques[j] = [];
+    if (subRegionsUniques[indexRegions] === undefined) {
+        subRegionsUniques[indexRegions] = [];
     }
+    let indexNewSubRegions = 0;
     for (let i in REGIONS) {
         if (REGIONS[i] === region) {
-            let k = 0;
-            while (SUBREGIONS[i] != subRegionsUniques[j][k] && k < subRegionsUniques[j].length) {
-                k++;
-            }
-            if (k === subRegionsUniques[j].length) {
-                if (SUBREGIONS[i] != undefined) {
-                    subRegionsUniques[j][indexSubRegions] = SUBREGIONS[i];
-                }
+            let  indexSubRegions= 0;
+            while (SUBREGIONS[i] != subRegionsUniques[indexRegions][indexSubRegions] && indexSubRegions < subRegionsUniques[indexRegions].length) {
                 indexSubRegions++;
+            }
+            if (indexSubRegions === subRegionsUniques[indexRegions].length) {
+                if (SUBREGIONS[i] != undefined) {
+                    subRegionsUniques[indexRegions][indexNewSubRegions] = SUBREGIONS[i];
+                }
+                indexNewSubRegions++;
             }
         }
     }
-    j++;
+    indexRegions++;
 }
+
 for (let i in regionsUniques) {
     console.writeln(`${regionsUniques[i]}:`);
     for (let j in subRegionsUniques[i]) {
