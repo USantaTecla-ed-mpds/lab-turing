@@ -9,7 +9,8 @@ function playMastermind() {
 
     function playGame(){
         const COLORS = ['r','g','y','b','m','c'];
-        const secretCombination = getSecretCombination(COLORS);
+        const secretCombination = generateSecretCombination(COLORS);
+        console.writeln(secretCombination); //Depurando
         let attempts = [];
         let finished; 
         showBoard(attempts);
@@ -35,19 +36,21 @@ function playMastermind() {
         return result;
     }
 
-    function getSecretCombination(COLORS){
-        //return "bycr";
+    function generateSecretCombination(COLORS){
+//Pendiente depurar
         const COMBINATION_LENGHT=4;
-        let secretCombinationArray = [...COLORS];
-        for (let i = 0; i < COLORS.length - COMBINATION_LENGHT; i++) {
-			secretCombinationArray.splice(Math.floor(Math.random() * secretCombinationArray.length),1);
+        let secretCombinationArray = [];
+        for (let i = 0; i < COMBINATION_LENGHT; i++) {
+            let randomColor;
+            let repeated=false;
+            do {
+                randomColor= COLORS[parseInt(Math.random() * COLORS.length)];
+                for (j=0;!repeated && j<secretCombinationArray.length-1;j++){
+                    repeated=secretCombinationArray[j]===randomColor;
+                }
+            }while(!repeated)
+			secretCombinationArray[i]=randomColor;
 		}
-        const shuffledSecretCombinationArray = secretCombinationArray.sort((a, b) => 0.5 - Math.random());
-        let secretCombination = "";
-        for (let i = 0; i < shuffledSecretCombinationArray.length; i++) {
-			secretCombination += shuffledSecretCombinationArray[i];
-		}
-        //console.writeln(`The secret combination is:${secretCombination}`);
         return secretCombination;
     }
 
