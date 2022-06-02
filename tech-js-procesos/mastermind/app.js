@@ -15,8 +15,8 @@ function playMastermind() {
         let finished; 
         showBoard(attempts);
         do{
-            let proposedCombination = getProposedCombination(secretCombination.length, COLORS);
-            let result = checkProposedCombination(secretCombination, proposedCombination);
+            const proposedCombination = getProposedCombination(secretCombination.length, COLORS);
+            const result = checkProposedCombination(secretCombination, proposedCombination);
             finished = showAttemptResult(proposedCombination, attempts, result);
         } while(!finished);
     }
@@ -44,10 +44,7 @@ function playMastermind() {
             let repeated; 
             do {
                 randomColor= COLORS[parseInt(Math.random() * COLORS.length)];
-                repeated=false;
-                for (j=0;!repeated && j<secretCombinationArray.length;j++){
-                    repeated=secretCombinationArray[j]===randomColor;
-                }
+                repeated=searchValueInArray(randomColor,secretCombinationArray);
                 if(!repeated){
                     secretCombinationArray[i]=randomColor;
                 }
@@ -89,14 +86,17 @@ function playMastermind() {
         if(!correct){
             console.writeln(WRONG_LENGTH_ERROR);
         }
-        for(let i=0; i<proposedCombination.length && correct; i++){
-            correct = isAColor(proposedCombination[i], COLORS);
+        else {
+            for(let i=0; correct && i<proposedCombination.length; i++){
+                correct = searchValueInArray(proposedCombination[i], COLORS);
+            }
             if(!correct){
                 console.writeln(WRONG_COLOR_ERROR);
-            } else {
-                correct = !isRepeated(proposedCombination[i], proposedCombination, i);
+            } 
+            else {
+                correct = !hasRepeatedCharacter(proposedCombination);
                 if(!correct){
-                    console.writeln(REPEATED_COLOR_ERROR);
+                console.writeln(REPEATED_COLOR_ERROR);
                 }    
             }
         }
@@ -111,18 +111,22 @@ function playMastermind() {
         return stringTarget;
     }
 
-    function isAColor(value, COLORS){
+    function searchValueInArray(value, arraySource){
         let found = false;
-        for (let i = 0; i < COLORS.length && !found; i++) {
-            found = COLORS[i] === value;
+        for (let i = 0; i < arraySource.length && !found; i++) {
+            found = arraySource[i] === value;
         }
         return found;
     }
 
-    function isRepeated(color, proposedCombination, indexColor){
+    function hasRepeatedCharacter(combinationString){
         let repeated=false;
-        for(let i=0; i<proposedCombination.length && !repeated; i++){
-            repeated = proposedCombination[i]===color && i!==indexColor;
+        for(let i in combinationString){
+            for(let j=0;!repeated && j<combinationString.length; j++){
+               if(j!=i){
+                   repeated = combinationString[j]===combinationString[i];
+               }
+            }
         }
         return repeated;
     }
@@ -134,20 +138,12 @@ function playMastermind() {
             if(secretCombination[i]===proposedCombination[i]){
                 black++;
             }else{
-                if(isOnSecretCombination(proposedCombination[i], secretCombination)){
+                if(searchValueInArray(proposedCombination[i], secretCombination)){
                     white++;
                 }
             }
         }
         return [black, white];
-    }
-
-    function isOnSecretCombination(color, secretCombination){
-        let found=false;
-        for(let i=0; i<secretCombination.length && !found; i++){
-            found = secretCombination[i]===color;
-        }
-        return found;
     }
 
     function showAttemptResult(proposedCombination, attempts, result){
