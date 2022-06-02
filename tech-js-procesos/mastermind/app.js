@@ -37,21 +37,23 @@ function playMastermind() {
     }
 
     function generateSecretCombination(COLORS){
-//Pendiente depurar
         const COMBINATION_LENGHT=4;
         let secretCombinationArray = [];
         for (let i = 0; i < COMBINATION_LENGHT; i++) {
             let randomColor;
-            let repeated=false;
+            let repeated; 
             do {
                 randomColor= COLORS[parseInt(Math.random() * COLORS.length)];
-                for (j=0;!repeated && j<secretCombinationArray.length-1;j++){
+                repeated=false;
+                for (j=0;!repeated && j<secretCombinationArray.length;j++){
                     repeated=secretCombinationArray[j]===randomColor;
                 }
-            }while(!repeated)
-			secretCombinationArray[i]=randomColor;
+                if(!repeated){
+                    secretCombinationArray[i]=randomColor;
+                }
+            }while(repeated)
 		}
-        return secretCombination;
+        return arrayToString(secretCombinationArray);
     }
 
     function showBoard(attempts) {
@@ -81,7 +83,7 @@ function playMastermind() {
 
     function validateProposedCombination(proposedCombination, COLORS, combinationLength){
         const WRONG_LENGTH_ERROR = `Wrong proposed combination length`;
-        const WRONG_COLOR_ERROR = `Wrong colors, they must be: ${getColorsText(COLORS)}`;
+        const WRONG_COLOR_ERROR = `Wrong colors, they must be: ${arrayToString(COLORS)}`;
         const REPEATED_COLOR_ERROR = `Wrong proposed combination, at least one color is repeated`;
         let correct = proposedCombination.length === combinationLength;
         if(!correct){
@@ -101,12 +103,12 @@ function playMastermind() {
         return correct;
     }
 
-    function getColorsText(COLORS){
-        let colorsText = "";
-        for (let i = 0; i < COLORS.length; i++) {
-            colorsText += COLORS[i];
+    function arrayToString(arraySource){
+        let stringTarget = "";
+        for (let i = 0; i < arraySource.length; i++) {
+            stringTarget += arraySource[i];
         }
-        return colorsText;
+        return stringTarget;
     }
 
     function isAColor(value, COLORS){
