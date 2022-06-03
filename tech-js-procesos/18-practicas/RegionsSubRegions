@@ -1,3 +1,4 @@
+ //TODO: CONVERTIR EN FUNCIONES, FUNCIONES DE ORDEN SUPERIOR, ANONIMAS Y FLECHAS
 const REGIONS = [
     "Americas",
     "Americas",
@@ -509,7 +510,7 @@ const console = new Console();
 let regionsUniques = [];
 let indexRegions = 0;
 for (let i = 1; i < REGIONS.length; i++) {
-
+    //TODO: CONVERTIR EN FUNCIONES, FUNCIONES DE ORDEN SUPERIOR, ANONIMAS Y FLECHAS
     let j = 0;
     while (REGIONS[i] != regionsUniques[j] && j < regionsUniques.length) {
         j++;
@@ -549,5 +550,3 @@ for (let i in regionsUniques) {
         console.writeln(`\t ${subRegionsUniques[i][j]}`);
     }
 }
-
-
