@@ -46,7 +46,7 @@ function playMastermind() {
             if(attempts.length===0){
                 console.writeln(`----- MASTERMIND -----`);
             }
-            console.writeln(`\n${attemptText}\n${secretCombinationText}${attemptsLines.length !== 0 ? `${attemptsLines}` : ``}`);
+            console.writeln(`\n${attemptText}\n${secretCombinationText}${attemptsLines}`);
 
             function getAttemptsLines(attempts) {
                 let lines = ""
@@ -89,6 +89,18 @@ function playMastermind() {
                     }
                 }
                 return correct;
+
+                function hasRepeatedCharacter(combinationString) {
+                    let repeated = false;
+                    for (let i in combinationString) {
+                        for (let j = 0; !repeated && j < combinationString.length; j++) {
+                            if (j != i) {
+                                repeated = combinationString[j] === combinationString[i];
+                            }
+                        }
+                    }
+                    return repeated;
+                }
             }
         }
     
@@ -100,24 +112,27 @@ function playMastermind() {
             return stringTarget;
         }
     
+        function checkProposedCombination(secretCombination, proposedCombination) {
+            let black = 0;
+            let white = 0;
+            for (let i = 0; i < secretCombination.length; i++) {
+                if (secretCombination[i] === proposedCombination[i]) {
+                    black++;
+                } else {
+                    if (searchValueInArray(proposedCombination[i], secretCombination)) {
+                        white++;
+                    }
+                }
+            }
+            return [black, white];
+        }
+        
         function searchValueInArray(value, arraySource) {
             let found = false;
             for (let i = 0; i < arraySource.length && !found; i++) {
                 found = arraySource[i] === value;
             }
             return found;
-        }
-    
-        function hasRepeatedCharacter(combinationString) {
-            let repeated = false;
-            for (let i in combinationString) {
-                for (let j = 0; !repeated && j < combinationString.length; j++) {
-                    if (j != i) {
-                        repeated = combinationString[j] === combinationString[i];
-                    }
-                }
-            }
-            return repeated;
         }
     
         function checkResult(secretCombination, proposedCombination, attempts) {
@@ -134,20 +149,7 @@ function playMastermind() {
             }
             return result;
 
-            function checkProposedCombination(secretCombination, proposedCombination) {
-                let black = 0;
-                let white = 0;
-                for (let i = 0; i < secretCombination.length; i++) {
-                    if (secretCombination[i] === proposedCombination[i]) {
-                        black++;
-                    } else {
-                        if (searchValueInArray(proposedCombination[i], secretCombination)) {
-                            white++;
-                        }
-                    }
-                }
-                return [black, white];
-            }
+            
         }
 
         function showResult(result){
