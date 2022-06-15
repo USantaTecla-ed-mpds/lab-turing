@@ -1,10 +1,3 @@
-/*
-Hacer una función para pedir el numero de jugadores 0 1 2
-La maquina usa movimientos aleatorios. Pone en posicion aleatoria vacia, mueve una ficha aleatoria
-Segun el número de humanos la función debe devolver el array con funciones a las que va a llamar.
-
-*/
-
 const { Console } = require("console-mpds");
 
 const console = new Console();
@@ -16,7 +9,7 @@ function playTicTacToe() {
   } while (isResumed());
 
   function playGame() {
-    const MAX_PLAYERS = 2;
+    const MAX_PLAYERS = 2
     const MAX_TOKENS = 3;
     const TOKEN_EMPTY = ` `;
     let tokens = [
@@ -24,11 +17,12 @@ function playTicTacToe() {
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY],
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY]
     ];
+    const numPlayers = getValidNumPlayers();
     let turn = 0;
     let winner;
     do {
       writelnTokens(tokens);
-      placeToken(tokens, turn);
+      selectTypeOfPlayerPlaceToken(numPlayers, turn)(tokens, turn);
       winner = isTicTacToe(tokens, turn);
       if (!winner) {
         turn = nextTurn(turn);
@@ -37,38 +31,97 @@ function playTicTacToe() {
     writelnTokens(tokens);
     console.writeln(`Victoria para ${getToken(turn)}`);
 
-    function placeToken(tokens, turn) {
-      console.writeln(`Turno para ${getToken(turn)}`);
+    function getValidNumPlayers() {
+      let numPlayers;
       let error;
-      let originRow;
-      let originColumn;
-      const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
-      if (movement) {
-        do {
-          originRow = read(`Fila origen`);
-          originColumn = read(`Columna origen`);
-          error = !isOccupied(tokens, originRow, originColumn, turn);
-          if (error) {
-            console.writeln(`No hay una ficha de la propiedad de ${getToken(turn)}`);
-          }
-        } while (error);
-      }
-      let targetRow;
-      let targetColumn;
       do {
-        targetRow = read(`Fila destino`);
-        targetColumn = read(`Columna destino`);
-        error = !isEmpty(tokens, targetRow, targetColumn);
+        numPlayers = console.readNumber(`¿Cuántos jugadores hay?[0,1,2]: `);
+        error = numPlayers < 0 || numPlayers > 2;
         if (error) {
-          console.writeln(`Indique una celda vacía`);
+          console.writeln(`ERROR: Por favor, introduce un número de jugadores válido`);
         }
       } while (error);
-      if (movement) {
-        tokens[originRow][originColumn] = TOKEN_EMPTY;
-      }
-      tokens[targetRow][targetColumn] = getToken(turn);
+      return numPlayers;
     }
-    
+
+    function selectTypeOfPlayerPlaceToken(numPlayers, turn) {
+      let functionSelected;
+      let functions=[placeRandomToken,placeToken];
+      if (numPlayers === 0) {
+        functionSelected= functions[0];
+      }
+      else if (numPlayers === 1) {
+       functionSelected=functions[turn];
+      }
+      else {
+        functionSelected= functions[1];
+      }
+      return functionSelected;
+
+      function placeRandomToken(tokens, turn) {
+        let error;
+        let originRow;
+        let originColumn;
+        const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
+        if (movement) {
+          do {
+            originRow = parseInt(Math.random() * tokens.length);
+            originColumn = parseInt(Math.random() * tokens[0].length);
+            error = !isOccupied(tokens, originRow, originColumn, turn);
+            if (error) {
+              console.writeln(`No hay una ficha de la propiedad de ${getToken(turn)}`);
+            }
+          } while (error);
+        }
+        let targetRow;
+        let targetColumn;
+        do {
+          targetRow = parseInt(Math.random() * tokens.length);
+          targetColumn = parseInt(Math.random() * tokens[0].length);
+          error = !isEmpty(tokens, targetRow, targetColumn);
+          if (error) {
+            console.writeln(`Indique una celda vacía`);
+          }
+        } while (error);
+        if (movement) {
+          tokens[originRow][originColumn] = TOKEN_EMPTY;
+        }
+        tokens[targetRow][targetColumn] = getToken(turn);
+      }
+      
+      function placeToken(tokens, turn) {
+        console.writeln(`Turno para ${getToken(turn)}`);
+        let error;
+        let originRow;
+        let originColumn;
+        const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
+        if (movement) {
+          do {
+            originRow = read(`Fila origen`);
+            originColumn = read(`Columna origen`);
+            error = !isOccupied(tokens, originRow, originColumn, turn);
+            if (error) {
+              console.writeln(`No hay una ficha de la propiedad de ${getToken(turn)}`);
+            }
+          } while (error);
+        }
+        let targetRow;
+        let targetColumn;
+        do {
+          targetRow = read(`Fila destino`);
+          targetColumn = read(`Columna destino`);
+          error = !isEmpty(tokens, targetRow, targetColumn);
+          if (error) {
+            console.writeln(`Indique una celda vacía`);
+          }
+        } while (error);
+        if (movement) {
+          tokens[originRow][originColumn] = TOKEN_EMPTY;
+        }
+        tokens[targetRow][targetColumn] = getToken(turn);
+      }
+    }
+
     function getNumTokens(tokens) {
       let empties = 0;
       for (let i = 0; i < tokens.length; i++) {
@@ -86,7 +139,7 @@ function playTicTacToe() {
       let error;
       do {
         position = console.readNumber(`${title}: `);
-        error = position < 1 || 3 < position;
+        error = position < 1 || MAX_TOKENS < position;
         if (error) {
           console.writeln(`Por favor un numero entre 1 y ${MAX_TOKENS} inclusives`)
         }
@@ -167,7 +220,7 @@ function playTicTacToe() {
     let answer;
     let error = false;
     do {
-      answer = console.readString(`¿Quieres jugar otra partida? `);
+      answer = console.readString(`¿Quieres jugar otra partida?[si/no] `);
       result = answer === `si`;
       error = !result && answer !== `no`;
       if (error) {
