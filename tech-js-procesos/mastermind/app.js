@@ -13,13 +13,14 @@ function playMastermind() {
         const MAX_ATTEMPT = 10;
         const secretCombination = generateSecretCombination(COLORS, COMBINATION_LENGHT);
         let attempts = [];
+        let blacksAndWhites = [];
         console.writeln(`----- MASTERMIND -----`);
         console.writeln(`\n0 attempt(s):\n****`);
         do {
-            const proposedCombination = getCorrectProposedCombination(COLORS, COMBINATION_LENGHT);
-            attempts[attempts.length] = getProposedCombinationResult(secretCombination, proposedCombination);
-            showBoard(attempts);
-        } while(attempts[attempts.length - 1][1] < COMBINATION_LENGHT && attempts.length < MAX_ATTEMPT);
+            attempts[attempts.length] = getCorrectProposedCombination(COLORS, COMBINATION_LENGHT);
+            blacksAndWhites[blacksAndWhites.length] = getProposedCombinationResult(secretCombination, attempts[attempts.length - 1]);
+            showBoard(attempts, blacksAndWhites);
+        } while (blacksAndWhites[blacksAndWhites.length - 1][0] < COMBINATION_LENGHT && attempts.length < MAX_ATTEMPT);
         console.writeln(`You've ${attempts.length < MAX_ATTEMPT ? "won!!! ;-)" : "lost!!! :-("}`);
 
         function generateSecretCombination(COLORS, COMBINATION_LENGHT) {
@@ -38,11 +39,12 @@ function playMastermind() {
         }
 
         function searchValueInArray(value, arraySource) {
-            let found = false;
-            for (let i = 0; !found && i < arraySource.length; i++) {
-                found = arraySource[i] === value;
+            for (let i = 0; i < arraySource.length; i++) {
+                if (arraySource[i] === value) {
+                    return true;
+                }
             }
-            return found;
+            return false;
         }
 
         function arrayToString(arraySource) {
@@ -55,54 +57,54 @@ function playMastermind() {
 
         function getCorrectProposedCombination(COLORS, combinationLength) {
             let proposedCombination;
-            let errorCode;
+            let errorCodeInCombination;
             do {
                 proposedCombination = console.readString(`Propose a combination: `);
-                errorCode = checkErrorsInProposedCombination(proposedCombination, COLORS, combinationLength);
-                if (errorCode > 0) {
-                    showError(errorCode, COLORS);
+                errorCodeInCombination = checkErrorsInProposedCombination(proposedCombination, COLORS, combinationLength);
+                if (errorCodeInCombination > 0) {
+                    showError(errorCodeInCombination, COLORS);
                 }
-            } while (errorCode != 0);
+            } while (errorCodeInCombination != 0);
             return proposedCombination;
 
             function checkErrorsInProposedCombination(proposedCombination, COLORS, combinationLength) {
                 const WRONG_LENGTH_ERROR = 1;
                 const WRONG_COLOR_ERROR = 2;
                 const REPEATED_COLOR_ERROR = 3;
-                let errorCode = 0;
+                let errorCodeInCombination = 0;
                 if (!(proposedCombination.length === combinationLength)) {
-                    errorCode = WRONG_LENGTH_ERROR;
+                    errorCodeInCombination = WRONG_LENGTH_ERROR;
                 } else {
                     let found = true;
                     for (let i = 0; found && i < proposedCombination.length; i++) {
                         found = searchValueInArray(proposedCombination[i], COLORS);
                     }
                     if (!found) {
-                        errorCode = WRONG_COLOR_ERROR;
+                        errorCodeInCombination = WRONG_COLOR_ERROR;
                     } else {
                         if (hasRepeteadElement(proposedCombination)) {
-                            errorCode = REPEATED_COLOR_ERROR
+                            errorCodeInCombination = REPEATED_COLOR_ERROR
                         }
                     }
                 }
-                return errorCode;
-            }
+                return errorCodeInCombination;
 
-            function showError(errorCode, COLORS) {
-                const errorArray = [0, `Wrong proposed combination length`, `Wrong colors, they must be: ${arrayToString(COLORS)}`, `Wrong proposed combination, at least one color is repeated`];
-                console.writeln(errorArray[errorCode]);
-            }
-        }
-
-        function hasRepeteadElement(arraySource) {
-            for (let i in arraySource) {
-                for (let j = 0; j < i; j++) {
-                    if (arraySource[j] === arraySource[i]) {
-                        return true;
+                function hasRepeteadElement(arraySource) {
+                    for (let i in arraySource) {
+                        for (let j = 0; j < i; j++) {
+                            if (arraySource[j] === arraySource[i]) {
+                                return true;
+                            }
+                        }
                     }
+                    return false;
                 }
             }
-            return false;
+
+            function showError(errorCodeInCombination, COLORS) {
+                const errorStrings = [`Wrong proposed combination length`, `Wrong colors, they must be: ${arrayToString(COLORS)}`, `Wrong proposed combination, at least one color is repeated`];
+                console.writeln(errorStrings[errorCodeInCombination - 1]);
+            }
         }
 
         function getProposedCombinationResult(secretCombination, proposedCombination) {
@@ -117,12 +119,13 @@ function playMastermind() {
                     }
                 }
             }
-            return [proposedCombination, blacks, whites];
+            return [blacks, whites];
         }
-        function showBoard(attempts) {
+
+        function showBoard(attempts, blacksAndWhites) {
             console.writeln(`\n${attempts.length} attempt(s):\n****`);
             for (let i = 0; i < attempts.length; i++) {
-                console.writeln(`${attempts[i][0]}  --> ${attempts[i][1]} blacks and ${attempts[i][2]} whites`);
+                console.writeln(`${attempts[i]}  --> ${blacksAndWhites[i][0]} blacks and ${blacksAndWhites[i][1]} whites`);
             }
         }
     }
