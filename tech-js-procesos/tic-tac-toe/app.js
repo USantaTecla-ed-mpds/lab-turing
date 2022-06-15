@@ -1,3 +1,10 @@
+/*
+Hacer una función para pedir el numero de jugadores 0 1 2
+La maquina usa movimientos aleatorios. Pone en posicion aleatoria vacia, mueve una ficha aleatoria
+Segun el número de humanos la función debe devolver el array con funciones a las que va a llamar.
+
+*/
+
 const { Console } = require("console-mpds");
 
 const console = new Console();
