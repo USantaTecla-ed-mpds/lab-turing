@@ -9,7 +9,7 @@ function playTicTacToe() {
   } while (isResumed());
 
   function playGame() {
-    const MAX_PLAYERS = 2
+    const MAX_PLAYERS = 2;
     const MAX_TOKENS = 3;
     const TOKEN_EMPTY = ` `;
     let tokens = [
@@ -17,12 +17,12 @@ function playTicTacToe() {
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY],
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY]
     ];
-    const numPlayers = getValidNumPlayers();
+    let computerOrHumanplaceHumanTokenFunctions=getPlayersModes();
     let turn = 0;
     let winner;
     do {
       writelnTokens(tokens);
-      selectTypeOfPlayerPlaceToken(numPlayers, turn)(tokens, turn);
+      computerOrHumanplaceHumanTokenFunctions[turn](tokens, turn);
       winner = isTicTacToe(tokens, turn);
       if (!winner) {
         turn = nextTurn(turn);
@@ -31,7 +31,7 @@ function playTicTacToe() {
     writelnTokens(tokens);
     console.writeln(`Victoria para ${getToken(turn)}`);
 
-    function getValidNumPlayers() {
+    function getPlayersModes() {
       let numPlayers;
       let error;
       do {
@@ -41,37 +41,29 @@ function playTicTacToe() {
           console.writeln(`ERROR: Por favor, introduce un número de jugadores válido`);
         }
       } while (error);
-      return numPlayers;
+      switch (numPlayers){
+        case 0: 
+         return [placeRandomToken,placeRandomToken];
+        case 1:
+          return [placeHumanToken,placeRandomToken];
+        case 2:
+          return [placeHumanToken,placeHumanToken];
+      }
     }
 
-    function selectTypeOfPlayerPlaceToken(numPlayers, turn) {
-      let functionSelected;
-      let functions=[placeRandomToken,placeToken];
-      if (numPlayers === 0) {
-        functionSelected= functions[0];
-      }
-      else if (numPlayers === 1) {
-       functionSelected=functions[turn];
-      }
-      else {
-        functionSelected= functions[1];
-      }
-      return functionSelected;
-
       function placeRandomToken(tokens, turn) {
+        console.writeln(`Turno para ${getToken(turn)}`);
         let error;
-        let originRow;
-        let originColumn;
         const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
         if (movement) {
+          let originRow;
+          let originColumn;
           do {
             originRow = parseInt(Math.random() * tokens.length);
             originColumn = parseInt(Math.random() * tokens[0].length);
             error = !isOccupied(tokens, originRow, originColumn, turn);
-            if (error) {
-              console.writeln(`No hay una ficha de la propiedad de ${getToken(turn)}`);
-            }
           } while (error);
+          tokens[originRow][originColumn] = TOKEN_EMPTY;
         }
         let targetRow;
         let targetColumn;
@@ -79,23 +71,17 @@ function playTicTacToe() {
           targetRow = parseInt(Math.random() * tokens.length);
           targetColumn = parseInt(Math.random() * tokens[0].length);
           error = !isEmpty(tokens, targetRow, targetColumn);
-          if (error) {
-            console.writeln(`Indique una celda vacía`);
-          }
         } while (error);
-        if (movement) {
-          tokens[originRow][originColumn] = TOKEN_EMPTY;
-        }
         tokens[targetRow][targetColumn] = getToken(turn);
       }
       
-      function placeToken(tokens, turn) {
+      function placeHumanToken(tokens, turn) {
         console.writeln(`Turno para ${getToken(turn)}`);
         let error;
-        let originRow;
-        let originColumn;
         const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
         if (movement) {
+          let originRow;
+          let originColumn;
           do {
             originRow = read(`Fila origen`);
             originColumn = read(`Columna origen`);
@@ -104,6 +90,7 @@ function playTicTacToe() {
               console.writeln(`No hay una ficha de la propiedad de ${getToken(turn)}`);
             }
           } while (error);
+          tokens[originRow][originColumn] = TOKEN_EMPTY;
         }
         let targetRow;
         let targetColumn;
@@ -115,12 +102,9 @@ function playTicTacToe() {
             console.writeln(`Indique una celda vacía`);
           }
         } while (error);
-        if (movement) {
-          tokens[originRow][originColumn] = TOKEN_EMPTY;
-        }
         tokens[targetRow][targetColumn] = getToken(turn);
       }
-    }
+    
 
     function getNumTokens(tokens) {
       let empties = 0;
