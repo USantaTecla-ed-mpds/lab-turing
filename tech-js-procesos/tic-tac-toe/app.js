@@ -17,12 +17,12 @@ function playTicTacToe() {
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY],
       [TOKEN_EMPTY, TOKEN_EMPTY, TOKEN_EMPTY]
     ];
-    let computerOrHumanplaceHumanTokenFunctions=getPlayersModes();
+    let computerOrHumanPlaceTokenFunctions=getPlayersModes();
     let turn = 0;
     let winner;
     do {
       writelnTokens(tokens);
-      computerOrHumanplaceHumanTokenFunctions[turn](tokens, turn);
+      computerOrHumanPlaceTokenFunctions[turn](tokens, turn);
       winner = isTicTacToe(tokens, turn);
       if (!winner) {
         turn = nextTurn(turn);
@@ -41,29 +41,21 @@ function playTicTacToe() {
           console.writeln(`ERROR: Por favor, introduce un número de jugadores válido`);
         }
       } while (error);
-      switch (numPlayers){
-        case 0: 
-         return [placeRandomToken,placeRandomToken];
-        case 1:
-          return [placeHumanToken,placeRandomToken];
-        case 2:
-          return [placeHumanToken,placeHumanToken];
-      }
+      return [[placeRandomToken,placeRandomToken],[placeHumanToken,placeRandomToken],[placeHumanToken,placeHumanToken]][numPlayers];
     }
 
       function placeRandomToken(tokens, turn) {
         console.writeln(`Turno para ${getToken(turn)}`);
         let error;
         const movement = getNumTokens(tokens) === MAX_PLAYERS * MAX_TOKENS;
+        let originRow;
+        let originColumn;
         if (movement) {
-          let originRow;
-          let originColumn;
           do {
             originRow = parseInt(Math.random() * tokens.length);
             originColumn = parseInt(Math.random() * tokens[0].length);
             error = !isOccupied(tokens, originRow, originColumn, turn);
           } while (error);
-          tokens[originRow][originColumn] = TOKEN_EMPTY;
         }
         let targetRow;
         let targetColumn;
@@ -72,6 +64,9 @@ function playTicTacToe() {
           targetColumn = parseInt(Math.random() * tokens[0].length);
           error = !isEmpty(tokens, targetRow, targetColumn);
         } while (error);
+        if (movement) {
+          tokens[originRow][originColumn] = TOKEN_EMPTY;
+        }
         tokens[targetRow][targetColumn] = getToken(turn);
       }
       
