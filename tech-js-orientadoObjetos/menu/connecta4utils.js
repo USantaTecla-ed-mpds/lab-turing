@@ -42,7 +42,7 @@ class QuitOption extends Option {
     #executed;
 
     constructor() {
-        super("Salir");
+        super("Exit");
         this.#executed = false;
     }
 
@@ -189,7 +189,7 @@ class DynamicMenu extends IterativeMenu {
 
 // model
 
-class Model {
+class GameModesModel {
 
     #gameModes;
     #selectedMode=0;
@@ -198,14 +198,6 @@ class Model {
         this.#gameModes = [];
         for (let string of [`Demo`, `1 Player`, `2 Players`])
             this.#gameModes.push(string);
-    }
-
-    add(string) {
-        this.#gameModes.push(string);
-    }
-
-    remove(index) {
-        this.#gameModes.splice(index, 1);
     }
 
     get(index) {
@@ -241,25 +233,34 @@ class ModelOption extends Option {
 
 }
 
-/*class ListModelOption extends ModelOption {
+class PlayOption extends ModelOption {
 
-    constructor (model) {
-        super("Listar modos de juego", model);
+    constructor(model) {
+        super("Play", model);
     }
 
-    interact() {
-        for (let i = 0; i < this.model.size(); i++) {
-            Option.console.writeln((i + 1) + ". " + this.model.get(i));
-        }
-        Option.console.writeln();
+    interact() { 
+        //play()
     }
 
-}*/
+}
+
+class ConfirugationOption extends ModelOption {
+
+    constructor(model) {
+        super("Configuration", model);
+    }
+
+    interact() { 
+        new Connect4ConfigurationMenu(new GameModesModel()).interact();
+    }
+
+}
 
 class ShowSelectedModeOption extends ModelOption {
 
     constructor(model) {
-        super("Modo Seleccionado", model);
+        super("Active Mode", model);
     }
 
     interact() {
@@ -273,44 +274,21 @@ class ShowSelectedModeOption extends ModelOption {
 class SetSelectedModeOption extends ModelOption {
 
     constructor(model) {
-        super("Seleccionar", model);
+        super("Change Mode", model);
     }
 
     interact() {
-        new ModelDynamicMenu(this.model).interact();
+        new GameModesMenu(this.model).interact();
     }
 
 }
-
-/* 
-
-class SetSelectedModeOption extends ModelOption {
-
-    constructor(model) {
-        super("Seleccionar Modo", model);
-    }
-
-    interact() {
-        let mode;
-        let ok;
-        do {
-            mode = Option.console.readNumber("Selecciona un modo de juego [1-" + this.model.size() + "]: ")-1;
-            const interval= new ClosedInterval(0, this.model.size()-1);
-            ok = interval.isIncluded(mode)
-            if (!ok) {
-                Menu.console.writeln("Error!!!");
-            }
-        } while (!ok);
-        this.model.setSelectedMode(mode);
-    }
-}*/
 
 class SelectModelOption extends ModelOption {
 
     #index;
 
     constructor(model, index) {
-        super("Seleccionar ", model);
+        super("Select ", model);
         this.model = model;
         this.#index = index;
     }
@@ -321,19 +299,18 @@ class SelectModelOption extends ModelOption {
 
     interact() {
         this.model.setSelectedMode(this.#index);
-        //this.model.ShowSelectedModeOption();
     }
 
 }
 
 // ModelMenus
 
-class ModelDynamicMenu extends DynamicMenu {
+class GameModesMenu extends DynamicMenu {
 
     #model;
 
     constructor(model) {
-        super("Modos de juego");
+        super("Game Modes Menu");
         this.#model = model;
         this.addOptions();
 
@@ -352,7 +329,7 @@ class Connect4ConfigurationMenu extends IterativeMenu {
     #model;
 
     constructor(model) {
-        super("Connec4 Configuration Menu"); //Model Iterative Dynamic Menu
+        super("Connec4 Configuration Menu"); 
         this.#model = model;
     }
 
@@ -363,5 +340,21 @@ class Connect4ConfigurationMenu extends IterativeMenu {
 
 }
 
+class Connect4Menu extends IterativeMenu {
+
+    #model;
+
+    constructor(model) {
+        super("Connec4 Menu"); 
+        this.#model = model;
+    }
+
+    addOptions() {
+        this.add(new PlayOption(this.#model));
+        this.add(new ConfirugationOption(this.#model));
+    }
+
+}
+
 Option.console.writeln("***");
-new Connect4ConfigurationMenu(new Model()).interact();
+new Connect4Menu(new Connect4ConfigurationMenu()).interact();
