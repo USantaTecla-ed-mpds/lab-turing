@@ -245,7 +245,7 @@ class PlayOption extends ModelOption {
 
 }
 
-class ConfirugationOption extends ModelOption {
+class ConfigurationOption extends ModelOption {
 
     constructor(model) {
         super("Configuration", model);
@@ -351,7 +351,7 @@ class Connect4Menu extends IterativeMenu {
 
     addOptions() {
         this.add(new PlayOption(this.#model));
-        this.add(new ConfirugationOption(this.#model));
+        this.add(new ConfigurationOption(this.#model));
     }
 
 }
