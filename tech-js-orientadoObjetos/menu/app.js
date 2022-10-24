@@ -222,14 +222,23 @@ class Model {
 
 class ModelOption extends Option {
 
-    model;
+    #model;
 
     constructor(string, model) {
         super(string);
-        this.model = model;
+        this.#model = model;
     }
 
     interact() {};
+
+    getModel(){
+        return this.#model;
+    }
+
+   /* CONSULTAR SI HACE FALTA EN LA CLASE RemoveModelOption
+    setModel(model){
+        this.#model=model;
+    } */
 
 }
 
@@ -240,8 +249,8 @@ class ListModelOption extends ModelOption {
     }
 
     interact() {
-        for (let i = 0; i < this.model.size(); i++) {
-            Option.console.writeln((i + 1) + ". " + this.model.get(i));
+        for (let i = 0; i < this.getModel().size(); i++) {
+            Option.console.writeln((i + 1) + ". " + this.getModel().get(i));
         }
         Option.console.writeln();
     }
@@ -255,8 +264,8 @@ class InverseListModelOption extends ModelOption {
     }
 
     interact() {
-        for (let i = this.model.size() - 1; i >= 0; i--) {
-            Option.console.writeln((i + 1) + ". " + this.model.get(i));
+        for (let i = this.getModel().size() - 1; i >= 0; i--) {
+            Option.console.writeln((i + 1) + ". " + this.getModel().get(i));
         }
         Option.console.writeln();
     }
@@ -274,7 +283,7 @@ class AddModelOption extends ModelOption {
         do {
             string = Option.console.readString("Dame una cadena de caracteres: ");
         } while (string.trim() ==="");
-        this.model.add(string.trim());
+        this.getModel().add(string.trim());
     }
 
 }
@@ -286,9 +295,9 @@ class DuplicationModelOption extends ModelOption {
     }
 
     interact() {
-        const SIZE = this.model.size();
+        const SIZE = this.getModel().size();
         for(let i=0; i< SIZE; i++){
-            this.model.add(this.model.get(i));
+            this.getModel().add(this.getModel().get(i));
         }
     }
 
@@ -301,7 +310,7 @@ class RemoveModelsOption extends ModelOption {
     }
 
     interact() {
-        new ModelDynamicMenu(this.model).interact();
+        new ModelDynamicMenu(this.getModel()).interact();
     }
 
 }
@@ -312,16 +321,16 @@ class RemoveModelOption extends ModelOption {
 
     constructor(model, index) {
         super("Eliminar ", model);
-        this.model = model;
+        //this.setModel(model); this.model = model; ESTO YA LO ESTÁ HACIENDO CON SUPER COMO EL RESTO DE CLASES DERIVADAS,NO?
         this.#index = index;
     }
 
     getTitle() {
-        return super.getTitle() + ": " + this.model.get(this.#index);
+        return super.getTitle() + ": " + this.getModel().get(this.#index);
     }
 
     interact() {
-        this.model.remove(this.#index);
+        this.getModel().remove(this.#index);
     }
 
 }
@@ -353,12 +362,12 @@ class ModelQuitMenu extends QuitMenu {
 
     constructor(model) {
         super("Model Quit Menu");
-        this.model = model;
+        this.#model = model;
     }
 
     addOptions() {
-        this.add(new ListModelOption(this.model));
-        this.add(new InverseListModelOption(this.model));
+        this.add(new ListModelOption(this.#model));
+        this.add(new InverseListModelOption(this.#model));
     }
 
 }
