@@ -37,16 +37,26 @@ class Color {
         return [Color.RED, Color.YELLOW, Color.NULL];
     }
 
-    write() {
-        console.write(` ${this.#string[0]} `);
-    }
-
-    toString() {
+    getString() {
         return this.#string;
+    }
+}
+
+
+class ColorView {
+    #color;
+
+    constructor(color) {
+        this.#color = color;
+    }
+    write() {
+        console.write(` ${this.#color.getString()[0]} `);
+    }
+    toString() {
+        return this.#color.getString();
     }
 
 }
-
 class Coordinate {
 
     static ORIGIN = new Coordinate(0, 0);
@@ -137,8 +147,8 @@ class Direction {
         return this.#coordinate;
     }
 
-    static halfValues(){
-        return Direction.values().splice(0,Direction.values().length / 2);
+    static halfValues() {
+        return Direction.values().splice(0, Direction.values().length / 2);
     }
 
 }
@@ -161,16 +171,28 @@ class Message {
         this.#string = string;
     }
 
+    getString() {
+        return this.#string;
+    }
+
+}
+
+class MessageView {
+    #message;
+
+    constructor(message) {
+        this.#message = message;
+    }
     write() {
-        console.write(this.#string);
+        console.write(this.#message.getString());
     }
 
     writeln() {
-        console.writeln(this.#string);
+        console.writeln(this.#message.getString());
     }
 
     toString() {
-        return this.#string;
+        return this.#message.getString();
     }
 
 }
@@ -280,26 +302,6 @@ class Board {
         return true;
     }
 
-    writeln() {
-        this.#writeHorizontal();
-        for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
-            Message.VERTICAL_LINE.write();
-            for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                this.getColor(new Coordinate(i, j)).write();
-                Message.VERTICAL_LINE.write();
-            }
-            console.writeln();
-        }
-        this.#writeHorizontal();
-    }
-
-    #writeHorizontal() {
-        for (let i = 0; i < 4 * Coordinate.NUMBER_COLUMNS; i++) {
-            Message.HORIZONTAL_LINE.write();
-        }
-        Message.HORIZONTAL_LINE.writeln();
-    }
-
     isOccupied(coordinate, color) {
         return this.getColor(coordinate) == color;
     }
@@ -310,6 +312,35 @@ class Board {
 
     getColor(coordinate) {
         return this.#colors[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+}
+
+class BoardView {
+    static BLANK_SPACES = 4
+    #board;
+
+    constructor(board) {
+        this.#board = board;
+    }
+    writeln() {
+        this.#writeHorizontal();
+        for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
+            Message.VERTICAL_LINE.write();
+            for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
+                this.#board.getColor(new Coordinate(i, j)).write(); //TODO:write es de color view
+                Message.VERTICAL_LINE.write();
+            }
+            console.writeln();
+        }
+        this.#writeHorizontal();
+    }
+
+    #writeHorizontal() {
+        for (let i = 0; i < BLANK_SPACES * Coordinate.NUMBER_COLUMNS; i++) {
+            Message.HORIZONTAL_LINE.write();
+        }
+        Message.HORIZONTAL_LINE.writeln();
     }
 
 }
