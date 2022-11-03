@@ -107,10 +107,6 @@ class Coordinate {
         return this.#column === coordinate.#column && this.#row === coordinate.#row;
     }
 
-    toString() {
-        return `Coordinate [row= ${this.#row} column= ${this.#column}]`;
-    }
-
 }
 
 class Direction {
@@ -381,23 +377,52 @@ class PlayerView {
         console.writeln(message);
     }
 
-    askColumn() {
+    getColumn() {
+       
+    }
+    isComplete(column){
+        return this.#player.getBoard().isComplete(column);
+    }
+    getPlayer(){
+        return this.#player;
+    }
+}
+
+class HumanPlayerView extends PlayerView {
+
+    constructor(player) {
+        super(player);
+      }
+
+    getColumn() {
         let column;
         let valid;
         do {
             new MessageView(Message.TURN).write();
-            console.writeln(new ColorView(this.#player.getColor()).toString());
+            console.writeln(new ColorView(super.getPlayer().getColor()).toString());
             column = console.readNumber(new MessageView(Message.ENTER_COLUMN_TO_DROP).toString()) - 1;
             valid = Coordinate.isColumnValid(column);
             if (!valid) {
                 new MessageView(Message.INVALID_COLUMN).writeln();
             } else {
-                valid = !this.#player.getBoard().isComplete(column);
+                valid = !super.isComplete(column);
                 if (!valid) {
                     new MessageView(Message.COMPLETED_COLUMN).writeln();
                 }
             }
         } while (!valid);
+        return column;
+    }
+}
+class RandomPlayerView extends PlayerView {
+
+    getColumn() {
+        let column;
+        do {
+            column = Math.floor(Math.random() * Coordinate.NUMBER_COLUMNS);
+            console.writeln(column);
+        } while (super.isComplete(column));
+        console.writeln(`Aleatoriamente en la columna: ${column}`);
         return column;
     }
 }
@@ -429,12 +454,14 @@ class Turn {
         }
     }
 
-
     getActivePlayer() {
         return this.#players[this.#activePlayer];
     }
     getBoard() {
         return this.#board;
+    }
+    getActivePlayerIndex() {
+       return this.#activePlayer;
     }
 }
 
@@ -442,13 +469,29 @@ class TurnView {
     #turn;
     #activePlayerView;
 
-    constructor(turn) {
+    constructor(turn,gameMode) {
         this.#turn = turn;
-        this.#activePlayerView = new PlayerView(this.#turn.getActivePlayer());
+        if (this.#turn.getActivePlayerIndex()===0){
+            if(gameMode===0){
+                this.#activePlayerView = new RandomPlayerView(this.#turn.getActivePlayer());
+                
+            }
+            else{
+                this.#activePlayerView = new HumanPlayerView(this.#turn.getActivePlayer());
+            }
+        }
+        else{
+            if(gameMode===2){
+                this.#activePlayerView = new HumanPlayerView(this.#turn.getActivePlayer());
+            }
+            else {
+                this.#activePlayerView = new RandomPlayerView(this.#turn.getActivePlayer());
+            }
+         }
     }
 
     play() {
-        this.#turn.play(this.#activePlayerView.askColumn());
+        this.#turn.play(this.#activePlayerView.getColumn());
     }
 
     writeResult() {
@@ -502,6 +545,7 @@ class Connect4 {
     #turn;
     #boardView;
     #turnView;
+    #gameMode;
 
     constructor() {
         this.#board = new Board();
@@ -515,13 +559,13 @@ class Connect4 {
     }
 
     #playGame() {
-        //TODO:meter seleccion  numero de jugadores (menu)
+        this.#getGameMode();
         this.#turn = new Turn(this.#board);
         new MessageView(Message.TITLE).writeln();
         this.#boardView.writeln();
         
         do {
-            this.#turnView=new TurnView(this.#turn);
+            this.#turnView=new TurnView(this.#turn,this.#gameMode);
             this.#turnView.play();
             this.#boardView.writeln();
         } while (!this.#board.isFinished());
@@ -536,6 +580,10 @@ class Connect4 {
             this.#turn.reset(); //TODO: resetear el tipo de jugadores y dejar reset turn para configurar
         }
         return yesNoDialog.isAffirmative();
+    }
+
+    #getGameMode (){
+        this.#gameMode = console.readNumber("0 - random vs random\n1 - human vs random \n2 - human vs human \n Insert game mode: ");
     }
 
 }
