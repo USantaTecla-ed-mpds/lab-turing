@@ -505,17 +505,18 @@ class Connect4 {
 
     constructor() {
         this.#board = new Board();
-        this.#turn = new Turn(this.#board);
         this.#boardView = new BoardView(this.#board);
     }
 
     playGames() {
         do {
-            this.playGame();
-        } while (this.isResumed());
+            this.#playGame();
+        } while (this.#isResumed());
     }
 
-    playGame() {
+    #playGame() {
+        //TODO:meter seleccion  numero de jugadores (menu)
+        this.#turn = new Turn(this.#board);
         new MessageView(Message.TITLE).writeln();
         this.#boardView.writeln();
         
@@ -527,12 +528,12 @@ class Connect4 {
         this.#turnView.writeResult();
     }
 
-    isResumed() {
+    #isResumed() {
         let yesNoDialog = new YesNoDialog();
         yesNoDialog.read(new MessageView(Message.RESUME).toString());
         if (yesNoDialog.isAffirmative()) {
             this.#board.reset();
-            this.#turn.reset();
+            this.#turn.reset(); //TODO: resetear el tipo de jugadores y dejar reset turn para configurar
         }
         return yesNoDialog.isAffirmative();
     }
