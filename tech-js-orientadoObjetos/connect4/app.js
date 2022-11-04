@@ -1,7 +1,6 @@
 const { Console } = require("console-mpds");
 
 const console = new Console();
-
 class ClosedInterval {
 
     #min;
@@ -17,7 +16,6 @@ class ClosedInterval {
     }
 
 }
-
 class Color {
 
     static RED = new Color(`Red`);
@@ -41,8 +39,6 @@ class Color {
         return this.#string;
     }
 }
-
-
 class ColorView {
     #color;
 
@@ -108,7 +104,6 @@ class Coordinate {
     }
 
 }
-
 class Direction {
     static NORTH = new Direction(1, 0);
     static NORTH_EAST = new Direction(1, 1);
@@ -148,7 +143,6 @@ class Direction {
     }
 
 }
-
 class Message {
     static TITLE = new Message(`--- CONNECT 4 ---`);
     static HORIZONTAL_LINE = new Message(`-`);
@@ -172,7 +166,6 @@ class Message {
     }
 
 }
-
 class MessageView {
     #message;
 
@@ -192,7 +185,6 @@ class MessageView {
     }
 
 }
-
 class Line {
 
     static LENGTH = 4;
@@ -222,7 +214,6 @@ class Line {
         return this.#coordinates;
     }
 }
-
 class Board {
 
     #colors;
@@ -311,7 +302,6 @@ class Board {
     }
 
 }
-
 class BoardView {
     static BLANK_SPACES = 4;
     #board;
@@ -341,7 +331,6 @@ class BoardView {
     }
 
 }
-
 class Player {
 
     #color;
@@ -363,7 +352,6 @@ class Player {
     }
 
 }
-
 class PlayerView {
     #player;
 
@@ -387,7 +375,6 @@ class PlayerView {
         return this.#player;
     }
 }
-
 class HumanPlayerView extends PlayerView {
 
     constructor(player) {
@@ -426,7 +413,6 @@ class RandomPlayerView extends PlayerView {
         return column;
     }
 }
-
 class Turn {
 
     static #NUMBER_PLAYERS = 2;
@@ -437,10 +423,10 @@ class Turn {
     constructor(board) {
         this.#board = board;
         this.#players = [];
-        this.reset();
+        this.#reset();
     }
 
-    reset() {
+    #reset() {
         for (let i = 0; i < Turn.#NUMBER_PLAYERS; i++) {
             this.#players[i] = new Player(Color.get(i), this.#board);
         }
@@ -464,7 +450,6 @@ class Turn {
        return this.#activePlayer;
     }
 }
-
 class TurnView {
     #turn;
     #activePlayerView;
@@ -503,7 +488,6 @@ class TurnView {
     }
 
 }
-
 class YesNoDialog {
 
     static #AFFIRMATIVE = `y`;
@@ -538,7 +522,6 @@ class YesNoDialog {
         return this.#answer.toLowerCase()[0];
     }
 }
-
 class Connect4 {
 
     #board;
@@ -577,7 +560,6 @@ class Connect4 {
         yesNoDialog.read(new MessageView(Message.RESUME).toString());
         if (yesNoDialog.isAffirmative()) {
             this.#board.reset();
-            this.#turn.reset(); //TODO: resetear el tipo de jugadores y dejar reset turn para configurar
         }
         return yesNoDialog.isAffirmative();
     }
@@ -587,5 +569,5 @@ class Connect4 {
     }
 
 }
-
 new Connect4().playGames();
+//export  {Connect4}

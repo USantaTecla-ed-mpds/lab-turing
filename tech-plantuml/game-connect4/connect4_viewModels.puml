@@ -1,0 +1,193 @@
+@startuml
+
+class Connect4{
+    - turn
+    - turnView
+    - board
+    - boardView
+    - yesNoDialog
+    - gameMode
+    + playGames()
+    - playGame()
+    - isResumed()
+    - getGameMode()
+}
+class YesNoDialog{
+    + read(message)
+    + isAffirmative()
+}
+
+class TurnView{
+    - turn
+    - activePlayerView
+    - gameMode
+    + play()
+}
+
+class Turn{
+    - players []
+    - board
+    - reset()
+    + play(column)
+    + getActivePlayer()
+}
+
+
+class Player{
+    -color
+    -board
+    -play(column)
+}
+
+abstract class PlayerView{
+    - player
+    + getColumn()
+    + isComplete(column)
+    -writeWinner(MessageView)
+}
+
+class HumanPlayerView{
+    + getColumn()
+
+}
+
+class RandomPlayerView{
+    + getColumn()
+}
+
+class Board{
+    -colors
+    -lastDrop
+    +reset()
+    +dropToken()
+    +isComplete(column)
+    +isFinished()
+    +isWinner()
+    +isConnect4(line)
+    +isOccupied()
+    +isEmpty()
+}
+
+class BoardView{
+    -board
+    +writeln()
+    -writeHorizontal()
+}
+
+
+class Line{
+    -origen
+    -coordinates[]
+    -oppositeDirection
+    +set(direction)
+    +shift()
+    +getCoordinates()
+}
+
+class Direction{
+    +NORTH
+    +SOUTH
+    +...
+    -coordinate
+    +getOpposite()
+    +values()
+    +halfValues()
+    +getCoordinate()
+
+}
+
+class Coordinate{
+    -row
+    -column
+    +shifted(coordinate)
+    +isValid()
+    +isColumnValid(column)
+    -isRowValid(row)
+    +equals(coordinate)
+}
+
+class Color{
+    -  Red
+    -  Yellow
+    -  NULL
+}
+
+class ColorView{
+    -color
+    +write()
+    +toString()
+
+}
+
+class ClosedInterval{
+    -min;
+    -max;
+    -isIncluded(value)
+}
+
+class Message{
+    + TITLE
+    + ...
+    -string
+    +getString()
+}
+
+class MessageView {
+    -message
+    +write()
+    +writeln()
+    +toString()
+}
+
+Connect4 ..> YesNoDialog
+Connect4 *--> Turn
+Connect4 ..> TurnView
+Connect4 *--> Board
+Connect4 *--> BoardView
+Connect4 ..> MessageView
+
+TurnView o--> HumanPlayerView
+TurnView o--> RandomPlayerView
+TurnView ..> MessageView
+Turn *..> TurnView
+Turn  *-- "2" Player :contains
+Turn *--> Board :contains
+Turn ..> Color
+
+
+PlayerView *--> Player
+PlayerView <|-- HumanPlayerView
+PlayerView <|--  RandomPlayerView
+
+PlayerView ..> MessageView
+PlayerView ..> ColorView
+
+Player o--> Color
+Player *--> Board
+
+BoardView *--> Board
+BoardView ..> Coordinate
+BoardView ..> MessageView
+BoardView ..> ColorView
+
+Board ..>"many" Color
+Board ..> Coordinate
+Board ..> Direction
+Board ..> Line
+
+Line ..> Coordinate
+Line ..> Direction
+
+Direction ..> Coordinate
+Direction ..> Direction
+
+Coordinate ..> Coordinate
+Coordinate ..> ClosedInterval
+
+ColorView *--> Color
+
+Color ..> Color
+
+MessageView *--> Message
+
+@enduml

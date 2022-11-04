@@ -1,0 +1,65 @@
+@startuml
+
+class xaviConnect4{
+    - boardView
+    - yesNoDialog
+    + playGame()
+}
+class yesNoDialogView{
+    + read(message)
+    + isAffirmative()
+}
+
+class createGame{
+
+}
+
+class createGameView{
+
+}
+
+
+class createBoardView{
+
+}
+
+class createTurn{
+
+}
+
+class createTurnView{
+
+
+}
+
+class messageView{
+
+}
+
+class createCoordinate{
+
+}
+
+enum colors{
+Red
+Yellow
+}
+
+
+xaviConnect4 ..> yesNoDialogView
+xaviConnect4 *--> createGame
+xaviConnect4 *--> createGameView
+createGame --> createBoard
+createGame --> createTurn
+
+
+createGame --> createGameView
+createGameView o--> createBoardView
+createGameView o--> createTurnView
+createGameView o--> messageView
+
+createBoard *--> createCoordinate
+
+createTurn --> colors
+
+@enduml
