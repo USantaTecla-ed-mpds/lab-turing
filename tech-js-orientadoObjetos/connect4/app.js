@@ -374,6 +374,9 @@ class PlayerView {
     getPlayer(){
         return this.#player;
     }
+
+    //TODO: APLICAR DOBLE DESPACHO
+    
 }
 class HumanPlayerView extends PlayerView {
 
@@ -400,8 +403,10 @@ class HumanPlayerView extends PlayerView {
         } while (!valid);
         return column;
     }
+
+    //TODO: APLICAR DOBLE DESPACHO 
 }
-class RandomPlayerView extends PlayerView {
+class RandomPlayerView extends PlayerView { 
 
     getColumn() {
         let column;
@@ -412,6 +417,8 @@ class RandomPlayerView extends PlayerView {
         console.writeln(`Aleatoriamente en la columna: ${column}`);
         return column;
     }
+
+    //TODO: APLICAR DOBLE DESPACHO
 }
 class Turn {
 
@@ -456,7 +463,7 @@ class TurnView {
 
     constructor(turn,gameMode) {
         this.#turn = turn;
-        if (this.#turn.getActivePlayerIndex()===0){
+        if (this.#turn.getActivePlayerIndex()===0){   //TODO: APLICAR DOBLE DESPACHO
             if(gameMode===0){
                 this.#activePlayerView = new RandomPlayerView(this.#turn.getActivePlayer());
                 
@@ -548,7 +555,7 @@ class Connect4 {
         this.#boardView.writeln();
         
         do {
-            this.#turnView=new TurnView(this.#turn,this.#gameMode);
+            this.#turnView=new TurnView(this.#turn,this.#gameMode); //TODO: APLICAR DOBLE DESPACHO
             this.#turnView.play();
             this.#boardView.writeln();
         } while (!this.#board.isFinished());
@@ -570,4 +577,4 @@ class Connect4 {
 
 }
 new Connect4().playGames();
-//export  {Connect4}
+//export default class Connect4;

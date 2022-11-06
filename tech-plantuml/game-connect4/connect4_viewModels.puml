@@ -146,8 +146,8 @@ Connect4 *--> Board
 Connect4 *--> BoardView
 Connect4 ..> MessageView
 
-TurnView o--> HumanPlayerView
-TurnView o--> RandomPlayerView
+TurnView o..> "0,1,2" HumanPlayerView
+TurnView o..> "0,1,2" RandomPlayerView
 TurnView ..> MessageView
 Turn *..> TurnView
 Turn  *-- "2" Player :contains
@@ -170,7 +170,7 @@ BoardView ..> Coordinate
 BoardView ..> MessageView
 BoardView ..> ColorView
 
-Board ..>"many" Color
+Board <--"many" Color
 Board ..> Coordinate
 Board ..> Direction
 Board ..> Line

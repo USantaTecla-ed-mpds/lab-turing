@@ -1,4 +1,5 @@
-import  {Connect4 } from '../connect4/app.js'
+//const { Connect4 } = require("../connect4/app.js");
+
 const { Console } = require("console-mpds");
 // Options
 class ClosedInterval {
@@ -237,13 +238,12 @@ class ModelOption extends Option {
 class PlayOption extends ModelOption {
 
     constructor(model) {
-        super("Play", model);
+        super("Play", model);        
     }
 
     interact() { 
-       // new Connect4().playGames();
+        new Connect4().playGames();
     }
-
 }
 
 class ConfigurationOption extends ModelOption {
