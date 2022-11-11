@@ -395,6 +395,8 @@ class HumanPlayerView extends PlayerView {
 class RandomPlayerView extends PlayerView {
 
     getColumn() {
+        Message.TURN.write();
+        new Message(new Color(super.getPlayer().getColor()).toString()).writeln();
         let column = this.getPlayer().getColumn();
         Message.RANDOM_COLUMN.write();
         new Message(column + 1).writeln();
@@ -494,11 +496,26 @@ class InIntervalDialog extends OptionDialog {
     }
 
 }
-class TurnView {
+
+class PlayerVisitor {
+    #activePlayerView;
+
+    visitHumanPlayer(humanPlayer) {
+         this.#activePlayerView = new HumanPlayerView(humanPlayer);
+    }
+    visitRandomPlayer(randomPlayer) {
+        this.#activePlayerView = new RandomPlayerView(randomPlayer);
+    }
+    getActivePlayerView(){
+        return this.#activePlayerView;
+    }
+}
+class TurnView extends PlayerVisitor {
     #turn;
     #activePlayerView;
 
     constructor(turn) {
+        super();
         this.#turn = turn;
     }
     readNummberOfHumanPlayers() {
@@ -507,15 +524,9 @@ class TurnView {
         return inIntervalDialog.getAnswer();
     }
 
-    visitHumanPlayer(humanPlayer) {
-        this.#activePlayerView = new HumanPlayerView(humanPlayer);
-    }
-    visitRandomPlayer(randomPlayer) {
-        this.#activePlayerView = new RandomPlayerView(randomPlayer);
-    }
-
     play() {
         this.#turn.getActivePlayer().accept(this);
+        this.#activePlayerView = super.getActivePlayerView();
         this.#turn.play(this.#activePlayerView.getColumn());
     }
 
