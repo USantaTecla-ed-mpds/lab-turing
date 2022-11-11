@@ -1,6 +1,40 @@
 const { Console } = require("console-mpds");
 
 const console = new Console();
+
+class Message {
+    static TITLE = new Message(`--- CONNECT 4 ---`);
+    static NUM_PLAYERS = new Message(`Enter number of human players: `);
+    static HORIZONTAL_LINE = new Message(`-`);
+    static VERTICAL_LINE = new Message(`|`);
+    static TURN = new Message(`Turn: `);
+    static ENTER_COLUMN_TO_DROP = new Message(`Enter a column to drop a token: `);
+    static INVALID_COLUMN = new Message(`Invalid columnn!!! Values [1-7]`);
+    static COMPLETED_COLUMN = new Message(`Invalid column!!! It's completed`);
+    static RANDOM_COLUMN = new Message(`Choosed radom column: `);
+    static PLAYER_WIN = new Message(`#colorS WIN!!! : -)`);
+    static PLAYERS_TIED = new Message(`TIED!!!`);
+    static RESUME = new Message(`Do you want to continue`);
+
+    #string;
+
+    constructor(string) {
+        this.#string = string;
+    }
+
+    write() {
+        console.write(this.#string);
+    }
+
+    writeln() {
+        console.writeln(this.#string);
+    }
+
+    toString() {
+        return this.#string;
+    }
+
+}
 class ClosedInterval {
 
     #min;
@@ -14,7 +48,6 @@ class ClosedInterval {
     isIncluded(value) {
         return this.#min <= value && value <= this.#max;
     }
-
 }
 class Color {
 
@@ -38,20 +71,13 @@ class Color {
     getString() {
         return this.#string;
     }
-}
-class ColorView {
-    #color;
 
-    constructor(color) {
-        this.#color = color;
-    }
     write() {
-        console.write(` ${this.#color.getString()[0]} `);
+        console.write(` ${this.#string.getString()[0]} `);
     }
     toString() {
-        return this.#color.getString();
+        return this.#string.getString();
     }
-
 }
 class Coordinate {
 
@@ -143,81 +169,11 @@ class Direction {
     }
 
 }
-class Message {
-    static TITLE = new Message(`--- CONNECT 4 ---`);
-    static HORIZONTAL_LINE = new Message(`-`);
-    static VERTICAL_LINE = new Message(`|`);
-    static TURN = new Message(`Turn: `);
-    static ENTER_COLUMN_TO_DROP = new Message(`Enter a column to drop a token: `);
-    static INVALID_COLUMN = new Message(`Invalid columnn!!! Values [1-7]`);
-    static COMPLETED_COLUMN = new Message(`Invalid column!!! It's completed`);
-    static PLAYER_WIN = new Message(`#colorS WIN!!! : -)`);
-    static PLAYERS_TIED = new Message(`TIED!!!`);
-    static RESUME = new Message(`Do you want to continue`);
-
-    #string;
-
-    constructor(string) {
-        this.#string = string;
-    }
-
-    getString() {
-        return this.#string;
-    }
-
-}
-class MessageView {
-    #message;
-
-    constructor(message) {
-        this.#message = message;
-    }
-    write() {
-        console.write(this.#message.getString());
-    }
-
-    writeln() {
-        console.writeln(this.#message.getString());
-    }
-
-    toString() {
-        return this.#message.getString();
-    }
-
-}
-class Line {
-
-    static LENGTH = 4;
-    #origin;
-    #coordinates;
-    #oppositeDirection;
-
-    constructor(coordinate) {
-        this.#origin = coordinate;
-    }
-
-    set(direction) {
-        this.#coordinates = [this.#origin];
-        for (let i = 1; i < Line.LENGTH; i++) {
-            this.#coordinates[i] = this.#coordinates[i - 1].shifted(direction.getCoordinate());
-        }
-        this.#oppositeDirection = direction.getOpposite();
-    }
-
-    shift() {
-        for (let i = 0; i < Line.LENGTH; i++) {
-            this.#coordinates[i] = this.#coordinates[i].shifted(this.#oppositeDirection.getCoordinate());
-        }
-    }
-
-    getCoordinates() {
-        return this.#coordinates;
-    }
-}
 class Board {
-
+    static LINE_LENGTH = 4;
     #colors;
     #lastDrop;
+    #line;
 
     constructor() {
         this.#colors = [];
@@ -263,26 +219,34 @@ class Board {
         if (this.#lastDrop === undefined) {
             return false;
         }
-        let line = new Line(this.#lastDrop);
         for (let direction of Direction.halfValues()) {
-            line.set(direction);
-            for (let i = 0; i < Line.LENGTH; i++) {
-                if (this.isConnect4(line)) {
+            this.#setLine(direction);
+            for (let i = 0; i < Board.LINE_LENGTH; i++) {
+                if (this.#isConnect4()) {
                     return true;
                 }
-                line.shift();
+                let oppositeDirection = direction.getOpposite();
+                for (let j = 0; j < Board.LINE_LENGTH; j++) {
+                    this.#line[j] = this.#line[j].shifted(oppositeDirection.getCoordinate());
+                }
             }
         }
         return false;
     }
 
-    isConnect4(line) {
-        let coordinates = line.getCoordinates();
-        for (let i = 0; i < Line.LENGTH; i++) {
-            if (!coordinates[i].isValid()) {
+    #setLine(direction) {
+        this.#line = [this.#lastDrop];
+        for (let i = 1; i < Board.LINE_LENGTH; i++) {
+            this.#line[i] = this.#line[i - 1].shifted(direction.getCoordinate());
+        }
+    }
+
+    #isConnect4() {
+        for (let i = 0; i < Board.LINE_LENGTH; i++) {
+            if (!this.#line[i].isValid()) {
                 return false;
             }
-            if (i > 0 && this.getColor(coordinates[i - 1]) != this.getColor(coordinates[i])) {
+            if (i > 0 && this.getColor(this.#line[i - 1]) != this.getColor(this.#line[i])) {
                 return false;
             }
         }
@@ -312,22 +276,22 @@ class BoardView {
     writeln() {
         this.#writeHorizontal();
         for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
-            new MessageView(Message.VERTICAL_LINE).write();
+            Message.VERTICAL_LINE.write();
             for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                new ColorView(this.#board.getColor(new Coordinate(i, j))).write();
-                new MessageView(Message.VERTICAL_LINE).write();
+                new Color(this.#board.getColor(new Coordinate(i, j))).write();
+                Message.VERTICAL_LINE.write();
             }
-            console.writeln();
+            new Message().writeln();
         }
         this.#writeHorizontal();
     }
 
     #writeHorizontal() {
-        
+
         for (let i = 0; i < BoardView.BLANK_SPACES * Coordinate.NUMBER_COLUMNS; i++) {
-            new MessageView(Message.HORIZONTAL_LINE).write();
+            Message.HORIZONTAL_LINE.write();
         }
-        new MessageView(Message.HORIZONTAL_LINE).writeln();
+        Message.HORIZONTAL_LINE.writeln();
     }
 
 }
@@ -340,18 +304,49 @@ class Player {
         this.#color = color;
         this.#board = board;
     }
-
     play(column) {
         this.#board.dropToken(column, this.#color);
     }
     getColor() {
         return this.#color;
     }
-    getBoard() {
-        return this.#board;
+    isComplete(column) {
+        return this.#board.isComplete(column);
+    }
+
+    accept() { }
+}
+
+class HumanPlayer extends Player {
+
+    constructor(color, board) {
+        super(color, board);
+    }
+    accept(visitor) {
+        visitor.visitHumanPlayer(this);
+    }
+}
+
+class RandomPlayer extends Player {
+
+    constructor(color, board) {
+        super(color, board);
+    }
+
+    accept(visitor) {
+        visitor.visitRandomPlayer(this);
+    }
+
+    getColumn() {
+        let column;
+        do {
+            column = Math.floor(Math.random() * Coordinate.NUMBER_COLUMNS);
+        } while (this.isComplete(column));
+        return column;
     }
 
 }
+
 class PlayerView {
     #player;
 
@@ -360,65 +355,51 @@ class PlayerView {
     }
 
     writeWinner() {
-        let message = new MessageView(Message.PLAYER_WIN).toString();
-        message = message.replace(`#color`, new ColorView(this.#player.getColor()).toString());
-        console.writeln(message);
+        let message = Message.PLAYER_WIN.toString();
+        message = message.replace(`#color`, new Color(this.#player.getColor()).toString());
+        new Message(message).writeln();
     }
 
-    getColumn() {
-       
-    }
-    isComplete(column){
-        return this.#player.getBoard().isComplete(column);
-    }
-    getPlayer(){
+    getColumn() { }
+
+    getPlayer() {
         return this.#player;
     }
-
-    //TODO: APLICAR DOBLE DESPACHO
-    
 }
 class HumanPlayerView extends PlayerView {
 
     constructor(player) {
         super(player);
-      }
+    }
 
     getColumn() {
         let column;
         let valid;
         do {
-            new MessageView(Message.TURN).write();
-            console.writeln(new ColorView(super.getPlayer().getColor()).toString());
-            column = console.readNumber(new MessageView(Message.ENTER_COLUMN_TO_DROP).toString()) - 1;
+            Message.TURN.write();
+            new Message(new Color(super.getPlayer().getColor()).toString()).writeln();
+            column = console.readNumber(Message.ENTER_COLUMN_TO_DROP.toString()) - 1;
             valid = Coordinate.isColumnValid(column);
             if (!valid) {
-                new MessageView(Message.INVALID_COLUMN).writeln();
+                Message.INVALID_COLUMN.writeln();
             } else {
-                valid = !super.isComplete(column);
+                valid = !super.getPlayer().isComplete(column);
                 if (!valid) {
-                    new MessageView(Message.COMPLETED_COLUMN).writeln();
+                    Message.COMPLETED_COLUMN.writeln();
                 }
             }
         } while (!valid);
         return column;
     }
-
-    //TODO: APLICAR DOBLE DESPACHO 
 }
-class RandomPlayerView extends PlayerView { 
+class RandomPlayerView extends PlayerView {
 
     getColumn() {
-        let column;
-        do {
-            column = Math.floor(Math.random() * Coordinate.NUMBER_COLUMNS);
-            console.writeln(column);
-        } while (super.isComplete(column));
-        console.writeln(`Aleatoriamente en la columna: ${column}`);
+        let column = this.getPlayer().getColumn();
+        Message.RANDOM_COLUMN.write();
+        new Message(column + 1).writeln();
         return column;
     }
-
-    //TODO: APLICAR DOBLE DESPACHO
 }
 class Turn {
 
@@ -430,59 +411,111 @@ class Turn {
     constructor(board) {
         this.#board = board;
         this.#players = [];
-        this.#reset();
     }
-
-    #reset() {
+    reset(humanPlayers) {
         for (let i = 0; i < Turn.#NUMBER_PLAYERS; i++) {
-            this.#players[i] = new Player(Color.get(i), this.#board);
+            this.#players[i] = i < humanPlayers ?
+                new HumanPlayer(Color.get(i), this.#board) :
+                new RandomPlayer(Color.get(i), this.#board);
         }
         this.#activePlayer = 0;
     }
-
     play(column) {
         this.#players[this.#activePlayer].play(column);
         if (!this.#board.isFinished()) {
             this.#activePlayer = (this.#activePlayer + 1) % Turn.#NUMBER_PLAYERS;
         }
     }
-
     getActivePlayer() {
         return this.#players[this.#activePlayer];
     }
     getBoard() {
         return this.#board;
     }
-    getActivePlayerIndex() {
-       return this.#activePlayer;
+    getNumberPlayers() {
+        return Turn.#NUMBER_PLAYERS;
     }
+}
+
+class OptionDialog {
+
+    option1;
+    option2;
+    message;
+    suffix;
+    #answer;
+
+    constructor(option1, option2) {
+        this.option1 = option1;
+        this.option2 = option2;
+        this.message = `The value must be between ${this.option1} or ${this.option2}`;
+        this.suffix = `? [` +
+            this.option1 + `-` +
+            this.option2 + `]: `
+    }
+
+    read(message) {
+        let ok;
+        do {
+            new Message(message).write();
+            this.#answer = this.readWithSuffix();
+            ok = this.isOk();
+            if (!ok) {
+                new Message(message).writeln();
+            }
+        } while (!ok);
+    }
+
+    readWithSuffix() {
+    }
+
+    isOk() { }
+
+    getAnswer() {
+        return this.#answer;
+    }
+}
+class InIntervalDialog extends OptionDialog {
+
+    constructor(min, max) {
+        super(min, max);
+        this.message = `The value must be between ${min} and ${max}`;
+        this.suffix = `? [` +
+            min + `-` +
+            max + `]: `
+    }
+
+    readWithSuffix() {
+        return console.readNumber(this.suffix);
+    }
+
+    isOk() {
+        return new ClosedInterval(this.option1, this.option2).isIncluded(this.getAnswer());
+    }
+
 }
 class TurnView {
     #turn;
     #activePlayerView;
 
-    constructor(turn,gameMode) {
+    constructor(turn) {
         this.#turn = turn;
-        if (this.#turn.getActivePlayerIndex()===0){   //TODO: APLICAR DOBLE DESPACHO
-            if(gameMode===0){
-                this.#activePlayerView = new RandomPlayerView(this.#turn.getActivePlayer());
-                
-            }
-            else{
-                this.#activePlayerView = new HumanPlayerView(this.#turn.getActivePlayer());
-            }
-        }
-        else{
-            if(gameMode===2){
-                this.#activePlayerView = new HumanPlayerView(this.#turn.getActivePlayer());
-            }
-            else {
-                this.#activePlayerView = new RandomPlayerView(this.#turn.getActivePlayer());
-            }
-         }
+    }
+    readNummberOfHumanPlayers() {
+        let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
+        inIntervalDialog.read(Message.NUM_PLAYERS.toString());
+        return inIntervalDialog.getAnswer();
+    }
+
+    visitHumanPlayer(humanPlayer) {
+        this.#activePlayerView = new HumanPlayerView(humanPlayer);
+    }
+    visitRandomPlayer(randomPlayer) {
+        this.#activePlayerView = new RandomPlayerView(randomPlayer);
     }
 
     play() {
+        this.#turn.getActivePlayer().accept(this);
         this.#turn.play(this.#activePlayerView.getColumn());
     }
 
@@ -490,31 +523,29 @@ class TurnView {
         if ((this.#turn.getBoard()).isWinner()) {
             this.#activePlayerView.writeWinner();
         } else {
-            new MessageView(Message.PLAYERS_TIED).writeln();
+            Message.PLAYERS_TIED.writeln();
         }
     }
-
 }
-class YesNoDialog {
+class YesNoDialog extends OptionDialog {
 
     static #AFFIRMATIVE = `y`;
     static #NEGATIVE = `n`;
-    static #SUFFIX = `? (` +
-        YesNoDialog.#AFFIRMATIVE + `/` +
-        YesNoDialog.#NEGATIVE + `): `;
-    static #MESSAGE = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
-    #answer;
 
-    read(message) {
-        let ok;
-        do {
-            console.write(message);
-            this.#answer = console.readString(YesNoDialog.#SUFFIX);
-            ok = this.isAffirmative() || this.isNegative();
-            if (!ok) {
-                console.writeln(YesNoDialog.#MESSAGE);
-            }
-        } while (!ok);
+    constructor() {
+        super(YesNoDialog.#AFFIRMATIVE, YesNoDialog.#NEGATIVE);
+        this.message = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
+        this.suffix = `? (` +
+            YesNoDialog.#AFFIRMATIVE + `/` +
+            YesNoDialog.#NEGATIVE + `): `;
+    }
+
+    readWithSuffix() {
+        return console.readString(this.suffix);
+    }
+
+    isOk() {
+        return this.isAffirmative() || this.isNegative();
     }
 
     isAffirmative() {
@@ -526,20 +557,23 @@ class YesNoDialog {
     }
 
     getAnswer() {
-        return this.#answer.toLowerCase()[0];
+        return super.getAnswer().toLowerCase()[0];
     }
 }
+
 class Connect4 {
 
     #board;
     #turn;
     #boardView;
     #turnView;
-    #gameMode;
+    #humanPlayers;
 
     constructor() {
         this.#board = new Board();
         this.#boardView = new BoardView(this.#board);
+        this.#turn = new Turn(this.#board);
+        this.#turnView = new TurnView(this.#turn);
     }
 
     playGames() {
@@ -549,13 +583,12 @@ class Connect4 {
     }
 
     #playGame() {
-        this.#getGameMode();
-        this.#turn = new Turn(this.#board);
-        new MessageView(Message.TITLE).writeln();
+        this.#humanPlayers = this.#turnView.readNummberOfHumanPlayers();
+        this.#turn.reset(this.#humanPlayers);
+        Message.TITLE.writeln();
         this.#boardView.writeln();
-        
+
         do {
-            this.#turnView=new TurnView(this.#turn,this.#gameMode); //TODO: APLICAR DOBLE DESPACHO
             this.#turnView.play();
             this.#boardView.writeln();
         } while (!this.#board.isFinished());
@@ -564,17 +597,11 @@ class Connect4 {
 
     #isResumed() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(new MessageView(Message.RESUME).toString());
+        yesNoDialog.read(Message.RESUME.toString());
         if (yesNoDialog.isAffirmative()) {
             this.#board.reset();
         }
         return yesNoDialog.isAffirmative();
     }
-
-    #getGameMode (){
-        this.#gameMode = console.readNumber("0 - random vs random\n1 - human vs random \n2 - human vs human \n Insert game mode: ");
-    }
-
 }
 new Connect4().playGames();
-//export default class Connect4;
