@@ -1,5 +1,5 @@
 import { Board, Coordinate } from '../models/Board.js';
-import { Message } from './Message.js';
+import { Message } from './utils/Message.js';
 import { console } from './utils/console.js'; //Adaptar ColorView a Message y eliminar import
 
 class ColorView {

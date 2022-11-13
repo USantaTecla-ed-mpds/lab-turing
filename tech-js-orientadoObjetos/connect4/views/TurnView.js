@@ -1,8 +1,10 @@
 import { Turn } from '../models/Turn.js';
-import { Message } from './Message.js';
-import { InIntervalDialog } from './Dialog.js';
-import { PlayerVisitor } from '../interfaces/PlayerInterface.js';
 import { HumanPlayerView, RandomPlayerView } from './PlayerView.js';
+import { PlayerVisitor } from '../interfaces/PlayerInterface.js';
+import { InIntervalDialog } from './utils/Dialog.js';
+import { Message } from './utils/Message.js';
+
+
 
 class TurnView extends PlayerVisitor {
     #turn;

@@ -1,5 +1,5 @@
 import { ColorView } from './BoardView.js';
-import { Message } from './Message.js';
+import { Message } from './utils/Message.js';
 import { console } from './utils/console.js'; //Adaptar en human a dialogo de pedir columna y eliminar import
 
 class PlayerView {

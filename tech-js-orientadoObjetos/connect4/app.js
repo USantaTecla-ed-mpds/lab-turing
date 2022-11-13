@@ -1,5 +1,5 @@
-import { Message } from './views/Message.js';
-import { YesNoDialog } from './views/Dialog.js';
+import { Message } from './views/utils/Message.js';
+import { YesNoDialog } from './views/utils/Dialog.js';
 import { Board, BoardView } from './views/BoardView.js';
 import { Turn, TurnView } from './views/TurnView.js';
 
