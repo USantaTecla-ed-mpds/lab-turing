@@ -1,6 +1,6 @@
 import { Board, Coordinate } from '../utils/Board.js';
 import { Message } from './Message.js';
-import { console } from '../utils/console.js';
+import { console } from './console.js'; //Adaptar ColorView a Message y eliminar import
 
 class ColorView {
     #color;

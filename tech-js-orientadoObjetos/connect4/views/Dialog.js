@@ -1,6 +1,6 @@
 import { ClosedInterval } from '../utils/ClosedInterval.js'
 import { Message } from './Message.js';
-import { console } from '../utils/console.js'
+import { console } from './console.js'
 
 
 class Dialog {

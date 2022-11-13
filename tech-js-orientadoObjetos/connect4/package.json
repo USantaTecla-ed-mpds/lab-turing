@@ -1,6 +1,6 @@
 {
   "name": "connect4",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
   "main": "app.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Joselon",
   "license": "ISC",
   "dependencies": {
     "console-mpds": "^1.0.4"
