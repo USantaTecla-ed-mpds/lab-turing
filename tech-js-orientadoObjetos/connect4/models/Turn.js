@@ -1,4 +1,4 @@
-import { HumanPlayer, RandomPlayer } from '../utils/Player.js'
+import { HumanPlayer, RandomPlayer } from './Player.js'
 import { Color } from './Board.js';
 
 class Turn {

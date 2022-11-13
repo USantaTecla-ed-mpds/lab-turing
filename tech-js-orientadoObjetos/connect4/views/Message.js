@@ -1,4 +1,4 @@
-import { console } from './console.js'
+import { console } from './utils/console.js'
 
 export class Message {
     static TITLE = new Message(`--- CONNECT 4 ---`);

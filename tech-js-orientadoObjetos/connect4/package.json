@@ -1,7 +1,7 @@
 {
   "name": "connect4",
   "version": "1.0.4",
-  "description": "",
+  "description": "Console Views Version",
   "main": "app.js",
   "type": "module",
   "scripts": {
