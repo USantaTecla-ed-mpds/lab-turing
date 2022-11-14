@@ -1,7 +1,5 @@
 import { Board, Coordinate } from '../models/Board.js';
 import { Message } from './utils/Message.js';
-import { console } from './utils/console.js'; //Adaptar ColorView a Message y eliminar import
-
 class ColorView {
     #color;
 
@@ -9,7 +7,7 @@ class ColorView {
         this.#color = color;
     }
     write() {
-        console.write(` ${this.#color.getString()[0]} `);
+        new Message(` ${this.#color.getString()[0]} `).write();
     }
     toString() {
         return this.#color.getString();

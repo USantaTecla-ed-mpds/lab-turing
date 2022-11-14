@@ -5,12 +5,14 @@ import { console } from './console.js'
 
 class Dialog {
     message;
+    errorMessage;
     suffix;
     #answer;
 
     constructor() {
         this.message = ``;
         this.suffix = ``;
+        this.errorMessage=``;
     }
 
     read(message) {
@@ -20,7 +22,7 @@ class Dialog {
             this.#answer = this.readWithSuffix();
             ok = this.isOk();
             if (!ok) {
-                new Message(message).writeln();
+                new Message(this.errorMessage).writeln();
             }
         } while (!ok);
     }
@@ -41,7 +43,7 @@ class InIntervalDialog extends Dialog {
         super();
         this.#min = min;
         this.#max = max;
-        this.message = `The value must be between ${min} and ${max}`;
+        this.errorMessage = `The value must be between ${min} and ${max}`;
         this.suffix = `? [` +
             min + `-` +
             max + `]: `
@@ -64,7 +66,7 @@ class YesNoDialog extends Dialog {
 
     constructor() {
         super();
-        this.message = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
+        this.errorMessage = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
         this.suffix = `? (` +
             YesNoDialog.#AFFIRMATIVE + `/` +
             YesNoDialog.#NEGATIVE + `): `;

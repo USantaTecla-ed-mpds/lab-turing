@@ -1,6 +1,7 @@
 import { ColorView } from './BoardView.js';
 import { Message } from './utils/Message.js';
-import { console } from './utils/console.js'; //Adaptar en human a dialogo de pedir columna y eliminar import
+import { InIntervalDialog } from './utils/Dialog.js';
+import { Coordinate } from '../models/Board.js';
 
 class PlayerView {
     #player;
@@ -33,15 +34,12 @@ class HumanPlayerView extends PlayerView {
         do {
             Message.TURN.write();
             new Message(new ColorView(super.getPlayer().getColor()).toString()).writeln();
-            column = console.readNumber(Message.ENTER_COLUMN_TO_DROP.toString()) - 1;
-            valid = super.getPlayer().isColumnValid(column);
+            let inIntervalDialog = new InIntervalDialog(1,Coordinate.NUMBER_COLUMNS);
+            inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
+            column = inIntervalDialog.getAnswer()-1;
+            valid = !super.getPlayer().isComplete(column);
             if (!valid) {
-                Message.INVALID_COLUMN.writeln();
-            } else {
-                valid = !super.getPlayer().isComplete(column);
-                if (!valid) {
-                    Message.COMPLETED_COLUMN.writeln();
-                }
+                Message.COMPLETED_COLUMN.writeln();
             }
         } while (!valid);
         return column;

@@ -18,8 +18,7 @@ class Player {
     isComplete(column) {
         return this.#board.isComplete(column);
     }
-
-    accept() { }
+    accept(visitor) { }
 }
 
 class HumanPlayer extends Player {
@@ -30,9 +29,7 @@ class HumanPlayer extends Player {
     accept(visitor) {
         visitor.visitHumanPlayer(this);
     }
-    isColumnValid(column) {
-        return Coordinate.isColumnValid(column);
-    }
+
 }
 
 class RandomPlayer extends Player {
