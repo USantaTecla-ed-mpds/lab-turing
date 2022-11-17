@@ -1,6 +1,6 @@
 import { ColorView } from './BoardView.js';
-import { Message } from './utils/Message.js';
-import { InIntervalDialog } from './utils/Dialog.js';
+import { Message } from './Message.js';
+import { InIntervalDialog } from '../utils/views/Dialog.js';
 import { Coordinate } from '../models/Board.js';
 
 class PlayerView {

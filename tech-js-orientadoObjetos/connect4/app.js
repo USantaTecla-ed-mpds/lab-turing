@@ -1,7 +1,9 @@
-import { Message } from './views/utils/Message.js';
-import { YesNoDialog } from './views/utils/Dialog.js';
-import { Board, BoardView } from './views/BoardView.js';
-import { Turn, TurnView } from './views/TurnView.js';
+import { Message } from './views/Message.js';
+import { YesNoDialog }  from './utils/views/Dialog.js';
+import { Board } from './models/Board.js';
+import { Turn } from './models/Turn.js';
+import { BoardView } from './views/BoardView.js';
+import { TurnView } from './views/TurnView.js';
 
 class Connect4 {
     #board;

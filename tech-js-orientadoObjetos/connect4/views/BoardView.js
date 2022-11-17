@@ -1,5 +1,5 @@
-import { Board, Coordinate } from '../models/Board.js';
-import { Message } from './utils/Message.js';
+import { Coordinate } from '../models/Board.js';
+import { Message } from './Message.js';
 class ColorView {
     #color;
 
@@ -45,4 +45,4 @@ class BoardView {
 
 }
 
-export { Board, BoardView, ColorView };
+export { BoardView, ColorView };

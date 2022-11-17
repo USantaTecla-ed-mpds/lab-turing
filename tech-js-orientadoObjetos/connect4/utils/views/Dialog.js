@@ -1,6 +1,7 @@
-import { ClosedInterval } from '../../models/utils/ClosedInterval.js'
-import { Message } from './Message.js';
-import { console } from './console.js'
+import ClosedInterval   from '../models/ClosedInterval.js'
+import { Message } from '../../views/Message.js';
+import  {console}  from './console.js';
+
 
 
 class Dialog {

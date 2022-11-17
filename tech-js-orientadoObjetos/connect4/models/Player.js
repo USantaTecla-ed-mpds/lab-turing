@@ -52,4 +52,13 @@ class RandomPlayer extends Player {
 
 }
 
-export { HumanPlayer, RandomPlayer };
+class PlayerVisitor {
+
+    visitHumanPlayer(humanPlayer) {
+    }
+    visitRandomPlayer(randomPlayer) {
+    }
+
+}
+
+export { HumanPlayer, RandomPlayer , PlayerVisitor };

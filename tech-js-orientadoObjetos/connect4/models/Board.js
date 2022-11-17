@@ -1,4 +1,4 @@
-import { ClosedInterval } from '../models/utils/ClosedInterval.js';
+import ClosedInterval  from '../utils/models/ClosedInterval.js';
 
 class Color {
 

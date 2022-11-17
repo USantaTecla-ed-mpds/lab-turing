@@ -1,4 +1,3 @@
 import { Console } from 'console-mpds';
-
-export const console = new Console();
+export  const console = new Console();
 

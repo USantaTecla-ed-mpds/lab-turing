@@ -1,4 +1,4 @@
-export class ClosedInterval {
+export default class ClosedInterval {
 
     #min;
     #max;
