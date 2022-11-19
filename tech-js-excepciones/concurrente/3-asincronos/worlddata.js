@@ -30,13 +30,13 @@ async function main() {
   try {
     let worldData = await getWorldInfo(code);
     let codeData;
-    console.writeln(typeof (worldData[0][code]));
+    console.writeln(`Data's type is: ${typeof (worldData[0][code])}`);
     switch (typeof (worldData[0][code])) {
       case 'number':
         codeData = 0;
         break;
       case 'object':
-          codeData = [];
+          codeData = '';
           break;
       default:
         throw new Error("No es un numero");
@@ -47,7 +47,7 @@ async function main() {
           codeData += worldData[country][code];
           break;
         case 'object':
-            codeData [worldData.indexOf[country]]= worldData[country][code];
+            codeData += worldData[country][code];
             break;
         default:
           throw new Error("No es un numero");
