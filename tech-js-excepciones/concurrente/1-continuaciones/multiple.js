@@ -44,8 +44,12 @@ function getCountryInfo(code, callback) {
             });
 
             resp.on('end', () => {
-                let country = JSON.parse(data)[0];
-                callback(undefined, country);
+                if (resp.statusCode === 404) {
+                    callback(new Error("País no encontrado"));
+                } else {
+                    let country = JSON.parse(data)[0];
+                    callback(undefined, country);
+                }
             });
 
         })
@@ -61,7 +65,7 @@ function showErrorOrDensityAverage(err, countries, countryOrigin) {
     } else {
         let average = 0;
         for (let country of countries) {
-            average += getZeroOrDensity(undefined, country);
+            average += getDensity(country);
         }
         average=average/countries.length;
         console.log(`The average of population of borders countries of ${countryOrigin.name.common} is ${average} (hab/Km2)`);
@@ -69,14 +73,9 @@ function showErrorOrDensityAverage(err, countries, countryOrigin) {
     }
 }
 
-function getZeroOrDensity(err, country) {
-    if (err !== undefined) {
-        return 0;
-    } else {
+function getDensity(country) {
         const remainder = country.population %  country.area;
         const integer = country.population - remainder;
-        const quotient = integer /  country.area;
-        return  quotient;
-        ;
-    }
+        const density = integer /  country.area;
+        return  density;
 }
