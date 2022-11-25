@@ -15,7 +15,7 @@ function getCountryInfo(code) {
 
       resp.on('end', () => {
         if (resp.statusCode !== 200) {
-          callback(new Error("País no encontrado"));
+          reject(new Error("País no encontrado Error https "+resp.statusCode));
         } else {
           let country = JSON.parse(data)[0];
           console.writeln(country.name.common);
@@ -29,10 +29,7 @@ function getCountryInfo(code) {
   });
 }
 
-function getErrorOrDensity(err, country) {
-  if (err) {
-    console.writeln("Error: " + err.message);
-  } else {
+function getDensity(country) {
     console.writeln(`Country: ${country.name.common}`);
     console.writeln(`Population: ${country.population}`);
     console.writeln(`Area: ${country.area}`);
@@ -40,7 +37,6 @@ function getErrorOrDensity(err, country) {
     console.writeln(`* Calculated Density: ${density.toFixed(2)}`);
     console.writeln(`\n`);
     return density;
-  }
 }
 
 async function getBordersInfo(code) {
@@ -86,7 +82,7 @@ async function main() {
       let countries = await getBordersInfo(code);
       let densityAverage = 0;
       for (let country of countries) {
-        densityAverage += getErrorOrDensity(null, country);
+        densityAverage += getDensity(country);
       }
       densityAverage /= countries.length;
       console.writeln(`Density Average of borders countries of ${code} is: ${densityAverage.toFixed(2)} hab/Km2`)

@@ -13,8 +13,12 @@ function getWorldInfo(field) {
       });
 
       resp.on('end', () => {
-        let worldData = JSON.parse(data);
-        resolve(worldData);
+        if (resp.statusCode !== 200) {
+          reject(new Error("País no encontrado Error https " + resp.statusCode));
+        } else {
+          let worldData = JSON.parse(data);
+          resolve(worldData);
+        }
       });
 
     }).on("error", (err) => {
@@ -25,7 +29,7 @@ function getWorldInfo(field) {
 
 async function main() {
 
-  const field = console.readString("Wich world data do you need?(Enter property of country-object in restcountries.com/v3.1 schema):")
+  const field = console.readString("Wich world data do you need?(Enter numeric property of country-object in restcountries.com/v3.1 schema):")
 
   try {
     let worldData = await getWorldInfo(field);
@@ -38,8 +42,16 @@ async function main() {
         case 'undefined':
           console.writeln(`${worldData[index].name} Data's type is: ${typeof (worldData[index][field])}`);
           break;
+        case 'object':
+          result =``;
+          for (let i in worldData[index][field])
+            if(worldData[index][field].hasOwnProperty(i)){
+              result += `${worldData[index][field]}.${i} = ${worldData[index][field][i]}\n`;
+            } 
+            console.writeln(`${worldData[index].name} is: ${result}`);
+            break;
         default:
-          throw new Error("No es un numero");
+          throw new Error("¡It's not a number!");
       }
     }
     console.writeln(`World at Jan 6, 2015: ${field}: ${fieldData}`);

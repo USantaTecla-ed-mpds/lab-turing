@@ -48,17 +48,26 @@ class ErrorThrower extends ErrorVisitor {
         console.log(`Sentencia previa`);
         try {
             if (Math.random() < 0.5) {
-                throw new MyRangeError("descripcion");
+                throw new MyRangeError("Error por fuera de rango la mitad de las veces");
             }
             if (Math.random() < 0.5) {
-                throw new CustomError("descripcion");
+                throw new CustomError("Error que se provoca 1/4 de las veces");
             }
             if (Math.random() < 0.5) {
-                throw new AssertionError("descripcion");
+                throw new AssertionError("Error 1/8: Assert de validación");
+            }
+            if (Math.random() < 0.5) {
+                throw "descuidado";
             }
             console.log("Sentencia ejecutada?");
+
         } catch (exception) {
-            exception.accept(this);
+            if(exception!=="descuidado"){  //Duda: como preguntar si la excepción no viene
+                exception.accept(this);  //de ninguna derivada de la clase Error que admita el nuevo metodo accept
+            }
+            else{
+             console.log("Acciones catch: descuidado");
+            }
         }
         console.log(`Sentencia posterior`);
     }
@@ -69,7 +78,7 @@ class ErrorThrower extends ErrorVisitor {
         console.log("Acciones catch: " + myRangeError.name + ": " + myRangeError.message);
     }
    visitAssertionError(assertionError) {
-        console.log("Acciones catch: " + assertionError.name + ": " + assertionError.message);
+        console.log("Acciones catch: " + assertionError.name + ": " + assertionError.message); //No estaría cumpliendo con la teoría de Assertion.
     }
 
 }
