@@ -1,0 +1,28 @@
+table {
+  margin-bottom: 50px;
+  border: 1px solid black;
+}
+
+td {
+  border: 1px solid black;
+}
+
+.NaN,.false {
+  color : red;
+}
+
+.undefined {
+  background-color: rgb(128, 128, 128);
+}
+
+.number {
+  background-color: rgb(128, 255, 128);
+}
+
+.boolean {
+  background-color: rgb(255, 128, 128);
+}
+
+.string {
+  background-color: rgb(128, 128, 255);
+}

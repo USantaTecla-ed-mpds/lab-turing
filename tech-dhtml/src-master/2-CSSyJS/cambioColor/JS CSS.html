@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS CSS. element</title>
+    <script>
+      function getTitle(){
+        return document.getElementsByTagName("h1")[0];
+      }
+
+      function load(){
+        // desaconsejado!!! 
+        getTitle().style.cssText = 
+          "color:red; font-family:Arial, Helvetica, sans-serif;";
+      }
+
+      function changeColor(){
+        let color = "#";
+        for(let i=0; i<"RGB".length; i++){
+          let number = Math.floor(Math.random()*256).toString(16);
+          if (number.length == 1){
+            number = "0" + number;
+          }
+          color += number
+        }
+        getTitle().style.color =  color;
+      }
+
+    </script>
+  </head>
+  <body onload="load();">
+    <h1>Título</h1>
+    <form>
+      <input type="button" value="Cambiar color" onclick="changeColor();">
+    </form>
+  </body>
+</html>

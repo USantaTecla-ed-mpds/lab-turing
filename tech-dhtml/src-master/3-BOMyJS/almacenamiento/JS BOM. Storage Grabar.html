@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS BOM. Grabar en el Almacén</title>
+    <script>
+      function save(input){
+        let data = JSON.stringify({ 
+          "constant": "constant",
+          "variable": input.value
+        });
+        //window.sessionStorage.setItem("key", data);
+        window.localStorage.setItem("key", data);
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      <label>Dato:</label>
+      <input type="text" onchange="save(this)">
+    </form>
+    <a href="JS BOM. Storage Consultar.html">Consultar</a>
+    <br>
+    <a href="JS BOM. Storage Borrar.html">Borrar</a>
+  </body>
+</html>

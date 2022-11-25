@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS DOM. Sistemas de Numeración</title>
+    <style>
+      table, td {
+        border : 1px solid black;
+      }
+      thead {
+        text-emphasis: 200;
+      }
+      td {
+        text-align : right;
+      }
+    </style>
+    <script>      
+      function createTable(){
+        var main = document.createElement("main");
+        document.getElementById("body").appendChild(main);
+        var table = document.createElement("table");
+        main.appendChild(table);
+        table.setAttribute("class", "title");
+        var thead = document.createElement("thead");
+        table.appendChild(thead);
+        var tr = document.createElement("tr");
+        thead.appendChild(tr);
+        for(base of ["Binario", "Octal", "Decimal", "Hexadecimal"]){
+          var td = document.createElement("td");
+          tr.appendChild(td);
+          var span = document.createElement("span");
+          td.appendChild(span);
+          var text = document.createTextNode(base);
+          span.appendChild(text);
+        }
+        var tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+        for(var i=0; i<=9999; i++){
+          var tr = document.createElement("tr");
+          tbody.appendChild(tr);
+          for(base of [2, 8, 10, 16]){
+            var td = document.createElement("td");
+            tr.appendChild(td);
+            var span = document.createElement("span");
+            td.appendChild(span);
+            var text = document.createTextNode(decimalToDigits(i,base));
+            span.appendChild(text);
+          }
+        }
+      }
+      
+      function decimalToDigits(value, base){
+        function getStep(dividend, divisor){
+          return {
+            dividend : dividend,
+            divisor : divisor,
+            quotient : Math.trunc(dividend/divisor),
+            remainder : dividend%divisor 
+          }
+        }
+        var trace = [getStep(value, base)];
+        while (trace[trace.length-1].quotient >= base){
+          trace.push(getStep(trace[trace.length-1].quotient, base));
+        }
+        var result = "";
+        var quotient = trace[trace.length-1].quotient;
+        if (quotient != 0){
+          result += decimalToDigit(quotient);
+        }
+        for(var i=trace.length-1; i>=0; i--){
+          result += decimalToDigit(trace[i].remainder);
+        }
+        return result;
+      }
+      
+      function decimalToDigit(value){
+        if (value<10) {
+          return ""+value;
+        } else {
+          return ["A", "B", "C", "D", "E", "F"][value-10];
+        }
+      }
+          
+    </script>
+  </head>
+  <body id="body"></body>
+	<script>createTable();</script>
+</html>
+

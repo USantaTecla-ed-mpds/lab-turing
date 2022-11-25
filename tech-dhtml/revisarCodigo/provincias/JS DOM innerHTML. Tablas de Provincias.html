@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JS DOM innerHTML. Listado de Provincias</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+
+        .provincia {
+            background-color: burlywood;
+        }
+
+        .nombre {
+            font-size: 14px;
+            background-color: #87afde;
+        }
+
+        .km2,
+        .poblacion {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <p>Ejercicio para generar elementos DOM dinámicamente a partir de un array de provicincias con datos (km2, ...)
+            visualizar una tabla</p>
+    </header>
+    <table id="tablaProvincias" />
+    <script>
+        var datosProvincias = [
+            { nombre: "Alava", km2: "238398", poblacion: "98229" },
+            { nombre: "Burgos", km2: "34555", poblacion: "77764" },
+            { nombre: "Cáceres", km2: "233433", poblacion: "76543" },
+            { nombre: "Huesca", km2: "78875", poblacion: "6789" },
+            { nombre: "Santa Cruz de Tenerife", km2: "454555", poblacion: "35433" },
+        ];
+
+        let innerHTML = "";
+        innerHTML += "<thead><tr>";
+        for (campo in datosProvincias[0]) {
+            innerHTML += "<td>" + campo + "</td>";
+        }
+        innerHTML += "</tr></thead>";
+        innerHTML += "<tbody>";
+        for (var i = 0; i < datosProvincias.length; i++) {
+            innerHTML += "<tr class='provincia' id='provincia'" + i + ">";
+            for (campo in datosProvincias[i]) {
+                innerHTML += "<td class='" + campo + "'>" + datosProvincias[i][campo] + "</td>";
+            }
+            innerHTML += "</tr>";
+        }
+        innerHTML += "</tbody>";
+
+        document.getElementById("tablaProvincias").innerHTML = innerHTML;
+    </script>
+</body>
+
+</html>

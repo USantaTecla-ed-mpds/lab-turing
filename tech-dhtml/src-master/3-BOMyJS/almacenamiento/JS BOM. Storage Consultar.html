@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS BOM. Consultar el Almacén</title>
+    <script>
+      function get(){
+        //let data = window.sessionStorage.getItem("key");
+        let data = window.localStorage.getItem("key");        
+        let text = "NO EXISTE!!!";
+        if (data != null){
+           text = JSON.parse(data).variable;
+        }
+        window.alert("Dato: " + text);
+      }
+    </script>
+  </head>
+  <body onload="get();">
+    <a href="JS BOM. Storage Borrar.html">Borrar</a>
+    <br>
+    <a href="JS BOM. Storage Grabar.html">Grabar</a>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS DOM. element</title>
+</head>
+<body id="body"></body>
+  <script>
+    let bodyElement = document.getElementById("body");
+    let titleElement = document.createElement("h1");
+    let titleText = document.createTextNode("Título con element");
+    titleElement.appendChild(titleText);
+    bodyElement.appendChild(titleElement);
+    let paragraphElement = document.createElement("p");
+    let paragraphText = document.createTextNode("Párrafo");
+    paragraphElement.appendChild(paragraphText);
+    bodyElement.appendChild(paragraphElement);
+  </script>
+</html>

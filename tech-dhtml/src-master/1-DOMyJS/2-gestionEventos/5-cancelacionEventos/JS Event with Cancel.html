@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Event. Cancelación</title>
+  </head>
+  <script>
+    const DIGITS = /[0-9]/g;
+		
+    var data = {
+      count : 0,
+      keys : ""
+    } 
+
+    function acumulateKeys(event){
+      data.count++;
+      data.keys += event.key;
+    }   
+
+    function filterNoDigitsWithPreventDefaul(event){
+      if (!DIGITS.test(event.key)){
+        event.preventDefault();
+      }
+    }
+
+    function filterNoDigitsWithReturn(event){
+      return DIGITS.test(event.key);
+    }
+
+    function showData(){
+      data.first = document.getElementsByName("first")[0].value;
+      data.second = document.getElementsByName("second")[0].value;
+      window.alert(JSON.stringify(data));
+    }
+    
+  </script>
+  <body onkeypress="acumulateKeys(event);">
+    <h1>Formulario con enteros filtrados</h1>
+    <form>
+      <label>Primer número natural: </label>
+      <input type="text" name="first" onkeypress="filterNoDigitsWithPreventDefaul(event);">
+      <br>
+      <label>Segundo número natural: </label>
+      <!-- importante el return en el callback!!! -->
+      <input type="text" name="second" onkeypress="return filterNoDigitsWithReturn(event);">
+      <br>
+      <input type="button" value="Mostrar" onclick="showData();">
+    </form>
+  </body>
+</html>

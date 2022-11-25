@@ -1,0 +1,29 @@
+div {
+  margin-bottom: 2%;
+  position: static;
+  float: left;
+}
+
+.nivel-1 {
+  width: 100%;
+  background-color: #61a0a2;
+}
+
+div div {
+  width: 45%;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.nivel-2 {
+  background-color: #5b85c7;
+}
+
+.nivel-3 {
+  background-color: #629676;
+}
+
+.nivel-4 {
+  background-color: #c3874c;
+}
+

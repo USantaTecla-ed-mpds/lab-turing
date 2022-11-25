@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Event</title>
+  </head>
+  <script>
+    function onLoad(event){
+      console.log("Evento: " + event.type);
+      let body = document.getElementById("body");
+      body.addEventListener("copy", onCopy);
+      let title = document.getElementById("title");
+      title.addEventListener("mouseenter", onMouseEnter);
+    }
+
+    function onCopy(event){
+      console.log("Evento: " + event.type);
+    }
+
+    function onMouseEnter(event){
+      console.log("Evento: " + event.type);
+    }
+
+    function onBlur(event, input){
+      console.log("Evento: " + event.type + " de " 
+        + input.name + " con " + input.value);
+    }
+
+    function onClick(event, button){
+      console.log("Evento: " + event.type + " con " 
+        + button.value);
+      let body = document.getElementById("body");
+      if (button.value=="Atender al tampón del teclado") {
+        button.value = "No atender al tampón del teclado";
+        body.addEventListener("copy", onCopy);
+      } else {
+        button.value = "Atender al tampón del teclado";
+        body.removeEventListener("copy", onCopy);
+      }
+    }
+
+    function onSubmit(event, form){
+      let equals = document.getElementById("fieldA").value 
+        == document.getElementById("fieldB").value;
+      if (equals) {
+        form.action = "https://" 
+          + document.getElementById("fieldA").value;
+      } 
+      console.log("Evento: " + event.type);    
+      return equals;
+    }
+
+  </script>
+  <!-- manejador establecido estáticamente -->
+  <body id="body" onload="onLoad(event)">
+    <!-- código establecido estáticamente -->
+    <h1 id="title" onmouseleave=
+      "javascript: console.log('Evento: ' + event.type); console.log('Evento: ' + event.type);">
+        Titulo con foco!!!</h1>
+    <!-- validacion/accion del submit: con return!!! -->
+    <form id="form"  method="POST"
+      onsubmit="return onSubmit(event, this);">
+      <label>Campo A: </label>
+      <input id="fieldA" type="text" 
+        onblur = "onBlur(event, this);"/>
+      <br>
+      <label>Campo B: </label>
+      <input id="fieldB" type="text"
+        onblur = "onBlur(event, this);"/>
+      <br>
+      <!-- validación/accion de boton -->
+      <input id="button" type="button" 
+        value="No Atender al tampón del teclado" 
+        onclick="onClick(event, this);">
+      <input type="submit" value="enviar">
+    </form>
+  </body>
+</html>

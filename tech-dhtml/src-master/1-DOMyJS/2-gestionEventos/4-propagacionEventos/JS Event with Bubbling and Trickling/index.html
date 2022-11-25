@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Event. Bubbling and Trickling</title>
+		<link rel="stylesheet" href="style.css"/>  
+		<script language="javascript" src="./logic.js"></script>
+	</head>
+  <body onload="onLoad();">
+    <div class = "nivel-1 izquierda" 
+      onclick = "alertBubblingFromHTML(event, this);">
+      <h1>Nivel 1</h1>
+      <h2>Izquierda</h2>
+      <div class = "nivel-2 izquierda" 
+        onclick = "alertBubblingFromHTML(event, this);">
+        <h2>Nivel 2</h2>
+        <h3>Izquierda</h3>
+        <div class = "nivel-3 izquierda" 
+          onclick = "alertBubblingFromHTML(event, this);">
+					<h3>Nivel 3</h3>
+          <h4>Izquierda</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+						<h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+        <div class = "nivel-3 derecha" 
+          onclick = "alertBubblingFromHTML(event, this);">
+          <h3>Nivel 3</h3>
+          <h4>Derecha</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+      </div>
+      <div class = "nivel-2 derecha" 
+        onclick = "alertBubblingFromHTML(event, this);">
+        <h2>Nivel 2</h2>
+        <h3>Derecha</h3>
+        <div class = "nivel-3 izquierda" 
+          onclick = "alertBubblingFromHTML(event, this);">
+					<h3>Nivel 3</h3>
+          <h4>Izquierda</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+						<h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha"  
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+        <div class = "nivel-3 derecha" 
+          onclick = "alertBubblingFromHTML(event, this);">
+          <h3>Nivel 3</h3>
+          <h4>Derecha</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "nivel-1 derecha" 
+      onclick = "alertBubblingFromHTML(event, this);">
+      <h1>Nivel 1</h1>
+      <h2>Derecha</h2>
+      <div class = "nivel-2 izquierda" 
+        onclick = "alertBubblingFromHTML(event, this);">
+        <h2>Nivel 2</h2>
+        <h3>Izquierda</h3>
+        <div class = "nivel-3 izquierda" 
+          onclick = "alertBubblingFromHTML(event, this);">
+					<h3>Nivel 3</h3>
+          <h4>Izquierda</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+						<h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+        <div class = "nivel-3 derecha" 
+          onclick = "alertBubblingFromHTML(event, this);">
+          <h3>Nivel 3</h3>
+          <h4>Derecha</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+      </div>
+      <div class = "nivel-2 derecha" 
+        onclick = "alertBubblingFromHTML(event, this);">
+        <h2>Nivel 2</h2>
+        <h3>Derecha</h3>
+        <div class = "nivel-3 izquierda" 
+          onclick = "alertBubblingFromHTML(event, this);">
+					<h3>Nivel 3</h3>
+          <h4>Izquierda</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+						<h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+        <div class = "nivel-3 derecha" 
+          onclick = "alertBubblingFromHTML(event, this);">
+          <h3>Nivel 3</h3>
+          <h4>Derecha</h4>
+          <div class = "nivel-4 izquierda" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Izquierda</h5>
+          </div>
+          <div class = "nivel-4 derecha" 
+            onclick = "alertBubblingFromHTML(event, this);">
+            <h4>Nivel 4</h4>
+            <h5>Derecha</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

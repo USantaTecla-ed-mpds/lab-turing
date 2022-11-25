@@ -1,0 +1,54 @@
+body {
+  background-color: white;
+  margin: 400px;
+
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  border-spacing: 0px;
+}
+
+.left {
+  border-left: 2px black solid ;
+}
+
+
+.top {
+  border-top: 2px black solid;
+}
+
+.bottom {
+  border-bottom: 2px black solid;
+}
+
+.right {
+  border-right: 2px black solid;
+}
+
+img {
+  width: 25px;
+  height: 25px;
+}
+
+.soft {
+  background-color:darkslategrey;
+}
+
+.medium {
+  background-color:gray;
+
+}
+
+.strong {
+  background-color: lightgray;
+}
+
+
+
+

@@ -1,0 +1,77 @@
+#app {
+  background-color: rgba(0, 0, 0, .02);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: Lato, sans-serif;
+  padding: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0
+}
+
+table {
+  border: 0;
+  border-spacing: 0;
+  border-collapse: separate;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  padding: 30px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .5)
+}
+
+table td,
+table th {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
+  font-weight: lighter
+}
+
+table th {
+  font-size: 24px;
+  color: rgba(0, 0, 0, .3)
+}
+
+table td {
+  color: rgba(0, 0, 0, .5);
+  font-size: 16px
+}
+
+p {
+  margin-top: 30px;
+  color: rgba(0, 0, 0, .6)
+}
+
+h1 {
+  margin: 0 auto 50px auto;
+  text-align: center;
+  color: rgba(0, 0, 0, .4);
+  font-weight: lighter;
+  display: block;
+  width: 50%;
+  padding: 10px 0;
+  font-size: 42px
+}
+
+.info-box,
+table {
+  width: 50%;
+  margin: auto
+}
+
+@media (max-width:992px) {
+#app {
+padding: 15px
+}
+
+table th {
+font-size: 16px
+}
+
+.info-box,
+h1,
+table {
+width: 100%
+}
+}
