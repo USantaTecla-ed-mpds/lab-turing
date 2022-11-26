@@ -1,0 +1,75 @@
+body {
+  min-width : 200px;
+  width : 80%;
+  background-color: black;
+  position: relative;
+  left: 10%;
+  color: orange;
+}
+
+  body > h1 {
+    border : 1px solid orange; 
+    margin-top: 1px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  form {
+    min-width: 130px;
+    width: 10%;
+    padding: 3px;
+    border : 1px solid orange; 
+    float: left;
+  }
+
+    .button {
+      margin-top : 5px;
+    }
+
+    input[type="text"] {
+      width : 30px;
+    }
+
+  #items {
+    width: 88%;
+    border : 1px orange solid;
+    padding: 1px;
+    float: right;
+  }
+
+    .item {
+      width : 120px;
+      padding : 1px;
+      border : 1px white solid;
+      margin : 1px;
+      background-color: blue;
+      color: black;
+      height : 140px;
+      text-align: center;
+      vertical-align : text-top;
+      font-size : 12px;
+    }
+
+    div > h1 {
+      margin: 0px;
+    }
+
+    .text {
+      position : relative;
+      bottom : 15px;
+    }
+
+    ul, li {
+      background-color: 1px red solid;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    div.noFloat {
+      clear: both;
+    }
+

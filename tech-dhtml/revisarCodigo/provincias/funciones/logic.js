@@ -6,24 +6,24 @@ const COUNTRIES = [
   { name: "Santa Cruz de Tenerife", density: 454555, population: 35433 },
 ];
 
-document.getElementById("body").addEventListener("load", function (){
-  let body = this.document.getElementById('body');
-  createHeader(body);
-  createTable(body, COUNTRIES);
-  createFooter(body);
+document.addEventListener("DOMContentLoaded", function (){
+  let appView = this.getElementById('appView'); //Duda: let myBody = document.body.innerHTML; vs let myBody = document.body
+  createHeader(appView);
+  createTable(appView, COUNTRIES);
+  createFooter(appView);
 });
 
-function createHeader(body) {
+function createHeader(appView) {
   let h1 = this.document.createElement('h1');
   h1.appendChild(this.document.createTextNode("DHTML exercice"));
-  body.appendChild(h1);
+  appView.appendChild(h1);
 }
 
-function createTable(body, countries) {
+function createTable(appView, countries) {
   let table = document.createElement('table');
   createHeaders(table);
   createBody(table, countries);
-  body.appendChild(table);
+  appView.appendChild(table);
 }
 
 function createHeaders(table) {
@@ -48,7 +48,7 @@ function createBody(table, countries) {
   }
 }
 
-function createFooter(body) {
+function createFooter(appView) {
   let p = document.createElement('p');
   p.append(
     "La media de población total es " +
@@ -62,7 +62,7 @@ function createFooter(body) {
   let div = document.createElement('div');
   div.append(p);
   div.classList.add("info-box");
-  body.append(div);
+  appView.append(div);
 }
 
 function getAverage(amounts) {
@@ -76,3 +76,4 @@ function getAverage(amounts) {
   }
   return sum / count;
 }
+

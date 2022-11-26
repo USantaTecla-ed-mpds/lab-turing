@@ -1,5 +1,8 @@
-#app {
-  background-color: rgba(0, 0, 0, .02);
+#appView {
+  background-color: rgba(0, 0, 0, 0.05);
+  min-width: -webkit-fill-available;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -10,7 +13,7 @@
   margin: 0
 }
 
-table {
+#appView> table {
   border: 0;
   border-spacing: 0;
   border-collapse: separate;
@@ -20,30 +23,30 @@ table {
   background-color: rgba(255, 255, 255, .5)
 }
 
-table td,
-table th {
+#appView> table td,
+#appView> table th {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid rgba(0, 0, 0, .05);
   font-weight: lighter
 }
 
-table th {
+#appView>table th {
   font-size: 24px;
   color: rgba(0, 0, 0, .3)
 }
 
-table td {
+#appView>table td {
   color: rgba(0, 0, 0, .5);
   font-size: 16px
 }
 
-p {
+#appView p {
   margin-top: 30px;
   color: rgba(0, 0, 0, .6)
 }
 
-h1 {
+#appView>h1 {
   margin: 0 auto 50px auto;
   text-align: center;
   color: rgba(0, 0, 0, .4);
@@ -51,27 +54,27 @@ h1 {
   display: block;
   width: 50%;
   padding: 10px 0;
-  font-size: 42px
+  font-size: 42px;
 }
 
-.info-box,
+#appView> .info-box, #appView>
 table {
   width: 50%;
-  margin: auto
+  margin: auto;
 }
 
 @media (max-width:992px) {
-#app {
-padding: 15px
+#appView {
+padding: 15px;
 }
 
-table th {
-font-size: 16px
+#appView> table th {
+font-size: 16px;
 }
 
-.info-box,
+#appView> .info-box,
 h1,
 table {
-width: 100%
+width: 100%;
 }
 }

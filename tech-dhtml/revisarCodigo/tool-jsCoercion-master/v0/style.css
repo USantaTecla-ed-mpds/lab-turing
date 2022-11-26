@@ -20,7 +20,7 @@ td {
 }
 
 .boolean {
-  background-color: rgb(255, 128, 128);
+  background-color: rgba(255, 128, 128, 0.397);
 }
 
 .string {

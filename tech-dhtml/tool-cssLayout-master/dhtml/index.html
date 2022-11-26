@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Layout</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script src="logic.js"></script>
+</head>
+<body onLoad="init();">
+  <h1>CSS Layout</h1>
+  <form>
+  <fieldset>
+    <legend>display</legend>
+    <input type="radio" class="display" name="display" value="none" 
+      onClick="setDisplayForm(this);">none</input><br>
+    <input type="radio" class="display" name="display" value="block" checked 
+      onClick="setDisplayForm(this);">block</input><br>
+    <input type="radio" class="display" name="display" value="inline" 
+      onClick="setDisplayForm(this);">inline</input>
+  </fieldset>
+  <fieldset>
+    <legend>position</legend>
+    <input type="radio" class="position" name="position" value="static" checked
+      onClick="setPositionForm(this);">static</input><br>
+    <input type="radio" class="position" name="position" value="relative"
+      onClick="setPositionForm(this);">relative</input><br>
+    <input type="radio" class="position" name="position" value="absolute"
+      onClick="setPositionForm(this);">absolute</input><br>
+    <input type="radio" class="position" name="position" value="fixed" 
+      onClick="setPositionForm(this);">fixed</input>
+  </fieldset>
+  <fieldset>
+    <legend>directions</legend>
+    <div>
+      <input type="text" id="top" value="auto" onFocus="" disabled />
+      <label>top</label><br>
+      <input type="text" id="bottom" value="auto" disabled />
+      <label>bottom</label><br>
+      <input type="text" id="left" value="auto" disabled />
+      <label>left</label><br>
+      <input type="text" id="right" value="auto" disabled />
+      <label>right</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>float</legend>
+    <input type="radio" class="float" name="float" value="left" 
+      onClick="setFloatForm(this);">left</input><br>
+    <input type="radio" class="float" name="float" value="right" 
+      onClick="setFloatForm(this);">right</input><br>
+    <input type="radio" class="float" name="float" value="none" checked 
+      onClick="setFloatForm(this);">none</input><br>
+    <input type="radio" class="float" name="float" value="inherit" 
+      onClick="setFloatForm(this);">inherit</input>
+  </fieldset>
+  <div>
+    <input type="button" value="Aplicar" class="button"
+      onClick="apply();"/><br>
+    <input type="button" value="Activar todos" class="button"
+      onClick="setAllActive(true);"/><br>
+    <input type="button" value="Desactivar todos" class="button"
+      onClick="setAllActive(false);"/>
+  </div>
+  </form>
+  <div id="items">
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="item" onClick="alternateActive(this);"></div>
+    <div class="noFloat"></div>
+  </div>
+</body>
+</html>
