@@ -44,10 +44,10 @@ class Connect4 {
     //  Message.TITLE.writeln();
       this.#boardView.writeln();
 
-      do {
+     /* do {
           this.#turnView.play();
           this.#boardView.writeln();
-      } while (!this.#board.isFinished());
+      } while (!this.#board.isFinished());*/
       this.#turnView.writeResult();
   }
 
@@ -505,7 +505,7 @@ class HumanPlayerView extends PlayerView {
   }
 
   getColumn() {
-      let column=0;
+      let column=1;
       /*
       let valid;
       do {
@@ -519,7 +519,7 @@ class HumanPlayerView extends PlayerView {
               Message.COMPLETED_COLUMN.writeln();
           }
       } while (!valid);*/
-      alert("TODO");
+      //alert("TODO");
       return column;
   }
 }
