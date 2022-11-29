@@ -7,7 +7,7 @@ class ColorView {
         this.#color = color;
     }
     write() {
-        new Message(` ${this.#color.getString()[0]} `).write();
+        new Message(` ${this.#color.getString()[0]} `).write(); //Set background-color
     }
     toString() {
         return this.#color.getString();
@@ -25,22 +25,22 @@ class BoardView {
     writeln() {
         this.#writeHorizontal();
         for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
-            Message.VERTICAL_LINE.write();
+            Message.VERTICAL_LINE.write(); //CSS
             for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                new ColorView(this.#board.getColor(new Coordinate(i, j))).write();
-                Message.VERTICAL_LINE.write();
+                new ColorView(this.#board.getColor(new Coordinate(i, j))).write(); //HTML le pasa el elmemento al que le tiene que poner el fondo de color
+                Message.VERTICAL_LINE.write(); //CSS
             }
-            new Message().writeln();
+            new Message().writeln(); //CSS
         }
-        this.#writeHorizontal();
+        this.#writeHorizontal(); //CSS
     }
 
     #writeHorizontal() {
 
         for (let i = 0; i < BoardView.BLANK_SPACES * Coordinate.NUMBER_COLUMNS; i++) {
-            Message.HORIZONTAL_LINE.write();
+            Message.HORIZONTAL_LINE.write(); //CSS
         }
-        Message.HORIZONTAL_LINE.writeln();
+        Message.HORIZONTAL_LINE.writeln(); //CSS
     }
 
 }

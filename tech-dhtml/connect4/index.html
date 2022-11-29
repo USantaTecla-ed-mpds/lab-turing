@@ -4,10 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Connect 4</title>
 <link href="main.css" rel="stylesheet" type="text/css">
-<script ></script>
+<script src="main.js" ></script>
 </head>
-<body>
-    <div class="grid">
+<body id="body" onload="load()">
+  <h1>Connect 4</h1>
+ <!--   <div class="grid">
         <div onclick="setClicked(this)" class="cell first-line"></div>
         <div onclick="setClicked(this)" class="cell first-line"></div>
         <div onclick="setClicked(this)" class="cell first-line"></div>
@@ -57,17 +58,8 @@
         <div class="cell"></div>
 
 
-    </div>
-    <script>
+    </div>-->
 
-        function setClicked(element) {
-          clickedCells = document.getElementsByClass("clicked");
-          for(cell of clickedCells){
-            cell.setAttribute("class","first-line cell");
-          }
-          element.setAttribute("class",getAttribute("class")+" clicked");
-        }
-    </script>
 </body>
 
 

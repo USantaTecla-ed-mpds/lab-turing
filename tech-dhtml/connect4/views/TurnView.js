@@ -1,6 +1,6 @@
 import { PlayerVisitor } from '../models/Player.js';
 import { HumanPlayerView, RandomPlayerView } from './PlayerView.js';
-import { InIntervalDialog } from '../utils/views/Dialog.js';
+//import { InIntervalDialog } from '../utils/views/Dialog.js';
 import { Message } from './Message.js';
 
 
@@ -14,9 +14,10 @@ class TurnView extends PlayerVisitor {
         this.#turn = turn;
     }
     setNumberOfHumanPlayers() { 
-        let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
-        inIntervalDialog.read(Message.NUM_PLAYERS.toString());
-        this.#turn.reset(inIntervalDialog.getAnswer());
+      /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
+        inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
+
+        this.#turn.reset(2/*inIntervalDialog.getAnswer()*/);
     }
 
     play() {
