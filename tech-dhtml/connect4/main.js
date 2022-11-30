@@ -1,4 +1,4 @@
-
+//Error: no se puede usar import fuera de un modulo???
 //import { Message } from './views/Message.js';
 //import { YesNoDialog }  from './utils/views/Dialog.js';
 //import { Board } from './models/Board.js';
@@ -10,14 +10,6 @@ function load() {
 
   new Connect4().playGames();
 
-};
-
-function setClicked(element) {
-  clickedCells = document.getElementsByClassName("clicked");
-  for(cell of clickedCells){
-    cell.setAttribute("class","first-line cell");
-  }
-  element.setAttribute("class",element.getAttribute("class")+" clicked");
 }
 
 class Connect4 {
@@ -44,10 +36,10 @@ class Connect4 {
     //  Message.TITLE.writeln();
       this.#boardView.writeln();
 
-     /* do {
+      do {
           this.#turnView.play();
           this.#boardView.writeln();
-      } while (!this.#board.isFinished());*/
+      } while (!this.#board.isFinished());
       this.#turnView.writeResult();
   }
 
@@ -81,12 +73,12 @@ class Message {
       this.#string = string;
   }
 
-  write() {
-      console.log(this.#string);
+  write(element) {
+      element.innerHTML=this.#string; 
   }
 
-  writeln() {
-      console.log(this.#string);
+  writeln(element) {
+    element.innerHTML=this.#string+'<br>'; //Duda
   }
 
   toString() {
@@ -121,7 +113,7 @@ class Color {
 
   static RED = new Color(`Red`);
   static YELLOW = new Color(`Yellow`);
-  static NULL = new Color(` `);
+  static NULL = new Color(`White`);
   #string;
 
   constructor(string) {
@@ -442,8 +434,8 @@ class ColorView {
   constructor(color) {
       this.#color = color;
   }
-  write() {
-      new Message(` ${this.#color.getString()[0]} `).write(); //Set background-color
+  write(element) {
+    element.style.backgroundColor=this.#color.getString();
   }
   toString() {
       return this.#color.getString();
@@ -458,6 +450,9 @@ class BoardView {
       this.#board = board;
   }
   writeln() {
+     for(let element of document.getElementsByClassName("grid")){
+        element.remove();
+      }
       let grid= document.createElement("div");
       grid.setAttribute("class","grid");
       grid.style.gridTemplateColumns="repeat("+Coordinate.NUMBER_COLUMNS+", 55px); ";
@@ -465,15 +460,17 @@ class BoardView {
       for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
           for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
               let cell= document.createElement("div");
-              cell.setAttribute("class","cell");
-
+              if(i===Coordinate.NUMBER_ROWS - 1){
+                cell.setAttribute("class","cell first-line");
+               // cell.setAttribute("onclick","setClicked(event,this)");
+              } else {
+                cell.setAttribute("class","cell");
+              }
+              new ColorView(this.#board.getColor(new Coordinate(i, j))).write(cell);
               grid.appendChild(cell);
-              //new ColorView(this.#board.getColor(new Coordinate(i, j))).write(); //HTML le pasa el elmemento al que le tiene que poner el fondo de color
           }
-          //new Message().writeln(); //CSS
       }
-      document.getElementsByTagName("body")[0].appendChild(grid);
-     // this.#writeHorizontal(); //CSS
+      document.getElementById("app").appendChild(grid);
   }
 
 }
@@ -487,9 +484,10 @@ class PlayerView {
   }
 
   writeWinner() {
+      let console =document.getElementById("console");
       let message = Message.PLAYER_WIN.toString();
       message = message.replace(`#color`, new ColorView(this.#player.getColor()).toString());
-      new Message(message).writeln();
+      new Message(message).writeln(console);
   }
 
   getColumn() { }
@@ -504,33 +502,63 @@ class HumanPlayerView extends PlayerView {
       super(player);
   }
 
-  getColumn() {
-      let column=1;
-      /*
+  async getColumn() {
+      let column;
       let valid;
       do {
-          Message.TURN.write();
-          new Message(new ColorView(super.getPlayer().getColor()).toString()).writeln();
-         // let inIntervalDialog = new InIntervalDialog(1,Coordinate.NUMBER_COLUMNS); //Click en alguna columna
-         // inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
-          column = inIntervalDialog.getAnswer()-1;
-          valid = !super.getPlayer().isComplete(column);
-          if (!valid) {
-              Message.COMPLETED_COLUMN.writeln();
+         let console =document.getElementById("console");
+         new Message(Message.TURN+new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
+      /*  let inIntervalDialog = new InIntervalDialog(1,Coordinate.NUMBER_COLUMNS); //Click en alguna columna
+          inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
+          column = inIntervalDialog.getAnswer()-1;*/
+         let columnSelectors = document.getElementsByClassName("first-line");
+          for (let columnSelector of columnSelectors){
+            columnSelector.setAttribute("onclick","setClicked(event,this)");
           }
-      } while (!valid);*/
-      //alert("TODO");
+          try{
+            column= await isColumnClicked(); 
+            valid = !super.getPlayer().isComplete(column);
+            if (!valid) {
+                Message.COMPLETED_COLUMN.writeln(console);
+            }
+        }
+        catch(err){
+            console.log(err);
+            new Message(err).write(document.getElementById("console"));
+        }
+      } while (!valid);
       return column;
+  }
+    setClicked(event,element) {
+    event.stopPropagation();
+    let clickedCells = document.getElementsByClassName("clicked");
+    for(let cell of clickedCells){
+      cell.setAttribute("class","first-line cell");
+    }
+    element.setAttribute("class",element.getAttribute("class")+" clicked");
+  }
+  isColumnClicked(){
+    return new Promise((resolve, reject) => {
+        let firstlineCells = document.getElementsByClassName("first-line");
+        for (let i in firstlineCells){
+            if("clicked" in firstlineCells[i].classList){
+                 resolve(i);
+            }
+        }
+        reject(err);
+    
+    });
   }
 }
 class RandomPlayerView extends PlayerView {
 
   getColumn() {
-      Message.TURN.write();
-      new Message(new ColorView(super.getPlayer().getColor()).toString()).writeln();
+      let console =document.getElementById("console");
+      Message.TURN.write(console);
+      new Message(new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
       let column = this.getPlayer().getColumn();
-      Message.RANDOM_COLUMN.write();
-      new Message(column + 1).writeln();
+      Message.RANDOM_COLUMN.write(console);
+      new Message(column + 1).writeln(console);
       return column;
   }
 }
@@ -557,10 +585,11 @@ class TurnView extends PlayerVisitor {
   }
 
   writeResult() {
+    let console =document.getElementById("console");
       if ((this.#turn.getBoard()).isWinner()) {
           this.#activePlayerView.writeWinner();
       } else {
-          Message.PLAYERS_TIED.writeln();
+          Message.PLAYERS_TIED.writeln(console);
       }
   }
   visitHumanPlayer(humanPlayer) {
