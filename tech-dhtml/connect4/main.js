@@ -510,45 +510,68 @@ class HumanPlayerView extends PlayerView {
     async getColumn() {
         let column;
         let valid;
+        
+        let turnViewDiv = document.getElementById("turnViewDiv");
+        let playerViewDiv = document.getElementById("playerViewDiv");
+        new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
+        let message = document.createElement("p");
+        message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
+        playerViewDiv.appendChild(message);
+        let input = document.createElement("INPUT");
+        input.setAttribute("type", "number");
+        input.setAttribute("min", 1);
+        input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
+        input.value= 3;
+        playerViewDiv.appendChild(input);
+        let button = document.createElement("BUTTON");
+        const buttonText = document.createTextNode("Drop");
+        button.appendChild(buttonText);
+        playerViewDiv.appendChild(button);
+        
         do {
-            let turnViewDiv = document.getElementById("turnViewDiv");
-            let playerViewDiv = document.getElementById("playerViewDiv");
-            new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
-            let message = document.createElement("p");
-            message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
-            playerViewDiv.appendChild(message);
-            let input = document.createElement("INPUT");
-            input.setAttribute("type", "number");
-            input.setAttribute("min", 1);
-            input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
-            playerViewDiv.appendChild(input);
-            let button = document.createElement("BUTTON");
-            const buttonText = document.createTextNode("Drop");
-            button.appendChild(buttonText);
-            playerViewDiv.appendChild(button);
-            button.addEventListener("click", function () { this.#buttonClicked = true; });
-            try {
-                column = await readIfButtonClicked(input);
-                button.removeEventListener("click", function () { this.#buttonClicked = true; });
-                valid = !super.getPlayer().isComplete(column);
-            }
-            finally {
-                if (!valid) {
-                    Message.COMPLETED_COLUMN.writeln(turnViewDiv);
-                }
+            button.addEventListener("click", this.#setButtonClicked()); 
+            //main.js:529 Uncaught TypeError: Cannot write private member #buttonClicked to an object whose class did not declare it
+           
+            column = await this.readIfButtonClicked(input); 
+            button.removeEventListener("click", this.#setButtonClicked());
+            valid = !super.getPlayer().isComplete(column);
+            if (!valid) {
+                 Message.COMPLETED_COLUMN.writeln(turnViewDiv);
             }
         } while (!valid);
         return column;
     }
 
+    #setButtonClicked() {
+        this.#buttonClicked = true;
+    }
+
     readIfButtonClicked(input) {
         return new Promise((resolve) => {
-            if (this.#buttonClicked) {
-                this.#buttonClicked = false;
+            if(this.#buttonClicked){
+                this.#buttonClicked=false;
+                console.log("click"+input.value);
+                 //main.js:329 Uncaught TypeError: Cannot read properties of undefined (reading '[object Promise]000000')
                 resolve(input.value);
             }
+            
         });
+
+
     }
+/*
+    const promise = new Promise((resolve, reject) => {
+        // contain an operation
+        // ...
+      
+        // return the state
+        if (success) {
+          resolve(value);
+        } else {
+          reject(error);
+        }
+      });
+*/
 
 }
 class RandomPlayerView extends PlayerView {
