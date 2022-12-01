@@ -1,7 +1,12 @@
-//Error: no se puede usar import fuera de un modulo???
-//import { Message } from './views/Message.js';
-//import { YesNoDialog }  from './utils/views/Dialog.js';
-//import { Board } from './models/Board.js';
+//Error: no se puede usar import fuera de un módulo  
+//=>usar type="module" Añadir al head??
+// Access to script at 'main.js'  from origin 'null' has been blocked by CORS policy: 
+//Cross origin requests are only supported for protocol schemes:
+// http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted.
+
+//import { Message } from './views/Message.js';  
+//import { YesNoDialog }  from './utils/views/Dialog.js'; 
+//import { Board } from './models/Board.js';  
 //import { Turn } from './models/Turn.js';
 //import { BoardView } from './views/BoardView.js';
 //import { TurnView } from './views/TurnView.js';
@@ -496,7 +501,7 @@ class PlayerView {
     }
 }
 class HumanPlayerView extends PlayerView {
-    #buttonClicked=false;
+    #buttonClicked = false;
 
     constructor(player) {
         super(player);
@@ -509,47 +514,52 @@ class HumanPlayerView extends PlayerView {
             let turnViewDiv = document.getElementById("turnViewDiv");
             let playerViewDiv = document.getElementById("playerViewDiv");
             new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
-            let message= document.createElement("p");
-            message.innerHTML=Message.ENTER_COLUMN_TO_DROP.toString();
+            let message = document.createElement("p");
+            message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
             playerViewDiv.appendChild(message);
             let input = document.createElement("INPUT");
             input.setAttribute("type", "number");
-            input.setAttribute("min",1);
-            input.setAttribute("max",Coordinate.NUMBER_COLUMNS);
+            input.setAttribute("min", 1);
+            input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
             playerViewDiv.appendChild(input);
-            let button=document.createElement("BUTTON");
-            const buttonText=document.createTextNode("Drop");
+            let button = document.createElement("BUTTON");
+            const buttonText = document.createTextNode("Drop");
             button.appendChild(buttonText);
             playerViewDiv.appendChild(button);
-            button.addEventListener("click",setbuttonClicked());
-            column = await isButtonClicked(input);
-            valid = !super.getPlayer().isComplete(column);
-            if (!valid) { 
-                Message.COMPLETED_COLUMN.writeln(playerViewDiv);
+            button.addEventListener("click", function () { this.#buttonClicked = true; });
+            try {
+                column = await readIfButtonClicked(input);
+                button.removeEventListener("click", function () { this.#buttonClicked = true; });
+                valid = !super.getPlayer().isComplete(column);
+            }
+            finally {
+                if (!valid) {
+                    Message.COMPLETED_COLUMN.writeln(turnViewDiv);
+                }
             }
         } while (!valid);
         return column;
     }
 
-    isButtonClicked(input){
-        return new Promise ((resolve)=>{
-            resolve(input.value); //En movil no limita el max
+    readIfButtonClicked(input) {
+        return new Promise((resolve) => {
+            if (this.#buttonClicked) {
+                this.#buttonClicked = false;
+                resolve(input.value);
+            }
         });
     }
-    setButtonClicked(){
-        this.#buttonClicked=true;
-     }
+
 }
 class RandomPlayerView extends PlayerView {
 
     getColumn() {
-        let console = document.getElementById("console");
-        Message.TURN.write(console);
-        new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
+        let turnViewDiv = document.getElementById("turnViewDiv");
+        new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
         let column = this.getPlayer().getColumn();
-        let playerViewDiv=document.getElementById("playerViewDiv");
+        let playerViewDiv = document.getElementById("playerViewDiv");
         Message.RANDOM_COLUMN.write(playerViewDiv);
-        new Message(Message.RANDOM_COLUMN+":"+ column + 1).writeln(playerViewDiv);
+        new Message(Message.RANDOM_COLUMN + ":" + column + 1).writeln(playerViewDiv);
         return column;
     }
 }
@@ -576,11 +586,11 @@ class TurnView extends PlayerVisitor {
     }
 
     writeResult() {
-        let console = document.getElementById("console");
+        let turnViewDiv = document.getElementById("turnViewDiv");
         if ((this.#turn.getBoard()).isWinner()) {
             this.#activePlayerView.writeWinner();
         } else {
-            Message.PLAYERS_TIED.writeln(console);
+            Message.PLAYERS_TIED.writeln(turnViewDiv);
         }
     }
     visitHumanPlayer(humanPlayer) {
