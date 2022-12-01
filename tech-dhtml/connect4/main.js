@@ -12,6 +12,15 @@ function load() {
 
 }
 
+function  setClicked( element) {
+
+    let clickedCells = document.getElementsByClassName("clicked");
+    for (let cell of clickedCells) {
+        cell.setAttribute("class", "first-line cell");
+    }
+    element.setAttribute("class", element.getAttribute("class") + " clicked");
+}
+
 class Connect4 {
     #board;
     #turn;
@@ -313,7 +322,7 @@ class Board {
     }
 
     isOccupied(coordinate, color) {
-        return this.getColor(coordinate) == color;
+        return this.getColor(coordinate) === color;
     }
 
     isEmpty(coordinate) {
@@ -507,58 +516,68 @@ class HumanPlayerView extends PlayerView {
         let valid;
         do {
             let console = document.getElementById("console");
+            let playerViewDiv = document.getElementById("playerViewDiv");
             new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
             /*  let inIntervalDialog = new InIntervalDialog(1,Coordinate.NUMBER_COLUMNS); //Click en alguna columna
                 inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
                 column = inIntervalDialog.getAnswer()-1;*/
-            let columnSelectors = document.getElementsByClassName("first-line");
+         /*   let columnSelectors = document.getElementsByClassName("first-line");
             for (let columnSelector of columnSelectors) {
-                columnSelector.setAttribute("onclick", "setClicked(event,this)");
-            }
-            try {
-                column = await isColumnClicked();
+               // columnSelector.setAttribute("onclick", "setClicked(event,this)");
+               columnSelector.addEventListener("click", setClicked());
+            }*/
+            let message= document.createElement("p");
+            message.innerHTML=Message.ENTER_COLUMN_TO_DROP.toString();
+            playerViewDiv.appendChild(message);
+            let input = document.createElement("INPUT");
+            input.setAttribute("type", "number");
+            input.setAttribute("min",1);
+            input.setAttribute("max",Coordinate.NUMBER_COLUMNS);
+            playerViewDiv.appendChild(input);
+            let button=document.createElement("BUTTON");
+            const buttonText=document.createTextNode("Drop");
+            button.appendChild(buttonText);
+            playerViewDiv.appendChild(button);
+              try {
+                column = await isButtonClicked(button,input);
+              /*  for (let columnSelector of columnSelectors) {
+                    // columnSelector.setAttribute("onclick", "setClicked(event,this)");
+                    columnSelector.removeEventListener("click", setClicked(columnSelector));
+                 }*/
+                alert(column);
                 valid = !super.getPlayer().isComplete(column);
-                if (!valid) {
-                    Message.COMPLETED_COLUMN.writeln(console);
+                if (!valid) { 
+                    Message.COMPLETED_COLUMN.writeln(playerViewDiv);
                 }
             }
             catch (err) {
-                console.log(err);
-                new Message(err).write(document.getElementById("console"));
+               // let console = document.getElementById("console");
+               // new Message(err).write(console);
+               throw (err);
             }
         } while (!valid);
         return column;
     }
-    setClicked(event, element) {
-        event.stopPropagation();
-        let clickedCells = document.getElementsByClassName("clicked");
-        for (let cell of clickedCells) {
-            cell.setAttribute("class", "first-line cell");
-        }
-        element.setAttribute("class", element.getAttribute("class") + " clicked");
-    }
-    isColumnClicked() {
-        return new Promise((resolve, reject) => {
-            let firstlineCells = document.getElementsByClassName("first-line");
-            for (let i in firstlineCells) {
-                if ("clicked" in firstlineCells[i].classList) {
-                    resolve(i);
-                }
-            }
-            reject(err);
 
+    isButtonClicked(button,input){
+        return new Promise ((resolve)=>{
+            button.addEventListener("click",buttonClicked(input));
         });
     }
+    buttonClicked(input){
+        return input.value;
+     }
 }
 class RandomPlayerView extends PlayerView {
 
     getColumn() {
         let console = document.getElementById("console");
         Message.TURN.write(console);
-        new Message(new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
+        new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
         let column = this.getPlayer().getColumn();
-        Message.RANDOM_COLUMN.write(console);
-        new Message(column + 1).writeln(console);
+        let playerViewDiv=document.getElementById("playerViewDiv");
+        Message.RANDOM_COLUMN.write(playerViewDiv);
+        new Message(Message.RANDOM_COLUMN+":"+ column + 1).writeln(playerViewDiv);
         return column;
     }
 }
@@ -576,7 +595,7 @@ class TurnView extends PlayerVisitor {
         /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
           inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
 
-        this.#turn.reset(2/*inIntervalDialog.getAnswer()*/);
+        this.#turn.reset(1/*inIntervalDialog.getAnswer()*/);
     }
 
     play() {
