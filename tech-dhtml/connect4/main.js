@@ -12,15 +12,6 @@ function load() {
 
 }
 
-function  setClicked( element) {
-
-    let clickedCells = document.getElementsByClassName("clicked");
-    for (let cell of clickedCells) {
-        cell.setAttribute("class", "first-line cell");
-    }
-    element.setAttribute("class", element.getAttribute("class") + " clicked");
-}
-
 class Connect4 {
     #board;
     #turn;
@@ -471,7 +462,6 @@ class BoardView {
                 let cell = document.createElement("div");
                 if (i === Coordinate.NUMBER_ROWS - 1) {
                     cell.setAttribute("class", "cell first-line");
-                    // cell.setAttribute("onclick","setClicked(event,this)");
                 } else {
                     cell.setAttribute("class", "cell");
                 }
@@ -493,10 +483,10 @@ class PlayerView {
     }
 
     writeWinner() {
-        let console = document.getElementById("console");
+        let turnViewDiv = document.getElementById("turnViewDiv");
         let message = Message.PLAYER_WIN.toString();
         message = message.replace(`#color`, new ColorView(this.#player.getColor()).toString());
-        new Message(message).writeln(console);
+        new Message(message).writeln(turnViewDiv);
     }
 
     getColumn() { }
@@ -506,6 +496,7 @@ class PlayerView {
     }
 }
 class HumanPlayerView extends PlayerView {
+    #buttonClicked=false;
 
     constructor(player) {
         super(player);
@@ -515,17 +506,9 @@ class HumanPlayerView extends PlayerView {
         let column;
         let valid;
         do {
-            let console = document.getElementById("console");
+            let turnViewDiv = document.getElementById("turnViewDiv");
             let playerViewDiv = document.getElementById("playerViewDiv");
-            new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(console);
-            /*  let inIntervalDialog = new InIntervalDialog(1,Coordinate.NUMBER_COLUMNS); //Click en alguna columna
-                inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
-                column = inIntervalDialog.getAnswer()-1;*/
-         /*   let columnSelectors = document.getElementsByClassName("first-line");
-            for (let columnSelector of columnSelectors) {
-               // columnSelector.setAttribute("onclick", "setClicked(event,this)");
-               columnSelector.addEventListener("click", setClicked());
-            }*/
+            new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
             let message= document.createElement("p");
             message.innerHTML=Message.ENTER_COLUMN_TO_DROP.toString();
             playerViewDiv.appendChild(message);
@@ -538,34 +521,23 @@ class HumanPlayerView extends PlayerView {
             const buttonText=document.createTextNode("Drop");
             button.appendChild(buttonText);
             playerViewDiv.appendChild(button);
-              try {
-                column = await isButtonClicked(button,input);
-              /*  for (let columnSelector of columnSelectors) {
-                    // columnSelector.setAttribute("onclick", "setClicked(event,this)");
-                    columnSelector.removeEventListener("click", setClicked(columnSelector));
-                 }*/
-                alert(column);
-                valid = !super.getPlayer().isComplete(column);
-                if (!valid) { 
-                    Message.COMPLETED_COLUMN.writeln(playerViewDiv);
-                }
-            }
-            catch (err) {
-               // let console = document.getElementById("console");
-               // new Message(err).write(console);
-               throw (err);
+            button.addEventListener("click",setbuttonClicked());
+            column = await isButtonClicked(input);
+            valid = !super.getPlayer().isComplete(column);
+            if (!valid) { 
+                Message.COMPLETED_COLUMN.writeln(playerViewDiv);
             }
         } while (!valid);
         return column;
     }
 
-    isButtonClicked(button,input){
+    isButtonClicked(input){
         return new Promise ((resolve)=>{
-            button.addEventListener("click",buttonClicked(input));
+            resolve(input.value); //En movil no limita el max
         });
     }
-    buttonClicked(input){
-        return input.value;
+    setButtonClicked(){
+        this.#buttonClicked=true;
      }
 }
 class RandomPlayerView extends PlayerView {
