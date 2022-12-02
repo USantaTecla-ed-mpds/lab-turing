@@ -461,7 +461,6 @@ class BoardView {
         let grid = document.createElement("div");
 
         grid.setAttribute("class", "grid");
-        grid.setAttribute("color","blue");
         grid.style.gridTemplateColumns = "repeat(" + Coordinate.NUMBER_COLUMNS + ", 55px); ";
         grid.style.gridTemplateRows = "repeat(" + Coordinate.NUMBER_ROWS + ", 55px); ";
         for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
