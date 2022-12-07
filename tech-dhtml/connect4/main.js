@@ -502,42 +502,47 @@ class PlayerView {
     }
 }
 class HumanPlayerView extends PlayerView {
-    #buttonClicked = false;
+    #buttonClicked;
 
     constructor(player) {
         super(player);
     }
 
-    async getColumn() {
+    getColumn() {
         let column;
         let valid;
-        
+        this.#buttonClicked=false;
         let turnViewDiv = document.getElementById("turnViewDiv");
-        let playerViewDiv = document.getElementById("playerViewDiv");
         new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
+        
         let message = document.createElement("p");
         message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
+        let playerViewDiv = document.getElementById("playerViewDiv");
         playerViewDiv.appendChild(message);
         let input = document.createElement("INPUT");
         input.setAttribute("type", "number");
         input.setAttribute("min", 1);
         input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
-        input.value= 3;
+       input.value = 4;
         playerViewDiv.appendChild(input);
         let button = document.createElement("BUTTON");
         const buttonText = document.createTextNode("Drop");
         button.appendChild(buttonText);
         playerViewDiv.appendChild(button);
-        
-        do {
-            button.addEventListener("click", this.#setButtonClicked()); 
-            //main.js:529 Uncaught TypeError: Cannot write private member #buttonClicked to an object whose class did not declare it
-           
-            column = await this.readIfButtonClicked(input); 
-            button.removeEventListener("click", this.#setButtonClicked());
+        button.addEventListener("click",this.#setButtonClicked());
+
+        do {        
+          do {
+                if (this.#buttonClicked) {
+                    console.log('column selected: '+input.value);
+                    column = input.value-1;
+                    button.removeEventListener("click", this.#setButtonClicked());
+                }
+            } while (!this.#buttonClicked&&column!=='undefined');
+            this.#buttonClicked = false;
             valid = !super.getPlayer().isComplete(column);
             if (!valid) {
-                 Message.COMPLETED_COLUMN.writeln(turnViewDiv);
+                Message.COMPLETED_COLUMN.writeln(turnViewDiv);
             }
         } while (!valid);
         return column;
@@ -545,21 +550,10 @@ class HumanPlayerView extends PlayerView {
 
     #setButtonClicked() {
         this.#buttonClicked = true;
+     //   console.log("event click");
     }
 
-    readIfButtonClicked(input) {
-        return new Promise((resolve) => {
-            if(this.#buttonClicked){
-                this.#buttonClicked=false;
-                console.log("click"+input.value);
-                 //main.js:329 Uncaught TypeError: Cannot read properties of undefined (reading '[object Promise]000000')
-                resolve(input.value);
-            }
-            
-        });
-
-
-    }
+}
 /*
     const promise = new Promise((resolve, reject) => {
         // contain an operation
@@ -584,7 +578,7 @@ getUsers() {
 }
 */
 
-}
+
 class RandomPlayerView extends PlayerView {
 
     getColumn() {
