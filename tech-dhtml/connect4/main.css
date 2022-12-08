@@ -8,7 +8,7 @@ body {
     grid-template-rows: repeat(6, 55px);
     width: 385px;
     height: 330px;
-    margin: 0 auto;
+    margin: 10px auto;
     justify-content: center;
     background-color: black;
 }

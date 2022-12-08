@@ -40,7 +40,7 @@ class Connect4 {
         this.#turnView.setNumberOfHumanPlayers();
         //  Message.TITLE.writeln();
         this.#boardView.writeln();
-  
+
 
         do {
             this.#turnView.play();
@@ -84,7 +84,7 @@ class Message {
     }
 
     writeln(element) {
-        element.innerHTML = this.#string + '<br>'; //Duda
+        element.innerHTML = this.#string; //Duda
     }
 
     toString() {
@@ -467,11 +467,11 @@ class BoardView {
         for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
             for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
                 let cell = document.createElement("div");
-               // if (i === Coordinate.NUMBER_ROWS - 1) {
-               //     cell.setAttribute("class", "cell first-line");
-              //  } else {
-                    cell.setAttribute("class", "cell");
-              //  }
+                // if (i === Coordinate.NUMBER_ROWS - 1) {
+                //     cell.setAttribute("class", "cell first-line");
+                //  } else {
+                cell.setAttribute("class", "cell");
+                //  }
                 new ColorView(this.#board.getColor(new Coordinate(i, j))).write(cell);
                 grid.appendChild(cell);
             }
@@ -504,7 +504,7 @@ class PlayerView {
 }
 class HumanPlayerView extends PlayerView {
 
-    #buttonClicked=false;
+    #buttonClicked = false;
 
     constructor(player) {
         super(player);
@@ -512,7 +512,7 @@ class HumanPlayerView extends PlayerView {
 
     getColumn() {
         let column;
-      
+
         //let buttonClicked = false;
         let turnViewDiv = document.getElementById("turnViewDiv");
         new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
@@ -520,45 +520,49 @@ class HumanPlayerView extends PlayerView {
         let message = document.createElement("p");
         message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
         let playerViewDiv = document.getElementById("playerViewDiv");
+        playerViewDiv.innerHTML="";
         playerViewDiv.appendChild(message);
         let input = document.createElement("INPUT");
         input.setAttribute("type", "number");
         input.setAttribute("min", 1);
         input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
-        input.setAttribute("value",4);
+        input.setAttribute("value", 3);
         playerViewDiv.appendChild(input);
         let button = document.createElement("BUTTON");
         const buttonText = document.createTextNode("Drop");
         button.appendChild(buttonText);
         playerViewDiv.appendChild(button);
-        
+
         let valid;
-            do {
-            
-      /*     button.addEventListener("click",()=>{this.setButtonClicked();});
-            console.log(this.#buttonClicked);
-            do {
-                if (this.#buttonClicked) {
-                    console.log('column selected: ' + input.value);
-                    button.removeEventListener("click",()=>{this.setButtonClicked();});
-                }
+        do {
+
+            button.addEventListener("click", () => { this.setButtonClicked(); },false);
+            console.log("Button clicked: " + this.#buttonClicked);
+           /*  do {
+                      if (this.#buttonClicked) {
+                          column = input.value - 1;
+                          console.log('column selected: ' + input.value+1);
+                          button.removeEventListener("click",()=>{this.setButtonClicked();});
+                      }
             } while (!this.#buttonClicked);
             this.#buttonClicked = false;*/
             column = input.value - 1;
             console.log(column);
             valid = !super.getPlayer().isComplete(column);
             if (!valid) {
-               // throw("completed")
-               // Message.COMPLETED_COLUMN.writeln(turnViewDiv);
-                alert("Columna:"+ column+":"+Message.COMPLETED_COLUMN.toString());
-                
+                // throw("completed")
+                Message.COMPLETED_COLUMN.writeln(turnViewDiv);
+                alert("Columna:" + column + ":" + Message.COMPLETED_COLUMN.toString());
+
             }
         } while (!valid);
-        
+        playerViewDiv.removeChild(message);
+        playerViewDiv.removeChild(input);
+        playerViewDiv.removeChild(button);
         return column;
     }
 
-     setButtonClicked() {
+    setButtonClicked() {
         this.#buttonClicked = true;
         console.log("Click");
 
@@ -574,8 +578,8 @@ class RandomPlayerView extends PlayerView {
         new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
         let column = this.getPlayer().getColumn();
         let playerViewDiv = document.getElementById("playerViewDiv");
-        Message.RANDOM_COLUMN.write(playerViewDiv);
-        new Message(Message.RANDOM_COLUMN + ":" + column + 1).writeln(playerViewDiv);
+        Message.RANDOM_COLUMN.writeln(playerViewDiv);
+        new Message(Message.RANDOM_COLUMN + ":" + (column+1)).writeln(playerViewDiv);
         return column;
     }
 }
@@ -593,7 +597,7 @@ class TurnView extends PlayerVisitor {
         /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
           inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
 
-        this.#turn.reset(1/*inIntervalDialog.getAnswer()*/);
+        this.#turn.reset(0/*inIntervalDialog.getAnswer()*/);
     }
 
     play() {
