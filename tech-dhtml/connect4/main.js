@@ -40,6 +40,7 @@ class Connect4 {
         this.#turnView.setNumberOfHumanPlayers();
         //  Message.TITLE.writeln();
         this.#boardView.writeln();
+  
 
         do {
             this.#turnView.play();
@@ -466,11 +467,11 @@ class BoardView {
         for (let i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
             for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
                 let cell = document.createElement("div");
-                if (i === Coordinate.NUMBER_ROWS - 1) {
-                    cell.setAttribute("class", "cell first-line");
-                } else {
+               // if (i === Coordinate.NUMBER_ROWS - 1) {
+               //     cell.setAttribute("class", "cell first-line");
+              //  } else {
                     cell.setAttribute("class", "cell");
-                }
+              //  }
                 new ColorView(this.#board.getColor(new Coordinate(i, j))).write(cell);
                 grid.appendChild(cell);
             }
@@ -480,7 +481,7 @@ class BoardView {
 
 }
 
-/*TurnView*/
+/*PlayerView*/
 class PlayerView {
     #player;
 
@@ -502,7 +503,8 @@ class PlayerView {
     }
 }
 class HumanPlayerView extends PlayerView {
-    #buttonClicked;
+
+    #buttonClicked=false;
 
     constructor(player) {
         super(player);
@@ -510,11 +512,11 @@ class HumanPlayerView extends PlayerView {
 
     getColumn() {
         let column;
-        let valid;
-        this.#buttonClicked=false;
+      
+        //let buttonClicked = false;
         let turnViewDiv = document.getElementById("turnViewDiv");
         new Message(Message.TURN + new ColorView(super.getPlayer().getColor()).toString()).writeln(turnViewDiv);
-        
+
         let message = document.createElement("p");
         message.innerHTML = Message.ENTER_COLUMN_TO_DROP.toString();
         let playerViewDiv = document.getElementById("playerViewDiv");
@@ -523,60 +525,46 @@ class HumanPlayerView extends PlayerView {
         input.setAttribute("type", "number");
         input.setAttribute("min", 1);
         input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
-       input.value = 4;
+        input.setAttribute("value",4);
         playerViewDiv.appendChild(input);
         let button = document.createElement("BUTTON");
         const buttonText = document.createTextNode("Drop");
         button.appendChild(buttonText);
         playerViewDiv.appendChild(button);
-        button.addEventListener("click",this.#setButtonClicked());
-
-        do {        
-          do {
+        
+        let valid;
+            do {
+            
+      /*     button.addEventListener("click",()=>{this.setButtonClicked();});
+            console.log(this.#buttonClicked);
+            do {
                 if (this.#buttonClicked) {
-                    console.log('column selected: '+input.value);
-                    column = input.value-1;
-                    button.removeEventListener("click", this.#setButtonClicked());
+                    console.log('column selected: ' + input.value);
+                    button.removeEventListener("click",()=>{this.setButtonClicked();});
                 }
-            } while (!this.#buttonClicked&&column!=='undefined');
-            this.#buttonClicked = false;
+            } while (!this.#buttonClicked);
+            this.#buttonClicked = false;*/
+            column = input.value - 1;
+            console.log(column);
             valid = !super.getPlayer().isComplete(column);
             if (!valid) {
-                Message.COMPLETED_COLUMN.writeln(turnViewDiv);
+               // throw("completed")
+               // Message.COMPLETED_COLUMN.writeln(turnViewDiv);
+                alert("Columna:"+ column+":"+Message.COMPLETED_COLUMN.toString());
+                
             }
         } while (!valid);
+        
         return column;
     }
 
-    #setButtonClicked() {
+     setButtonClicked() {
         this.#buttonClicked = true;
-     //   console.log("event click");
-    }
+        console.log("Click");
 
+    }
 }
-/*
-    const promise = new Promise((resolve, reject) => {
-        // contain an operation
-        // ...
-      
-        // return the state
-        if (success) {
-          resolve(value);
-        } else {
-          reject(error);
-        }
-      });
-getUsers() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve([
-        { username: 'john', email: 'john@test.com' },
-        { username: 'jane', email: 'jane@test.com' },
-      ]);
-    }, 1000);
-  });
-}
-*/
+
 
 
 class RandomPlayerView extends PlayerView {
@@ -592,7 +580,7 @@ class RandomPlayerView extends PlayerView {
     }
 }
 
-
+/*TurnView*/
 class TurnView extends PlayerVisitor {
     #turn;
     #activePlayerView;
