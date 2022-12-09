@@ -37,3 +37,8 @@ body {
     transform: rotate(90deg);
 
 }
+
+.animated {
+    animation:
+    change-color 5s linear;
+}

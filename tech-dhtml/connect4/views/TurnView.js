@@ -13,11 +13,11 @@ class TurnView extends PlayerVisitor {
         super();
         this.#turn = turn;
     }
-    setNumberOfHumanPlayers() { 
-      /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
-        inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
+    setNumberOfHumanPlayers() {
+        /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
+          inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
 
-        this.#turn.reset(2/*inIntervalDialog.getAnswer()*/);
+        this.#turn.reset(0); /*inIntervalDialog.getAnswer()*/
     }
 
     play() {
@@ -26,10 +26,11 @@ class TurnView extends PlayerVisitor {
     }
 
     writeResult() {
+        let turnViewDiv = document.getElementById("turnViewDiv");
         if ((this.#turn.getBoard()).isWinner()) {
             this.#activePlayerView.writeWinner();
         } else {
-            Message.PLAYERS_TIED.writeln();
+            Message.PLAYERS_TIED.writeln(turnViewDiv);
         }
     }
     visitHumanPlayer(humanPlayer) {

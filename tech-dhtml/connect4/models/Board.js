@@ -4,7 +4,7 @@ class Color {
 
     static RED = new Color(`Red`);
     static YELLOW = new Color(`Yellow`);
-    static NULL = new Color(` `);
+    static NULL = new Color(`White`);
     #string;
 
     constructor(string) {
@@ -204,7 +204,7 @@ class Board {
     }
 
     isOccupied(coordinate, color) {
-        return this.getColor(coordinate) == color;
+        return this.getColor(coordinate) === color;
     }
 
     isEmpty(coordinate) {

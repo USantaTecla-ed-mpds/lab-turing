@@ -1,6 +1,3 @@
-import  {console}  from '../utils/views/console.js';
-
-
 export class Message {
     static TITLE = new Message(`--- CONNECT 4 ---`);
     static NUM_PLAYERS = new Message(`Enter number of human players: `);
@@ -21,12 +18,8 @@ export class Message {
         this.#string = string;
     }
 
-    write() {
-        console.write(this.#string);
-    }
-
-    writeln() {
-        console.writeln(this.#string);
+    writeln(element) {
+        element.innerHTML = this.#string; 
     }
 
     toString() {
