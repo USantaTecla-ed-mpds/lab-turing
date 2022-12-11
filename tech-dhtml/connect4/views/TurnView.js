@@ -11,6 +11,10 @@ export class TurnView {
 
     setNumberOfHumanPlayers(numberOfHumanPlayers) {
         this.#turn.reset(numberOfHumanPlayers);
+        this.render();      
+    }
+
+    render(){
         this.#turnViewDiv.innerHTML = `Turn: ${this.getActivePlayer().getColor().getString()}`;
     }
 
@@ -27,8 +31,8 @@ export class TurnView {
     }
 
     play(column) {
-
         this.#turn.play(column);
+        this.render();
 
     }
 
