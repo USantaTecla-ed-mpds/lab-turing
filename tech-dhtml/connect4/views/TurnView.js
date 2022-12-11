@@ -1,44 +1,71 @@
-import { PlayerVisitor } from '../models/Player.js';
-import { HumanPlayerView, RandomPlayerView } from './PlayerView.js';
-//import { InIntervalDialog } from '../utils/views/Dialog.js';
-import { Message } from './Message.js';
-
-
-
-class TurnView extends PlayerVisitor {
+import { Coordinate } from '../models/Board.js';
+export class TurnView {
     #turn;
-    #activePlayerView;
+    #turnViewDiv;
 
     constructor(turn) {
-        super();
         this.#turn = turn;
-    }
-    setNumberOfHumanPlayers() {
-        /*  let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
-          inIntervalDialog.read(Message.NUM_PLAYERS.toString());*/
-
-        this.#turn.reset(0); /*inIntervalDialog.getAnswer()*/
+        this.#turnViewDiv = document.getElementById("turnViewDiv");
+        this.#turnViewDiv.innerHTML = "";
     }
 
-    play() {
-        this.#turn.getActivePlayer().accept(this);
-        this.#turn.play(this.#activePlayerView.getColumn());
+    setNumberOfHumanPlayers(numberOfHumanPlayers) {
+        this.#turn.reset(numberOfHumanPlayers);
+        this.#turnViewDiv.innerHTML = `Turn: ${this.getActivePlayer().getColor().getString()}`;
+    }
+
+    getActivePlayer() {
+        return this.#turn.getActivePlayer();
+    }
+
+    isValidColumn(column) {
+        if (this.getActivePlayer().isComplete(column)) {
+            this.#turnViewDiv.innerHTML = ` Invalid column!!! ${column} 's completed`;
+            return false;
+        }
+        return true;
+    }
+
+    play(column) {
+
+        this.#turn.play(column);
+
     }
 
     writeResult() {
-        let turnViewDiv = document.getElementById("turnViewDiv");
         if ((this.#turn.getBoard()).isWinner()) {
-            this.#activePlayerView.writeWinner();
+            this.#turnViewDiv.innerHTML = `${this.getActivePlayer().getColor().getString()}s WIN!!! : -)`;
         } else {
-            Message.PLAYERS_TIED.writeln(turnViewDiv);
+            this.#turnViewDiv.innerHTML = `TIED!!!`;
         }
     }
-    visitHumanPlayer(humanPlayer) {
-        this.#activePlayerView = new HumanPlayerView(humanPlayer);
-    }
-    visitRandomPlayer(randomPlayer) {
-        this.#activePlayerView = new RandomPlayerView(randomPlayer);
+
+    renderTurnControls(that) {
+        const playerViewDiv = document.getElementById("playerViewDiv");
+        let message = document.createElement("p");
+        message.innerHTML = `Enter a column to drop a token: `;
+        playerViewDiv.innerHTML = "";
+        playerViewDiv.append(message);
+
+        let input = document.createElement("INPUT");
+        input.setAttribute("type", "number");
+        input.setAttribute("min", 1);
+        input.setAttribute("max", Coordinate.NUMBER_COLUMNS);
+        playerViewDiv.append(input);
+
+        let button = document.createElement("BUTTON");
+        button.innerText = "Drop";
+        playerViewDiv.append(button);
+
+        button.addEventListener("click", () => {
+            if (!Number.isNaN(input.value) && 0 < input.value && input.value < Coordinate.NUMBER_COLUMNS+1 ) {
+                that.play(input.value - 1);
+                playerViewDiv.innerHTML = "";
+            }
+            else {
+                this.#turnViewDiv.innerHTML = ` Invalid column!!!`;
+            }
+            
+        });
     }
 }
-
-export { TurnView }

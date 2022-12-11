@@ -47,9 +47,6 @@ class Connect4 {
      }*/
 }
 
-
 window.onload = () => {
     new Connect4().playGames();
 }
-
-
