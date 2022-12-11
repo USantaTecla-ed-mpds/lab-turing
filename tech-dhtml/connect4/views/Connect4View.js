@@ -47,7 +47,7 @@ export class Connect4View {
     visitRandomPlayer(randomPlayer) {
         setTimeout(() => {
             const selectedColumn=randomPlayer.getColumn();
-            document.getElementById("randomPlayerViewDiv").innerHTML =`Choosed radom column: ${selectedColumn}`;
+            document.getElementById("randomPlayerViewDiv").innerHTML =`Choosed radom column: ${selectedColumn+1}`;
             this.play(selectedColumn);
         }, 500);
     }

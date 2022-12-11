@@ -68,7 +68,7 @@ export class TurnView {
                 if (this.isValidColumn(input.value - 1)) {
                     
                     that.play(input.value - 1);
-                    playerViewDiv.innerHTML = "";
+                   // playerViewDiv.innerHTML = "";
                 }
             }
             else {
@@ -109,18 +109,21 @@ export class TurnView {
 
     renderControlsPlayAgain(that) {
         const playerViewDiv = document.getElementById("playerViewDiv");
+        playerViewDiv.innerHTML = "";
+
         let message = document.createElement("p");
         message.innerHTML = `Do you want to continue (y/n)`;
-        playerViewDiv.innerHTML = "";
+        message.setAttribute("translate","no");
         playerViewDiv.append(message);
+
+        let button = document.createElement("BUTTON");
+        button.innerText = "Continue?";
+        playerViewDiv.append(button);
 
         let input = document.createElement("INPUT");
         input.setAttribute("type", "text");
         playerViewDiv.append(input);
 
-        let button = document.createElement("BUTTON");
-        button.innerText = "Select";
-        playerViewDiv.append(button);
 
         button.addEventListener("click", () => {
             if ( input.value==='y') {
@@ -128,7 +131,7 @@ export class TurnView {
                 that.askHumanPlayers();
             }
             else {
-                this.#turnViewDiv.innerHTML = ` Reload!!!`;
+                this.#turnViewDiv.innerHTML = ` Type y to continue!!!`;
             }
 
         });
