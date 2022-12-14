@@ -1,64 +1,74 @@
-
-import { Board } from '../models/Board.js';
-import { Turn } from '../models/Turn.js';
 import { BoardView } from './BoardView.js';
 import { TurnView } from './TurnView.js';
 import { assert } from '../utils/assert.js';
 import { NumPlayersDialog, ResumeDialog} from '../utils/views/Dialog.js';
+import { Connect4 } from '../models/Connect4.js';
+import { StorageView } from './StorageView.js';
 
 export class Connect4View {
+    #connect4;
     #boardView;
     #turnView;
+    #storageView;
 
     constructor() {
-        this.#init()
+        this.#init();
+        this.#storageView= new StorageView(this.#loadGame.bind(this));
     }
 
     #init(){
         new NumPlayersDialog((numberOfHumanPlayers) => {
             this.numberOfHumanPlayers=numberOfHumanPlayers;
-            const board = new Board();
-            this.#boardView = new BoardView(board);
-            this.#turnView = new TurnView(new Turn(board));
+            this.#connect4=new Connect4();
+            this.#boardView = new BoardView(this.#connect4.getBoard());
+            this.#turnView = new TurnView(this.#connect4.getTurn());
             this.#turnView.setNumberOfHumanPlayers(numberOfHumanPlayers);
             this.#turnView.renderTurn();
             this.#boardView.render();
-            if (numberOfHumanPlayers > 0) {
-                this.#boardView.addUpdateListener(this.#onUpdate.bind(this))
-              } else {
-                this.#turnView.getActivePlayer().accept(this)
-              }
-            
+            this.#turnView.getActivePlayer().accept(this); 
         });
+    }
+
+    #loadGame(game){
+      this.#connect4=new Connect4();
+      this.#connect4.fromJSON(game);
+      this.#boardView = new BoardView(this.#connect4.getBoard());
+      this.#turnView = new TurnView(this.#connect4.getTurn());
+      this.#turnView.renderTurn();
+      this.#boardView.render();
+      this.#turnView.getActivePlayer().accept(this); 
     }
 
     #onUpdate(column) {
         assert(!this.#boardView.isWinner(),"Game is finished");
-    
+        
         this.#turnView.play(column);
+
+        this.#storageView.render(this.#connect4);
         this.#turnView.renderTurn();
         this.#boardView.render();
-        if (this.numberOfHumanPlayers > 0) {
-          this.#boardView.addUpdateListener(this.#onUpdate.bind(this))
-        }
+
         if (!this.#boardView.isFinished()) {
           this.#turnView.getActivePlayer().accept(this)
         } else {
           this.#turnView.renderResults()
           new ResumeDialog(() => {
-            document.getElementById("infoDiv").innerHTML="";
-            document.getElementById("turnDiv").innerHTML="";
-            const boardDiv=document.getElementById("boardDiv");
-            boardDiv.removeChild(boardDiv.firstElementChild);
+            this.clearDivs();
             this.#init();
           });
         }
       }
-
-    visitHumanPlayer(humanPlayer) {
-      
+    clearDivs(){
+      document.getElementById("infoDiv").innerHTML="";
+      document.getElementById("turnDiv").innerHTML="";
+      const boardDiv=document.getElementById("boardDiv");
+      boardDiv.removeChild(boardDiv.firstElementChild);
     }
-    visitRandomPlayer(randomPlayer) {
+
+    visitHumanPlayer() {
+      this.#boardView.addUpdateListener(this.#onUpdate.bind(this));
+    }
+    visitRandomPlayer() {
         setTimeout(() => {
             this.#onUpdate()
           }, 300)

@@ -14,7 +14,7 @@ export class TurnView {
     }
 
     renderTurn() {
-        this.#turnDiv.innerHTML = `Turn: ${this.getActivePlayer().getColor().getString()}`;
+        this.#turnDiv.innerHTML = `Turn: ${this.getActivePlayer().getColor().toString()}`;
     }
 
     getActivePlayer() {
@@ -32,7 +32,7 @@ export class TurnView {
 
     renderResults() {
         if ((this.#turn.getBoard()).isWinner()) {
-            this.#turnDiv.innerHTML = `${this.getActivePlayer().getColor().getString()}s WIN!!! : -)`;
+            this.#turnDiv.innerHTML = `${this.getActivePlayer().getColor().toString()}s WIN!!! : -)`;
         } else {
             this.#turnDiv.innerHTML = `TIED!!!`;
         }

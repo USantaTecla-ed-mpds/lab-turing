@@ -2,24 +2,29 @@ class ButtonsDialog {
     
     #buttons
 
-    createButtonsContainer() {
-        this.#buttons = document.createElement('div')
-        this.#buttons.id = 'buttonsId'
-        document.getElementById('dialogDiv').append(this.#buttons)
+    createButtonsContainer(title ="") {
+        this.#buttons = document.createElement('div');
+        this.#buttons.id = 'buttonsId';
+        const titleH3=document.createElement('h3');
+        titleH3.innerHTML=title;
+        document.getElementById('dialogDiv').append(titleH3,this.#buttons);
     }
 
     addButton(text, callback, index) {
-        let button = document.createElement('button')
-        this.getButtons().append(button)
-        button.innerText = text
+        let button = document.createElement('button');
+        this.getButtons().append(button);
+        button.innerText = text;
         button.addEventListener('click', () => {
-            this.deleteButtons()
-            callback(index)
-        })
+            this.deleteDialog();
+            callback(index);
+        });
     }
 
-    deleteButtons() {
-        document.getElementById('buttonsId').remove()
+    deleteDialog() {
+        let childs=document.getElementById('dialogDiv')
+        while(childs.firstChild){
+            childs.removeChild(childs.firstChild);
+        }
     }
 
     getButtons(){
@@ -31,14 +36,14 @@ class ButtonsDialog {
 class NumPlayersDialog extends ButtonsDialog {
 
     constructor(callback) {
-        super()
-        this.createButtonsContainer();
+        super();
+        this.createButtonsContainer("Select Game Mode: ");
         let texts = [
             `Machine VS Machine`,
             `Player VS Machine`,
-            `Player VS Player`]
+            `Player VS Player`];
         for (let i = 0; i < texts.length; i++) {
-            this.addButton(texts[i], callback, i)
+            this.addButton(texts[i], callback, i);
         }
     }
 
@@ -53,4 +58,14 @@ class ResumeDialog extends ButtonsDialog {
     }
 }
 
-export {NumPlayersDialog, ResumeDialog};
+class StorageDialog extends ButtonsDialog {
+
+    constructor(savecallback) {
+        super();
+        this.deleteDialog();
+        this.createButtonsContainer("LocalStorage : ");
+        this.addButton("Save", savecallback);
+    }
+}
+
+export {NumPlayersDialog, ResumeDialog, StorageDialog};

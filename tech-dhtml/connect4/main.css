@@ -42,3 +42,7 @@ body {
     animation:
     change-color 5s linear;
 }
+
+#buttonsId button {
+    margin:1%;
+}

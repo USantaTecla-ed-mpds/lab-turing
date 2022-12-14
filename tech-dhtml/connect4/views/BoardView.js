@@ -24,7 +24,7 @@ export class BoardView {
                 } else {
                     cell.setAttribute("class", "cell");
                 }
-                cell.style.backgroundColor=this.#board.getColor(new Coordinate(i, j)).getString();
+                cell.style.backgroundColor=this.#board.getColor(new Coordinate(i, j)).toString();
                 grid.appendChild(cell);
             }
         }
@@ -39,8 +39,7 @@ export class BoardView {
     }
 
     addUpdateListener(onUpdate) {
-        console.log(document.getElementById("grid").childNodes);
-        document.getElementById("grid").childNodes.forEach((headElement, column) => {
+        document.querySelectorAll(".first-row").forEach((headElement, column) => {
           headElement.addEventListener('click', () => {
             onUpdate(column)
           })

@@ -13,9 +13,9 @@ class Turn {
         this.#board = board;
         this.#players = [];
     }
-    reset(humanPlayers) {
+    reset(numberOfHumanPlayers) {
         for (let i = 0; i < Turn.#NUMBER_PLAYERS; i++) {
-            this.#players[i] = i < humanPlayers ?
+            this.#players[i] = i < numberOfHumanPlayers ?
                 new HumanPlayer(Color.get(i), this.#board) :
                 new RandomPlayer(Color.get(i), this.#board);
         }
@@ -35,6 +35,29 @@ class Turn {
     }
     getNumberPlayers() {
         return Turn.#NUMBER_PLAYERS;
+    }
+    #getNumberOfHumanPlayers(){
+        this.numberOfHumanPlayers=0;
+        this.#players.forEach((player)=>{player.accept(this)})
+        let numberOfHumanPlayers=this.numberOfHumanPlayers
+        delete this.numberOfHumanPlayers;
+        return numberOfHumanPlayers;
+    }
+    toJSON(){
+        return {
+            numberOfHumanPlayers: this.#getNumberOfHumanPlayers(),
+            activePlayer: this.#activePlayer
+        }
+    }
+    fromJSON(turn){
+        this.reset(turn.numberOfHumanPlayers);
+        this.#activePlayer=turn.activePlayer;
+    }
+
+    visitHumanPlayer() {
+        this.numberOfHumanPlayers++;
+    }
+    visitRandomPlayer() {
     }
 }
 

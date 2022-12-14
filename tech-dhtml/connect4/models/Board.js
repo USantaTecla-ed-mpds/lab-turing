@@ -19,7 +19,18 @@ class Color {
         return [Color.RED, Color.YELLOW, Color.NULL];
     }
 
-    getString() {
+    static fromString(color) {
+        switch (color) {
+            case 'Red':
+                return Color.RED
+            case 'Yellow':
+                return Color.YELLOW
+            default:
+                return Color.NULL
+        }
+    }
+
+    toString(){
         return this.#string;
     }
 
@@ -215,6 +226,38 @@ class Board {
         return this.#colors[coordinate.getRow()][coordinate.getColumn()];
     }
 
+    toJSON(){
+        return {
+            colors: this.#colors.map(color=>color.toString()),
+            lastDropRow: this.#lastDrop.getRow(),
+            lastDropColumn: this.#lastDrop.getColumn()
+        }
+    }
+    fromJSON(board){
+        this.#colors=[];
+        board.colors.forEach((row,rowIndex)=>{
+            this.#colors[rowIndex]=[];
+            row.split(",").forEach((color,columnIndex)=>{
+                this.#colors[rowIndex][columnIndex]=Color.fromString(color); //Solucionar new Color(string)
+            });
+        });
+        this.#lastDrop= new Coordinate(board.lastDropRow,board.lastDropColumn);
+    }
+
 }
 
 export { Board, Color, Coordinate };
+
+/*
+static fromString(color) {
+        switch (color) {
+            case 'Red':
+                return Color.RED
+            case 'Yellow':
+                return Color.YELLOW
+            default:
+                return Color.NULL
+        }
+    }
+this.#colors[rowKey][columnKey] = Color.fromString(color)
+*/
