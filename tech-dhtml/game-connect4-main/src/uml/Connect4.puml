@@ -1,0 +1,74 @@
+@startuml
+
+class GameView {
+  #init()
+  #onUpdate(column)
+  visitUserPlayer() 
+  visitMachinePlayer()
+}
+
+GameView ..> NumPlayersDialog
+GameView ..> ResumeDialog
+
+class NumPlayersDialog extends ButtonsDialog {
+    constructor(callback) 
+}
+
+class ResumeDialog extends ButtonsDialog {
+    constructor(callback) 
+}
+
+class ResumeDialog
+
+class BoardView {
+  constructor(board)
+  #createTable() 
+  #createRowH(row) 
+  #createRow(row)
+  addUpdateListener(onUpdate)
+  update()
+}
+
+ class MessageDialog {
+    constructor(board) 
+    update() 
+}
+
+
+BoardView ..> MessageDialog
+
+class TurnView {
+  constructor(turn)
+  #update() 
+  dropToken(column) 
+  visitUserPlayer(userPlayer) 
+  visitMachinePlayer(machinePlayer)
+}
+
+class ButtonsDialog {
+    getButtons()
+    deleteButtons()
+}
+
+package models {
+class Game
+class Turn
+abstract class Player
+class RandomMachinePlayer
+class UserPlayer
+class Board
+}
+
+GameView -down-> Game
+GameView *-down-> TurnView
+GameView *-down-> BoardView
+BoardView -down-> Board
+TurnView -down-> Turn
+Game *-down-> Turn
+Turn *-down-> "2" Player
+Game *-down-> Board
+Player -down-> Board
+Player <|-- RandomMachinePlayer
+Player <|-- UserPlayer
+
+@enduml

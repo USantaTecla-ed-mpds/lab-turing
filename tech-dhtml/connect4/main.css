@@ -20,7 +20,7 @@ body {
     outline:  3px solid black;
 }
 
-.first-line.cell:hover{
+.first-row.cell:hover{
     /*background-color: rgb(75, 204, 255);*/
     background-image: url("./image/insert-coin.png");
     background-repeat: no-repeat;

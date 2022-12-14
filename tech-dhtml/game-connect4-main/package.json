@@ -1,0 +1,15 @@
+{
+  "name": "connect4-DHTML",
+  "version": "1.0.0",
+  "description": "connect4 game HTML with js modules",
+  "type": "module",
+  "main": "/src/views/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "2.8.0"
+  }
+}

@@ -3,57 +3,66 @@ import { Board } from '../models/Board.js';
 import { Turn } from '../models/Turn.js';
 import { BoardView } from './BoardView.js';
 import { TurnView } from './TurnView.js';
+import { assert } from '../utils/assert.js';
+import { NumPlayersDialog, ResumeDialog} from '../utils/views/Dialog.js';
 
 export class Connect4View {
     #boardView;
     #turnView;
 
     constructor() {
-        const board = new Board();
-        this.#boardView = new BoardView(board);
-        this.#turnView = new TurnView(new Turn(board));
+        this.#init()
     }
 
-    askHumanPlayers(){
-        this.#boardView.render();
-        this.#turnView.renderControlsNumberOfPlayer(this);
+    #init(){
+        new NumPlayersDialog((numberOfHumanPlayers) => {
+            document.getElementById("randomPlayerDiv").innerHTML="";
+            this.numberOfHumanPlayers=numberOfHumanPlayers;
+            const board = new Board();
+            this.#boardView = new BoardView(board);
+            this.#turnView = new TurnView(new Turn(board));
+            this.#turnView.setNumberOfHumanPlayers(numberOfHumanPlayers);
+            this.#turnView.renderTurn();
+            this.#boardView.render();
+            if (numberOfHumanPlayers > 0) {
+                this.#boardView.addUpdateListener(this.#onUpdate.bind(this))
+              } else {
+                this.#turnView.getActivePlayer().accept(this)
+              }
+            
+        });
     }
 
-    playGame(numberOfPlayers) {
-        this.#turnView.setNumberOfHumanPlayers(numberOfPlayers);
-        this.#boardView.render();
-        this.#turnView.getActivePlayer().accept(this);
-
-    }
-
-    play(column) {
+    #onUpdate(column) {
+        assert(!this.#boardView.isWinner(),"Game is finished");
+    
         this.#turnView.play(column);
+        this.#turnView.renderTurn();
         this.#boardView.render();
-   
-        if (this.#boardView.isFinished()) {
-            this.#turnView.writeResult();
-            this.#turnView.renderControlsPlayAgain(this);
+        if (this.numberOfHumanPlayers > 0) {
+          this.#boardView.addUpdateListener(this.#onUpdate.bind(this))
         }
-        else {
-            this.#turnView.getActivePlayer().accept(this);
+        if (!this.#boardView.isFinished()) {
+          this.#turnView.getActivePlayer().accept(this)
+        } else {
+          this.#turnView.renderResults()
+          new ResumeDialog(() => {
+            this.#init()
+          })
         }
-       
-    }
+      }
 
     visitHumanPlayer(humanPlayer) {
-        console.log("esperando click");
-        this.#turnView.renderTurnControls(this);
+      
     }
     visitRandomPlayer(randomPlayer) {
         setTimeout(() => {
-            const selectedColumn=randomPlayer.getColumn();
-            document.getElementById("randomPlayerViewDiv").innerHTML =`Choosed radom column: ${selectedColumn+1}`;
-            this.play(selectedColumn);
-        }, 500);
+            this.#onUpdate()
+          }, 300)
     }
 
 }
 
 window.onload = () => {
-    new Connect4View().askHumanPlayers();
+    new Connect4View();
 }

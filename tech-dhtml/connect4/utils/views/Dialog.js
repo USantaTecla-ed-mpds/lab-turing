@@ -1,97 +1,56 @@
-import ClosedInterval   from '../models/ClosedInterval.js'
-import { Message } from '../../views/Message.js';
-import  {console}  from './console.js';
+class ButtonsDialog {
+    
+    #buttons
 
-
-
-class Dialog {
-    message;
-    errorMessage;
-    suffix;
-    #answer;
-
-    constructor() {
-        this.message = ``;
-        this.suffix = ``;
-        this.errorMessage=``;
+    createButtonsContainer() {
+        this.#buttons = document.createElement('div')
+        this.#buttons.id = 'buttonsId'
+        document.getElementById('dialogDiv').append(this.#buttons)
     }
 
-    read(message) {
-        let ok;
-        do {
-            new Message(message).write();
-            this.#answer = this.readWithSuffix();
-            ok = this.isOk();
-            if (!ok) {
-                new Message(this.errorMessage).writeln();
-            }
-        } while (!ok);
+    addButton(text, callback, index) {
+        let button = document.createElement('button')
+        this.getButtons().append(button)
+        button.innerText = text
+        button.addEventListener('click', () => {
+            this.deleteButtons()
+            callback(index)
+        })
     }
 
-    readWithSuffix() {
+    deleteButtons() {
+        document.getElementById('buttonsId').remove()
     }
 
-    isOk() { }
-
-    getAnswer() {
-        return this.#answer;
-    }
-}
-class InIntervalDialog extends Dialog {
-    #min;
-    #max;
-    constructor(min, max) {
-        super();
-        this.#min = min;
-        this.#max = max;
-        this.errorMessage = `The value must be between ${min} and ${max}`;
-        this.suffix = `? [` +
-            min + `-` +
-            max + `]: `
-    }
-
-    readWithSuffix() {
-        return console.readNumber(this.suffix);
-    }
-
-    isOk() {
-        return new ClosedInterval(this.#min, this.#max).isIncluded(this.getAnswer());
+    getButtons(){
+        return this.#buttons;
     }
 
 }
 
-class YesNoDialog extends Dialog {
+class NumPlayersDialog extends ButtonsDialog {
 
-    static #AFFIRMATIVE = `y`;
-    static #NEGATIVE = `n`;
-
-    constructor() {
-        super();
-        this.errorMessage = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
-        this.suffix = `? (` +
-            YesNoDialog.#AFFIRMATIVE + `/` +
-            YesNoDialog.#NEGATIVE + `): `;
+    constructor(callback) {
+        super()
+        this.createButtonsContainer();
+        let texts = [
+            `Machine VS Machine`,
+            `Player VS Machine`,
+            `Player VS Player`]
+        for (let i = 0; i < texts.length; i++) {
+            this.addButton(texts[i], callback, i)
+        }
     }
 
-    readWithSuffix() {
-        return console.readString(this.suffix);
-    }
+}
 
-    isOk() {
-        return this.isAffirmative() || this.isNegative();
-    }
+class ResumeDialog extends ButtonsDialog {
 
-    isAffirmative() {
-        return this.getAnswer() === YesNoDialog.#AFFIRMATIVE;
-    }
-
-    isNegative() {
-        return this.getAnswer() === YesNoDialog.#NEGATIVE;
-    }
-
-    getAnswer() {
-        return super.getAnswer().toLowerCase()[0];
+    constructor(callback) {
+        super()
+        this.createButtonsContainer()
+        this.addButton('Play again!', callback)
     }
 }
 
-export { InIntervalDialog, YesNoDialog };
+export {NumPlayersDialog, ResumeDialog};

@@ -1,0 +1,104 @@
+.main {
+  margin: 0;
+  display: flex;
+}
+
+:root {
+  --th-background-image: url('../images/red-token.png');
+}
+
+body {
+  color: aliceblue;
+  background: #0c1621;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.leftPanel {
+  width: 200px;
+  padding: 10px;
+  background: #3a445e;
+  height: 100vh;
+}
+
+#buttonsId {
+  text-align: center;
+}
+
+#buttonsId button {
+  max-width: 200px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background: #0c1621;
+  color: white;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+#turnId {
+  text-align: center;
+}
+
+#turnId #RedId {
+  opacity: 1;
+}
+
+#turnId #YellowId {
+  opacity: 0.2;
+}
+
+#rightPanel {
+  padding: 10px;
+}
+
+#titleId {
+  text-align: center;
+  padding: 10px;
+  align-content: center;
+}
+
+#messageId {
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  align-content: center;
+}
+
+#boardId {
+  position: relative;
+}
+
+#boardId table {
+  margin: auto;
+  background: aqua;
+  width: 400px;
+  height: 400px;
+  border-collapse: separate;
+  border-spacing: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 1px 1px 1px black;
+}
+
+#boardId table > tr > td {
+  background-color: #0c1621;
+  border-radius: 100%;
+  min-width: 15px;
+  min-height: 15px;
+  box-shadow: 2px 1px 1px 1px black inset;
+}
+
+#boardId table > tr > th {
+  background-color: #0c1621;
+  cursor: pointer;
+  border-radius: 100%;
+  min-width: 10px;
+  min-height: 10px;
+  box-shadow: 2px 1px 1px 1px black inset;
+}
+
+#boardId table > tr > th:hover {
+  background: var(--th-background-image);
+}
