@@ -16,7 +16,6 @@ export class Connect4View {
 
     #init(){
         new NumPlayersDialog((numberOfHumanPlayers) => {
-            document.getElementById("randomPlayerDiv").innerHTML="";
             this.numberOfHumanPlayers=numberOfHumanPlayers;
             const board = new Board();
             this.#boardView = new BoardView(board);
@@ -47,8 +46,12 @@ export class Connect4View {
         } else {
           this.#turnView.renderResults()
           new ResumeDialog(() => {
-            this.#init()
-          })
+            document.getElementById("infoDiv").innerHTML="";
+            document.getElementById("turnDiv").innerHTML="";
+            const boardDiv=document.getElementById("boardDiv");
+            boardDiv.removeChild(boardDiv.firstElementChild);
+            this.#init();
+          });
         }
       }
 

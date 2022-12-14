@@ -22,7 +22,7 @@ export class TurnView {
     }
 
     renderInvalidColumn(column) { 
-            this.#turnDiv.innerHTML = ` Invalid column!!! ${column} 's completed`;
+        document.getElementById("infoDiv").innerHTML = ` Invalid column!!! ${column+1} 's completed`;
     }
 
     play(column) {
@@ -32,13 +32,14 @@ export class TurnView {
 
     renderResults() {
         if ((this.#turn.getBoard()).isWinner()) {
-            this.#turnViewDiv.innerHTML = `${this.getActivePlayer().getColor().getString()}s WIN!!! : -)`;
+            this.#turnDiv.innerHTML = `${this.getActivePlayer().getColor().getString()}s WIN!!! : -)`;
         } else {
-            this.#turnViewDiv.innerHTML = `TIED!!!`;
+            this.#turnDiv.innerHTML = `TIED!!!`;
         }
     }
 
     visitHumanPlayer(humanPlayer) {
+        document.getElementById("infoDiv").innerHTML="";
         if(humanPlayer.isComplete(this.column)){
             this.renderInvalidColumn(this.column);
         }
@@ -49,7 +50,7 @@ export class TurnView {
     }
     visitRandomPlayer(randomPlayer) {
         const selectedColumn=randomPlayer.getColumn();
-        document.getElementById("randomPlayerDiv").innerHTML=`Choosed radom column: ${selectedColumn+1}`;
+        document.getElementById("infoDiv").innerHTML=`Choosed radom column: ${selectedColumn+1}`;
         this.#turn.play(selectedColumn);
     }
 
