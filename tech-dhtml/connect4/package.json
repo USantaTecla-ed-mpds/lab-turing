@@ -2,15 +2,16 @@
   "name": "connect4",
   "version": "1.0.4",
   "description": "Console Views Version",
-  "main": "main.js",
+  "main": "index.html",
   "type": "module",
   "scripts": {
+    "run": "live server ./index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Joselon",
+  "author": "LabTuring-EscuelaIT-setillo-jumpering-Joselon",
   "license": "ISC",
   "dependencies": {
-    "console-mpds": "^1.0.4"
+
   }
 }

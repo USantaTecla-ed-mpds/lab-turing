@@ -238,7 +238,12 @@ class Board {
         board.colors.forEach((row,rowIndex)=>{
             this.#colors[rowIndex]=[];
             row.split(",").forEach((color,columnIndex)=>{
-                this.#colors[rowIndex][columnIndex]=Color.fromString(color); //Solucionar new Color(string)
+                if(color!==Color.NULL.toString()){
+                    this.#colors[rowIndex][columnIndex]=new Color(color);
+                }
+                else{
+                    this.#colors[rowIndex][columnIndex]= Color.NULL;
+                }
             });
         });
         this.#lastDrop= new Coordinate(board.lastDropRow,board.lastDropColumn);
@@ -247,17 +252,3 @@ class Board {
 }
 
 export { Board, Color, Coordinate };
-
-/*
-static fromString(color) {
-        switch (color) {
-            case 'Red':
-                return Color.RED
-            case 'Yellow':
-                return Color.YELLOW
-            default:
-                return Color.NULL
-        }
-    }
-this.#colors[rowKey][columnKey] = Color.fromString(color)
-*/

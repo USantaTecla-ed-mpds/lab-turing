@@ -1,4 +1,7 @@
 body {
+    background-image: url("./image/iStock-1092139474.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     text-align:center; 
    }
 
@@ -40,9 +43,19 @@ body {
 
 .animated {
     animation:
-    change-color 5s linear;
+    switchColorToGreen 5s infinite;
 }
+
+@keyframes switchColorToGreen {
+    from {background-color: #fff;}
+    to {background-color: #7ebd0b;}
+  }
 
 #buttonsId button {
     margin:1%;
+}
+
+nav {
+    background-color: black;
+    color:white;
 }

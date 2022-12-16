@@ -1,13 +1,18 @@
 class ButtonsDialog {
     
-    #buttons
+    #buttons;
+    #divElement;
+
+    constructor(divElement){
+        this.#divElement=divElement;
+    }
 
     createButtonsContainer(title ="") {
         this.#buttons = document.createElement('div');
         this.#buttons.id = 'buttonsId';
         const titleH3=document.createElement('h3');
         titleH3.innerHTML=title;
-        document.getElementById('dialogDiv').append(titleH3,this.#buttons);
+        document.getElementById(this.#divElement).append(titleH3,this.#buttons);
     }
 
     addButton(text, callback, index) {
@@ -21,7 +26,7 @@ class ButtonsDialog {
     }
 
     deleteDialog() {
-        let childs=document.getElementById('dialogDiv')
+        let childs=document.getElementById(this.#divElement)
         while(childs.firstChild){
             childs.removeChild(childs.firstChild);
         }
@@ -35,8 +40,8 @@ class ButtonsDialog {
 
 class NumPlayersDialog extends ButtonsDialog {
 
-    constructor(callback) {
-        super();
+    constructor(divElement,callback) {
+        super(divElement);
         this.createButtonsContainer("Select Game Mode: ");
         let texts = [
             `Machine VS Machine`,
@@ -51,8 +56,8 @@ class NumPlayersDialog extends ButtonsDialog {
 
 class ResumeDialog extends ButtonsDialog {
 
-    constructor(callback) {
-        super()
+    constructor(divElement,callback) {
+        super(divElement)
         this.createButtonsContainer()
         this.addButton('Play again!', callback)
     }
@@ -60,11 +65,12 @@ class ResumeDialog extends ButtonsDialog {
 
 class StorageDialog extends ButtonsDialog {
 
-    constructor(savecallback) {
-        super();
+    constructor(divElement,savecallback,loadcallback) {
+        super(divElement);
         this.deleteDialog();
         this.createButtonsContainer("LocalStorage : ");
         this.addButton("Save", savecallback);
+        this.addButton("Load", loadcallback);
     }
 }
 

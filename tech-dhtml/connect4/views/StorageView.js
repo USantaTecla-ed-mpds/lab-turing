@@ -13,15 +13,16 @@ export class StorageView {
 
     render(connect4) {
         if(connect4){
-            new StorageDialog(() => this.#connect4LocalStorage.saveGame(connect4));
+            new StorageDialog("StorageDiv",() => this.#connect4LocalStorage.saveGame(connect4));
         }
         this.#renderSavedGames();
 
     }
 
     #renderSavedGames() {
-        document.getElementById("StorageDiv").innerHTML = "";
-        document.getElementById("StorageDiv").append(this.#createSelect());
+        const storageDiv=document.getElementById("StorageDiv");
+        storageDiv.append(this.#createSelect());
+        
     }
 
     #createSelect() {
