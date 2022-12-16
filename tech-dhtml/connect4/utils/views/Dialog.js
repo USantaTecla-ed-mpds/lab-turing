@@ -13,6 +13,7 @@ class ButtonsDialog {
         const titleH3=document.createElement('h3');
         titleH3.innerHTML=title;
         document.getElementById(this.#divElement).append(titleH3,this.#buttons);
+        document.getElementById(this.#divElement).style.display="block";
     }
 
     addButton(text, callback, index) {
@@ -30,6 +31,7 @@ class ButtonsDialog {
         while(childs.firstChild){
             childs.removeChild(childs.firstChild);
         }
+        document.getElementById(this.#divElement).style.display="none";
     }
 
     getButtons(){

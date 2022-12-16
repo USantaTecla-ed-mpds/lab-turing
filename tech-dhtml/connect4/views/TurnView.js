@@ -22,6 +22,7 @@ export class TurnView {
     }
 
     renderInvalidColumn(column) { 
+        document.getElementById("infoDiv").style.display="block";
         document.getElementById("infoDiv").innerHTML = ` Invalid column!!! ${column+1} 's completed`;
     }
 
@@ -50,6 +51,7 @@ export class TurnView {
     }
     visitRandomPlayer(randomPlayer) {
         const selectedColumn=randomPlayer.getColumn();
+        document.getElementById("infoDiv").style.display="block";
         document.getElementById("infoDiv").innerHTML=`Choosed radom column: ${selectedColumn+1}`;
         this.#turn.play(selectedColumn);
     }

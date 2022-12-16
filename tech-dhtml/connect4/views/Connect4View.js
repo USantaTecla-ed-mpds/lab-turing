@@ -60,6 +60,7 @@ export class Connect4View {
       }
     clearDivs(){
       document.getElementById("infoDiv").innerHTML="";
+      document.getElementById("infoDiv").style.display="none";
       document.getElementById("turnDiv").innerHTML="";
       const boardDiv=document.getElementById("boardDiv");
       boardDiv.removeChild(boardDiv.firstElementChild);
