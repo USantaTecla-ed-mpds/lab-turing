@@ -43,16 +43,29 @@ body {
 
 .animated {
     animation:
-    switchColorToGreen 5s infinite;
+    switchColorToGreen 3s linear infinite;
 }
 
 @keyframes switchColorToGreen {
-    from {background-color: #fff;}
-    to {background-color: #7ebd0b;}
+    0% {background-color: transparent;}
+    50% {background-color: #7ebd0b;}
+    100%{background-color:transparent;}
   }
 
 #buttonsId button {
     margin:1%;
+}
+
+#dialogDiv, #infoDiv,nav{
+    border:1px white solid;
+    border-radius:25px;
+    padding:1%;
+    width: 50%;
+    margin: 1% 25% 1%;
+}
+
+#infoDiv {
+    background-color: #f5f5f521;
 }
 
 nav {
