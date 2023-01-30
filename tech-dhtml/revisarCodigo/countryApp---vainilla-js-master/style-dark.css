@@ -1,0 +1,13 @@
+
+* {
+    color: #ccc;
+    background-color: #111;
+}
+
+h2 {
+    border-bottom-color: #666;
+}
+
+#country-flag {
+    box-shadow: -5px 5px 15px #000;
+}

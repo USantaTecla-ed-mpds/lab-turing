@@ -1,0 +1,57 @@
+
+= MDS 2022
+COUNTRY APP
+:toc-title: Index
+:toc: none
+
+:idprefix:
+:idseparator: -
+:imagesdir: images
+
+
+
+[plantuml, DiagramaDomain, svg]
+....
+
+
+class CountryApp
+
+package "Views" <<Rectangle>> #ddd {
+    entity DOM #caa
+    class CountryFilterView #acc
+    class CountrySelectorView #acc
+    class CountryInfoView #acc
+    class AppSetupView #cca
+}
+
+package "Model" <<Rectangle>> #ddd {
+    class LocalStorageService #aca
+    class CountryDataService #aca
+}
+
+
+CountryApp *--> AppSetupView
+CountryApp *--> CountryFilterView
+CountryApp *--> CountrySelectorView
+CountryApp *--> CountryInfoView
+
+DOM -u-> CountryApp
+AppSetupView -> DOM
+
+CountryFilterView -l> DOM
+CountrySelectorView -l> DOM
+CountryInfoView -u-> DOM
+
+CountryFilterView .l> LocalStorageService
+CountrySelectorView .l> LocalStorageService
+AppSetupView .l> LocalStorageService
+
+CountryFilterView --> CountrySelectorView
+CountrySelectorView --> CountryInfoView
+
+CountrySelectorView -> CountryDataService
+CountryInfoView -u-> CountryDataService
+
+LocalStorageService -[#ddd]- CountryDataService
+
+....

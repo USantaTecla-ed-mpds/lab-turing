@@ -1,0 +1,115 @@
+
+= MDS 2022
+COUNTRY APP
+:toc-title: Index
+:toc: none
+
+:idprefix:
+:idseparator: -
+:imagesdir: images
+
+
+
+[plantuml, DiagramaDomain, svg]
+....
+
+
+entity CountryApp {
+    fuction run()
+}
+
+package "Views" <<Rectangle>> #ddd {
+
+    entity DOM #caa {
+        <filter-radio>
+        <filter-selector>
+        <country-selector>
+        <country-info>
+        <theme-radio>
+        <emphasis-radio>
+    }
+
+    class CountryFilterView #acc {
+        #FILTERS
+        #countrySelectorView
+        #elemFilterRadio
+        #elemFilterSelector
+        #filterRadio
+        #initElements()
+        #updateElemFilterSelector()
+        #renderElemFilterSelector()
+        #addListenerToFilterRadio()
+        #addListenerToFilterSelector()
+    }
+
+    class CountrySelectorView #acc {
+        #countryDataService
+        #countryInfoView
+        #elemCountrySelector
+        - initElemCountrySelector(filterRadio, filterSelector)
+        - updateElemCountrySelector(filterRadio, filterSelector)
+        #renderElemCountrySelector(filter, filterSelection)
+        #addListenerToCountrySelector()
+    }
+
+    class CountryInfoView #acc {
+        #countryDataService
+        -renderCountryInfo(countryCode)
+    }
+
+    class AppSetupView #cca {
+        #THEMES
+        #EMPHASIS
+        #elementThemeRadio
+        #elementEmphasisRadio
+        #updateTheme()
+        #updateEmphasis()
+        #addListenerToThemeRadio()
+        #addListenerToEmphasisRadio()
+    }
+}
+
+package "Model" <<Rectangle>> #ddd {
+
+    class LocalStorageService #aca {
+        -static getItem(key)
+        -static setItem(key, value)
+        -static initItem(key, defaultValue)
+    }
+
+    class CountryDataService #aca {
+        #APIurl
+        -getCountryDataAll()
+        -getCountryDataByCode(code)
+        -getCountryDataByRegion(region)
+        -getCountryDataBySubregion(subregion)
+        #requestCountries(url, isOneObjectArray)
+    }
+}
+
+
+CountryApp *--> AppSetupView
+CountryApp *--> CountryFilterView
+CountryApp *--> CountrySelectorView
+CountryApp *--> CountryInfoView
+
+DOM -u-> CountryApp
+AppSetupView -> DOM
+
+CountryFilterView -l> DOM
+CountrySelectorView -l> DOM
+CountryInfoView -u-> DOM
+
+CountryFilterView .l> LocalStorageService
+CountrySelectorView .l> LocalStorageService
+AppSetupView .l> LocalStorageService
+
+CountryFilterView --> CountrySelectorView
+CountrySelectorView --> CountryInfoView
+
+CountrySelectorView -> CountryDataService
+CountryInfoView -u-> CountryDataService
+
+LocalStorageService -[#ddd]- CountryDataService
+
+....

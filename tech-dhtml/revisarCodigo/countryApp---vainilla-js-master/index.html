@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Country App</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./style-dark.css" id="theme">
+        <script src="./src/app.js" type="module" defer></script>
+    </head>
+
+    <body>
+
+        <div id="area-header">
+            <h1 class="emphasis">COUNTRY APP</h1>
+        </div>
+
+        <div id="area-main">
+
+
+            <div id="panel-left">
+                <h2>Filter</h2>
+
+                <div class="subsection">
+                    <div>
+                        <input type="radio" id="all" name="filter-radio" value="all">
+                        <label for="all">All</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="regions" name="filter-radio" value="regions">
+                        <label for="region">By Region</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="subregions" name="filter-radio" value="subregions">
+                        <label for="subregion">By Subregion</label>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <form method="post">
+                        <select id="filter-selector" name="filter-selector"></select>
+                    </form>
+                </div>
+
+                <h2>Selection</h2>
+
+                <div class="section">
+                    <form method="post">
+                        <select id="country-selector" name="country-selector"></select>
+                    </form>
+                </div>
+            </div>
+
+
+            <div id="panel-center">
+                <h2>Country</h2>
+
+                <div id="country-info" class="section">
+                    <h3>
+                        <span id="country-name" class="emphasis"></span>
+                        <span id="country-code" class="emphasis"></span>
+                    </h3>
+                    <p><span id="country-capital" class="emphasis"></span></p>
+                    <p><span id="country-area"></span> km²</p>
+                    <p><span id="country-population"></span> pers.</p>
+                    <p><span id="country-languages"></span></p>
+                    <p><span id="country-currencies"></span></p>
+                    <img id="country-flag" src="">
+                </div>
+            </div>
+
+
+            <div id="panel-right">
+                <h2>App Setup</h2>
+
+                <div id="app-info" class="section">
+
+                    <div class="subsection">
+                        <p>Theme</p>
+                        <div>
+                            <input type="radio" id="light" name="theme-radio" value="light">
+                            <label for="all">Light</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="dark" name="theme-radio" value="dark">
+                            <label for="region">Dark</label>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <p>Emphasis color</p>
+                        <div>
+                            <input type="radio" id="magenta" name="emphasis-radio" value="magenta">
+                            <label for="all">Magenta</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="cyan" name="emphasis-radio" value="cyan">
+                            <label for="region">Cyan</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="khaki" name="emphasis-radio" value="khaki">
+                            <label for="region">Khaki</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+</html>

@@ -240,6 +240,7 @@ class Board {
             row.split(",").forEach((color,columnIndex)=>{
                 if(color!==Color.NULL.toString()){
                     this.#colors[rowIndex][columnIndex]=new Color(color);
+                    console.log(this.#colors[rowIndex][columnIndex])
                 }
                 else{
                     this.#colors[rowIndex][columnIndex]= Color.NULL;

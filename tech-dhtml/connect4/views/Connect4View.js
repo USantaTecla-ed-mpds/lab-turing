@@ -53,12 +53,12 @@ export class Connect4View {
         } else {
           this.#turnView.renderResults()
           new ResumeDialog("dialogDiv",() => {
-            this.clearDivs();
+            this.#clearDivs();
             this.#init();
           });
         }
       }
-    clearDivs(){
+    #clearDivs(){
       document.getElementById("infoDiv").innerHTML="";
       document.getElementById("infoDiv").style.display="none";
       document.getElementById("turnDiv").innerHTML="";

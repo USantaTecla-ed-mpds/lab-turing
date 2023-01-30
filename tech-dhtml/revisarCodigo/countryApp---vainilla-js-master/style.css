@@ -1,0 +1,51 @@
+
+* {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 25px;
+}
+
+h1 {
+    margin: 0 0 30px 0;
+}
+
+h2 {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+
+
+div.section {
+    margin: 0 0 50px 0;
+}
+
+div.subsection {
+    margin: 0 0 20px 0;
+}
+
+
+
+#country-flag {
+    margin-top: 20px;
+}
+
+#area-main {
+    display: flex;
+}
+
+#panel-left {
+    width: 400px;
+    margin-right: 50px;
+}
+
+#panel-center {
+    width: 400px;
+    margin-right: 50px;
+}
+
+#panel-right {
+    width: 400px;
+}
