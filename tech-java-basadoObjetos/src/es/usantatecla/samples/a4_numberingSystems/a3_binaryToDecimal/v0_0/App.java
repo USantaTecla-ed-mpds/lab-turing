@@ -1,4 +1,4 @@
-package es.usantatecla.exercises.a4_numberingSystems.a3_binaryToDecimal.v0_0;
+package es.usantatecla.samples.a4_numberingSystems.a3_binaryToDecimal.v0_0;
 
 import es.usantatecla.utils.Console;
 

@@ -1,4 +1,4 @@
-package es.usantatecla.exercises.a5_changeCoins.v0_0;
+package es.usantatecla.samples.a5_changeCoins.v0_0;
 
 import es.usantatecla.utils.Console;
 
