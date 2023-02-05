@@ -5,52 +5,27 @@ public class Coordinate2D {
     public Coordinate2D() {
     }
 
-    public Coordinate2D(int ordinate, int abscissa) {
+    public Coordinate2D(double abscissa, double ordinate) {
     }
 
-    public Coordinate2D(double ordinate, double abscissa) {
-    }
-
-    public void shift(Coordinate2D shiftment) {
+    public Coordinate2D clone() {
+        return null;
     }
 
     public Coordinate2D shifted(Coordinate2D shiftment) {
         return null;
     }
 
-    public boolean isValid() {
-        return true;
-    }
-
-    public boolean isOrdinateValid() {
-        return true;
-    }
-
-    public boolean isAbscissaValid() {
-        return true;
-    }
-
-    public Coordinate2D orginSymetric() {
+    public Coordinate2D originSymetric() {
         return null;
     }
 
-    public Coordinate2D axisSymetric() {
+    public Coordinate2D axisSymetric(String axis) {
         return null;
     }
 
     public boolean equals(Coordinate2D coordinate) {
-        return null;
-    }
-
-    public boolean equalsOrdinate(Coordinate2D coordinate) {
-        return true;
-    }
-
-    public boolean equalsAbscissa(Coordinate2D coordinate) {
-        return true;
-    }
-
-    public void setOrigin(Coordinate2D origin) {
+        return false;
     }
 
     public Coordinate2D getOrigin() {

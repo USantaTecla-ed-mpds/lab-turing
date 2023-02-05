@@ -7,33 +7,12 @@ public class Date {
     public Date(int day, int month, int year) {
     }
 
-    public boolean isLeapYear() {
-        return true;
-    }
-
-    public int daysElapsedSince(Date date) {
-        return 0;
-    }
-
-    public int monthsElapsedSince(Date date) {
-        return 0;
-    }
-
-    public int yearsElapsedSince(Date date) {
-        return 0;
-    }
-
-    public void setZone(int zone) {
-    }
-
-    public void setCalendar(String calendar){}
-    
-    public String getSeason() {
+    public Date ElapsedSince(Date date){
         return null;
     }
 
-    public int daysOfMonth() {
-        return 0;
+    public Date Add(Date date){
+        return null;
     }
 
     public boolean equals(Date date) {
