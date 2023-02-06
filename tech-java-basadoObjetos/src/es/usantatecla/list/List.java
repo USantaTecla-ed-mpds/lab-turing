@@ -8,20 +8,19 @@ public class List {
 
     }
 
-    public void addElement(Element element, String onPosition) {
+    public void add(Element element, String onPosition) {
 
     }
 
-    public void removeElement(Element element,String onPosition) {
+    public void remove(Element element,String onPosition) {
 
     }
 
-    public boolean hasElement(Element element){
+    public boolean contains(Element element){
         return false;
     }
 
-    public int getIndexOfElement(Element element){
+    public int getIndexOf(Element element){
         return 0;
     }
-
 }

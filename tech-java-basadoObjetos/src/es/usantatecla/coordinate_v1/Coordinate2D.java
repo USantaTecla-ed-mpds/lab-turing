@@ -6,8 +6,7 @@ public class Coordinate2D {
     private double ordinate;
 
     public Coordinate2D() {
-        this.abscissa = 0;
-        this.ordinate = 0;
+        this(0, 0);
     }
 
     public Coordinate2D(double abscissa, double ordinate) {
@@ -27,15 +26,13 @@ public class Coordinate2D {
         return new Coordinate2D(-this.abscissa, -this.ordinate);
     }
 
-    public Coordinate2D axisSymetric(String axis) {
-        if (axis == "abscissa") {
-            return new Coordinate2D(this.abscissa, -this.ordinate);
-        }
-        if (axis == "ordinate"){
-            return new Coordinate2D(-this.abscissa, this.ordinate);
-        }
-        return null;
+    public Coordinate2D abscissaSymetric() {
 
+        return new Coordinate2D(this.abscissa, -this.ordinate);
+    }
+
+    public Coordinate2D ordinateSymetric() {
+        return new Coordinate2D(-this.abscissa, this.ordinate);
     }
 
     public boolean equals(Coordinate2D coordinate) {
