@@ -1,4 +1,4 @@
-package es.usantatecla.samples.managers.services.classes;
+package es.usantatecla.utils;
 
 public class Date {
 

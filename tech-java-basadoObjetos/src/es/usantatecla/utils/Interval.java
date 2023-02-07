@@ -1,6 +1,4 @@
-package es.usantatecla.samples.managers.services.classes;
-
-import es.usantatecla.utils.Console;
+package es.usantatecla.utils;
 
 public class Interval {
 
