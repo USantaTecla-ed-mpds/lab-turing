@@ -6,7 +6,7 @@ import es.usantatecla.utils.Console;
 public class ExitOption implements Option{
 
     @Override
-    public String show() {
+    public String showTitle() {
         return "Salir de aplicación";    
     }
 

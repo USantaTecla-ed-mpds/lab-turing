@@ -5,7 +5,7 @@ import es.usantatecla.companyManagement.ServicesContract;
 public class ShowOption implements Option{
 
     @Override
-    public String show() {
+    public String showTitle() {
         return "Mostrar intervalos";     
     }
 

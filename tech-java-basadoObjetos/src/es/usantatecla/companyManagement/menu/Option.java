@@ -4,7 +4,7 @@ import es.usantatecla.companyManagement.ServicesContract;
 
 public interface Option {
 
-    String show();
+    String showTitle();
 
     void execute(ServicesContract servicesContract);
 }

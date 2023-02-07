@@ -27,7 +27,7 @@ public class Menu {
         do{
             this.console.writeln("ACCIONES DISPONIBLES");
             for (int i = 0; i < this.options.size(); i++) {
-                this.console.writeln(i + 1 + ": " + this.options.get(i).show());
+                this.console.writeln(i + 1 + ": " + this.options.get(i).showTitle());
             }
             selectedOption = this.console.readInt("Seleccionar [1-" + this.options.size() + "]: ");
             validOption = selectedOption > 0 && selectedOption <= this.options.size();
