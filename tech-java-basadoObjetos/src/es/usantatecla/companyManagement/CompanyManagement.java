@@ -5,7 +5,7 @@ import es.usantatecla.utils.Console;
 
 public class CompanyManagement {
 
-	private final String CONTRACT_NAME = "Consultaria a Escuela.it.";
+	private final String CONTRACT_NAME = "Consultaria del supermercado Dia";
 	private final int YEAR = 2023;
 	
     public static void main(String[] args) {

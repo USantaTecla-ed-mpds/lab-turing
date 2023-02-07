@@ -1,17 +1,20 @@
 package es.usantatecla.companyManagement.menu;
 
 import es.usantatecla.companyManagement.ServicesContract;
+import es.usantatecla.utils.Console;
 
-public class ShowOption implements Option{
+public class GetCostOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Mostrar fecha - rango de horas";     
+        return "Get total cost";
     }
 
     @Override
     public void execute(ServicesContract servicesContract) {
-        servicesContract.writeln();
+        new Console().writeln("\nCosto anual total: " + servicesContract.getCost() + "-euros\n");
+        
     }
-    
+
+
 }

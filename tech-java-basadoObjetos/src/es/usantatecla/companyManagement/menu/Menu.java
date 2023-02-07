@@ -18,6 +18,7 @@ public class Menu {
         this.options = new ArrayList<>();
         this.options.add(new ShowOption());
         this.options.add(new CancelOption());
+        this.options.add(new GetCostOption());
         this.options.add(new ExitOption());
     }
 

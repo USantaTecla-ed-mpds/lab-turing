@@ -11,7 +11,7 @@ public class CancelOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Cancelar intervalo";   
+        return "Cancelar fecha";   
     }
 
     @Override
