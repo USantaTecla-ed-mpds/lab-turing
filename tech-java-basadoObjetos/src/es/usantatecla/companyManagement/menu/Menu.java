@@ -36,6 +36,6 @@ public class Menu {
             } else {
                 this.console.writeln("ERROR! Introduzca una opción válida [1-" + this.options.size() + "] \n");
             }
-        }while(selectedOption != 3);
+        }while(selectedOption != this.options.size());
     }
 }
