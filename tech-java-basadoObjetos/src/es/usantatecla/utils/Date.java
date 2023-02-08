@@ -26,7 +26,7 @@ public class Date {
 		this(1, 1, 1900);
 	}
 
-    public static Date getFromDayAndMonthUserInput(int year){
+    public static Date getFromDayAndMonthUserInput(int year){ //ojo acoplamiento console() todo ..igual no va aqui este método
         Pattern pattern = Pattern.compile("^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])");
         Matcher matcher;
         String userInputDate;

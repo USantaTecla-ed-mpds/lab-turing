@@ -12,7 +12,7 @@ public class ShiftOption implements Option{
     }
 
     @Override
-    public void execute(ServicesContract servicesContract) {
+    public void execute(ServicesContract servicesContract) {//opcion acoplada a console
         Date date = Date.getFromDayAndMonthUserInput(servicesContract.getYear());
         double shiftment;
         boolean validShifment = false;
