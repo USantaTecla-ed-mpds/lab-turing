@@ -1,7 +1,7 @@
 package es.usantatecla.coordinate;
 
 public class Coordinate2D {
-
+ //TO UML
     public Coordinate2D() {
     }
 
