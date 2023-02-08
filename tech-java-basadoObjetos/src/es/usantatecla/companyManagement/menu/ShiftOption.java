@@ -16,17 +16,17 @@ public class ShiftOption implements Option{
     public void execute(ServicesContract servicesContract) {
         Date date = new DateView().getFromDayAndMonthUserInput(servicesContract.getYear());
         double shiftment;
-        boolean validScale = false;
+        boolean validShifment = false;
         Console console = new Console();
         do{
             shiftment = console.readDouble("Valor para desplazar [ valor > 0 ]: ");
             if(shiftment > 0){
-                validScale = true;
+                validShifment = true;
                 servicesContract.shift(date, shiftment);
             } else {
                 console.writeln("ERROR! desplazamiento incorrecto [ valor > 0 ]");
             }
-        }while(!validScale);            
+        }while(!validShifment);            
     }
     
 }
