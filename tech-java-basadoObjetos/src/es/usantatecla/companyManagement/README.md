@@ -1,1 +1,1 @@
-![ModeloClases]( ../../UML/ModeloClases.svg "ModeloClases")
+![ModeloClases]( UML/ModeloClases.svg "ModeloClases")
