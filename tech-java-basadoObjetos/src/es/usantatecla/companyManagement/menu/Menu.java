@@ -17,6 +17,8 @@ public class Menu {
         this.console = new Console();
         this.options = new ArrayList<>();
         this.options.add(new ShowOption());
+        this.options.add(new EnlargeOption());
+        this.options.add(new ShiftOption());
         this.options.add(new CancelOption());
         this.options.add(new GetCostOption());
         this.options.add(new ExitOption());

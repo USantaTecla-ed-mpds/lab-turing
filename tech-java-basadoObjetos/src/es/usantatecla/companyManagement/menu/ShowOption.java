@@ -6,7 +6,7 @@ public class ShowOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Mostrar fecha - rango de horas";     
+        return "Mostrar (fecha - rango de horas)";     
     }
 
     @Override

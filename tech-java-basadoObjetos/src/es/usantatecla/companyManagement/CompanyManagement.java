@@ -14,7 +14,7 @@ public class CompanyManagement {
 
 	private void run() {
 		ServicesContract servicesContract = new ServicesContract(this.CONTRACT_NAME, this.YEAR);
-		new Console().writeln("Gestión del contrato " + servicesContract.getName() + " para el año " + servicesContract.getYear());
+		new Console().writeln("Gestión del contrato \"" + servicesContract.getName() + "\" para el año " + servicesContract.getYear());
 		new Menu(servicesContract).show();
 	}
     

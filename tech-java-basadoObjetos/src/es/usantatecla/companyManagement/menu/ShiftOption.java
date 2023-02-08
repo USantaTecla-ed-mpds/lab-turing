@@ -1,20 +1,18 @@
 package es.usantatecla.companyManagement.menu;
 
 import es.usantatecla.companyManagement.ServicesContract;
-import es.usantatecla.utils.Console;
 
-public class GetCostOption implements Option{
+public class ShiftOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Obtener costo total";
+        return "Desplazar (rango de horas)";
     }
 
     @Override
     public void execute(ServicesContract servicesContract) {
-        new Console().writeln("\nCosto anual total: " + servicesContract.getCost() + "-euros\n");
+        // TODO Auto-generated method stub
         
     }
-
-
+    
 }
