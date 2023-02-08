@@ -17,6 +17,7 @@ public class MenuView {
         Console console = new Console();
         int selectedOption = 0;
         boolean validOption = false;
+        console.writeln("Gestión del contrato \"" + this.servicesContract.getName() + "\" para el año " + this.servicesContract.getYear());
         do{
             console.writeln("ACCIONES DISPONIBLES");
             for (int i = 0; i < this.menu.getSize(); i++) {

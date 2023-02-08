@@ -1,0 +1,54 @@
+@startuml
+class CompanyManagement
+class ServiceContract
+class MenuView
+class Menu
+class CancelOption
+class ShowOption
+class ExitOption
+class EnlargeOption
+class ShiftOption
+class GetCostOption
+
+class Date
+class Console
+class Interval
+
+interface Option
+
+
+CompanyManagement ..> ServiceContract
+CompanyManagement ..> MenuView
+CompanyManagement ..> Console
+
+ServiceContract ..> Date
+ServiceContract *--> "360" Interval
+
+MenuView --> ServiceContract
+MenuView --> Menu
+MenuView ..> Console
+
+CancelOption ..> Date
+CancelOption ..> ServiceContract
+
+EnlargeOption ..> Date
+ShiftOption ..> Date
+
+Menu --> ServiceContract
+Menu --> Option
+Menu --> CancelOption
+Menu --> EnlargeOption
+Menu --> ExitOption
+Menu --> GetCostOption
+Menu --> ShiftOption
+Menu --> ShowOption
+
+Option <|.. CancelOption
+Option <|.. EnlargeOption
+Option <|.. ExitOption
+Option <|.. GetCostOption
+Option <|.. ShiftOption
+Option <|.. ShowOption
+
+
+@enduml
