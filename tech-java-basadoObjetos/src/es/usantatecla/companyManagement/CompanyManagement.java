@@ -1,6 +1,6 @@
 package es.usantatecla.companyManagement;
 
-import es.usantatecla.companyManagement.menu.Menu;
+import es.usantatecla.companyManagement.menu.MenuView;
 import es.usantatecla.utils.Console;
 
 public class CompanyManagement {
@@ -15,7 +15,7 @@ public class CompanyManagement {
 	private void run() {
 		ServicesContract servicesContract = new ServicesContract(this.CONTRACT_NAME, this.YEAR);
 		new Console().writeln("Gestión del contrato \"" + servicesContract.getName() + "\" para el año " + servicesContract.getYear());
-		new Menu(servicesContract).show();
+		new MenuView(servicesContract).show();
 	}
     
 }

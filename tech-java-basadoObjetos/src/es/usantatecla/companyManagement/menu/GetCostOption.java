@@ -7,7 +7,7 @@ public class GetCostOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Obtener costo total";
+        return "Costo total";
     }
 
     @Override

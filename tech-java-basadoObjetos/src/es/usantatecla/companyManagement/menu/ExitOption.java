@@ -7,7 +7,7 @@ public class ExitOption implements Option{
 
     @Override
     public String showTitle() {
-        return "Salir de aplicación";    
+        return "Salir";    
     }
 
     @Override
