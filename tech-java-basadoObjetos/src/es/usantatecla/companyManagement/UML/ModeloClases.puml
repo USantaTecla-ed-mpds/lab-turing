@@ -24,6 +24,8 @@ CompanyManagement ..> MenuView
 ServiceContract ..> Date
 ServiceContract *--> "360" Interval
 
+DateView ..> Date
+
 MenuView --> ServiceContract
 MenuView --> Menu
 MenuView ..> Console
