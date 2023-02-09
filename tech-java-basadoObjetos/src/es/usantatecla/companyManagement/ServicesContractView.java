@@ -25,30 +25,22 @@ public class ServicesContractView {
         boolean validScale = false;
         Console console = new Console();
         do{
-            scale = console.readDouble("Multiplicador para redimensionar [ valor > 0.1 ]: ");
-            if(scale > 0.1){
+            scale = console.readDouble("Multiplicador para redimensionar [ valor >0.1 o <-0.1]: ");
+            if(scale > 0.1 || scale < -0.1){
                 validScale = true;
                 this.servicesContract.enlarge(date, scale);
             } else {
-                console.writeln("ERROR! Escalado incorrecto [ valor > 0.1 ]");
+                console.writeln("ERROR! Escalado incorrecto [ valor > 0.1 o < -0.1]");
             }
         }while(!validScale); 
     }
 
-    public void shift() {
+    public void shift() {//todo calculate limits interval 0h. - 24h.
         Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         double shiftment;
-        boolean validShifment = false;
         Console console = new Console();
-        do{
-            shiftment = console.readDouble("Valor para desplazar [ valor > 0 ]: ");
-            if(shiftment > 0){
-                validShifment = true;
-                this.servicesContract.shift(date, shiftment);
-            } else {
-                console.writeln("ERROR! desplazamiento incorrecto [ valor > 0 ]");
-            }
-        }while(!validShifment);    
+        shiftment = console.readDouble("Valor para desplazar: ");
+        this.servicesContract.shift(date, shiftment);    
     }
 
     public void exit() {
