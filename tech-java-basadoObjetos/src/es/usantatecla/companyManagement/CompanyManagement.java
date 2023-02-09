@@ -13,7 +13,8 @@ public class CompanyManagement {
 
 	private void run() {
 		ServicesContract servicesContract = new ServicesContract(this.CONTRACT_NAME, this.YEAR);
-		new MenuView(servicesContract).show();
+		ServicesContractView servicesContractView = new ServicesContractView(servicesContract);
+		new MenuView(servicesContractView).show();
 	}
     
 }

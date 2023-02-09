@@ -1,6 +1,5 @@
 package es.usantatecla.companyManagement.menu;
 
-import es.usantatecla.companyManagement.ServicesContract;
 import es.usantatecla.companyManagement.ServicesContractView;
 import es.usantatecla.utils.Console;
 
@@ -9,8 +8,8 @@ public class MenuView {
     private Menu menu;
     private ServicesContractView servicesContractView;
 
-    public MenuView(ServicesContract servicesContract){
-        this.servicesContractView = new ServicesContractView(servicesContract);
+    public MenuView(ServicesContractView servicesContractView){
+        this.servicesContractView = servicesContractView;
         this.menu = new Menu();
     }
 
