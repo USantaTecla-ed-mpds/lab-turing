@@ -36,7 +36,7 @@ public class ServicesContractView {
     }
 
     public void shift() {
-        Date date = this.getDateFromDayAndMonthUserInput(servicesContract.getYear());
+        Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         double shiftment;
         boolean validShifment = false;
         Console console = new Console();
