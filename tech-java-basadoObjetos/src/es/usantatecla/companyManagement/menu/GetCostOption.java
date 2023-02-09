@@ -1,7 +1,6 @@
 package es.usantatecla.companyManagement.menu;
 
-import es.usantatecla.companyManagement.ServicesContract;
-import es.usantatecla.utils.Console;
+import es.usantatecla.companyManagement.ServicesContractView;
 
 public class GetCostOption implements Option{
 
@@ -11,9 +10,8 @@ public class GetCostOption implements Option{
     }
 
     @Override
-    public void execute(ServicesContract servicesContract) {
-        new Console().writeln("\nCosto anual total: " + servicesContract.getCost() + "-euros\n");
-        
+    public void execute(ServicesContractView servicesContractView) {
+        servicesContractView.getCost();
     }
 
 

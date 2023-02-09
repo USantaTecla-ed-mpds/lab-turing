@@ -1,6 +1,7 @@
 package es.usantatecla.companyManagement.menu;
 
 import es.usantatecla.companyManagement.ServicesContract;
+import es.usantatecla.companyManagement.ServicesContractView;
 
 public class ShowOption implements Option{
 
@@ -10,8 +11,8 @@ public class ShowOption implements Option{
     }
 
     @Override
-    public void execute(ServicesContract servicesContract) {
-        servicesContract.writeln();
+    public void execute(ServicesContractView servicesContractView) {
+        servicesContractView.writeln();
     }
     
 }

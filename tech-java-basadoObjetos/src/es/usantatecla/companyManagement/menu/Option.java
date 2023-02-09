@@ -1,10 +1,10 @@
 package es.usantatecla.companyManagement.menu;
 
-import es.usantatecla.companyManagement.ServicesContract;
+import es.usantatecla.companyManagement.ServicesContractView;
 
 public interface Option {
 
     String showTitle();
 
-    void execute(ServicesContract servicesContract);
+    void execute(ServicesContractView servicesContractView);
 }

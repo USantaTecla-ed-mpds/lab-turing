@@ -1,7 +1,6 @@
 package es.usantatecla.companyManagement.menu;
 
-import es.usantatecla.companyManagement.ServicesContract;
-import es.usantatecla.utils.Console;
+import es.usantatecla.companyManagement.ServicesContractView;
 
 public class ExitOption implements Option{
 
@@ -11,8 +10,8 @@ public class ExitOption implements Option{
     }
 
     @Override
-    public void execute(ServicesContract servicesContract) {
-        new Console().writeln("\nHasta la próxima!");
+    public void execute(ServicesContractView servicesContractView) {
+        servicesContractView.exit();
     }
     
 }

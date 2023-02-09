@@ -1,9 +1,6 @@
 package es.usantatecla.companyManagement.menu;
 
-import es.usantatecla.companyManagement.DateView;
-import es.usantatecla.companyManagement.ServicesContract;
-
-import es.usantatecla.utils.Date;
+import es.usantatecla.companyManagement.ServicesContractView;
 
 public class CancelOption implements Option{
 
@@ -13,9 +10,8 @@ public class CancelOption implements Option{
     }
 
     @Override
-    public void execute(ServicesContract servicesContract) {
-        Date date = new DateView().getFromDayAndMonthUserInput(servicesContract.getYear());
-        servicesContract.cancel(date);
+    public void execute(ServicesContractView servicesContractView) {
+        servicesContractView.cancel();
     }
     
 }
