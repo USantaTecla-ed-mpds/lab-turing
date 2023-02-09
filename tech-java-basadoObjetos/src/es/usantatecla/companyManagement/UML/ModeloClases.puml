@@ -29,7 +29,6 @@ ServiceContract --> "360" Interval
 MenuView --> Menu
 MenuView ..> ServiceContractView
 
-Menu ..> ServiceContractView
 Menu --> Option
 Menu --> CancelOption
 Menu --> EnlargeOption
