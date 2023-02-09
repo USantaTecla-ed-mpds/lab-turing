@@ -1,4 +1,4 @@
-@startuml Diagrama de clases
+@startuml
 class CompanyManagement
 class ServiceContract
 class ServiceContractView
