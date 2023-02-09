@@ -29,13 +29,20 @@ ServiceContract --> "360" Interval
 MenuView --> Menu
 MenuView ..> ServiceContractView
 
-Menu --> Option
-Menu --> CancelOption
-Menu --> EnlargeOption
-Menu --> ExitOption
-Menu --> GetCostOption
-Menu --> ShiftOption
-Menu --> ShowOption
+Menu -->"6" Option
+' Menu --> CancelOption
+' Menu --> EnlargeOption
+' Menu --> ExitOption
+' Menu --> GetCostOption
+' Menu --> ShiftOption
+' Menu --> ShowOption
+
+' CancelOption ..> ServiceContractView
+' EnlargeOption ..> ServiceContractView
+' ExitOption ..> ServiceContractView
+' GetCostOption ..> ServiceContractView
+' ShiftOption ..> ServiceContractView
+' ShowOption ..> ServiceContractView
 
 Option <|.. CancelOption
 Option <|.. EnlargeOption
