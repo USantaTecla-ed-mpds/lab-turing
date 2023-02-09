@@ -1,4 +1,4 @@
-@startuml
+@startuml Diagrama de clases
 class CompanyManagement
 class ServiceContract
 class ServiceContractView
@@ -12,27 +12,22 @@ class ShiftOption
 class GetCostOption
 
 class Date
-class DateView
 class Interval
 
 interface Option
-
 
 CompanyManagement *--> ServiceContract
 CompanyManagement ..> ServiceContractView
 CompanyManagement ..> MenuView
 
 ServiceContractView ..> ServiceContract
-ServiceContractView ..> DateView
+ServiceContractView ..> Date
 
 ServiceContract ..> Date
 ServiceContract --> "360" Interval
 
-DateView ..> Date
-
 MenuView --> Menu
 MenuView ..> ServiceContractView
-
 
 Menu ..> ServiceContractView
 Menu --> Option
@@ -49,6 +44,5 @@ Option <|.. ExitOption
 Option <|.. GetCostOption
 Option <|.. ShiftOption
 Option <|.. ShowOption
-
 
 @enduml
