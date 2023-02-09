@@ -1,6 +1,7 @@
 @startuml
 class CompanyManagement
 class ServiceContract
+class ServiceContractView
 class MenuView
 class Menu
 class CancelOption
@@ -12,31 +13,28 @@ class GetCostOption
 
 class Date
 class DateView
-class Console
 class Interval
 
 interface Option
 
 
-CompanyManagement ..> ServiceContract
+CompanyManagement *--> ServiceContract
+CompanyManagement ..> ServiceContractView
 CompanyManagement ..> MenuView
 
+ServiceContractView ..> ServiceContract
+ServiceContractView ..> DateView
+
 ServiceContract ..> Date
-ServiceContract *--> "360" Interval
+ServiceContract --> "360" Interval
 
 DateView ..> Date
 
-MenuView --> ServiceContract
 MenuView --> Menu
-MenuView ..> Console
+MenuView ..> ServiceContractView
 
-CancelOption ..> DateView
-CancelOption ..> ServiceContract
 
-EnlargeOption ..> DateView
-ShiftOption ..> DateView
-
-Menu --> ServiceContract
+Menu ..> ServiceContractView
 Menu --> Option
 Menu --> CancelOption
 Menu --> EnlargeOption
