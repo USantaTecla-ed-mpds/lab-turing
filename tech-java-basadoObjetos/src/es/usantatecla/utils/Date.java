@@ -1,8 +1,5 @@
 package es.usantatecla.utils;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Date {
 
 	private int day;

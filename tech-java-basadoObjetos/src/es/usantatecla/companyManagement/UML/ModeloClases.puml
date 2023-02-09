@@ -11,6 +11,7 @@ class ShiftOption
 class GetCostOption
 
 class Date
+class DateView
 class Console
 class Interval
 
@@ -27,11 +28,11 @@ MenuView --> ServiceContract
 MenuView --> Menu
 MenuView ..> Console
 
-CancelOption ..> Date
+CancelOption ..> DateView
 CancelOption ..> ServiceContract
 
-EnlargeOption ..> Date
-ShiftOption ..> Date
+EnlargeOption ..> DateView
+ShiftOption ..> DateView
 
 Menu --> ServiceContract
 Menu --> Option
