@@ -1,5 +1,6 @@
 package es.usantatecla.companyManagement.menu;
 
+import es.usantatecla.companyManagement.DateView;
 import es.usantatecla.companyManagement.ServicesContract;
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
@@ -13,7 +14,7 @@ public class ShiftOption implements Option{
 
     @Override
     public void execute(ServicesContract servicesContract) {//opcion acoplada a console
-        Date date = Date.getFromDayAndMonthUserInput(servicesContract.getYear());
+        Date date = new DateView().getFromDayAndMonthUserInput(servicesContract.getYear());
         double shiftment;
         boolean validShifment = false;
         Console console = new Console();
