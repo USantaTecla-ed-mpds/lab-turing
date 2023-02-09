@@ -15,12 +15,12 @@ public class ServicesContractView {
     }
 
     public void cancel() {
-        Date date = this.getFromDayAndMonthUserInput(servicesContract.getYear());
+        Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         this.servicesContract.cancel(date);
     }
 
     public void enlarge() {
-        Date date = this.getFromDayAndMonthUserInput(servicesContract.getYear());
+        Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         double scale;
         boolean validScale = false;
         Console console = new Console();
@@ -36,7 +36,7 @@ public class ServicesContractView {
     }
 
     public void shift() {
-        Date date = this.getFromDayAndMonthUserInput(servicesContract.getYear());
+        Date date = this.getDateFromDayAndMonthUserInput(servicesContract.getYear());
         double shiftment;
         boolean validShifment = false;
         Console console = new Console();
@@ -71,7 +71,7 @@ public class ServicesContractView {
         return this.servicesContract.getYear();
     }
 
-    private Date getFromDayAndMonthUserInput(int year){ //ojo acoplamiento console() todo ..igual no va aqui este método
+    private Date getDateFromDayAndMonthUserInput(int year){
         Pattern pattern = Pattern.compile("^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])");
         Matcher matcher;
         String userInputDate;
