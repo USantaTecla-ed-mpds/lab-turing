@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class ShiftOption implements Option{
 
     @Override
-    public String showTitle() {
-        return "Desplazar (rango de horas)";
+    public String showTitle(int languaje) {
+        return Languaje.SHIFT.getTitle(languaje);
     }
 
     @Override

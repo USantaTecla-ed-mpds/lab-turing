@@ -7,6 +7,7 @@ public class MenuView {
     
     private Menu menu;
     private ServicesContractView servicesContractView;
+    private final int LANGUAJE = 0; //0 spanish, 1 english 
 
     public MenuView(ServicesContractView servicesContractView){
         this.servicesContractView = servicesContractView;
@@ -21,7 +22,7 @@ public class MenuView {
         do{
             console.writeln("ACCIONES DISPONIBLES");
             for (int i = 0; i < this.menu.getSize(); i++) {
-                console.writeln(i + 1 + ": " + this.menu.getOption(i).showTitle());
+                console.writeln(i + 1 + ": " + this.menu.getOption(i).showTitle(LANGUAJE));
             }
             selectedOption = console.readInt("Seleccionar [1-" + this.menu.getSize() + "]: ");
             validOption = selectedOption > 0 && selectedOption <= this.menu.getSize();

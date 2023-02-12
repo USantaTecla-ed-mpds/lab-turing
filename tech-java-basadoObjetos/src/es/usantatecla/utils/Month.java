@@ -5,8 +5,8 @@ public enum Month {
     JANUARY(31, new String[]{ "Enero", "January" }),
     FEBRUARY(28, new String[]{ "Febrero", "Februry" });
 
-    int days;
-    String[] langs;
+    private int days;
+    private String[] langs;
 
     private Month(int days, String[] langs){
         this.days = days;
