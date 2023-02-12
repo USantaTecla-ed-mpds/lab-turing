@@ -27,6 +27,13 @@ public class Date {
 		return new Date(this);
 	}
 
+	public String getMonthName(){
+		//nombre del enumerado en castellano
+		return Month.values()[this.month - 1].langs[0];
+		//solo nombre del enumerado
+		//return Month.values()[this.month - 1].name();
+	}
+
 	public boolean equals(Date date) {
 		return this.day == date.day
 				&& this.month == date.month
