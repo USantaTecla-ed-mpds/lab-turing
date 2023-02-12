@@ -4,7 +4,7 @@ import es.usantatecla.companyManagement.ServicesContractView;
 
 public interface Option {
 
-    String showTitle(int languaje);
+    String showTitle(Languaje languaje);
 
     void execute(ServicesContractView servicesContractView);
 }

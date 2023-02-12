@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class ShowOption implements Option{
 
     @Override
-    public String showTitle(int languaje) {
-        return Languaje.SHOW.getTitle(languaje);     
+    public String showTitle(Languaje languaje) {
+        return Messages.SHOW.getTitle(languaje.ordinal());     
     }
 
     @Override

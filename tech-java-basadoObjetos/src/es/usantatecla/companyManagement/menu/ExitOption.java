@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class ExitOption implements Option{
 
     @Override
-    public String showTitle(int languaje) {
-        return Languaje.EXIT.getTitle(languaje);    
+    public String showTitle(Languaje languaje) {
+        return Messages.EXIT.getTitle(languaje.ordinal());    
     }
 
     @Override

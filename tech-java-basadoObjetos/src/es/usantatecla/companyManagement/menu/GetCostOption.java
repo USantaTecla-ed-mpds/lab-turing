@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class GetCostOption implements Option{
 
     @Override
-    public String showTitle(int languaje) {
-        return Languaje.TOTAL_COST.getTitle(languaje);
+    public String showTitle(Languaje languaje) {
+        return Messages.TOTAL_COST.getTitle(languaje.ordinal());
     }
 
     @Override

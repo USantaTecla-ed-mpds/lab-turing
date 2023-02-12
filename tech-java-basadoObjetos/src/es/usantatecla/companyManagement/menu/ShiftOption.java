@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class ShiftOption implements Option{
 
     @Override
-    public String showTitle(int languaje) {
-        return Languaje.SHIFT.getTitle(languaje);
+    public String showTitle(Languaje languaje) {
+        return Messages.SHIFT.getTitle(languaje.ordinal());
     }
 
     @Override

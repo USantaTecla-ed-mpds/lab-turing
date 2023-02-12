@@ -5,8 +5,8 @@ import es.usantatecla.companyManagement.ServicesContractView;
 public class CancelOption implements Option{
 
     @Override
-    public String showTitle(int languaje) {
-        return Languaje.CANCEL.getTitle(languaje); 
+    public String showTitle(Languaje languaje) {
+        return Messages.CANCEL.getTitle(languaje.ordinal()); 
     }
 
     @Override
