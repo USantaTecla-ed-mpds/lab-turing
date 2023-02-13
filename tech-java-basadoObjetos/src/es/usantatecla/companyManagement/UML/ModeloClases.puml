@@ -26,7 +26,7 @@ ServiceContractView ..> Date
 ServiceContractView ..> Message
 
 ServiceContract ..> Date
-ServiceContract --> "360" Interval
+ServiceContract *--> "360" Interval
 
 MenuView --> Menu
 MenuView ..> ServiceContractView
