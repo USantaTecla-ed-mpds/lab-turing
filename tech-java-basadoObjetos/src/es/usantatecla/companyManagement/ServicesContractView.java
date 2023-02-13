@@ -11,9 +11,10 @@ import es.usantatecla.utils.Date;
 public class ServicesContractView {
 
     private ServicesContract servicesContract;
-    private int codeLanguaje = Languaje.SPANISH.ordinal();
+    private final Languaje languaje;
 
-    public ServicesContractView(ServicesContract servicesContract) {
+    public ServicesContractView(ServicesContract servicesContract, Languaje languaje) {
+        this.languaje = languaje;
         this.servicesContract = servicesContract;
     }
 
@@ -47,7 +48,7 @@ public class ServicesContractView {
     }
 
     public void exit() {
-        new Console().writeln(Message.BYE.getCustomLanguajeMessage(this.codeLanguaje));
+        new Console().writeln(Message.BYE.getCustomLanguajeMessage(this.languaje.ordinal()));
     }
 
     public void getCost() {

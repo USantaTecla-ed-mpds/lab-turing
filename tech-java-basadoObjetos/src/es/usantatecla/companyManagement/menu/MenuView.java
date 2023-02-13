@@ -13,22 +13,39 @@ public class MenuView {
         this.menu = new Menu();
     }
 
-    public void show(){
+    public void show(Languaje languaje){
         Console console = new Console();
         int selectedOption = 0;
         boolean validOption = false;
-        console.writeln("Gestión del contrato \"" + this.servicesContractView.getName() + "\" para el año " + this.servicesContractView.getYear());
+        console.writeln(
+            Message.MENU_TITLE_PRE.getCustomLanguajeMessage(languaje.ordinal())
+             + 
+            this.servicesContractView.getName() 
+             +
+            Message.MENU_TITLE_POST.getCustomLanguajeMessage(languaje.ordinal())
+             + 
+            this.servicesContractView.getYear());
         do{
-            console.writeln("ACCIONES DISPONIBLES");
+            console.writeln(Message.MENU_SUBTITLE.getCustomLanguajeMessage(languaje.ordinal()));
             for (int i = 0; i < this.menu.getSize(); i++) {
-                console.writeln(i + 1 + ": " + this.menu.getOption(i).showTitle(Languaje.SPANISH));
+                console.writeln(i + 1 + Message.MENU_SEPARATOR.getCustomLanguajeMessage(languaje.ordinal()) + this.menu.getOption(i).showTitle(languaje));
             }
-            selectedOption = console.readInt("Seleccionar [1-" + this.menu.getSize() + "]: ");
+            selectedOption = console.readInt(
+                Message.MENU_READ_ERROR_PRE.getCustomLanguajeMessage(languaje.ordinal())
+                 + 
+                this.menu.getSize() 
+                 + 
+                 Message.MENU_READ_ERROR_POST.getCustomLanguajeMessage(languaje.ordinal()));
             validOption = selectedOption > 0 && selectedOption <= this.menu.getSize();
             if (validOption){
                 this.menu.getOption(selectedOption - 1).execute(this.servicesContractView);
             } else {
-                console.writeln("ERROR! Introduzca una opción válida [1-" + this.menu.getSize() + "] \n");
+                console.writeln(
+                    Message.MENU_SELECT_ERROR_PRE.getCustomLanguajeMessage(languaje.ordinal())
+                     + 
+                    this.menu.getSize()
+                      + 
+                    Message.MENU_SELECT_ERROR_POST.getCustomLanguajeMessage(languaje.ordinal()));
             }
         }while(selectedOption != this.menu.getSize());
     }
