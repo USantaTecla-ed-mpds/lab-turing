@@ -8,7 +8,7 @@ public enum Message {
     TOTAL_COST(new String[] { "Costo total", "Total cost" }),
     SHIFT(new String[] { "Desplazar (rango de horas)", "Shift (range of hours)" }),
     SHOW(new String[] { "Mostrar (fecha - rango de horas)", "Show (date - range of hours)" }),
-    BYE(new String[] { "Hasta la próxima!", "See you latter!" }),
+    BYE(new String[] { "\nHasta la próxima!", "\nSee you latter!" }),
     MENU_TITLE_PRE(new String[] { "Gestión del contrato \"", "Contract management of \"" }),
     MENU_TITLE_POST(new String[]{ "\" para el año ", "\" at year " }),
     MENU_SUBTITLE(new String[] { "ACCIONES", "ACTIONS" }),
@@ -16,7 +16,10 @@ public enum Message {
     MENU_SELECT_ERROR_POST(new String[] { "] \n", "] \n" }),
     MENU_READ_ERROR_PRE(new String[] { "Seleccionar [1-", "Select [1-" }),
     MENU_READ_ERROR_POST(new String[] { "]: ", "]: " }),
-    MENU_SEPARATOR(new String[] { ": ", ": " });
+    MENU_SEPARATOR(new String[] { ": ", ": " }),
+    SERVICE_CONTRACT_ENLARGE(new String[] { "Multiplicador para redimensionar [ valor >0.1 o <-0.1]: ", "Multiplier to resize [ value >0.1 or <-0.1]: " }),
+    SERVICE_CONTRACT_ENLARGE_ERROR(new String[] { "ERROR! Escalado incorrecto [ valor > 0.1 o < -0.1]", "ERROR! incorret resize [ value > 0.1 or < -0.1]" }),
+    SERVICE_CONTRACT_SHIFT(new String[] { "Valor para desplazar: ", "Shift value: " });
     
     
     
@@ -27,7 +30,7 @@ public enum Message {
         this.menasje = menasje;
     }
     
-    public String getCustomLanguajeMessage(int languaje){
-        return this.menasje[languaje];
+    public String getCustomLanguajeMessage(Languaje languaje){
+        return this.menasje[languaje.ordinal()];
     }
 }

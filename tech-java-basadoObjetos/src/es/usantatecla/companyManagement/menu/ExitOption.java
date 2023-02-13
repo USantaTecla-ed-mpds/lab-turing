@@ -6,7 +6,7 @@ public class ExitOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Message.EXIT.getCustomLanguajeMessage(languaje.ordinal());    
+        return Message.EXIT.getCustomLanguajeMessage(languaje);    
     }
 
     @Override

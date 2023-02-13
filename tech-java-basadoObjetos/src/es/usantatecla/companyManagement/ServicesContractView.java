@@ -28,27 +28,27 @@ public class ServicesContractView {
         double scale;
         boolean validScale = false;
         Console console = new Console();
-        do{
-            scale = console.readDouble("Multiplicador para redimensionar [ valor >0.1 o <-0.1]: ");
-            if(scale > 0.1 || scale < -0.1){
+        do {
+            scale = console.readDouble(Message.SERVICE_CONTRACT_ENLARGE.getCustomLanguajeMessage(languaje));
+            if (scale > 0.1 || scale < -0.1) {
                 validScale = true;
                 this.servicesContract.enlarge(date, scale);
             } else {
-                console.writeln("ERROR! Escalado incorrecto [ valor > 0.1 o < -0.1]");
+                console.writeln(Message.SERVICE_CONTRACT_ENLARGE_ERROR.getCustomLanguajeMessage(languaje));
             }
-        }while(!validScale); 
+        } while (!validScale);
     }
 
-    public void shift() {//todo calculate limits interval 0h. - 24h.
+    public void shift() {// todo calculate limits interval 0h. - 24h.
         Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         double shiftment;
         Console console = new Console();
-        shiftment = console.readDouble("Valor para desplazar: ");
-        this.servicesContract.shift(date, shiftment);    
+        shiftment = console.readDouble(Message.SERVICE_CONTRACT_SHIFT.getCustomLanguajeMessage(languaje));
+        this.servicesContract.shift(date, shiftment);
     }
 
     public void exit() {
-        new Console().writeln(Message.BYE.getCustomLanguajeMessage(this.languaje.ordinal()));
+        new Console().writeln(Message.BYE.getCustomLanguajeMessage(this.languaje));
     }
 
     public void getCost() {
@@ -67,17 +67,17 @@ public class ServicesContractView {
         return this.servicesContract.getYear();
     }
 
-    private Date getDateFromDayAndMonthUserInput(int year){
+    private Date getDateFromDayAndMonthUserInput(int year) {
         Pattern pattern = Pattern.compile("^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])");
         Matcher matcher;
         String userInputDate;
-        do{
+        do {
             userInputDate = new Console().readString("Día y mes [dd/mm]: ");
             matcher = pattern.matcher(userInputDate);
-            if(!matcher.matches()){
+            if (!matcher.matches()) {
                 System.out.println("ERROR! Día y mes con el formato [dd/mm]");
             }
-        }while(!matcher.matches());
+        } while (!matcher.matches());
         String[] separatedInput = userInputDate.split("/");
         int day = Integer.parseInt(separatedInput[0]);
         int month = Integer.parseInt(separatedInput[1]);

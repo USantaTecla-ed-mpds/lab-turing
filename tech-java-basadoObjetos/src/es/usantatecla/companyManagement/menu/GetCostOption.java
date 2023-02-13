@@ -6,7 +6,7 @@ public class GetCostOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Message.TOTAL_COST.getCustomLanguajeMessage(languaje.ordinal());
+        return Message.TOTAL_COST.getCustomLanguajeMessage(languaje);
     }
 
     @Override

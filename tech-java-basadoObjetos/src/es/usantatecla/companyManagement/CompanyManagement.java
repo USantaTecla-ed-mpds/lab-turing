@@ -8,6 +8,8 @@ public class CompanyManagement {
 	private final String CONTRACT_NAME = "Limpieza supermercado Dia";
 	private final int YEAR = 2023;
 	private final Languaje languaje = Languaje.SPANISH;
+
+	private CompanyManagement(){}
 	
     public static void main(String[] args) {
 		new CompanyManagement().run();
