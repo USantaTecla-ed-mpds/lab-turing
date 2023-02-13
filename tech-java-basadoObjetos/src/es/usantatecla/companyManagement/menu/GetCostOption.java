@@ -13,6 +13,4 @@ public class GetCostOption implements Option{
     public void execute(ServicesContractView servicesContractView) {
         servicesContractView.getCost();
     }
-
-
 }

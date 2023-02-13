@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import es.usantatecla.companyManagement.menu.Languaje;
 import es.usantatecla.companyManagement.menu.Message;
+
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
 
@@ -53,11 +54,11 @@ public class ServicesContractView {
 
     public void getCost() {
         new Console().writeln(
-            Message.SERVICE_CONTRACT_COST_PRE.getCustomLanguajeMessage(languaje)
-            + 
-            this.servicesContract.getCost() 
-            + 
-            Message.SERVICE_CONTRACT_COST_POST.getCustomLanguajeMessage(languaje));
+                Message.SERVICE_CONTRACT_COST_PRE.getCustomLanguajeMessage(languaje)
+                        +
+                        this.servicesContract.getCost()
+                        +
+                        Message.SERVICE_CONTRACT_COST_POST.getCustomLanguajeMessage(languaje));
     }
 
     public String getName() {

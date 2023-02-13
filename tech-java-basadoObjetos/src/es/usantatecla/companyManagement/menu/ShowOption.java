@@ -12,6 +12,5 @@ public class ShowOption implements Option{
     @Override
     public void execute(ServicesContractView servicesContractView) {
         servicesContractView.writeln();
-    }
-    
+    } 
 }

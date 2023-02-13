@@ -5,6 +5,5 @@ public enum Languaje {
     SPANISH,
     ENGLISH;
     
-    private Languaje(){}
-    
+    private Languaje(){}  
 }

@@ -25,9 +25,6 @@ public enum Message {
     SERVICE_GETDATE(new String[] {"Día y mes [dd/mm]: ","Day and Month [dd/mm]: "}),
     SERVICE_GETDATE_ERROR(new String[] {"ERROR! Formato día y mes [dd/mm]","ERROR! Wrong day and month format [dd/mm]"});
     
-    
-    
-
     private String[] menasje;
 
     private Message(String[] menasje){

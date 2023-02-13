@@ -12,6 +12,5 @@ public class EnlargeOption implements Option{
     @Override
     public void execute(ServicesContractView servicesContractView) {
         servicesContractView.enlarge(); 
-    }
-    
+    }  
 }

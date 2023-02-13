@@ -12,6 +12,5 @@ public class CancelOption implements Option{
     @Override
     public void execute(ServicesContractView servicesContractView) {
         servicesContractView.cancel();
-    }
-    
+    } 
 }

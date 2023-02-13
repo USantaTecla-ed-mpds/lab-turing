@@ -12,6 +12,5 @@ public class ShiftOption implements Option{
     @Override
     public void execute(ServicesContractView servicesContractView) {
         servicesContractView.shift();        
-    }
-    
+    }  
 }

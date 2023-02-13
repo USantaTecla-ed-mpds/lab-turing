@@ -4,7 +4,6 @@ import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
 import es.usantatecla.utils.Interval;
 
-
 public class ServicesContract {
 
 	private String name;
@@ -35,7 +34,7 @@ public class ServicesContract {
 		this.intervals[date.daysElapsedYear()].shift(shiftment);
 	}
 
-	public void writeln() {//todo to view
+	public void writeln() {// todo to view
 		Console console = new Console();
 		console.writeln("Contrato de limpieza: " + name + "-" + year);
 		Date date = new Date(1, 1, year);
@@ -67,12 +66,11 @@ public class ServicesContract {
 		return cost;
 	}
 
-	public String getName(){
+	public String getName() {
 		return this.name;
 	}
 
-	public int getYear(){
+	public int getYear() {
 		return this.year;
 	}
-
 }
