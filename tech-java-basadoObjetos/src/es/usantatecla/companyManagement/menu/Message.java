@@ -1,6 +1,6 @@
 package es.usantatecla.companyManagement.menu;
 
-public enum Messages {
+public enum Message {
 
     CANCEL(new String[] { "Cancelar (fecha)", "Cancel (date)" }),
     ENLARGE(new String[] { "Redimensionar (rango de horas)", "Enlarge (range of hours)" }),
@@ -13,7 +13,7 @@ public enum Messages {
 
     private String[] title;
 
-    private Messages(String[] title){
+    private Message(String[] title){
         this.title = title;
     }
     

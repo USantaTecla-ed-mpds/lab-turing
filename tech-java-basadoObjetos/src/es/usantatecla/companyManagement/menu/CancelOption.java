@@ -6,7 +6,7 @@ public class CancelOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Messages.CANCEL.getCustomLanguajeMessage(languaje.ordinal()); 
+        return Message.CANCEL.getCustomLanguajeMessage(languaje.ordinal()); 
     }
 
     @Override

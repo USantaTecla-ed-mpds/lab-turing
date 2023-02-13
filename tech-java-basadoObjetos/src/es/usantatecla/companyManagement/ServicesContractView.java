@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import es.usantatecla.companyManagement.menu.Languaje;
-import es.usantatecla.companyManagement.menu.Messages;
+import es.usantatecla.companyManagement.menu.Message;
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
 
@@ -47,7 +47,7 @@ public class ServicesContractView {
     }
 
     public void exit() {
-        new Console().writeln(Messages.BYE.getCustomLanguajeMessage(this.codeLanguaje));
+        new Console().writeln(Message.BYE.getCustomLanguajeMessage(this.codeLanguaje));
     }
 
     public void getCost() {

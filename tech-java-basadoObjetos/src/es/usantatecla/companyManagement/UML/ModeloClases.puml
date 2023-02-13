@@ -13,7 +13,7 @@ class GetCostOption
 
 class Date
 class Interval
-enum Messages
+enum Message
 
 interface Option
 
@@ -23,14 +23,14 @@ CompanyManagement ..> MenuView
 
 ServiceContractView ..> ServiceContract
 ServiceContractView ..> Date
-ServiceContractView ..> Messages
+ServiceContractView ..> Message
 
 ServiceContract ..> Date
 ServiceContract --> "360" Interval
 
 MenuView --> Menu
 MenuView ..> ServiceContractView
-MenuView ..> Messages
+MenuView ..> Message
 
 Menu -->"6" Option
 ' Menu --> CancelOption
