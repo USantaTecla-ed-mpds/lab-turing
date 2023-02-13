@@ -23,6 +23,7 @@ CompanyManagement ..> MenuView
 
 ServiceContractView ..> ServiceContract
 ServiceContractView ..> Date
+ServiceContractView ..> Messages
 
 ServiceContract ..> Date
 ServiceContract --> "360" Interval
