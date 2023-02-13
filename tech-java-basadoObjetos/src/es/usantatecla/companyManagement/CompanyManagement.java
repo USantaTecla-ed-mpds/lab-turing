@@ -8,16 +8,19 @@ public class CompanyManagement {
 	private final String CONTRACT_NAME = "Limpieza supermercado Dia";
 	private final int YEAR = 2023;
 	private final Languaje languaje = Languaje.SPANISH;
+	private final ServicesContract servicesContract;
+	private final ServicesContractView servicesContractView;
 
-	private CompanyManagement(){}
+	private CompanyManagement(){
+		this.servicesContract = new ServicesContract(this.CONTRACT_NAME, this.YEAR);
+		this.servicesContractView = new ServicesContractView(servicesContract, this.languaje);
+	}
 	
     public static void main(String[] args) {
 		new CompanyManagement().run();
 	}
 
 	private void run() {
-		ServicesContract servicesContract = new ServicesContract(this.CONTRACT_NAME, this.YEAR);
-		ServicesContractView servicesContractView = new ServicesContractView(servicesContract, this.languaje);
 		new MenuView(servicesContractView).show(this.languaje);
 	}
     

@@ -35,7 +35,7 @@ public class ServicesContract {
 		this.intervals[date.daysElapsedYear()].shift(shiftment);
 	}
 
-	public void writeln() {
+	public void writeln() {//todo to view
 		Console console = new Console();
 		console.writeln("Contrato de limpieza: " + name + "-" + year);
 		Date date = new Date(1, 1, year);
