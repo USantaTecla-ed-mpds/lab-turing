@@ -6,7 +6,7 @@ public class EnlargeOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Messages.ENLARGE.getTitle(languaje.ordinal());
+        return Messages.ENLARGE.getCustomLanguajeMessage(languaje.ordinal());
     }
 
     @Override

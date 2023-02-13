@@ -6,7 +6,7 @@ public class ShowOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Messages.SHOW.getTitle(languaje.ordinal());     
+        return Messages.SHOW.getCustomLanguajeMessage(languaje.ordinal());     
     }
 
     @Override

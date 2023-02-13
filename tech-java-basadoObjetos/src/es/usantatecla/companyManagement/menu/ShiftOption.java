@@ -6,7 +6,7 @@ public class ShiftOption implements Option{
 
     @Override
     public String showTitle(Languaje languaje) {
-        return Messages.SHIFT.getTitle(languaje.ordinal());
+        return Messages.SHIFT.getCustomLanguajeMessage(languaje.ordinal());
     }
 
     @Override

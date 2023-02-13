@@ -13,6 +13,7 @@ class GetCostOption
 
 class Date
 class Interval
+enum Messages
 
 interface Option
 
@@ -28,6 +29,7 @@ ServiceContract --> "360" Interval
 
 MenuView --> Menu
 MenuView ..> ServiceContractView
+MenuView ..> Messages
 
 Menu -->"6" Option
 ' Menu --> CancelOption

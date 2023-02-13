@@ -21,7 +21,7 @@ public class MenuView {
         do{
             console.writeln("ACCIONES DISPONIBLES");
             for (int i = 0; i < this.menu.getSize(); i++) {
-                console.writeln(i + 1 + ": " + this.menu.getOption(i).showTitle(Languaje.ENGLISH));
+                console.writeln(i + 1 + ": " + this.menu.getOption(i).showTitle(Languaje.SPANISH));
             }
             selectedOption = console.readInt("Seleccionar [1-" + this.menu.getSize() + "]: ");
             validOption = selectedOption > 0 && selectedOption <= this.menu.getSize();

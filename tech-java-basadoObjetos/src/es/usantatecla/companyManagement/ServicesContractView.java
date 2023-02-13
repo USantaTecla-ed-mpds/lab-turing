@@ -3,12 +3,15 @@ package es.usantatecla.companyManagement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import es.usantatecla.companyManagement.menu.Languaje;
+import es.usantatecla.companyManagement.menu.Messages;
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
 
 public class ServicesContractView {
 
     private ServicesContract servicesContract;
+    private int codeLanguaje = Languaje.SPANISH.ordinal();
 
     public ServicesContractView(ServicesContract servicesContract) {
         this.servicesContract = servicesContract;
@@ -44,7 +47,7 @@ public class ServicesContractView {
     }
 
     public void exit() {
-        new Console().writeln("\nHasta la próxima!");
+        new Console().writeln(Messages.BYE.getCustomLanguajeMessage(this.codeLanguaje));
     }
 
     public void getCost() {
