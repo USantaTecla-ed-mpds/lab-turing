@@ -19,7 +19,11 @@ public enum Message {
     MENU_SEPARATOR(new String[] { ": ", ": " }),
     SERVICE_CONTRACT_ENLARGE(new String[] { "Multiplicador para redimensionar [ valor >0.1 o <-0.1]: ", "Multiplier to resize [ value >0.1 or <-0.1]: " }),
     SERVICE_CONTRACT_ENLARGE_ERROR(new String[] { "ERROR! Escalado incorrecto [ valor > 0.1 o < -0.1]", "ERROR! incorret resize [ value > 0.1 or < -0.1]" }),
-    SERVICE_CONTRACT_SHIFT(new String[] { "Valor para desplazar: ", "Shift value: " });
+    SERVICE_CONTRACT_SHIFT(new String[] { "Valor para desplazar: ", "Shift value: " }),
+    SERVICE_CONTRACT_COST_PRE(new String[] {"\nCosto anual total: ", "\nTotal anual cost: "}),
+    SERVICE_CONTRACT_COST_POST(new String[] {"-euros\n", "-euros\n"}),
+    SERVICE_GETDATE(new String[] {"Día y mes [dd/mm]: ","Day and Month [dd/mm]: "}),
+    SERVICE_GETDATE_ERROR(new String[] {"ERROR! Formato día y mes [dd/mm]","ERROR! Wrong day and month format [dd/mm]"});
     
     
     

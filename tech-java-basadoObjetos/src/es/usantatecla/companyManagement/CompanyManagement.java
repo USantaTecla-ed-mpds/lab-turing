@@ -22,6 +22,5 @@ public class CompanyManagement {
 
 	private void run() {
 		new MenuView(servicesContractView).show(this.languaje);
-	}
-    
+	} 
 }

@@ -52,7 +52,12 @@ public class ServicesContractView {
     }
 
     public void getCost() {
-        new Console().writeln("\nCosto anual total: " + this.servicesContract.getCost() + "-euros\n");
+        new Console().writeln(
+            Message.SERVICE_CONTRACT_COST_PRE.getCustomLanguajeMessage(languaje)
+            + 
+            this.servicesContract.getCost() 
+            + 
+            Message.SERVICE_CONTRACT_COST_POST.getCustomLanguajeMessage(languaje));
     }
 
     public String getName() {
@@ -72,10 +77,10 @@ public class ServicesContractView {
         Matcher matcher;
         String userInputDate;
         do {
-            userInputDate = new Console().readString("Día y mes [dd/mm]: ");
+            userInputDate = new Console().readString(Message.SERVICE_GETDATE.getCustomLanguajeMessage(languaje));
             matcher = pattern.matcher(userInputDate);
             if (!matcher.matches()) {
-                System.out.println("ERROR! Día y mes con el formato [dd/mm]");
+                System.out.println(Message.SERVICE_GETDATE_ERROR.getCustomLanguajeMessage(languaje));
             }
         } while (!matcher.matches());
         String[] separatedInput = userInputDate.split("/");
