@@ -42,3 +42,16 @@ class TicTacToe {
 	}
 
 }
+
+
+/*
+
+Eliminar la clase "YesNoDialog",
+Añadir una clase "Piece"
+Añadir la clase "Square"
+Hacer una clase "Color"
+Elimina la clase "Turn"...
+O si tienes otra propuesta, también se acepta.
+
+*/
+
