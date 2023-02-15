@@ -4,7 +4,7 @@ class Board {
 	+ Board() 
 	+ void reset() 
 	+ boolean isComplete(Color)
-	- Coordinate[] getCoordinates(Color)
+	- Square[] getSquares(Color)
 	+ void putToken(Coordinate, Color)
 	+ void moveToken(Coordinate, Coordinate) 
 	- Color getColor(Coordinate) 
@@ -15,6 +15,12 @@ class Board {
 	+ void write()
 	+ boolean isComplete(Color)
 }
+
+class Square {
+    - Coordinate coordinate;
+    - Color color;
+}
+
 
 class BoundedIntDialog {
 	- ClosedInterval LIMITS
@@ -138,10 +144,14 @@ class Player {
 }
 
 class TicTacToe {
+	- String answer
 	- TicTacToe() 
 	- void play() 
 	- void playGame() 
 	- boolean isResumedGame() 
+	- void read(String)
+	- boolean isAffirmative()
+	- boolean isNegative() 
 	+ {static} void main(String[])
 }
 
@@ -155,14 +165,6 @@ class Turn {
 	+ Color getActiveColor() 
 }
 
-class YesNoDialog {
-	- String answer
-	+ void read(String)
-	+ boolean isAffirmative()
-	- char getAnswer() 
-	+ boolean isNegative() 
-}
-
 class ClosedInterval {
 	- int min;
 	- int max;
@@ -173,7 +175,6 @@ class ClosedInterval {
 }
 
 TicTacToe ..> Message
-TicTacToe ..> YesNoDialog
 TicTacToe *-down-> Turn : turn
 TicTacToe *-down-> Board : board
 Turn *-down-> "2" Player : players
@@ -181,9 +182,11 @@ Player -down-> Board : board
 Player -down-> Color : color
 Player ..> Error
 Player ..> Message
-Board *-down-> "3x3" Color
-Board ..> Coordinate
-Board ..> Direction
+Board *-down-> "3x3" Square
+
+Square *--> Coordinate
+Square ..> Color
+Board..> Direction
 Board ..> Message
 Coordinate ..> Direction
 Coordinate ..> BoundedIntDialog

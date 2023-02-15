@@ -1,4 +1,4 @@
-package es.usantatecla.utils;
+package es.usantatecla.companyManagement2.utils;
 
 public class Interval {
 

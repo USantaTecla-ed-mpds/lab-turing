@@ -2,24 +2,24 @@ package es.usantatecla.tictactoe.src.main.java.es.usantatecla.tictactoe;
 
 class Board {
 
-	private Color[][] colors;
+	private Square[][] squares;
 
 	public Board() {
-		this.colors = new Color[Coordinate.getDimension()][Coordinate.getDimension()];
+		this.squares = new Square[Coordinate.getDimension()][Coordinate.getDimension()];
 		this.reset();
 	}
 
 	public void reset() {
 		for (int i = 0; i < Coordinate.getDimension(); i++) {
 			for (int j = 0; j < Coordinate.getDimension(); j++) {
-				this.colors[i][j] = Color.NULL;
+				this.squares[i][j]= new Square(new Coordinate(i,j));
 			}
 		}
 	}
 
   public boolean isComplete(Color color) {
-		for(Coordinate coordinate : this.getCoordinates(color)) {
-			if (coordinate == null){
+		for(Square squares : this.getSquares(color)) {
+			if (squares == null){
 				return false;
 			}
 		}
@@ -27,26 +27,27 @@ class Board {
 	}
 		
 
-	private Coordinate[] getCoordinates(Color color) {
+	//private Coordinate[] getCoordinates(Color color) {
+	private Square[] getSquares(Color color) {
 		assert !color.isNull();
 
-		Coordinate[] coordinates = new Coordinate[Coordinate.getDimension()];
+		Square[] squares = new Square[Coordinate.getDimension()];
 		int k = 0;
 		for (int i = 0; i < Coordinate.getDimension(); i++) {
 			for (int j = 0; j < Coordinate.getDimension(); j++) {
-				if (this.getColor(new Coordinate(i, j)) == color) {
-					coordinates[k] = new Coordinate(i, j);
+				if (this.getColor(new Coordinate(i,j)) == color) {
+					squares[k] = this.squares[i][j];
 					k++;
 				}
 			}
 		}
-		return coordinates;
+		return squares;
 	}
 
 	public void putToken(Coordinate coordinate, Color color) {
 		assert coordinate != null;
 
-		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+		this.squares[coordinate.getRow()][coordinate.getColumn()].setColor(color);
 	}
 
 	public void moveToken(Coordinate origin, Coordinate target) {
@@ -62,7 +63,7 @@ class Board {
 	private Color getColor(Coordinate coordinate) {
 		assert coordinate != null;
 
-		return this.colors[coordinate.getRow()][coordinate.getColumn()];
+		return this.squares[coordinate.getRow()][coordinate.getColumn()].getColor();
 	}
 
 	public boolean isOccupied(Coordinate coordinate, Color color) {
@@ -91,16 +92,16 @@ class Board {
 	private Direction[] getDirections(Color color) {
 		assert !color.isNull();
 
-		Coordinate[] coordinates = this.getCoordinates(color);
+		Square[] squares = this.getSquares(color);
 		int pairs = 0;
-		for (int i = 1; i < coordinates.length; i++) {
-			if (coordinates[i] != null) {
+		for (int i = 1; i < squares.length; i++) {
+			if (squares[i] != null) {
 				pairs++;
 			}
 		}
 		Direction[] directions = new Direction[pairs];
 		for (int i = 0; i < directions.length; i++) {
-			directions[i] = coordinates[i].getDirection(coordinates[i + 1]);
+			directions[i] = squares[i].getCoordinate().getDirection(squares[i + 1].getCoordinate());
 		}
 		return directions;
 	}

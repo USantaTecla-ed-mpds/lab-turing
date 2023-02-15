@@ -6,6 +6,8 @@ class TicTacToe {
 	private Board board;
 	private Turn turn;
 
+	private String answer;
+
 	private TicTacToe() {
 		this.board = new Board();
 		this.turn = new Turn(this.board);
@@ -28,13 +30,35 @@ class TicTacToe {
 	}
 
 	private boolean isResumedGame() {
-		YesNoDialog yesNoDialog = new YesNoDialog();
-		yesNoDialog.read(Message.RESUME.toString());
-		if (yesNoDialog.isAffirmative()) {
+		this.read(Message.RESUME.toString());
+		if (this.isAffirmative()) {
 			this.board.reset();
 			this.turn.reset();
 		}
-		return yesNoDialog.isAffirmative();
+		return this.isAffirmative();
+	}
+
+	public void read(String message) {
+		assert message != null;
+
+		Console console = Console.getInstance();
+		boolean ok;
+		do {
+			console.write(message);
+			this.answer = console.readString(Message.YES_NO_SUFFIX.toString());
+			ok = this.isAffirmative() || this.isNegative();
+			if (!ok) {
+				console.writeln(Message.YES_NO_ERROR.toString());
+			}
+		} while (!ok);
+	}
+
+	public boolean isAffirmative() {
+		return Character.toLowerCase(this.answer.charAt(0)) == Message.AFFIRMATIVE;
+	}
+
+	public boolean isNegative() {
+		return Character.toLowerCase(this.answer.charAt(0)) == Message.NEGATIVE;
 	}
 
 	public static void main(String[] args) {
@@ -43,15 +67,4 @@ class TicTacToe {
 
 }
 
-
-/*
-
-Eliminar la clase "YesNoDialog",
-Añadir una clase "Piece"
-Añadir la clase "Square"
-Hacer una clase "Color"
-Elimina la clase "Turn"...
-O si tienes otra propuesta, también se acepta.
-
-*/
 
