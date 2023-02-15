@@ -1,4 +1,4 @@
-package es.usantatecla.companyManagement.model.menu;
+package es.usantatecla.companyManagement.model;
 
 public enum Languaje {
 

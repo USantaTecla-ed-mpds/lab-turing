@@ -1,8 +1,8 @@
 package es.usantatecla.companyManagement.view;
 
-import es.usantatecla.companyManagement.model.menu.Languaje;
+import es.usantatecla.companyManagement.model.Languaje;
+import es.usantatecla.companyManagement.model.Message;
 import es.usantatecla.companyManagement.model.menu.Menu;
-import es.usantatecla.companyManagement.model.menu.Message;
 import es.usantatecla.utils.Console;
 
 public class MenuView {

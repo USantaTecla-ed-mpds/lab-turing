@@ -1,5 +1,7 @@
 package es.usantatecla.companyManagement.model.menu;
 
+import es.usantatecla.companyManagement.model.Languaje;
+import es.usantatecla.companyManagement.model.Message;
 import es.usantatecla.companyManagement.view.ServicesContractView;
 
 public class EnlargeOption implements Option{
