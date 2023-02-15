@@ -1,0 +1,198 @@
+@startuml
+
+class Board {
+	+ Board() 
+	+ void reset() 
+	+ boolean isComplete(Color)
+	- Coordinate[] getCoordinates(Color)
+	+ void putToken(Coordinate, Color)
+	+ void moveToken(Coordinate, Coordinate) 
+	- Color getColor(Coordinate) 
+	+ boolean isOccupied(Coordinate, Color) 
+	+ boolean isEmpty(Coordinate)
+	+ boolean isTicTacToe(Color) 
+	- Direction[] getDirections(Color)
+	+ void write()
+	+ boolean isComplete(Color)
+}
+
+class BoundedIntDialog {
+	- ClosedInterval LIMITS
+	+ BoundedIntDialog(int, int)
+	+ int read(String) 
+	- String getLimits()
+}
+
+enum Color {
+	X,
+	O,
+	NULL
+	+ {static} Color get(int)
+	+ void write() 
+	+ boolean isNull()
+}
+
+class Console {
+	- {static} Console instance = new Console()
+	+ {static} Console getInstance()
+	- BufferedReader bufferedReader
+	+ String readString(String) 
+	+ String readString()
+	+ int readInt(String) 
+	+ char readChar(String) 
+	+ void write(String)
+	+ void write(int)
+	+ void write(char)
+	+ void writeln()
+	+ void writeln(String)
+	+ void writeln(int) 
+	+ void writeError(String) 
+}
+
+class Coordinate {
+	- {static} int DIMENSION = 3
+	- int row
+	- int column
+	+ {static} int getDimension()
+	+ Coordinate() 
+	+ Coordinate(int, int) 
+	+ Direction getDirection(Coordinate)
+	- boolean inHorizontal(Coordinate)
+	- boolean inVertical(Coordinate)
+	- boolean inMainDiagonal() 
+	- boolean inInverseDiagonal() 
+	+ void read(String)
+	+ String getErrorMessage() 
+	+ int getRow()
+	+ int getColumn()
+	+ boolean equals(Coordinate)
+}
+
+enum Direction {
+	VERTICAL,
+	HORIZONTAL,
+	MAIN_DIAGONAL,
+	INVERSE_DIAGONAL,
+	NULL
+	+ boolean isNull() 
+}
+
+enum Error {
+	NOT_EMPTY
+	NOT_OWNER
+	SAME_COORDINATES
+	WRONG_COORDINATES
+	NULL
+	- String message
+	- Error()
+	- Error(String)
+	+ void writeln()
+	+ boolean isNull()
+}
+
+enum Message {
+	TITLE
+	HORIZONTAL_LINE
+	VERTICAL_LINE
+	NULL_COLOR
+	TURN
+	ENTER_COORDINATE_TO_PUT
+	COORDINATE_TO_PUT
+	COORDINATE_TO_REMOVE
+	COORDINATE_TO_MOVE
+	ROW
+	COLUMN
+	BOUNDED_INT_ERROR
+	LIMITS
+	CLOSED_INTERVAL
+	PLAYER_WIN
+	RESUME
+	YES_NO_SUFFIX
+	YES_NO_ERROR
+	+ {static} char AFFIRMATIVE
+	+ {static} char NEGATIVE
+	+ {static} String $COLOR
+	+ {static} String $PLAYER
+	+ {static} String $CLOSED_INTERVAL
+	+ {static} String $MIN
+	+ {static} String $MAX
+	- String message
+	- Message(String)
+	+ void write()
+	+ void writeln() 
+	+ void writeln(String)
+	+ String toString() 
+}
+
+class Player {
+	+ Player(Color, Board)
+	+ void play() 
+	- void putToken()
+	- Coordinate getCoordinate(Message) 
+	- Error getPutTokenError(Coordinate)
+	- void moveToken() 
+	- Error getOriginMoveTokenError(Coordinate) 
+	- Error getTargetMoveTokenError(Coordinate, Coordinate)
+	+ void writeWinner() 
+	+ Color getColor() 
+}
+
+class TicTacToe {
+	- TicTacToe() 
+	- void play() 
+	- void playGame() 
+	- boolean isResumedGame() 
+	+ {static} void main(String[])
+}
+
+class Turn {
+	- {static} int NUMBER_PLAYERS = 2
+	- int activePlayer
+	+ Turn(Board) 
+	+ void reset()
+	+ void play()
+	+ void writeWinner()
+	+ Color getActiveColor() 
+}
+
+class YesNoDialog {
+	- String answer
+	+ void read(String)
+	+ boolean isAffirmative()
+	- char getAnswer() 
+	+ boolean isNegative() 
+}
+
+class ClosedInterval {
+	- int min;
+	- int max;
+	+ ClosedInterval(int, int) 
+	+ boolean isIncluded(int) 
+	+ String toString()
+	+ boolean equals(ClosedInterval)
+}
+
+TicTacToe ..> Message
+TicTacToe ..> YesNoDialog
+TicTacToe *-down-> Turn : turn
+TicTacToe *-down-> Board : board
+Turn *-down-> "2" Player : players
+Player -down-> Board : board
+Player -down-> Color : color
+Player ..> Error
+Player ..> Message
+Board *-down-> "3x3" Color
+Board ..> Coordinate
+Board ..> Direction
+Board ..> Message
+Coordinate ..> Direction
+Coordinate ..> BoundedIntDialog
+BoundedIntDialog ..> ClosedInterval
+YesNoDialog ..> Console
+BoundedIntDialog ..> Console
+Coordinate ..> Console
+Board ..> Console
+Color ..> Console
+Message ..> Console
+Error ..> Console
+@enduml
