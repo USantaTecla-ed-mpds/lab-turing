@@ -1,6 +1,6 @@
-package es.usantatecla.companyManagement.menu;
+package es.usantatecla.companyManagement.model.menu;
 
-import es.usantatecla.companyManagement.ServicesContractView;
+import es.usantatecla.companyManagement.view.ServicesContractView;
 
 public class GetCostOption implements Option{
 

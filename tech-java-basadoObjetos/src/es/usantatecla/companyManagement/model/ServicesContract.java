@@ -1,4 +1,4 @@
-package es.usantatecla.companyManagement;
+package es.usantatecla.companyManagement.model;
 
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;

@@ -1,11 +1,11 @@
-package es.usantatecla.companyManagement;
+package es.usantatecla.companyManagement.view;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import es.usantatecla.companyManagement.menu.Languaje;
-import es.usantatecla.companyManagement.menu.Message;
-
+import es.usantatecla.companyManagement.model.ServicesContract;
+import es.usantatecla.companyManagement.model.menu.Languaje;
+import es.usantatecla.companyManagement.model.menu.Message;
 import es.usantatecla.utils.Console;
 import es.usantatecla.utils.Date;
 

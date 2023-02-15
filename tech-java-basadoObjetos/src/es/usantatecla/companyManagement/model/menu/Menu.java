@@ -1,4 +1,4 @@
-package es.usantatecla.companyManagement.menu;
+package es.usantatecla.companyManagement.model.menu;
 
 import java.util.ArrayList;
 import java.util.List;

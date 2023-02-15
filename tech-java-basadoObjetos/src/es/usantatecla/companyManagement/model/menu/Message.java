@@ -1,4 +1,4 @@
-package es.usantatecla.companyManagement.menu;
+package es.usantatecla.companyManagement.model.menu;
 
 public enum Message {
 
