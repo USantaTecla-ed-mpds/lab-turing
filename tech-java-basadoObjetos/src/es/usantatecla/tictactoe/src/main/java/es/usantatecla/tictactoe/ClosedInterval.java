@@ -1,4 +1,5 @@
-package es.usantatecla.tictactoe;
+package es.usantatecla.tictactoe.src.main.java.es.usantatecla.tictactoe;
+
 
 class ClosedInterval {
 
