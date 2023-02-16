@@ -23,6 +23,6 @@ public class CompanyManagement {
 	}
 
 	private void run() {
-		new MenuView(servicesContractView).show(this.languaje);
+		new MenuView(this.servicesContractView).show(this.languaje);
 	}
 }
