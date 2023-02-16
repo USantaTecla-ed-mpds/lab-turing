@@ -10,8 +10,8 @@ public class ServicesContract {
 	private final int year;
 	private Interval[] intervals;
 	private final Interval PRESET_INTERVAL = new Interval(8.0, 12.0);
-	private final double PRESET_COST_PER_HOUR = 70.0;
-	private final double EXTRAORDINARY_COST_PER_HOUR = 90.0;
+	private final double PRESET_COST_PER_HOUR = 10.0;
+	private final double EXTRAORDINARY_COST_PER_HOUR = 20.0;
 
 	public ServicesContract(String name, int year) {
 		this.name = name;
