@@ -34,8 +34,7 @@ public class MenuView {
     }
 
     private void showMenuTitle(Languaje languaje) {
-        Console console = new Console();
-        console.writeln(
+        new Console().writeln(
             Message.MENU_TITLE_PRE.getCustomLanguajeMessage(languaje)
                 +
                 this.servicesContractView.getName()
