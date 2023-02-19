@@ -14,12 +14,14 @@ class GetCostOption
 class Date
 class Interval
 enum Message
+enum Languaje
 
 interface Option
 
 CompanyManagement *--> ServiceContract
 CompanyManagement ..> ServiceContractView
 CompanyManagement ..> MenuView
+CompanyManagement ..> Languaje
 
 ServiceContractView ..> ServiceContract
 ServiceContractView ..> Date
