@@ -3,7 +3,7 @@ package es.usantatecla.tictactoe_v2.main.models;
 import es.usantatecla.tictactoe_v2.utils.ClosedInterval;
 import es.usantatecla.tictactoe_v2.utils.Console;
 
-enum Color {
+public enum Color {
 
 	X,
 	O,

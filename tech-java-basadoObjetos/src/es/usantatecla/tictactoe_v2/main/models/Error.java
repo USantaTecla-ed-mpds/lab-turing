@@ -2,7 +2,7 @@ package es.usantatecla.tictactoe_v2.main.models;
 
 import es.usantatecla.tictactoe_v2.utils.Console;
 
-enum Error {
+public enum Error {
 
 	NOT_EMPTY("The square is not empty"),
 	NOT_OWNER("There is not a token of yours"),

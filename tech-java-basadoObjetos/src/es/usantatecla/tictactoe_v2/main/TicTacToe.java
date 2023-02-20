@@ -3,6 +3,8 @@ package es.usantatecla.tictactoe_v2.main;
 import es.usantatecla.tictactoe_v2.main.models.Board;
 import es.usantatecla.tictactoe_v2.main.models.Message;
 import es.usantatecla.tictactoe_v2.main.models.Turn;
+import es.usantatecla.tictactoe_v2.main.views.BoardView;
+import es.usantatecla.tictactoe_v2.main.views.TurnView;
 import es.usantatecla.tictactoe_v2.utils.YesNoDialog;
 
 class TicTacToe {
@@ -16,7 +18,7 @@ class TicTacToe {
 		this.board = new Board();
 		this.boardView = new BoardView(this.board);
 		this.turn = new Turn(this.board);
-		this.turnView = new Turn(this.turn);
+		this.turnView = new TurnView(this.turn);
 	}
 
 	private void play() {
@@ -30,7 +32,7 @@ class TicTacToe {
 		this.boardView.write();
 		do {
 			this.turn.play();
-			this.board.write();
+			this.boardView.write();
 		} while (!this.board.isTicTacToe(this.turn.getActiveColor()));
 		this.turn.writeWinner();
 	}

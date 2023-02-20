@@ -1,7 +1,7 @@
 package es.usantatecla.tictactoe_v2.utils;
 
 
-enum Direction {
+public enum Direction {
 
 	VERTICAL,
 	HORIZONTAL,

@@ -1,52 +1,54 @@
-package es.usantatecla.tictactoe_v2.main.models;
+package es.usantatecla.tictactoe_v2.main.views;
 
+import es.usantatecla.tictactoe_v2.main.models.Message;
+import es.usantatecla.tictactoe_v2.main.models.BoundedCoordinate;
+import es.usantatecla.tictactoe_v2.main.models.Error;
+import es.usantatecla.tictactoe_v2.main.models.Player;
 import es.usantatecla.tictactoe_v2.utils.Coordinate;
 
 class PlayerView {
 
-	private Color color;
-	private Board board;
+	private Player player;
 
-	public PlayerView(Color color, Board board) {
-		assert !color.isNull();
-		assert board != null;
 
-		this.color = color;
-		this.board = board;
+	public PlayerView(Player player) {
+		this.player = player;
 	}
 
 	public void play() {
-		if (!this.board.isComplete(color)) {
+		if (!this.player.getBoard().isComplete(this.player.getColor())) {
 			this.putToken();
 		} else {
 			this.moveToken();
 		}
 	}
 
+
+	
 	private void putToken() {
-		Message.TURN.writeln(this.color.name());
-		Coordinate coordinate;
+		Message.TURN.writeln(this.player.getColor().name());
+		BoundedCoordinate boundedCoordinate;
 		Error error;
 		do {
-			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
-			error = this.getPutTokenError(coordinate);
+			boundedCoordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
+			error = this.getPutTokenError(boundedCoordinate);
 		} while (!error.isNull());
-		this.board.putToken(coordinate, this.color);
+		this.player.getBoard().putToken(boundedCoordinate, this.player.getColor());
 	}
 
-	private Coordinate getCoordinate(Message message) {
+	private BoundedCoordinate getCoordinate(Message message) {
 		assert message != null;
 
-		Coordinate coordinate = new Coordinate();
-		coordinate.read(message.toString());
-		return coordinate;
+		BoundedCoordinate boundedCoordinate = new BoundedCoordinate();
+		boundedCoordinate.read(message.toString());
+		return boundedCoordinate;
 	}
 
-	private Error getPutTokenError(Coordinate coordinate) {
-		assert coordinate != null;
+	private Error getPutTokenError(BoundedCoordinate boundedCoordinate) {
+		assert boundedCoordinate != null;
 
 		Error error = Error.NULL;
-		if (!this.board.isEmpty(coordinate)) {
+		if (!this.player.getBoard().isEmpty(boundedCoordinate)) {
 			error = Error.NOT_EMPTY;
 		}
 		error.writeln();
@@ -54,33 +56,33 @@ class PlayerView {
 	}
 
 	private void moveToken() {
-		Message.TURN.writeln(this.color.name());
-		Coordinate origin;
+		Message.TURN.writeln(this.player.getColor().name());
+		BoundedCoordinate origin;
 		Error error;
 		do {
 			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
 			error = this.getOriginMoveTokenError(origin);
 		} while (error != Error.NULL);
-		Coordinate target;
+		BoundedCoordinate target;
 		do {
 			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
 			error = this.getTargetMoveTokenError(origin, target);
 		} while (error != Error.NULL);
-		this.board.moveToken(origin, target);
+		this.player.getBoard().moveToken(origin, target);
 	}
 
-	private Error getOriginMoveTokenError(Coordinate origin) {
+	private Error getOriginMoveTokenError(BoundedCoordinate origin) {
 		assert origin != null;
 
 		Error error = Error.NULL;
-		if (!this.board.isOccupied(origin, this.color)) {
+		if (!this.player.getBoard().isOccupied(origin, this.player.getColor())) {
 			error = Error.NOT_OWNER;
 		}
 		error.writeln();
 		return error;
 	}
 
-	private Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+	private Error getTargetMoveTokenError(BoundedCoordinate origin, BoundedCoordinate target) {
 		assert origin != null;
 		assert target != null;
 
@@ -96,10 +98,6 @@ class PlayerView {
 
 	public void writeWinner() {
 		Message.PLAYER_WIN.writeln(this.color.name());
-	}
-
-	public Color getColor() {
-		return this.color;
 	}
 
 }

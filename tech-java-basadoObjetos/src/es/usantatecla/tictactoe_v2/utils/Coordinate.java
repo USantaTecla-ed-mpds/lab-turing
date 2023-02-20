@@ -1,14 +1,23 @@
 package es.usantatecla.tictactoe_v2.utils;
 
-
 public class Coordinate {
 
+	private int row;
+	private int column;
 
 	public Coordinate() {
 	}
 
 	public Coordinate(int row, int column) {
 		this.row = row;
+		this.column = column;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void setColumn(int column) {
 		this.column = column;
 	}
 
@@ -53,17 +62,6 @@ public class Coordinate {
 
 	private boolean inInverseDiagonal() {
 		return this.row + this.column == Coordinate.DIMENSION - 1;
-	}
-
-	public void read(String title) {
-		BoundedIntDialog boundedIntDialog = new BoundedIntDialog(1, Coordinate.getDimension());
-		new Console().writeln(title);
-    	this.row = boundedIntDialog.read(Message.ROW.toString()) - 1;
-		this.column = boundedIntDialog.read(Message.COLUMN.toString()) - 1;
-	}
-
-	public String getErrorMessage() {
-		return Error.WRONG_COORDINATES.toString();
 	}
 
 	public int getRow() {
