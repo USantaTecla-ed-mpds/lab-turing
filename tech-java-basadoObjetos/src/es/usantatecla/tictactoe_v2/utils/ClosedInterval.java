@@ -2,7 +2,7 @@ package es.usantatecla.tictactoe_v2.utils;
 
 import es.usantatecla.tictactoe_v2.main.models.Message;
 
-class ClosedInterval {
+public class ClosedInterval {
 
 	private int min;
 	private int max;

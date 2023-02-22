@@ -10,7 +10,6 @@ class PlayerView {
 
 	private Player player;
 
-
 	public PlayerView(Player player) {
 		this.player = player;
 	}
@@ -23,10 +22,8 @@ class PlayerView {
 		}
 	}
 
-
-	
 	private void putToken() {
-		Message.TURN.writeln(this.player.getColor().name());
+		new MessageView(Message.TURN).writeln(this.player.getColor().name());
 		BoundedCoordinate boundedCoordinate;
 		Error error;
 		do {
@@ -51,12 +48,12 @@ class PlayerView {
 		if (!this.player.getBoard().isEmpty(boundedCoordinate)) {
 			error = Error.NOT_EMPTY;
 		}
-		error.writeln();
+		new ErrorView(error).writeln();
 		return error;
 	}
 
 	private void moveToken() {
-		Message.TURN.writeln(this.player.getColor().name());
+		new MessageView(Message.TURN).writeln(this.player.getColor().name());
 		BoundedCoordinate origin;
 		Error error;
 		do {
@@ -78,7 +75,7 @@ class PlayerView {
 		if (!this.player.getBoard().isOccupied(origin, this.player.getColor())) {
 			error = Error.NOT_OWNER;
 		}
-		error.writeln();
+		new ErrorView(error).writeln();
 		return error;
 	}
 
@@ -89,15 +86,15 @@ class PlayerView {
 		Error error = Error.NULL;
 		if (origin.equals(target)) {
 			error = Error.SAME_COORDINATES;
-		} else if (!this.board.isEmpty(target)) {
+		} else if (!this.player.getBoard().isEmpty(target)) {
 			error = Error.NOT_EMPTY;
 		}
-		error.writeln();
+		new ErrorView(error).writeln();
 		return error;
 	}
 
 	public void writeWinner() {
-		Message.PLAYER_WIN.writeln(this.color.name());
+		new MessageView(Message.PLAYER_WIN).writeln(this.player.getColor().name());
 	}
 
 }

@@ -37,7 +37,7 @@ public class Board {
 		int k = 0;
 		for (int i = 0; i < BoundedCoordinate.getDimension(); i++) {
 			for (int j = 0; j < BoundedCoordinate.getDimension(); j++) {
-				if (this.getColor(new Coordinate(i, j)) == color) {
+				if (this.getColor(new BoundedCoordinate(i, j)) == color) {
 					boundedCoordinates[k] = new BoundedCoordinate(i, j);
 					k++;
 				}

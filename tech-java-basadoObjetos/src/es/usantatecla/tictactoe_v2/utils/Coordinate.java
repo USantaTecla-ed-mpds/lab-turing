@@ -21,47 +21,18 @@ public class Coordinate {
 		this.column = column;
 	}
 
-	public Direction getDirection(Coordinate coordinate) {
-		assert coordinate != null;
-
-		if (this.equals(coordinate)) {
-			return Direction.NULL;
-		}
-		if (this.inHorizontal(coordinate)) {
-			return Direction.HORIZONTAL;
-		}
-		if (this.inVertical(coordinate)) {
-			return Direction.VERTICAL;
-		}
-		if (this.inMainDiagonal() && coordinate.inMainDiagonal()) {
-			return Direction.MAIN_DIAGONAL;
-		}
-		if (this.inInverseDiagonal() && coordinate.inInverseDiagonal()) {
-			return Direction.INVERSE_DIAGONAL;
-		}
-		return Direction.NULL;
-	}
-
-	private boolean inHorizontal(Coordinate coordinate) {
+	public boolean inRow(Coordinate coordinate) {
 		if (coordinate == null) {
 			return false;
 		}
 		return this.row == coordinate.row;
 	}
 
-	private boolean inVertical(Coordinate coordinate) {
+	public boolean inColumn(Coordinate coordinate) {
 		if (coordinate == null) {
 			return false;
 		}
 		return this.column == coordinate.column;
-	}
-
-	private boolean inMainDiagonal() {
-		return this.row - this.column == 0;
-	}
-
-	private boolean inInverseDiagonal() {
-		return this.row + this.column == Coordinate.DIMENSION - 1;
 	}
 
 	public int getRow() {
