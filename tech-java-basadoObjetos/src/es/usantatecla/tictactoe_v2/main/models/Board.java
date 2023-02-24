@@ -1,6 +1,5 @@
 package es.usantatecla.tictactoe_v2.main.models;
 
-import es.usantatecla.tictactoe_v2.utils.Coordinate;
 import es.usantatecla.tictactoe_v2.utils.Direction;
 
 public class Board {
@@ -20,15 +19,14 @@ public class Board {
 		}
 	}
 
-  public boolean isComplete(Color color) {
-		for(BoundedCoordinate boundedCoordinate : this.getCoordinates(color)) {
-			if (boundedCoordinate == null){
+	public boolean isComplete(Color color) {
+		for (BoundedCoordinate boundedCoordinate : this.getCoordinates(color)) {
+			if (boundedCoordinate == null) {
 				return false;
 			}
 		}
 		return true;
 	}
-		
 
 	private BoundedCoordinate[] getCoordinates(Color color) {
 		assert !color.isNull();
@@ -109,4 +107,3 @@ public class Board {
 	}
 
 }
-

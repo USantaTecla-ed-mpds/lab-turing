@@ -27,9 +27,10 @@ class PlayerView {
 		Error error;
 		do {
 			boundedCoordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
-			error = this.getPutTokenError(boundedCoordinate);
+			error = this.player.getPutTokenError(boundedCoordinate);
+			new ErrorView(error).writeln();
 		} while (!error.isNull());
-		this.player.getBoard().putToken(boundedCoordinate, this.player.getColor());
+		this.player.putToken(boundedCoordinate);
 	}
 
 	private BoundedCoordinate getCoordinate(Message message) {
@@ -41,56 +42,22 @@ class PlayerView {
 		return boundedCoordinate;
 	}
 
-	private Error getPutTokenError(BoundedCoordinate boundedCoordinate) {
-		assert boundedCoordinate != null;
-
-		Error error = Error.NULL;
-		if (!this.player.getBoard().isEmpty(boundedCoordinate)) {
-			error = Error.NOT_EMPTY;
-		}
-		new ErrorView(error).writeln();
-		return error;
-	}
-
 	private void moveToken() {
 		new MessageView(Message.TURN).writeln(this.player.getColor().name());
 		BoundedCoordinate origin;
 		Error error;
 		do {
 			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
-			error = this.getOriginMoveTokenError(origin);
+			error = this.player.getOriginMoveTokenError(origin);
+			new ErrorView(error).writeln();
 		} while (error != Error.NULL);
 		BoundedCoordinate target;
 		do {
 			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
-			error = this.getTargetMoveTokenError(origin, target);
+			error = this.player.getTargetMoveTokenError(origin, target);
+			new ErrorView(error).writeln();
 		} while (error != Error.NULL);
-		this.player.getBoard().moveToken(origin, target);
-	}
-
-	private Error getOriginMoveTokenError(BoundedCoordinate origin) {
-		assert origin != null;
-
-		Error error = Error.NULL;
-		if (!this.player.getBoard().isOccupied(origin, this.player.getColor())) {
-			error = Error.NOT_OWNER;
-		}
-		new ErrorView(error).writeln();
-		return error;
-	}
-
-	private Error getTargetMoveTokenError(BoundedCoordinate origin, BoundedCoordinate target) {
-		assert origin != null;
-		assert target != null;
-
-		Error error = Error.NULL;
-		if (origin.equals(target)) {
-			error = Error.SAME_COORDINATES;
-		} else if (!this.player.getBoard().isEmpty(target)) {
-			error = Error.NOT_EMPTY;
-		}
-		new ErrorView(error).writeln();
-		return error;
+		this.player.moveToken(origin, target);
 	}
 
 	public void writeWinner() {

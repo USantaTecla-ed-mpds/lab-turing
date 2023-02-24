@@ -54,11 +54,9 @@ class TicTacToe {
 
 }
 
-
 /*
-
-Separar Vistas
-Enmascarar coordinate con boundedCoordinate
-
-*/
-
+ * 
+ * Separar Vistas
+ * Enmascarar coordinate con boundedCoordinate
+ * 
+ */
