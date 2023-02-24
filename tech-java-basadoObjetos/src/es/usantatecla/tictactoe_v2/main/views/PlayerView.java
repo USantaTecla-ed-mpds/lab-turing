@@ -4,7 +4,6 @@ import es.usantatecla.tictactoe_v2.main.models.Message;
 import es.usantatecla.tictactoe_v2.main.models.BoundedCoordinate;
 import es.usantatecla.tictactoe_v2.main.models.Error;
 import es.usantatecla.tictactoe_v2.main.models.Player;
-import es.usantatecla.tictactoe_v2.utils.Coordinate;
 
 class PlayerView {
 
@@ -37,7 +36,8 @@ class PlayerView {
 		assert message != null;
 
 		BoundedCoordinate boundedCoordinate = new BoundedCoordinate();
-		boundedCoordinate.read(message.toString());
+		BoundedCoordinateView boundedCoordinateView = new BoundedCoordinateView(boundedCoordinate);
+		boundedCoordinateView.read(message.toString());
 		return boundedCoordinate;
 	}
 

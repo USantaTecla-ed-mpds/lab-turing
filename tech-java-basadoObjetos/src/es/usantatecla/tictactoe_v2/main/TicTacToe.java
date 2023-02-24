@@ -1,8 +1,9 @@
 package es.usantatecla.tictactoe_v2.main;
 
 import es.usantatecla.tictactoe_v2.main.models.Board;
-import es.usantatecla.tictactoe_v2.main.models.Message;
 import es.usantatecla.tictactoe_v2.main.models.Turn;
+import es.usantatecla.tictactoe_v2.main.models.Message;
+import es.usantatecla.tictactoe_v2.main.views.MessageView;
 import es.usantatecla.tictactoe_v2.main.views.BoardView;
 import es.usantatecla.tictactoe_v2.main.views.TurnView;
 import es.usantatecla.tictactoe_v2.utils.YesNoDialog;
@@ -28,13 +29,13 @@ class TicTacToe {
 	}
 
 	private void playGame() {
-		Message.TITLE.writeln();
+		new MessageView(Message.TITLE).writeln();
 		this.boardView.write();
 		do {
-			this.turn.play();
+			this.turnView.play();
 			this.boardView.write();
 		} while (!this.board.isTicTacToe(this.turn.getActiveColor()));
-		this.turn.writeWinner();
+		this.turnView.writeWinner();
 	}
 
 	private boolean isResumedGame() {
@@ -56,12 +57,8 @@ class TicTacToe {
 
 /*
 
-Eliminar la clase "YesNoDialog",
-Añadir una clase "Piece"
-Añadir la clase "Square"
-Hacer una clase "Color"
-Elimina la clase "Turn"...
-O si tienes otra propuesta, también se acepta.
+Separar Vistas
+Enmascarar coordinate con boundedCoordinate
 
 */
 

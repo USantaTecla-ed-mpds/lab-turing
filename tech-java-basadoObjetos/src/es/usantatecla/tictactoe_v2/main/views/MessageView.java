@@ -7,7 +7,7 @@ public class MessageView {
 
 	private Message message;
 
-	MessageView(Message message) {
+	public MessageView(Message message) {
 		this.message = message;
 	}
 

@@ -15,16 +15,16 @@ public class BoardView {
 
 
 	public void write() {
-		Message.HORIZONTAL_LINE.writeln();
+		new MessageView(Message.HORIZONTAL_LINE).writeln();
 		for (int i = 0; i < BoundedCoordinate.getDimension(); i++) {
-			Message.VERTICAL_LINE.write();
+			new MessageView(Message.VERTICAL_LINE).write();
 			for (int j = 0; j < BoundedCoordinate.getDimension(); j++) {
-				this.board.getColor(new BoundedCoordinate(i, j)).write();
-				Message.VERTICAL_LINE.write();
+				new ColorView(this.board.getColor(new BoundedCoordinate(i, j))).write();
+				new MessageView(Message.VERTICAL_LINE).write();
 			}
 			Console.getInstance().writeln();
 		}
-		Message.HORIZONTAL_LINE.writeln();
+		new MessageView(Message.HORIZONTAL_LINE).writeln();
 	}
 
 }
