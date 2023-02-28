@@ -36,10 +36,10 @@ class PlayerView {
 	private BoundedCoordinate getCoordinate(Message message) {
 		assert message != null;
 
-		BoundedCoordinate boundedCoordinate = new BoundedCoordinate();
-		BoundedCoordinateView boundedCoordinateView = new BoundedCoordinateView(boundedCoordinate);
-		boundedCoordinateView.read(message.toString());
-		return boundedCoordinate;
+		
+		BoundedCoordinateView boundedCoordinateView = new BoundedCoordinateView();
+		
+		return  boundedCoordinateView.read(message.toString());
 	}
 
 	private void moveToken() {

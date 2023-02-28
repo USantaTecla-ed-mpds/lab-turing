@@ -16,12 +16,14 @@ public class TurnView {
     }
 
     public void play() {
-        this.playerViews[this.turn.getActivePlayerIndex()].play();
+       // this.playerViews[this.turn.getActivePlayerIndex()].play(); //YAGNI:PLAYER[0] ELIGE COLOR.
+        this.playerViews[this.turn.getActiveColor().ordinal()].play();
         this.turn.play();
     }
 
     public void writeWinner() {
-        this.playerViews[this.turn.getActivePlayerIndex()].writeWinner();
+       // this.playerViews[this.turn.getActivePlayerIndex()].writeWinner();
+        this.playerViews[this.turn.getActiveColor().ordinal()].writeWinner();
     }
 
 }

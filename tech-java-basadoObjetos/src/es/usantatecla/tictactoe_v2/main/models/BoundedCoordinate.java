@@ -65,11 +65,4 @@ public class BoundedCoordinate {
 		return this.coordinate.getColumn();
 	}
 
-	public void setRow(int row) {
-		this.coordinate.setRow(row);
-	}
-
-	public void setColumn(int column) {
-		this.coordinate.setColumn(column);
-	}
 }

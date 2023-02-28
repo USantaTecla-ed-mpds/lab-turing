@@ -8,17 +8,14 @@ import es.usantatecla.tictactoe_v2.utils.Console;
 
 public class BoundedCoordinateView {
 
-    private BoundedCoordinate boundedCoordinate;
-
-    public BoundedCoordinateView(BoundedCoordinate boundedCoordinate) {
-        this.boundedCoordinate = boundedCoordinate;
+    public BoundedCoordinateView() {
+  
     }
 
-    public void read(String title) {
+    public BoundedCoordinate read(String title) {
         BoundedIntDialog boundedIntDialog = new BoundedIntDialog(1, BoundedCoordinate.getDimension());
         new Console().writeln(title);
-        this.boundedCoordinate.setRow(boundedIntDialog.read(Message.ROW.toString()) - 1);
-        this.boundedCoordinate.setColumn(boundedIntDialog.read(Message.COLUMN.toString()) - 1);
+        return new BoundedCoordinate(boundedIntDialog.read(Message.ROW.toString()) - 1,boundedIntDialog.read(Message.COLUMN.toString()) - 1);
 
     }
 

@@ -34,18 +34,14 @@ public class Turn {
 		return this.players[this.activePlayerIndex].getColor();
 	}
 
-	public int getActivePlayerIndex() {
+	/*public int getActivePlayerIndex() {
 		return this.activePlayerIndex;
-	}
+	}*/
 
 	public Player getPlayer(int index) {
 		assert new ClosedInterval(0, NUMBER_PLAYERS - 1).isIncluded(index);
 
 		return this.players[index];
-	}
-
-	public Player getactivePlayer() {
-		return this.players[this.activePlayerIndex];
 	}
 
 	public static int getNumberOfPlayers() {
