@@ -24,6 +24,23 @@ public class ServicesContractView {
         this.servicesContract.cancel(date);
     }
 
+    private Date getDateFromDayAndMonthUserInput(int year) {
+        Pattern pattern = Pattern.compile("^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])");
+        Matcher matcher;
+        String userInputDate;
+        do {
+            userInputDate = new Console().readString(Message.SERVICE_GETDATE.getCustomLanguajeMessage(languaje));
+            matcher = pattern.matcher(userInputDate);
+            if (!matcher.matches()) {
+                System.out.println(Message.SERVICE_GETDATE_ERROR.getCustomLanguajeMessage(languaje));
+            }
+        } while (!matcher.matches());
+        String[] separatedInput = userInputDate.split("/");
+        int day = Integer.parseInt(separatedInput[0]);
+        int month = Integer.parseInt(separatedInput[1]);
+        return new Date(day, month, year);
+    }
+
     public void enlarge() {
         Date date = this.getDateFromDayAndMonthUserInput(this.servicesContract.getYear());
         double scale;
@@ -71,22 +88,5 @@ public class ServicesContractView {
 
     public int getYear() {
         return this.servicesContract.getYear();
-    }
-
-    private Date getDateFromDayAndMonthUserInput(int year) {
-        Pattern pattern = Pattern.compile("^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])");
-        Matcher matcher;
-        String userInputDate;
-        do {
-            userInputDate = new Console().readString(Message.SERVICE_GETDATE.getCustomLanguajeMessage(languaje));
-            matcher = pattern.matcher(userInputDate);
-            if (!matcher.matches()) {
-                System.out.println(Message.SERVICE_GETDATE_ERROR.getCustomLanguajeMessage(languaje));
-            }
-        } while (!matcher.matches());
-        String[] separatedInput = userInputDate.split("/");
-        int day = Integer.parseInt(separatedInput[0]);
-        int month = Integer.parseInt(separatedInput[1]);
-        return new Date(day, month, year);
     }
 }
