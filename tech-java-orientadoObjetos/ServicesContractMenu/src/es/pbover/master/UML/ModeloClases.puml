@@ -19,15 +19,15 @@ class Month
 class Format
 class Console
 
-Option <|.. ServicesContractOption
+Option <|-- ServicesContractOption
 
-ServicesContractOption <|.. CancelServicesContractOption
-ServicesContractOption <|.. CostServicesContractOption
-ServicesContractOption <|.. EnlargeServicesContractOption
-ServicesContractOption <|.. ListServicesContractOption
-ServicesContractOption <|.. PrintServicesContractOption 
-ServicesContractOption <|.. QuitOption 
-ServicesContractOption <|.. ShiftServicesContractOption 
+ServicesContractOption <|-- CancelServicesContractOption
+ServicesContractOption <|-- CostServicesContractOption
+ServicesContractOption <|-- EnlargeServicesContractOption
+ServicesContractOption <|-- ListServicesContractOption
+ServicesContractOption <|-- PrintServicesContractOption 
+ServicesContractOption <|-- QuitOption 
+ServicesContractOption <|-- ShiftServicesContractOption 
 
 
 abstract class Menu {
@@ -104,11 +104,11 @@ class ShiftServicesContractOption
 
 QuitMenu --> QuitOption
 
-Menu <|.. QuitMenu
-QuitMenu <|.. IterativeMenu
-IterativeMenu <|.. DynamicMenu
-DynamicMenu <|.. ServicesContractMenu 
-Option <|.. QuitOption
+Menu <|-- QuitMenu
+QuitMenu <|-- IterativeMenu
+IterativeMenu <|-- DynamicMenu
+DynamicMenu <|-- ServicesContractMenu 
+Option <|-- QuitOption
 
 Menu o--"*" Option
 ServicesContractMenu --> ServicesContract
