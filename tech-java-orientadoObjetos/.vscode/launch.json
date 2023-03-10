@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ServiceContractManagement",
+            "request": "launch",
+            "mainClass": "ServiceContractManagement",
+            "projectName": "service-contract-management",
+            "vmArgs": "-enableassertions"
+        }
+    ]
+}
