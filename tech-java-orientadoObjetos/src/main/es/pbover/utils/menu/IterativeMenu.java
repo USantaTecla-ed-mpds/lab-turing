@@ -1,6 +1,6 @@
 package main.es.pbover.utils.menu;
 
-abstract class IterativeMenu extends QuitMenu {
+public abstract class IterativeMenu extends QuitMenu {
 
     public IterativeMenu(String title) {
         super(title);

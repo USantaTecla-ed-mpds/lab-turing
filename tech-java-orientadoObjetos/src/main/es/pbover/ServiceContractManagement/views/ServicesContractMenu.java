@@ -6,9 +6,9 @@ import main.es.pbover.ServiceContractManagement.views.options.CostServicesContra
 import main.es.pbover.ServiceContractManagement.views.options.EnlargeServicesContractOption;
 import main.es.pbover.ServiceContractManagement.views.options.ListServicesContractOption;
 import main.es.pbover.ServiceContractManagement.views.options.ShiftServicesContractOption;
-import main.es.pbover.utils.menu.DynamicMenu;
+import main.es.pbover.utils.menu.IterativeMenu;
 
-public class ServicesContractMenu extends DynamicMenu {
+public class ServicesContractMenu extends IterativeMenu {
 
     private ServicesContract servicesContract;
 

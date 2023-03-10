@@ -1,9 +1,7 @@
 package main.es.pbover.ServiceContractManagement.models;
 
-import main.es.pbover.utils.Console;
 import main.es.pbover.utils.Interval;
 import main.es.pbover.utils.date.Date;
-import main.es.pbover.utils.date.Month;
 
 public class ServicesContract {
 
@@ -35,25 +33,10 @@ public class ServicesContract {
 		this.timetable[date.daysElapsedYear()].escale(factor);
 	}
 
-	public void desplazar(Date date, double desplazamiento) {
+	public void shift(Date date, double shiftment) {
 		assert date.getYear() == year;
 		assert timetable[date.daysElapsedYear()] != null;
-		timetable[date.daysElapsedYear()].shift(desplazamiento);
-	}
-
-	public void writeln() {
-		Console console = new Console();
-		console.writeln("Contrato de Servicios: " + year);
-		Date date = new Date(1, Month.JANUARY, year);
-		for (int i = 0; i < timetable.length; i++) {
-			console.write("(" + (i + 1) + ") " + date.toString() + " - ");
-			if (timetable[i] == null) {
-				console.writeln("Anulado");
-			} else {
-				console.writeln(timetable[i].toString());
-			}
-			date = date.next();
-		}
+		timetable[date.daysElapsedYear()].shift(shiftment);
 	}
 
 	public double getCost() {
@@ -80,12 +63,16 @@ public class ServicesContract {
 		return cost;
 	}
 
-	public boolean isIncluded(Date date){
+	public boolean containsInterval(Date date){
 		return this.timetable[date.daysElapsedYear()] != null;
 	}
 
 	public int getYear() {
 		return this.year;
+	}
+
+	public Interval[] getTimetable() {
+		return timetable;
 	}
 
 }

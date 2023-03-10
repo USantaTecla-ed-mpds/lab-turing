@@ -6,10 +6,12 @@ import main.es.pbover.ServiceContractManagement.views.ServicesContractMenu;
 public class ServiceContractManagement {
 
   private ServicesContract servicesContract; 
-  private final static int YEAR = 2023; 
+  private final int YEAR = 2023;
+  private ServicesContractMenu servicesContractMenu;
 
   public ServiceContractManagement(){
-    this.servicesContract = new ServicesContract(ServiceContractManagement.YEAR);
+    this.servicesContract = new ServicesContract(this.YEAR);
+    this.servicesContractMenu = new ServicesContractMenu(this.servicesContract);
   }
 
   public static void main(String[] args) {
@@ -17,6 +19,6 @@ public class ServiceContractManagement {
   }
 
   private void interact(){
-    new ServicesContractMenu(this.servicesContract).interact();
+    this.servicesContractMenu.interact();
   }
 }

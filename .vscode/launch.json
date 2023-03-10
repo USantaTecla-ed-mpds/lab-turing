@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ServiceContractManagement",
+            "request": "launch",
+            "mainClass": "main.es.pbover.ServiceContractManagement.ServiceContractManagement",
+            "projectName": "lab-turing_7e42dc7e"
+        },
+        {
+            "type": "java",
+            "name": "ServiceContractManagement",
+            "request": "launch",
+            "mainClass": "ServiceContractManagement",
+            "projectName": "service-contract-management",
+            "vmArgs": "-enableassertions"
+        }
+    ]
+}

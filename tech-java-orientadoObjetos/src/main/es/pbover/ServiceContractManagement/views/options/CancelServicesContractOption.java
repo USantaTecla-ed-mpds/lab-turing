@@ -8,18 +8,18 @@ import main.es.pbover.utils.date.DateDialog;
 public class CancelServicesContractOption extends ServicesContractOption {
 
     public CancelServicesContractOption(ServicesContract servicesContract) {
-        super("Cancelar Contrato de Servicios", servicesContract);
+        super("Cancelar Horas del Contrato de Servicios", servicesContract);
     }
 
     @Override
     public void interact() {
-        Date date = new DateDialog().read(this.servicesContract.getYear());
+        Date date = new DateDialog("Inserte fecha dd/mm: ").read(this.servicesContract.getYear());
         Console.getInstance().writeln();
 
-        if(this.servicesContract.isIncluded(date)){
+        if (this.servicesContract.containsInterval(date)) {
             servicesContract.cancel(date);
         } else {
-            Console.getInstance().writeln("Fecha no incluida");
+            Console.getInstance().writeln("Fecha sin horas en el contrato");
         }
     }
 

@@ -13,10 +13,10 @@ public class EnlargeServicesContractOption extends ServicesContractOption {
 
     @Override
     public void interact() {
-        Date date = new DateDialog().read(this.servicesContract.getYear());
+        Date date = new DateDialog("Inserte fecha dd/mm: ").read(this.servicesContract.getYear());
         Double factor = Console.getInstance().readDouble("Introduzca el factor:");
         Console.getInstance().writeln();
-        if(this.servicesContract.isIncluded(date)){
+        if(this.servicesContract.containsInterval(date)){
             this.servicesContract.enlarge(date, factor);
         } else {
             Console.getInstance().writeln("Fecha no incluida");
