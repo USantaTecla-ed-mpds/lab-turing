@@ -15,5 +15,4 @@ public class ListServicesContractOption extends ServicesContractOption {
         Console.getInstance().writeln();
         new ServicesContractView(this.servicesContract).writeln();
     }
-
 }

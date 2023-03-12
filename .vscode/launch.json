@@ -5,6 +5,13 @@
             "name": "ServiceContractManagement",
             "request": "launch",
             "mainClass": "main.es.pbover.ServiceContractManagement.ServiceContractManagement",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
+            "name": "ServiceContractManagement",
+            "request": "launch",
+            "mainClass": "main.es.pbover.ServiceContractManagement.ServiceContractManagement",
             "projectName": "lab-turing_7e42dc7e"
         },
         {

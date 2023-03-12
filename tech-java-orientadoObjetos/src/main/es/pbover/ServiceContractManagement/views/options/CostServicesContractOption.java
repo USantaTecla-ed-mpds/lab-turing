@@ -11,7 +11,6 @@ public class CostServicesContractOption extends ServicesContractOption {
 
     @Override
     public void interact() {
-        Console.getInstance().writeln();
         Console.getInstance().writeln("Coste anual del contrato: " + servicesContract.getCost() + " Euros");
 
     }
