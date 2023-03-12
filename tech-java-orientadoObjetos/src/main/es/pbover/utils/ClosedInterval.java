@@ -17,9 +17,9 @@ public class ClosedInterval {
 	}
 
 	// public String toString() {
-	// 	return Message.CLOSED_INTERVAL.toString()
-	// 			.replaceAll(Message.$MIN, String.valueOf(this.min))
-	// 			.replaceAll(Message.$MAX, String.valueOf(this.max));
+	// return Message.CLOSED_INTERVAL.toString()
+	// .replaceAll(Message.$MIN, String.valueOf(this.min))
+	// .replaceAll(Message.$MAX, String.valueOf(this.max));
 	// }
 
 	public boolean equals(ClosedInterval closedInterval) {

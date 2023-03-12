@@ -63,7 +63,7 @@ public class ServicesContract {
 		return cost;
 	}
 
-	public boolean containsInterval(Date date){
+	public boolean containsInterval(Date date) {
 		return this.timetable[date.daysElapsedYear()] != null;
 	}
 

@@ -1,7 +1,5 @@
 package main.es.pbover.utils;
 
-
-
 public class Interval {
 
 	private double min;
