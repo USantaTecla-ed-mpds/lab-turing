@@ -17,6 +17,4 @@ public abstract class DateDialogAndDoubleOption extends DateDialogOption {
         super.interact();
     }
 
-    public abstract void interact_();
-
 }
