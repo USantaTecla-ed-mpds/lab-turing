@@ -1,0 +1,34 @@
+@startuml desarrollo_implementacion
+package "  "  as usantatecla.tictactoe {
+}
+package "  "  as usantatecla.tictactoe.models {
+}
+package "  "  as usantatecla.tictactoe.views {
+}
+package "  "  as usantatecla.utils {
+}
+package "  "  as java.io {
+}
+package "  "  as java.util {
+}
+
+[tictactoe.jar] as jar
+
+jar *--> usantatecla.tictactoe
+jar *--> usantatecla.tictactoe.models
+jar *--> usantatecla.tictactoe.views
+jar *--> usantatecla.utils
+jar *--> java.io
+jar *--> java.util
+@enduml
+
+@startuml despliegue_fisica
+node node #DDDDDD [
+<b>Personal Computer</b>
+----
+]
+
+[ tictactoe.jar ] as component
+
+node *--> component
+@enduml

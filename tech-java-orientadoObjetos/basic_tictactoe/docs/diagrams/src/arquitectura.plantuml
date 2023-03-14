@@ -1,0 +1,17 @@
+@startuml arquitectura
+package usantatecla.tictactoe #DDDDDD { }
+package usantatecla.tictactoe.models #DDDDDD { }
+package usantatecla.tictactoe.views #DDDDDD { } 
+package usantatecla.utils #DDDDDD { } 
+package java.util{ }
+usantatecla.tictactoe .down.> usantatecla.tictactoe.models
+usantatecla.tictactoe .down.> usantatecla.tictactoe.views
+usantatecla.tictactoe.models .down.> java.util
+usantatecla.tictactoe.models .down.> usantatecla.utils
+usantatecla.tictactoe.views .down.> usantatecla.utils
+usantatecla.tictactoe.views .down.> usantatecla.tictactoe.models
+  
+
+package java.io{ }
+usantatecla.utils .down.> java.io
+@enduml
