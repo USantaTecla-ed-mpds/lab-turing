@@ -1,45 +1,45 @@
 package main.es.pbover.connect4.models;
 
-public class Direction {
-    static NORTH = new Direction(1, 0);
-    static NORTH_EAST = new Direction(1, 1);
-    static EAST = new Direction(0, 1);
-    static SOUTH_EAST = new Direction(-1, 1);
-    static SOUTH = new Direction(-1, 0);
-    static SOUTH_WEST = new Direction(-1, -1);
-    static WEST = new Direction(0, -1);
-    static NORTH_WEST = new Direction(1, -1);
+public enum Direction {
+    NORTH(1, 0),
+    NORTH_EAST(1, 1),
+    EAST(0, 1),
+    SOUTH_EAST(-1, 1),
+    SOUTH(-1, 0),
+    SOUTH_WEST(-1, -1),
+    WEST(0, -1),
+    NORTH_WEST(1, -1);
 
-    #coordinate;
+    private Coordinate coordinate;
 
-    constructor(row, column) {
-        this.#coordinate = new Coordinate(row, column);
+    private Direction(int row, int column) {
+        this.coordinate = new Coordinate(row, column);
     }
 
-    getOpposite() {
-        for (let direction of Direction.values()) {
-            if (direction.#coordinate.shifted(this.#coordinate).equals(Coordinate.ORIGIN)) {
+    public Direction getOpposite() {
+        for (Direction direction : Direction.values()) {
+            if (direction.coordinate.shifted(this.coordinate).equals(Coordinate.ORIGIN)) {
                 return direction;
             }
         }
         return null;
     }
 
-    static values() {
-        return [Direction.NORTH, Direction.NORTH_EAST, Direction.EAST, Direction.SOUTH_EAST,
-        Direction.SOUTH, Direction.SOUTH_WEST, Direction.WEST, Direction.NORTH_WEST];
+    public Coordinate getCoordinate() {
+        return this.coordinate;
     }
 
-    getCoordinate() {
-        return this.#coordinate;
+    public static Direction[] halfValues() {
+        Direction[] halfDirections = new Direction[Direction.values().length / 2];
+        for (int index = 0; index < Direction.values().length / 2; index++) {
+            halfDirections[index] = Direction.values()[index];
+        }
+        return halfDirections;
     }
 
-    static halfValues() {
-        return Direction.values().splice(0, Direction.values().length / 2);
+    public Coordinate next(Coordinate coordinate) {
+        return new Coordinate(
+                this.coordinate.getRow() + coordinate.getRow(),
+                this.coordinate.getColumn() + coordinate.getColumn());
     }
-    next(coordinate) {
-	  	return new Coordinate(
-  			this.#coordinate.getRow() + coordinate.getRow(),
-  			this.#coordinate.getColumn() + coordinate.getColumn());
-	}
 }

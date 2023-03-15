@@ -1,51 +1,52 @@
 package main.es.pbover.connect4.models;
 
+import main.es.pbover.utils.ClosedInterval;
+
 public class Coordinate {
-    static ORIGIN = new Coordinate(0, 0);
-    static NUMBER_ROWS = 6;
-    static #ROWS = new ClosedInterval(0, Coordinate.NUMBER_ROWS - 1);
-    static NUMBER_COLUMNS = 7;
-    static #COLUMNS = new ClosedInterval(0, Coordinate.NUMBER_COLUMNS - 1);
+    public static Coordinate ORIGIN = new Coordinate(0, 0);
+    public static int NUMBER_ROWS = 6;
+    private static ClosedInterval ROWS = new ClosedInterval(0, Coordinate.NUMBER_ROWS - 1);
+    public static int NUMBER_COLUMNS = 7;
+    private static ClosedInterval COLUMNS = new ClosedInterval(0, Coordinate.NUMBER_COLUMNS - 1);
 
-    #row;
-    #column;
+    private int row;
+    private int column;
 
-    constructor(row, column) {
-        this.#row = row;
-        this.#column = column;
+    public Coordinate(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
-    shifted(coordinate) {
-        return new Coordinate(this.#row + coordinate.#row,
-            this.#column + coordinate.#column);
+    public Coordinate shifted(Coordinate coordinate) {
+        return new Coordinate(this.row + coordinate.row, this.column + coordinate.column);
     }
 
-    isValid() {
-        return Coordinate.#isRowValid(this.getRow())
-            && Coordinate.isColumnValid(this.getColumn());
+    public boolean isValid() {
+        return Coordinate.isRowValid(this.getRow())
+                && Coordinate.isColumnValid(this.getColumn());
     }
 
-    static isColumnValid(column) {
-        return Coordinate.#COLUMNS.isIncluded(column);
+    public static boolean isColumnValid(int column) {
+        return Coordinate.COLUMNS.isIncluded(column);
     }
 
-    static #isRowValid(row) {
-        return Coordinate.#ROWS.isIncluded(row);
+    private static boolean isRowValid(int row) {
+        return Coordinate.ROWS.isIncluded(row);
     }
 
-    getRow() {
-        return this.#row;
+    public int getRow() {
+        return this.row;
     }
 
-    getColumn() {
-        return this.#column;
+    public int getColumn() {
+        return this.column;
     }
 
-    equals(coordinate) {
+    public boolean equals(Coordinate coordinate) {
         if (this == coordinate)
             return true;
         if (coordinate == null)
             return false;
-        return this.#column === coordinate.#column && this.#row === coordinate.#row;
+        return this.column == coordinate.column && this.row == coordinate.row;
     }
 }

@@ -1,10 +1,9 @@
 package main.es.pbover.connect4.models;
 
-public class PlayerVisitor {
-    visitHumanPlayer(humanPlayer) {
-    }
-    visitRandomPlayer(randomPlayer) {
-    }
-    visitMinMaxPlayer(minMaxPlayer) {
-    }
+public interface PlayerVisitor {
+    void visit(HumanPlayer humanPlayer);
+
+    void visit(RandomPlayer randomPlayer);
+
+    void visit(MinMaxPlayer minMaxPlayer);
 }

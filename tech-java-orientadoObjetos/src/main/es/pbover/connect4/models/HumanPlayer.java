@@ -1,11 +1,12 @@
 package main.es.pbover.connect4.models;
 
-public class HumanPlayer {
-    constructor(color, board) {
+public class HumanPlayer extends Player {
+    public HumanPlayer(Color color, Board board) {
         super(color, board);
     }
-    accept(visitor) {
-        visitor.visitHumanPlayer(this);
+
+    public void accept(PlayerVisitor visitor) {
+        visitor.visit(this);
     }
 
 }

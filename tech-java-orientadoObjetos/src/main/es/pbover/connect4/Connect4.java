@@ -1,5 +1,9 @@
 package main.es.pbover.connect4;
 
+import main.es.pbover.connect4.models.Board;
+import main.es.pbover.connect4.models.Turn;
+import main.es.pbover.utils.YesNoDialog;
+
 public class Connect4 {
     
     private Board board;
@@ -34,7 +38,7 @@ public class Connect4 {
         this.turnView.writeResult();
     }
 
-    private void isResumed() {
+    private boolean isResumed() {
         YesNoDialog yesNoDialog = new YesNoDialog();
         yesNoDialog.read(Message.RESUME.toString());
         if (yesNoDialog.isAffirmative()) {

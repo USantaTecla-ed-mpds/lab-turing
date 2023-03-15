@@ -1,46 +1,33 @@
 package main.es.pbover.connect4.models;
 
-public class Color {
-    static RED = new Color(`Red`);
-    static YELLOW = new Color(`Yellow`);
-    static NULL = new Color(`White`);
-    #string;
+public enum Color {
 
-    constructor(string) {
-        this.#string = string;
+    RED("Red"),
+    YELLOW("Yellow"),
+    NULL("White");
+
+    private String name;
+
+    private Color(String name) {
+        this.name = name;
     }
 
-    static get(ordinal) {
-        return Color.#values()[ordinal];
+    public static Color get(int ordinal) {
+        return Color.values()[ordinal];
     }
 
-    static #values() {
-        return [Color.RED, Color.YELLOW, Color.NULL];
+    public String getString() {
+        return this.name();
     }
 
-    getString() {
-        return this.#string;
-    }
-    
-    static PLAYERS = [Color.RED, Color.YELLOW];
-
-    getOpposite() {
-        return Color.#values()[(this.ordinal() + 1) % Color.PLAYERS.length];
+    public Color getOpposite() {
+        return Color.values()[this.ordinal() % (Color.values().length - 1)];
     }
 
-    ordinal() {
-        for(let i = 0; i < Color.PLAYERS.length; i++){
-            if (this == Color.PLAYERS[i]){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    getCode() {
+    public char getCode() {
         if (this == Color.NULL) {
             return ' ';
         }
-        return this.toString().charAt(0);
-    } 
+        return this.name().charAt(0);
+    }
 }

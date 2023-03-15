@@ -1,17 +1,20 @@
-import { PlayerVisitor } from '../models/Player.js';
+import main.es.pbover.connect4.models.MinMaxPlayer;
+import main.es.pbover.connect4.models.PlayerVisitor;
+import main.es.pbover.connect4.models.Turn;
+
 import { HumanPlayerView, RandomPlayerView } from './PlayerView.js';
 import { InIntervalDialog } from '../utils/views/Dialog.js';
 import { Message } from './Message.js';
 
 
 
-class TurnView extends PlayerVisitor {
-    #turn;
-    #activePlayerView;
+class TurnView implements PlayerVisitor {
+    private Turn turn;
+    private PlayerView activePlayerView;
 
-    constructor(turn) {
+    public TurnView(Turn turn) {
         super();
-        this.#turn = turn;
+        this.turn = turn;
     }
     setNumberOfHumanPlayers() { 
         let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
@@ -31,12 +34,13 @@ class TurnView extends PlayerVisitor {
             Message.PLAYERS_TIED.writeln();
         }
     }
-    visitHumanPlayer(humanPlayer) {
-        this.#activePlayerView = new HumanPlayerView(humanPlayer);
+    public void visit(HumanPlayer humanPlayer) {
+        this.activePlayerView = new HumanPlayerView(humanPlayer);
     }
-    visitRandomPlayer(randomPlayer) {
-        this.#activePlayerView = new RandomPlayerView(randomPlayer);
+    public void visit(RandomPlayer randomPlayer) {
+        this.activePlayerView = new RandomPlayerView(randomPlayer);
+    }
+    public void visit(MinMaxPlayer minMaxPlayer) {
+        this.activePlayerView = new MinMaxPlayerView(minMaxPlayer);
     }
 }
-
-export { TurnView }

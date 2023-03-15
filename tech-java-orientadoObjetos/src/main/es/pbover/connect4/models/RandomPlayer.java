@@ -1,18 +1,18 @@
 package main.es.pbover.connect4.models;
 
-public class RandomPlayer {
-    constructor(color, board) {
+public class RandomPlayer extends Player {
+    public RandomPlayer(Color color, Board board) {
         super(color, board);
     }
 
-    accept(visitor) {
-        visitor.visitRandomPlayer(this);
+    public void accept(PlayerVisitor visitor) {
+        visitor.visit(this);
     }
 
-    getColumn() {
-        let column;
+    public int getColumn() {
+        int column;
         do {
-            column = Math.floor(Math.random() * Coordinate.NUMBER_COLUMNS);
+            column = (int) Math.floor(Math.random() * Coordinate.NUMBER_COLUMNS);
         } while (this.isComplete(column));
         return column;
     }

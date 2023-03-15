@@ -7,7 +7,7 @@ public class Board {
     private Coordinate lastDrop;
 
     public Board() {
-        this.colors = new Color[Coordinate.DIMENSION][Coordinate.DIMENSION];
+        this.colors = new Color[Coordinate.NUMBER_ROWS][Coordinate.NUMBER_COLUMNS];
         this.reset();
     }
 
@@ -27,10 +27,33 @@ public class Board {
         this.colors[this.lastDrop.getRow()][this.lastDrop.getColumn()] = color;
     }
 
-    public void isComplete(int column) {
-        if (column != null) {
-            return !this.isEmpty(new Coordinate(Coordinate.NUMBER_ROWS - 1, column));
+    public boolean isEmpty() {
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isEmpty(i)) {
+                return false;
+            }
         }
+        return true;
+    }
+
+    public boolean isEmpty(int value) {
+
+        return this.isEmpty(new Coordinate(0, value));
+
+    }
+
+    public boolean isEmpty(Coordinate value) {
+
+        return this.isOccupied(value, Color.NULL);
+
+    }
+
+    public boolean isOccupied(Coordinate coordinate, Color color) {
+        return this.getColor(coordinate) == color;
+    }
+
+    public boolean isComplete() {
+
         for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
             if (!this.isComplete(i)) {
                 return false;
@@ -39,147 +62,144 @@ public class Board {
         return true;
     }
 
-    public void isFinished() {
+    public boolean isComplete(int column) {
+
+        return !this.isEmpty(new Coordinate(Coordinate.NUMBER_ROWS - 1, column));
+
+    }
+
+    public boolean isFinished() {
         return this.isComplete() || this.isWinner();
     }
 
-    public void isWinner() {
-            if (this.lastDrop == null) {
-                return false;
-            }
-            for (let direction of Direction.halfValues()) {
-                LINE line = [this.lastDrop];
-                this.#setLine(line, direction);
-                for (int i = 1; i < Board.LINE_LENGTH; i++) {
-                    line[i] = line[i - 1].shifted(direction.getCoordinate());
-                }
-                for (let i = 0; i < Board.LINE_LENGTH; i++) {
-                    if (this.#isConnect4(line)) {
-                        return true;
-                    }
-                    this.#shiftLine(line, direction);
-                }
-            }
+    public boolean isWinner() {
+        if (this.lastDrop == null) {
             return false;
         }
-
-    #setLine(line, direction) {
-            for (let i = 1; i < Board.LINE_LENGTH; i++) {
+        for (Direction direction : Direction.halfValues()) {
+            Coordinate[] line = new Coordinate[Board.LINE_LENGTH];
+            line[0] = this.lastDrop;
+            this.setLine(line, direction);
+            for (int i = 1; i < Board.LINE_LENGTH; i++) {
                 line[i] = line[i - 1].shifted(direction.getCoordinate());
             }
-        }
-        #shiftLine(line, direction) {
-            let oppositeDirection = direction.getOpposite();
-            for (let j = 0; j < Board.LINE_LENGTH; j++) {
-                line[j] = line[j].shifted(oppositeDirection.getCoordinate());
+            for (int i = 0; i < Board.LINE_LENGTH; i++) {
+                if (this.isConnect4(line)) {
+                    return true;
+                }
+                this.shiftLine(line, direction);
             }
         }
-    
-        #isConnect4(line) {
-            for (let i = 0; i < Board.LINE_LENGTH; i++) {
-                if (!line[i].isValid()) {
-                    return false;
-                }
-                if (i > 0 && this.getColor(line[i - 1]) != this.getColor(line[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
+        return false;
+    }
 
-    isAlmostWinner() {
-            if (this.#lastDrop === undefined) {
+    private void setLine(Coordinate[] line, Direction direction) {
+        for (int i = 1; i < Board.LINE_LENGTH; i++) {
+            line[i] = line[i - 1].shifted(direction.getCoordinate());
+        }
+    }
+
+    private void shiftLine(Coordinate[] line, Direction direction) {
+        Direction oppositeDirection = direction.getOpposite();
+        for (int i = 0; i < Board.LINE_LENGTH; i++) {
+            line[i] = line[i].shifted(oppositeDirection.getCoordinate());
+        }
+    }
+
+    private boolean isConnect4(Coordinate[] line) {
+        for (int i = 0; i < Board.LINE_LENGTH; i++) {
+            if (!line[i].isValid()) {
                 return false;
             }
-            for (let direction of Direction.halfValues()) {
-                let line = [this.#lastDrop];
-                this.#set3Line(line, direction);
-                for (let i = 1; i < Board.LINE_LENGTH-1; i++) {
-                    line[i] = line[i - 1].shifted(direction.getCoordinate());
-                }
-                for (let i = 0; i < Board.LINE_LENGTH-1; i++) {
-                    if (this.#isConnect3(line)) {
-                        return true;
-                    }
-                    this.#shift3Line(line, direction);
-                }
+            if (i > 0 && this.getColor(line[i - 1]) != this.getColor(line[i])) {
+                return false;
             }
+        }
+        return true;
+    }
+
+    public boolean isAlmostWinner() {
+        if (this.lastDrop == null) {
             return false;
-        }#set3Line(line, direction) {
-            for (let i = 1; i < Board.LINE_LENGTH-1; i++) {
+        }
+        for (Direction direction : Direction.halfValues()) {
+            Coordinate[] line = new Coordinate[Board.LINE_LENGTH - 1];
+            line[0] = this.lastDrop;
+            this.set3Line(line, direction);
+            for (int i = 1; i < Board.LINE_LENGTH - 1; i++) {
                 line[i] = line[i - 1].shifted(direction.getCoordinate());
             }
-        }
-        #shift3Line(line, direction) {
-            let oppositeDirection = direction.getOpposite();
-            for (let j = 0; j < Board.LINE_LENGTH-1; j++) {
-                line[j] = line[j].shifted(oppositeDirection.getCoordinate());
+            for (int i = 0; i < Board.LINE_LENGTH - 1; i++) {
+                if (this.isConnect3(line)) {
+                    return true;
+                }
+                this.shift3Line(line, direction);
             }
         }
-    
-        #isConnect3(line) {
-            for (let i = 0; i < Board.LINE_LENGTH-1; i++) {
-                if (!line[i].isValid()) {
-                    return false;
-                }
-                if (i > 0 && this.getColor(line[i - 1]) != this.getColor(line[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    
-        isOccupied(coordinate, color) {
-            return this.getColor(coordinate) === color;
-        }
-    
-        isEmpty(coordinate) {
-            return this.isOccupied(coordinate, Color.NULL);
-        }
-    
-        getColor(coordinate) {
-            return this.#colors[coordinate.getRow()][coordinate.getColumn()];
-        }
-        setColor(coordinate, color) {
-            this.#colors[coordinate.getRow()][coordinate.getColumn()] = color;
-        }
+        return false;
+    }
 
-    getUncompletedColumns() {
-            let uncompletedColumns = [];
-            for (let j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                if (!this.isComplete(j)) {
-                    uncompletedColumns.push(j);
-                }
-            }
-            return uncompletedColumns;
+    private void set3Line(Coordinate[] line, Direction direction) {
+        for (int i = 1; i < Board.LINE_LENGTH - 1; i++) {
+            line[i] = line[i - 1].shifted(direction.getCoordinate());
         }
+    }
 
-    removeTop(column) {
-            this.setColor(this.getTop(column), Color.NULL);
+    private void shift3Line(Coordinate[] line, Direction direction) {
+        Direction oppositeDirection = direction.getOpposite();
+        for (int i = 0; i < Board.LINE_LENGTH - 1; i++) {
+            line[i] = line[i].shifted(oppositeDirection.getCoordinate());
         }
-    
-        getTop(column) {
-            let coordinate = new Coordinate(Coordinate.NUMBER_ROWS - 1, column);
-            while (this.isEmpty(coordinate)) {
-                coordinate = Direction.SOUTH.next(coordinate);
+    }
+
+    private boolean isConnect3(Coordinate[] line) {
+        for (int i = 0; i < Board.LINE_LENGTH - 1; i++) {
+            if (!line[i].isValid()) {
+                return false;
             }
-            return coordinate;
+            if (i > 0 && this.getColor(line[i - 1]) != this.getColor(line[i])) {
+                return false;
+            }
         }
-    
-        isEmpty(value) {
-            if (value != undefined){
-                if (typeof value == "number"){
-                    return this.isEmpty(new Coordinate(0, value));
-                } 
-                return this.isOccupied(value, Color.NULL);
+        return true;
+    }
+
+    public Color getColor(Coordinate coordinate) {
+        return this.colors[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    public void setColor(Coordinate coordinate, Color color) {
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
+
+    public int[] getUncompletedColumns() {
+        int counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isComplete(i)) {
+                counter++;
             }
-            for (let i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-                if (!this.isEmpty(i)) {
-                    return false;
-                }
-            }
-            return true;
         }
-    
+        int[] uncompletedColumns = new int[counter];
+        counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isComplete(i)) {
+                uncompletedColumns[counter] = i;
+                counter++;
+            }
+        }
+        return uncompletedColumns;
+    }
+
+    public void removeTop(int column) {
+        this.setColor(this.getTop(column), Color.NULL);
+    }
+
+    public Coordinate getTop(int column) {
+        Coordinate coordinate = new Coordinate(Coordinate.NUMBER_ROWS - 1, column);
+        while (this.isEmpty(coordinate)) {
+            coordinate = Direction.SOUTH.next(coordinate);
+        }
+        return coordinate;
+    }
 
 }

@@ -1,25 +1,29 @@
 package main.es.pbover.connect4.models;
 
-public class Player {
-    #color;
-    #board;
+public abstract class Player {
+    private Color color;
+    private Board board;
 
-    constructor(color, board) {
-        this.#color = color;
-        this.#board = board;
+    public Player(Color color, Board board) {
+        this.color = color;
+        this.board = board;
     }
-    play(column) {
-        this.#board.dropToken(column, this.#color);
+
+    public void play(int column) {
+        this.board.dropToken(column, this.color);
     }
-    getColor() {
-        return this.#color;
+
+    public Color getColor() {
+        return this.color;
     }
-    isComplete(column) {
-        return this.#board.isComplete(column);
+
+    public boolean isComplete(int column) {
+        return this.board.isComplete(column);
     }
-    
-    getBoard() {
-      return this.#board;
+
+    public Board getBoard() {
+        return this.board;
     }
-    accept(visitor) { }
+
+    public abstract void accept(PlayerVisitor visitor);
 }
