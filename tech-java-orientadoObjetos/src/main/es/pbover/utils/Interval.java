@@ -21,27 +21,17 @@ public class Interval {
 	public Interval(String string) {
 		int hours = Integer.parseInt(string.substring(
 				0, string.indexOf(":")).trim());
-		// hours = Integer.valueOf(string.substring(
-		// 0, cadena.indexOf(":")).trim());
+
 		int minutes = Integer.parseInt(string.substring(string.indexOf(":") + 1,
 				string.indexOf("-")).trim());
 		min = hours + minutes / 60.0;
-		// cadena = cadena.substring(cadena.indexOf("-") + 1);
+
 		hours = Integer.parseInt(
 				string.substring(string.indexOf("-") + 1, string.indexOf(":")).trim());
 		minutes = Integer.parseInt(
 				string.substring(string.indexOf(":") + 1).trim());
 		max = hours + minutes / 60.0;
 	}
-
-	// public Interval(String cadena) {
-	// String exreg = ":|-";
-	// String[] datos = cadena.split(exreg);
-	// minimo = Integer.parseInt(datos[0].trim()) +
-	// Integer.parseInt(datos[1].trim()) / 60.0;
-	// maximo = Integer.parseInt(datos[2].trim()) +
-	// Integer.parseInt(datos[3].trim()) / 60.0;
-	// }
 
 	public String toString() {
 		return "[" + this.min + ", " + this.max + "]";
@@ -122,26 +112,12 @@ public class Interval {
 
 	public static void main(String[] args) {
 		Console console = new Console();
-		// Intervalo intervalo = new Intervalo();
-		// intervalo.recoger();
-		// gestorIO.escribirLinea();
-		// gestorIO.escribirLinea("Longitud: " + intervalo.longitud());
-		// gestorIO.escribirLinea("Punto medio: " + intervalo.puntoMedio());
-		// gestorIO.escribirLinea("Simetrico: " + intervalo.simetrico().toString());
-		// Intervalo copia = intervalo.copia();
-		// intervalo.desplazar(7.7);
-		// gestorIO.escribirLinea("Desplazado 7.7: " + intervalo.toString());
-		// gestorIO.escribirLinea("Incluye 3.3? " + intervalo.incluye(3.3));
-		// gestorIO.escribirLinea("Incluye al original? "
-		// + intervalo.incluye(copia));
 
 		Interval intervalo = new Interval("12:00-13:00");
 		console.writeln(intervalo.toString());
 
 		intervalo = new Interval(" 9 : 15 - 10 : 30 ");
 		console.writeln(intervalo.toString());
-
-		// System.out.println(intervalo.toString());
 
 	}
 }

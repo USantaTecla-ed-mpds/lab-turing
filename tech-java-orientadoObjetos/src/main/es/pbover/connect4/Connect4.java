@@ -2,6 +2,9 @@ package main.es.pbover.connect4;
 
 import main.es.pbover.connect4.models.Board;
 import main.es.pbover.connect4.models.Turn;
+import main.es.pbover.connect4.views.BoardView;
+import main.es.pbover.connect4.views.Message;
+import main.es.pbover.connect4.views.TurnView;
 import main.es.pbover.utils.YesNoDialog;
 
 public class Connect4 {

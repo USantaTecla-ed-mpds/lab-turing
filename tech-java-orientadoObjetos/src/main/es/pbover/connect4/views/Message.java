@@ -1,36 +1,37 @@
-import  {console}  from '../utils/views/console.js';
+package main.es.pbover.connect4.views;
 
+import main.es.pbover.utils.Console;
 
-export class Message {
-    static TITLE = new Message(`--- CONNECT 4 ---`);
-    static NUM_PLAYERS = new Message(`Enter number of human players: `);
-    static HORIZONTAL_LINE = new Message(`-`);
-    static VERTICAL_LINE = new Message(`|`);
-    static TURN = new Message(`Turn: `);
-    static ENTER_COLUMN_TO_DROP = new Message(`Enter a column to drop a token: `);
-    static INVALID_COLUMN = new Message(`Invalid columnn!!! Values [1-7]`);
-    static COMPLETED_COLUMN = new Message(`Invalid column!!! It's completed`);
-    static RANDOM_COLUMN = new Message(`Choosed radom column: `);
-    static PLAYER_WIN = new Message(`#colorS WIN!!! : -)`);
-    static PLAYERS_TIED = new Message(`TIED!!!`);
-    static RESUME = new Message(`Do you want to continue`);
+public class Message {
+    public static Message TITLE = new Message("--- CONNECT 4 ---");
+    static Message NUM_PLAYERS = new Message("Enter number of human players: ");
+    static Message HORIZONTAL_LINE = new Message("-");
+    static Message VERTICAL_LINE = new Message("|");
+    static Message TURN = new Message("Turn: ");
+    static Message ENTER_COLUMN_TO_DROP = new Message("Enter a column to drop a token: ");
+    static Message INVALID_COLUMN = new Message("Invalid columnn!!! Values [1-7]");
+    static Message COMPLETED_COLUMN = new Message("Invalid column!!! It's completed");
+    static Message RANDOM_COLUMN = new Message("Choosed radom column: ");
+    static Message PLAYER_WIN = new Message("S WIN!!! : -)");
+    static Message PLAYERS_TIED = new Message("TIED!!!");
+    public static Message RESUME = new Message("Do you want to continue");
 
-    #string;
+    private String string;
 
-    constructor(string) {
-        this.#string = string;
+    public Message(String string) {
+        this.string = string;
     }
 
-    write() {
-        console.write(this.#string);
+    public void write() {
+        Console.getInstance().write(this.string);
     }
 
-    writeln() {
-        console.writeln(this.#string);
+    public void writeln() {
+        Console.getInstance().writeln(this.string);
     }
 
-    toString() {
-        return this.#string;
+    public String toString() {
+        return this.string;
     }
 
 }

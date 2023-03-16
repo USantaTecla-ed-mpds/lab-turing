@@ -1,34 +1,42 @@
 package main.es.pbover.utils;
 
 public class YesNoDialog {
-    static #AFFIRMATIVE = `y`;
-    static #NEGATIVE = `n`;
 
-    constructor() {
-        super();
-        this.errorMessage = `The value must be ${YesNoDialog.#AFFIRMATIVE} or ${YesNoDialog.#NEGATIVE}`;
-        this.suffix = `? (` +
-            YesNoDialog.#AFFIRMATIVE + `/` +
-            YesNoDialog.#NEGATIVE + `): `;
-    }
+	private static final char AFFIRMATIVE = 'y';
+	private static final char NEGATIVE = 'n';
+	private static final String SUFFIX = "? (" +
+		YesNoDialog.AFFIRMATIVE+"/" + 
+		YesNoDialog.NEGATIVE+"): ";
+	private static final String MESSAGE = "The value must be '" + 
+		YesNoDialog.AFFIRMATIVE + "' or '" + 
+		YesNoDialog.NEGATIVE + "'";
+	private String answer;
 
-    readWithSuffix() {
-        return console.readString(this.suffix);
-    }
+	public void read(String message) {
+		assert message != null;
 
-    isOk() {
-        return this.isAffirmative() || this.isNegative();
-    }
+		Console console = Console.getInstance();
+		boolean ok;
+		do {
+			console.write(message);
+			this.answer = console.readString(YesNoDialog.SUFFIX);
+			ok = this.isAffirmative() || this.isNegative();
+			if (!ok) {
+				console.writeln(YesNoDialog.MESSAGE);
+			}
+		} while (!ok);
+	}
+	
+	public boolean isAffirmative() {
+		return this.getAnswer() == YesNoDialog.AFFIRMATIVE;
+	}
+	
+	private char getAnswer(){
+		return Character.toLowerCase(this.answer.charAt(0));
+	}
 
-    isAffirmative() {
-        return this.getAnswer() === YesNoDialog.#AFFIRMATIVE;
-    }
+	public boolean isNegative() {
+		return this.getAnswer() == YesNoDialog.NEGATIVE;
+	}
 
-    isNegative() {
-        return this.getAnswer() === YesNoDialog.#NEGATIVE;
-    }
-
-    getAnswer() {
-        return super.getAnswer().toLowerCase()[0];
-    }
 }

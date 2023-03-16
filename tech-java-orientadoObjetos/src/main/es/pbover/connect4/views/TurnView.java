@@ -1,14 +1,13 @@
+package main.es.pbover.connect4.views;
+
+import main.es.pbover.connect4.models.HumanPlayer;
 import main.es.pbover.connect4.models.MinMaxPlayer;
 import main.es.pbover.connect4.models.PlayerVisitor;
+import main.es.pbover.connect4.models.RandomPlayer;
 import main.es.pbover.connect4.models.Turn;
+import main.es.pbover.utils.InIntervalDialog;
 
-import { HumanPlayerView, RandomPlayerView } from './PlayerView.js';
-import { InIntervalDialog } from '../utils/views/Dialog.js';
-import { Message } from './Message.js';
-
-
-
-class TurnView implements PlayerVisitor {
+public class TurnView implements PlayerVisitor {
     private Turn turn;
     private PlayerView activePlayerView;
 
@@ -16,20 +15,20 @@ class TurnView implements PlayerVisitor {
         super();
         this.turn = turn;
     }
-    setNumberOfHumanPlayers() { 
-        let inIntervalDialog = new InIntervalDialog(0, this.#turn.getNumberPlayers());
+    public void setNumberOfHumanPlayers() { 
+        InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
         inIntervalDialog.read(Message.NUM_PLAYERS.toString());
-        this.#turn.reset(inIntervalDialog.getAnswer());
+        this.turn.reset(inIntervalDialog.getAnswer());
     }
 
-    play() {
-        this.#turn.getActivePlayer().accept(this);
-        this.#turn.play(this.#activePlayerView.getColumn());
+    public void play() {
+        this.turn.getActivePlayer().accept(this);
+        this.turn.play(this.activePlayerView.getColumn());
     }
 
-    writeResult() {
-        if ((this.#turn.getBoard()).isWinner()) {
-            this.#activePlayerView.writeWinner();
+    public void writeResult() {
+        if ((this.turn.getBoard()).isWinner()) {
+            this.activePlayerView.writeWinner();
         } else {
             Message.PLAYERS_TIED.writeln();
         }

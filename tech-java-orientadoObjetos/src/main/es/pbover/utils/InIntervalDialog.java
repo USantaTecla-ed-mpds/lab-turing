@@ -1,24 +1,26 @@
 package main.es.pbover.utils;
 
-public class InIntervalDialog {
-    #min;
-    #max;
-    constructor(min, max) {
+public class InIntervalDialog extends IntDialog {
+    private int min;
+    private int max;
+    public String errorMessage;
+    private String suffix;
+    public InIntervalDialog(int min, int max) {
         super();
-        this.#min = min;
-        this.#max = max;
-        this.errorMessage = `The value must be between ${min} and ${max}`;
-        this.suffix = `? [` +
-            min + `-` +
-            max + `]: `
+        this.min = min;
+        this.max = max;
+        this.errorMessage = "The value must be between "+min+" and "+max;
+        this.suffix = "? [" +
+            min + "-" +
+            max + "]: ";
     }
 
-    readWithSuffix() {
-        return console.readNumber(this.suffix);
+    public int readWithSuffix() {
+        return Console.getInstance().readInt(this.suffix);
     }
 
-    isOk() {
-        return new ClosedInterval(this.#min, this.#max).isIncluded(this.getAnswer());
+    public boolean isOk() {
+        return new ClosedInterval(this.min, this.max).isIncluded(this.getAnswer());
     }
 
 }
