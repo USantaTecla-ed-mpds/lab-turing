@@ -14,7 +14,7 @@ public class Turn {
     public void reset(int humanPlayers) {
         for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
             this.players[i] = i < humanPlayers ? new HumanPlayer(Color.get(i), this.board)
-                    : new RandomPlayer(Color.get(i), this.board);
+                    : new MinMaxPlayer(Color.get(i), this.board);
         }
         this.activePlayer = 0;
     }

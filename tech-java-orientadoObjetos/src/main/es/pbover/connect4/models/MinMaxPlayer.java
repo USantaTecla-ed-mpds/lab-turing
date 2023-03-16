@@ -1,11 +1,10 @@
 package main.es.pbover.connect4.models;
 
 public class MinMaxPlayer extends Player {
-    private final int maxSteps=6;
+    private final int maxSteps = 6;
     private static int MAX_COST = 2;
     private static int OTHER_COST = 0;
     private static int MIN_COST = -2;
-
 
     public MinMaxPlayer(Color color, Board board) {
         super(color, board);
@@ -13,7 +12,7 @@ public class MinMaxPlayer extends Player {
 
     public int getColumn() {
         int[] uncompletedColumns = this.getBoard().getUncompletedColumns();
-        int bestColumn = uncompletedColumns[ (int) Math.floor(Math.random() * uncompletedColumns.length)];
+        int bestColumn = uncompletedColumns[(int) Math.floor(Math.random() * uncompletedColumns.length)];
         int maxCost = MinMaxPlayer.MIN_COST;
         for (int column : uncompletedColumns) {
             this.getBoard().dropToken(column, this.getColor());
@@ -59,29 +58,27 @@ public class MinMaxPlayer extends Player {
     }
 
     private boolean isEnd(int steps) {
-        return steps == this.maxSteps || this.getBoard().isFinished();
+        return steps == this.maxSteps || this.getBoard().isFinished() || this.getBoard().isAlmostWinner();
     }
 
     private int getCost(boolean isOpposite) {
-        if (this.getBoard().isWinner()) { 
-          if (isOpposite){
-            return MinMaxPlayer.MIN_COST; 
-          }
-          else  { 
-           return MinMaxPlayer.MAX_COST;
-          }
+        if (this.getBoard().isWinner()) {
+            if (isOpposite) {
+                return MinMaxPlayer.MIN_COST;
+            } else {
+                return MinMaxPlayer.MAX_COST;
+            }
         }
         if (this.getBoard().isAlmostWinner()) {
-          if (isOpposite){
-            return MinMaxPlayer.MIN_COST/2; 
-          }
-          else  { 
-           return MinMaxPlayer.MAX_COST/2;
-          }
+            if (isOpposite) {
+                return MinMaxPlayer.MIN_COST / 2;
+            } else {
+                return MinMaxPlayer.MAX_COST / 2;
+            }
         }
         return MinMaxPlayer.OTHER_COST;
     }
-    
+
     public void accept(PlayerVisitor visitor) {
         visitor.visit(this);
     }
