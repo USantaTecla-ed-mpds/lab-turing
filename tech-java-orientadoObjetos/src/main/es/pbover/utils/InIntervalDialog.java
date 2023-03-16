@@ -3,7 +3,6 @@ package main.es.pbover.utils;
 public class InIntervalDialog extends IntDialog {
     private int min;
     private int max;
-    public String errorMessage;
     private String suffix;
     public InIntervalDialog(int min, int max) {
         super();
