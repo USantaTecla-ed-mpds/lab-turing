@@ -80,9 +80,6 @@ public class Board {
             Coordinate[] line = new Coordinate[Board.LINE_LENGTH];
             line[0] = this.lastDrop;
             this.setLine(line, direction);
-            for (int i = 1; i < Board.LINE_LENGTH; i++) {
-                line[i] = line[i - 1].shifted(direction.getCoordinate());
-            }
             for (int i = 0; i < Board.LINE_LENGTH; i++) {
                 if (this.isConnect4(line)) {
                     return true;
@@ -126,9 +123,6 @@ public class Board {
             Coordinate[] line = new Coordinate[Board.LINE_LENGTH - 1];
             line[0] = this.lastDrop;
             this.set3Line(line, direction);
-            for (int i = 1; i < Board.LINE_LENGTH - 1; i++) {
-                line[i] = line[i - 1].shifted(direction.getCoordinate());
-            }
             for (int i = 0; i < Board.LINE_LENGTH - 1; i++) {
                 if (this.isConnect3(line)) {
                     return true;
