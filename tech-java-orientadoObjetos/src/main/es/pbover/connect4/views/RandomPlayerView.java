@@ -13,7 +13,7 @@ public class RandomPlayerView extends PlayerView{
         Message.TURN.write();
         new Message(new ColorView(this.player.getColor()).toString()).writeln();
         int column = ((RandomPlayer) this.player).getColumn();
-        Message.RANDOM_COLUMN.write();
+        Message.IA_COLUMN.write();
         Console.getInstance().writeln(column + 1);
         return column;
     }
