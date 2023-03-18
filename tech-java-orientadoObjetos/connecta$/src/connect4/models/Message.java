@@ -19,7 +19,8 @@ public enum Message {
     RANDOM_COLUMN("Choosed radom column: "),
     PLAYER_WIN("WIN!!!"),
     PLAYERS_TIED("TIED!!!"),
-    RESUME("Do you want to continue");
+    RESUME("Do you want to continue"),
+    TYPE_MACHINE("Enter Random (1) or IA Machine Player (2) for Player {0}: ");
 
     private String message;
 

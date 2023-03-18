@@ -4,6 +4,13 @@
             "type": "java",
             "name": "Connect4",
             "request": "launch",
+            "mainClass": "connect4.Connect4",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Connect4",
+            "request": "launch",
             "mainClass": "main.es.pbover.connect4.Connect4",
             "projectName": "lab-turing_7e42dc7e",
             "vmArgs": "-enableassertions"

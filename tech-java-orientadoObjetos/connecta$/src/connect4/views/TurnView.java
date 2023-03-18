@@ -1,9 +1,11 @@
 package connect4.views;
 
 import connect4.utils.InIntervalDialog;
+import connect4.models.Color;
 import connect4.models.HumanPlayer;
 import connect4.models.Message;
 import connect4.models.MinMaxPlayer;
+import connect4.models.Player;
 import connect4.models.PlayerVisitor;
 import connect4.models.RandomPlayer;
 import connect4.models.Turn;
@@ -17,10 +19,25 @@ public class TurnView implements PlayerVisitor {
         this.turn = turn;
     }
 
-    public void setNumberOfHumanPlayers() {
+    public void initPlayers() {
         InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
         inIntervalDialog.read(Message.NUM_PLAYERS.toString());
-        this.turn.reset(inIntervalDialog.getAnswer());
+
+        Player[] players = new Player[this.turn.getNumberPlayers()];
+        for (int i = 0; i < this.turn.getNumberPlayers(); i++) {
+            players[i] = i < inIntervalDialog.getAnswer() ? new HumanPlayer(Color.get(i), this.turn.getBoard())
+                    : getMachinePlayerType(Color.get(i));
+        }
+        this.turn.reset(players);
+    }
+
+    private Player getMachinePlayerType(Color color) {
+        InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
+        inIntervalDialog.read(Message.TYPE_MACHINE.getFormated(color.getString()));
+
+        if (inIntervalDialog.getAnswer() == 1)
+            return new RandomPlayer(color, this.turn.getBoard());
+        return new MinMaxPlayer(color, this.turn.getBoard());
     }
 
     public void play() {

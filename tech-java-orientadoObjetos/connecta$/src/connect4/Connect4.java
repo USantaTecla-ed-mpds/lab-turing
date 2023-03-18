@@ -28,7 +28,9 @@ public class Connect4 {
     }
 
     private void playGame() {
-        this.turnView.setNumberOfHumanPlayers();
+
+        this.turnView.initPlayers();
+
         Message.TITLE.writeln();
         this.boardView.writeln();
 
