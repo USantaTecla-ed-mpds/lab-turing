@@ -4,14 +4,15 @@ import connect4.models.Color;
 import connect4.models.Message;
 
 public class ColorView {
-    private Color color;
+    private final Color color;
+    private final MessageView messageView = new MessageView();
 
-    public ColorView(Color color) {
+    public ColorView(final Color color) {
         this.color = color;
     }
 
     public void write() {
-        Message.PLAYER_COLOR.writeFormated(String.valueOf(this.color.getCode()));
+        messageView.writeFormated(Message.PLAYER_COLOR, String.valueOf(this.color.getCode()));
     }
 
     public String toString() {

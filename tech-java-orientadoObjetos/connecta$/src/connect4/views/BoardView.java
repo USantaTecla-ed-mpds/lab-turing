@@ -6,31 +6,32 @@ import connect4.models.Message;
 
 public class BoardView {
     static int BLANK_SPACES = 4;
-    private Board board;
+    private final Board board;
+    private final MessageView messageView = new MessageView();
 
-    public BoardView(Board board) {
+    public BoardView(final Board board) {
         this.board = board;
     }
 
     public void writeln() {
         this.writeHorizontal();
         for (int i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
-            Message.VERTICAL_LINE.write();
+            new MessageView().write(Message.VERTICAL_LINE_SYMBOL);
+
             for (int j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
                 new ColorView(this.board.getColor(new Coordinate(i, j))).write();
-                Message.VERTICAL_LINE.write();
+                messageView.write(Message.VERTICAL_LINE_SYMBOL);
             }
-            Message.BLANK.writeln();
+            messageView.writeln(Message.BLANK);
         }
         this.writeHorizontal();
     }
 
     private void writeHorizontal() {
-
         for (int i = 0; i < BoardView.BLANK_SPACES * Coordinate.NUMBER_COLUMNS; i++) {
-            Message.HORIZONTAL_LINE.write();
+            messageView.write(Message.HORIZONTAL_LINE_SYMBOL);
         }
-        Message.HORIZONTAL_LINE.writeln();
+        messageView.writeln(Message.HORIZONTAL_LINE_SYMBOL);
     }
 
 }

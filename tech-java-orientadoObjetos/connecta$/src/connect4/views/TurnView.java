@@ -12,19 +12,20 @@ import connect4.models.RandomPlayer;
 import connect4.models.Turn;
 
 public class TurnView implements PlayerVisitor {
-    private Turn turn;
+    private final Turn turn;
     private PlayerView activePlayerView;
+    private final MessageView messageView = new MessageView();
 
-    public TurnView(Turn turn) {
+    public TurnView(final Turn turn) {
         super();
         this.turn = turn;
     }
 
     public void initPlayers() {
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
-        inIntervalDialog.read(Message.NUM_PLAYERS.toString());
+        final InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
+        inIntervalDialog.read(Message.ASK_NUM_PLAYERS.toString());
 
-        Player[] players = new Player[this.turn.getNumberPlayers()];
+        final Player[] players = new Player[this.turn.getNumberPlayers()];
         for (int i = 0; i < this.turn.getNumberPlayers(); i++) {
             players[i] = i < inIntervalDialog.getAnswer() ? PlayerFactory.getPlayerByOption(
                     0,
@@ -36,11 +37,11 @@ public class TurnView implements PlayerVisitor {
         this.turn.reset(players);
     }
 
-    private Player getMachinePlayerType(Color color) {
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
-        inIntervalDialog.read(Message.TYPE_MACHINE.getFormated(color.getString()));
+    private Player getMachinePlayerType(final Color color) {
+        final InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
+        inIntervalDialog.read(Message.ASK_MACHINE_TYPE.getFormatedMessage(color.getString()));
 
-        Player player = PlayerFactory.getPlayerByOption(
+        final Player player = PlayerFactory.getPlayerByOption(
                 inIntervalDialog.getAnswer(),
                 color,
                 this.turn.getBoard());
@@ -58,19 +59,19 @@ public class TurnView implements PlayerVisitor {
         if ((this.turn.getBoard()).isWinner()) {
             this.activePlayerView.writeWinner();
         } else {
-            Message.PLAYERS_TIED.writeln();
+            messageView.writeln(Message.PLAYERS_TIED);
         }
     }
 
-    public void visit(HumanPlayer humanPlayer) {
+    public void visit(final HumanPlayer humanPlayer) {
         this.activePlayerView = new HumanPlayerView(humanPlayer);
     }
 
-    public void visit(RandomPlayer randomPlayer) {
+    public void visit(final RandomPlayer randomPlayer) {
         this.activePlayerView = new RandomPlayerView(randomPlayer);
     }
 
-    public void visit(MinMaxPlayer minMaxPlayer) {
+    public void visit(final MinMaxPlayer minMaxPlayer) {
         this.activePlayerView = new MinMaxPlayerView(minMaxPlayer);
     }
 }

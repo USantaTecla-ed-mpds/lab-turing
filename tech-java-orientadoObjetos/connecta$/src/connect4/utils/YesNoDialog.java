@@ -12,10 +12,10 @@ public class YesNoDialog {
 			YesNoDialog.NEGATIVE + "'";
 	private String answer;
 
-	public void read(String message) {
+	public void read(final String message) {
 		assert message != null;
 
-		Console console = Console.getInstance();
+		final Console console = Console.getInstance();
 		boolean ok;
 		do {
 			console.write(message);

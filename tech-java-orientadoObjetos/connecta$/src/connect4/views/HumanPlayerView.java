@@ -15,13 +15,13 @@ public class HumanPlayerView extends PlayerView {
         int column;
         boolean valid;
         do {
-            Message.TURN.writelnFormated(this.getPlayer().getColor().getString());
+            messageView.writelnFormated(Message.TURN, this.getPlayer().getColor().getString());
             InIntervalDialog inIntervalDialog = new InIntervalDialog(1, Coordinate.NUMBER_COLUMNS);
-            inIntervalDialog.read(Message.ENTER_COLUMN_TO_DROP.toString());
+            inIntervalDialog.read(Message.ASK_COLUMN_TO_DROP.toString());
             column = inIntervalDialog.getAnswer() - 1;
             valid = !this.getPlayer().isComplete(column);
             if (!valid) {
-                Message.COMPLETED_COLUMN.writeln();
+                messageView.writeln(Message.ERR_COMPLETED_COLUMN_TO_DROP);
             }
         } while (!valid);
         return column;

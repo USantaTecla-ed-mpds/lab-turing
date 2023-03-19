@@ -1,7 +1,5 @@
 package connect4.utils;
 
-import connect4.models.Message;
-
 public abstract class IntDialog {
     protected String message;
     public String errorMessage;

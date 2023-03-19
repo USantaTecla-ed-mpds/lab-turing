@@ -5,14 +5,16 @@ import connect4.models.Board;
 import connect4.models.Message;
 import connect4.models.Turn;
 import connect4.views.BoardView;
+import connect4.views.MessageView;
 import connect4.views.TurnView;
 
 public class Connect4 {
 
-    private Board board;
-    private Turn turn;
-    private BoardView boardView;
-    private TurnView turnView;
+    private final Board board;
+    private final Turn turn;
+    private final BoardView boardView;
+    private final TurnView turnView;
+    private final MessageView messageView = new MessageView();
 
     public Connect4() {
         this.board = new Board();
@@ -30,8 +32,7 @@ public class Connect4 {
     private void playGame() {
 
         this.turnView.initPlayers();
-
-        Message.TITLE.writeln();
+        this.messageView.writeln(Message.GAME_TITLE);
         this.boardView.writeln();
 
         do {
@@ -42,7 +43,7 @@ public class Connect4 {
     }
 
     private boolean isResumed() {
-        YesNoDialog yesNoDialog = new YesNoDialog();
+        final YesNoDialog yesNoDialog = new YesNoDialog();
         yesNoDialog.read(Message.RESUME.toString());
         if (yesNoDialog.isAffirmative()) {
             this.board.reset();
@@ -50,7 +51,7 @@ public class Connect4 {
         return yesNoDialog.isAffirmative();
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         new Connect4().run();
     }
 

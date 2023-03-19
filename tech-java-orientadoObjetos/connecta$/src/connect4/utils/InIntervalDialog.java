@@ -12,11 +12,11 @@ public class InIntervalDialog extends IntDialog {
         this.min = min;
         this.max = max;
 
-        this.errorMessage = Message.INVALID_NUM_PLAYERS.getFormated(
+        this.errorMessage = Message.ERR_NUM_PLAYERS.getFormatedMessage(
                 String.valueOf(this.min),
                 String.valueOf(this.max));
 
-        this.suffix = Message.SUFIX.getFormated(
+        this.suffix = Message.SUFIX.getFormatedMessage(
                 String.valueOf(this.min),
                 String.valueOf(this.max));
     }
