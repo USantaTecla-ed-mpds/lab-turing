@@ -12,7 +12,9 @@ public class ColorView {
     }
 
     public void write() {
-        MessageView.getInstance().writeFormated(Message.PLAYER_COLOR, String.valueOf(this.color.getCode()));
+        MessageView.getInstance().writeFormated(
+                Message.PLAYER_COLOR,
+                String.valueOf(this.color.getCode()));
     }
 
     public String toString() {
