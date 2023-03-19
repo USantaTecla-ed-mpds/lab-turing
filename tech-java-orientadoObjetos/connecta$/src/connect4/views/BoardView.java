@@ -3,7 +3,6 @@ package connect4.views;
 import connect4.models.Board;
 import connect4.models.Coordinate;
 import connect4.models.Message;
-import connect4.utils.Console;
 
 public class BoardView {
     static int BLANK_SPACES = 4;
@@ -21,8 +20,7 @@ public class BoardView {
                 new ColorView(this.board.getColor(new Coordinate(i, j))).write();
                 Message.VERTICAL_LINE.write();
             }
-            Console.getInstance().writeln("");
-            // new Message("").writeln();
+            Message.BLANK.writeln();
         }
         this.writeHorizontal();
     }

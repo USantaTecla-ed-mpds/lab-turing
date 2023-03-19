@@ -1,6 +1,5 @@
 package connect4.views;
 
-import connect4.utils.Console;
 import connect4.utils.InIntervalDialog;
 import connect4.models.Coordinate;
 import connect4.models.HumanPlayer;

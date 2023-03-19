@@ -16,8 +16,9 @@ public enum Message {
     ENTER_COLUMN_TO_DROP("Enter a column to drop a token: "),
     INVALID_COLUMN("Invalid columnn!!! Values [{0}-{1}]"),
     COMPLETED_COLUMN("Invalid column!!! It's completed"),
-    RANDOM_COLUMN("Choosed radom column: "),
-    PLAYER_WIN("WIN!!!"),
+    RANDOM_COLUMN("Choosed Random column: {0}"),
+    MINMAX_COLUMN("Choosed MinMax column: {0}"),
+    PLAYER_WIN("{0} WIN!!!"),
     PLAYERS_TIED("TIED!!!"),
     RESUME("Do you want to continue"),
     TYPE_MACHINE("Enter Random (1) or IA Machine Player (2) for Player {0}: ");
