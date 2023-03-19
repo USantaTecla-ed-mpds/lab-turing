@@ -12,8 +12,12 @@ public abstract class PlayerView {
         this.messageView = new MessageView();
     }
 
-    public void writeWinner() {
+    protected void showWinner() {
         this.messageView.writelnFormated(Message.PLAYER_WIN, this.player.getColor().getString());
+    }
+
+    protected void showPlayerTurn() {
+        this.messageView.writelnFormated(Message.TURN, this.getPlayer().getColor().getString());
     }
 
     public abstract int getColumn();

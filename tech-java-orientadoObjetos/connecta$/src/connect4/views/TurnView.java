@@ -58,7 +58,7 @@ public class TurnView implements PlayerVisitor {
 
     public void writeResult() {
         if ((this.turn.getBoard()).isWinner()) {
-            this.activePlayerView.writeWinner();
+            this.activePlayerView.showWinner();
         } else {
             this.messageView.writeln(Message.PLAYERS_TIED);
         }

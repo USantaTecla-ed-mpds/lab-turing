@@ -15,7 +15,7 @@ public class HumanPlayerView extends PlayerView {
         int column;
         boolean valid;
         do {
-            messageView.writelnFormated(Message.TURN, this.getPlayer().getColor().getString());
+            super.showPlayerTurn();
             InIntervalDialog inIntervalDialog = new InIntervalDialog(1, Coordinate.NUMBER_COLUMNS);
             inIntervalDialog.read(Message.ASK_COLUMN_TO_DROP.toString());
             column = inIntervalDialog.getAnswer() - 1;

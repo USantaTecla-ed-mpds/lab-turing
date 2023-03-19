@@ -10,9 +10,9 @@ public class RandomPlayerView extends PlayerView {
     }
 
     public int getColumn() {
-        messageView.writelnFormated(Message.TURN, this.getPlayer().getColor().name());
+        super.showPlayerTurn();
         int column = ((RandomPlayer) this.player).getColumn();
-        messageView.writelnFormated(Message.SHOW_RANDOM_COLUMN, String.valueOf(column + 1));
+        this.messageView.writelnFormated(Message.SHOW_RANDOM_COLUMN, String.valueOf(column + 1));
         return column;
     }
 }
