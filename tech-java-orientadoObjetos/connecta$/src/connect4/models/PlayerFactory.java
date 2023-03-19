@@ -34,7 +34,13 @@ public enum PlayerFactory {
                 return playerFactory.getPlayer(color, board);
             }
         }
-        return null;
+        return getDefaultPlayer(color, board);
+    }
+
+    private static Player getDefaultPlayer(Color color, Board board) {
+        return PlayerFactory.values().length > 0
+                ? PlayerFactory.values()[0].getPlayer(color, board)
+                : null;
     }
 
 }

@@ -14,13 +14,14 @@ public class Connect4 {
     private final Turn turn;
     private final BoardView boardView;
     private final TurnView turnView;
-    private final MessageView messageView = new MessageView();
+    private final MessageView messageView;
 
     public Connect4() {
         this.board = new Board();
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
         this.turnView = new TurnView(this.turn);
+        this.messageView = new MessageView();
     }
 
     private void run() {
@@ -33,11 +34,11 @@ public class Connect4 {
 
         this.turnView.initPlayers();
         this.messageView.writeln(Message.GAME_TITLE);
-        this.boardView.writeln();
+        this.boardView.paintBoard();
 
         do {
             this.turnView.play();
-            this.boardView.writeln();
+            this.boardView.paintBoard();
         } while (!this.board.isFinished());
         this.turnView.writeResult();
     }

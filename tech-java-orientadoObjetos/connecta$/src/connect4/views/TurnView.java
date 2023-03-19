@@ -14,11 +14,12 @@ import connect4.models.Turn;
 public class TurnView implements PlayerVisitor {
     private final Turn turn;
     private PlayerView activePlayerView;
-    private final MessageView messageView = new MessageView();
+    private final MessageView messageView;
 
     public TurnView(final Turn turn) {
         super();
         this.turn = turn;
+        this.messageView = new MessageView();
     }
 
     public void initPlayers() {
@@ -59,7 +60,7 @@ public class TurnView implements PlayerVisitor {
         if ((this.turn.getBoard()).isWinner()) {
             this.activePlayerView.writeWinner();
         } else {
-            messageView.writeln(Message.PLAYERS_TIED);
+            this.messageView.writeln(Message.PLAYERS_TIED);
         }
     }
 
