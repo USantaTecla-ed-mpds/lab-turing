@@ -21,54 +21,52 @@ public class Board {
 
     public void dropToken(int column, Color color) {
         this.lastDrop = new Coordinate(0, column);
-        while (!this.isEmpty(this.lastDrop)) {
+        while (!this.isEmptyPosition(this.lastDrop)) {
             this.lastDrop = this.lastDrop.shifted(Direction.NORTH.getCoordinate());
         }
         this.colors[this.lastDrop.getRow()][this.lastDrop.getColumn()] = color;
     }
 
-    public boolean isEmpty() {
-        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isEmpty(i)) {
-                return false;
-            }
-        }
-        return true;
+    private boolean isEmptyPosition(Coordinate coordinate) {
+        return this.isOccupied(coordinate, Color.NULL);
     }
 
-    public boolean isEmpty(int value) {
-
-        return this.isEmpty(new Coordinate(0, value));
-
-    }
-
-    public boolean isEmpty(Coordinate value) {
-
-        return this.isOccupied(value, Color.NULL);
-
-    }
-
-    public boolean isOccupied(Coordinate coordinate, Color color) {
+    private boolean isOccupied(Coordinate coordinate, Color color) {
         return this.getColor(coordinate) == color;
     }
 
-    public boolean isComplete() {
-
+    private boolean isComplete() {
         for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isComplete(i)) {
+            if (!this.isCompleteColumn(i)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean isComplete(int column) {
-
-        return !this.isEmpty(new Coordinate(Coordinate.NUMBER_ROWS - 1, column));
-
+    public boolean isCompleteColumn(int column) {
+        return !this.isEmptyPosition(new Coordinate(Coordinate.NUMBER_ROWS - 1, column));
     }
 
-    public boolean isFinished() {
+    public int[] getUncompletedColumns() {
+        int counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isCompleteColumn(i)) {
+                counter++;
+            }
+        }
+        int[] uncompletedColumns = new int[counter];
+        counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isCompleteColumn(i)) {
+                uncompletedColumns[counter] = i;
+                counter++;
+            }
+        }
+        return uncompletedColumns;
+    }
+
+    public boolean isGameFinished() {
         return this.isComplete() || this.isWinner();
     }
 
@@ -166,31 +164,13 @@ public class Board {
         this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
     }
 
-    public int[] getUncompletedColumns() {
-        int counter = 0;
-        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isComplete(i)) {
-                counter++;
-            }
-        }
-        int[] uncompletedColumns = new int[counter];
-        counter = 0;
-        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isComplete(i)) {
-                uncompletedColumns[counter] = i;
-                counter++;
-            }
-        }
-        return uncompletedColumns;
-    }
-
     public void removeTop(int column) {
         this.setColor(this.getTop(column), Color.NULL);
     }
 
-    public Coordinate getTop(int column) {
+    private Coordinate getTop(int column) {
         Coordinate coordinate = new Coordinate(Coordinate.NUMBER_ROWS - 1, column);
-        while (this.isEmpty(coordinate)) {
+        while (this.isEmptyPosition(coordinate)) {
             coordinate = Direction.SOUTH.next(coordinate);
         }
         return coordinate;

@@ -6,12 +6,24 @@ import connect4.utils.Console;
 
 public class MessageView {
 
-    public void writelnFormated(Message message, String... values) {
+    private static MessageView instance;
+
+    private MessageView() {
+    }
+
+    public static MessageView getInstance() {
+        if (MessageView.instance == null) {
+            MessageView.instance = new MessageView();
+        }
+        return MessageView.instance;
+    }
+
+    public void writelnFormated(Message message, Object... values) {
         String formattedMessage = MessageFormat.format(message.toString(), values);
         Console.getInstance().writeln(formattedMessage);
     }
 
-    public void writeFormated(Message message, String... values) {
+    public void writeFormated(Message message, Object... values) {
         String formattedMessage = MessageFormat.format(message.toString(), values);
         Console.getInstance().write(formattedMessage);
     }

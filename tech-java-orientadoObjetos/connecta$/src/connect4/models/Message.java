@@ -28,7 +28,7 @@ public enum Message {
         this.message = message;
     }
 
-    public String getFormatedMessage(String... values) {
+    public String getFormatedMessage(Object... values) {
         String formattedMessage = MessageFormat.format(this.message, values);
         return formattedMessage;
     }

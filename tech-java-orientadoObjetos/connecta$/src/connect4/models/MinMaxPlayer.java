@@ -58,7 +58,7 @@ public class MinMaxPlayer extends Player {
     }
 
     private boolean isEnd(int steps) {
-        return steps == this.maxSteps || this.getBoard().isFinished() || this.getBoard().isAlmostWinner();
+        return steps == this.maxSteps || this.getBoard().isGameFinished() || this.getBoard().isAlmostWinner();
     }
 
     private int getCost(boolean isOpposite) {

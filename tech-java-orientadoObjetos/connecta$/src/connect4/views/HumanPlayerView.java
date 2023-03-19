@@ -21,7 +21,7 @@ public class HumanPlayerView extends PlayerView {
             column = inIntervalDialog.getAnswer() - 1;
             valid = !this.getPlayer().isComplete(column);
             if (!valid) {
-                messageView.writeln(Message.ERR_COMPLETED_COLUMN_TO_DROP);
+                MessageView.getInstance().writeln(Message.ERR_COMPLETED_COLUMN_TO_DROP);
             }
         } while (!valid);
         return column;

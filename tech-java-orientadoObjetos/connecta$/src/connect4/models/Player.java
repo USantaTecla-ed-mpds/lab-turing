@@ -18,7 +18,7 @@ public abstract class Player {
     }
 
     public boolean isComplete(int column) {
-        return this.board.isComplete(column);
+        return this.board.isCompleteColumn(column);
     }
 
     public Board getBoard() {

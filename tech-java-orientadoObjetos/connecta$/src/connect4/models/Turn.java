@@ -19,7 +19,7 @@ public class Turn {
 
     public void play(int column) {
         this.players[this.activePlayer].play(column);
-        if (!this.board.isFinished()) {
+        if (!this.board.isGameFinished()) {
             this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
     }
