@@ -82,4 +82,5 @@ public class MinMaxPlayer extends Player {
     public void accept(PlayerVisitor visitor) {
         visitor.visit(this);
     }
+
 }

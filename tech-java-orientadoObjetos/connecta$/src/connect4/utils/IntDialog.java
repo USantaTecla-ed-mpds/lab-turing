@@ -22,7 +22,6 @@ public abstract class IntDialog {
             this.answer = this.readWithSuffix();
             ok = this.isOk();
             if (!ok) {
-                // new Message(this.errorMessage).writeln();
                 Console.getInstance().writeln(this.errorMessage);
             }
         } while (!ok);

@@ -16,4 +16,5 @@ public class RandomPlayer extends Player {
         } while (this.isComplete(column));
         return column;
     }
+
 }
