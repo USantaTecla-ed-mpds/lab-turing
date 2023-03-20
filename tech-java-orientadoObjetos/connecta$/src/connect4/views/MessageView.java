@@ -15,6 +15,7 @@ public class MessageView {
         if (MessageView.instance == null) {
             MessageView.instance = new MessageView();
         }
+
         return MessageView.instance;
     }
 

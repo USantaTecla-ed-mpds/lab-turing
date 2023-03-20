@@ -26,7 +26,7 @@ public class TurnView implements PlayerVisitor {
 
         final Player[] players = new Player[this.turn.getNumberPlayers()];
         for (int i = 0; i < this.turn.getNumberPlayers(); i++) {
-            players[i] = i < inIntervalDialog.getAnswer() ? PlayerFactory.getPlayerByOption(
+            players[i] = i < inIntervalDialog.getAnswer() ? PlayerFactory.buildPlayerFromOption(
                     0,
                     Color.get(i),
                     this.turn.getBoard())
@@ -40,7 +40,7 @@ public class TurnView implements PlayerVisitor {
         final InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
         inIntervalDialog.read(Message.ASK_MACHINE_TYPE.getFormatedMessage(color.getString()));
 
-        final Player player = PlayerFactory.getPlayerByOption(
+        final Player player = PlayerFactory.buildPlayerFromOption(
                 inIntervalDialog.getAnswer(),
                 color,
                 this.turn.getBoard());
