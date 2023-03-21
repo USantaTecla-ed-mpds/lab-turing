@@ -1,6 +1,6 @@
 package main.es.pbover.utils.menu;
 
-abstract class QuitMenu extends Menu {
+public abstract class QuitMenu extends Menu {
 
     private QuitOption quitOption;
 

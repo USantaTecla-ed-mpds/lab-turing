@@ -4,6 +4,13 @@
             "type": "java",
             "name": "Connect4",
             "request": "launch",
+            "mainClass": "main.es.pbover.connecta$.Connect4",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
+            "name": "Connect4",
+            "request": "launch",
             "mainClass": "connect4.Connect4",
             "projectName": ""
         },

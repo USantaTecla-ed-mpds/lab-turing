@@ -5,7 +5,7 @@ import java.util.List;
 
 import main.es.pbover.utils.Console;
 
-abstract class Menu {
+public abstract class Menu {
 
     private String title;
     private List<Option> options;
