@@ -6,9 +6,8 @@ import main.es.pbover.connecta$.models.Message;
 
 import main.es.pbover.connecta$.views.BoardView;
 import main.es.pbover.connecta$.views.TurnView;
+import main.es.pbover.connecta$.views.menu.Connect4Menu;
 import main.es.pbover.connecta$.views.MessageView;
-import main.es.pbover.connecta$.views.Connect4Menu;
-
 import main.es.pbover.utils.YesNoDialog;
 
 public class Connect4 {
