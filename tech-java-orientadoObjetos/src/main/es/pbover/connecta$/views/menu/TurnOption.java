@@ -1,4 +1,4 @@
-package main.es.pbover.connecta$.views;
+package main.es.pbover.connecta$.views.menu;
 
 import main.es.pbover.utils.menu.Option;
 import main.es.pbover.connecta$.models.Turn;

@@ -1,4 +1,4 @@
-package main.es.pbover.connecta$.views;
+package main.es.pbover.connecta$.views.menu;
 
 import main.es.pbover.connecta$.models.Turn;
 import main.es.pbover.connecta$.models.HumanPlayer;
