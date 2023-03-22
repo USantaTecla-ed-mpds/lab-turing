@@ -1,4 +1,4 @@
-package main.es.pbover.connect4.models;
+package main.es.pbover.connect4Old.models;
 
 public enum Color {
 
@@ -17,7 +17,7 @@ public enum Color {
     }
 
     public String getString() {
-        return this.name;
+        return this.name();
     }
 
     public Color getOpposite() {

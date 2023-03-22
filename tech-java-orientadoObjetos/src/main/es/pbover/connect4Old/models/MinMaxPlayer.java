@@ -1,4 +1,4 @@
-package main.es.pbover.connect4.models;
+package main.es.pbover.connect4Old.models;
 
 public class MinMaxPlayer extends Player {
     private final int maxSteps = 6;
@@ -6,8 +6,8 @@ public class MinMaxPlayer extends Player {
     private static int OTHER_COST = 0;
     private static int MIN_COST = -2;
 
-    public MinMaxPlayer(Board board) {
-        super(board);
+    public MinMaxPlayer(Color color, Board board) {
+        super(color, board);
     }
 
     public int getColumn() {
@@ -58,7 +58,7 @@ public class MinMaxPlayer extends Player {
     }
 
     private boolean isEnd(int steps) {
-        return steps == this.maxSteps || this.getBoard().isGameFinished() || this.getBoard().isAlmostWinner();
+        return steps == this.maxSteps || this.getBoard().isFinished() || this.getBoard().isAlmostWinner();
     }
 
     private int getCost(boolean isOpposite) {
@@ -82,5 +82,4 @@ public class MinMaxPlayer extends Player {
     public void accept(PlayerVisitor visitor) {
         visitor.visit(this);
     }
-
 }

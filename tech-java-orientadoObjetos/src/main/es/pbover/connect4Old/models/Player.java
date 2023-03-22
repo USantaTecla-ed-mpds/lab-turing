@@ -1,15 +1,11 @@
-package main.es.pbover.connect4.models;
+package main.es.pbover.connect4Old.models;
 
 public abstract class Player {
     private Color color;
     private Board board;
 
-    // public Player(Color color, Board board) {
-    //     this.color = color;
-    //     this.board = board;
-    // }
-
-    public Player(Board board) {
+    public Player(Color color, Board board) {
+        this.color = color;
         this.board = board;
     }
 
@@ -21,12 +17,8 @@ public abstract class Player {
         return this.color;
     }
 
-    public void setColor(Color color){
-        this.color = color;
-    }
-
     public boolean isComplete(int column) {
-        return this.board.isCompleteColumn(column);
+        return this.board.isComplete(column);
     }
 
     public Board getBoard() {

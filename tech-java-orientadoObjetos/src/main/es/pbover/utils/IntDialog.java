@@ -1,6 +1,6 @@
 package main.es.pbover.utils;
 
-import main.es.pbover.connect4.views.Message;
+import main.es.pbover.connect4Old.views.Message;
 
 public abstract class IntDialog {
     protected String message;

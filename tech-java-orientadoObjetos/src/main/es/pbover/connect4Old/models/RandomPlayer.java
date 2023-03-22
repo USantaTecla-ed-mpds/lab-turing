@@ -1,8 +1,8 @@
-package main.es.pbover.connect4.models;
+package main.es.pbover.connect4Old.models;
 
 public class RandomPlayer extends Player {
-    public RandomPlayer(Board board) {
-        super(board);
+    public RandomPlayer(Color color, Board board) {
+        super(color, board);
     }
 
     public void accept(PlayerVisitor visitor) {
@@ -16,5 +16,4 @@ public class RandomPlayer extends Player {
         } while (this.isComplete(column));
         return column;
     }
-
 }

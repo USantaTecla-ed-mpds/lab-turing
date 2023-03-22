@@ -1,20 +1,18 @@
 package main.es.pbover.connect4.views;
 
+import main.es.pbover.connect4.models.Message;
 import main.es.pbover.connect4.models.RandomPlayer;
-import main.es.pbover.utils.Console;
 
-public class RandomPlayerView extends PlayerView{
+public class RandomPlayerView extends PlayerView {
 
-    public RandomPlayerView(RandomPlayer player){
+    public RandomPlayerView(RandomPlayer player) {
         super(player);
     }
 
     public int getColumn() {
-        Message.TURN.write();
-        new Message(new ColorView(this.player.getColor()).toString()).writeln();
+        super.showPlayerTurn();
         int column = ((RandomPlayer) this.player).getColumn();
-        Message.IA_COLUMN.write();
-        Console.getInstance().writeln(column + 1);
+        MessageView.getInstance().writelnFormated(Message.SHOW_RANDOM_COLUMN, String.valueOf(column + 1));
         return column;
     }
 }

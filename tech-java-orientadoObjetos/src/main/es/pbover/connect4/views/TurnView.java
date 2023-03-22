@@ -1,29 +1,18 @@
 package main.es.pbover.connect4.views;
 
 import main.es.pbover.connect4.models.HumanPlayer;
+import main.es.pbover.connect4.models.Message;
 import main.es.pbover.connect4.models.MinMaxPlayer;
 import main.es.pbover.connect4.models.PlayerVisitor;
 import main.es.pbover.connect4.models.RandomPlayer;
 import main.es.pbover.connect4.models.Turn;
-import main.es.pbover.utils.InIntervalDialog;
-
 public class TurnView implements PlayerVisitor {
-    private Turn turn;
+    private final Turn turn;
     private PlayerView activePlayerView;
 
-    public TurnView(Turn turn) {
+    public TurnView(final Turn turn) {
         super();
         this.turn = turn;
-    }
-    public void getNumberOfHumanPlayers() { 
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
-        inIntervalDialog.read(Message.NUM_PLAYERS.toString());
-        this.turn.reset(inIntervalDialog.getAnswer());
-    }
-    public void getMachineTypePlayer() { 
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
-        inIntervalDialog.read(Message.TYPE_MACHINE.toString());
-        this.turn.setTypeMachine(inIntervalDialog.getAnswer());
     }
 
     public void play() {
@@ -33,18 +22,21 @@ public class TurnView implements PlayerVisitor {
 
     public void writeResult() {
         if ((this.turn.getBoard()).isWinner()) {
-            this.activePlayerView.writeWinner();
+            this.activePlayerView.showWinner();
         } else {
-            Message.PLAYERS_TIED.writeln();
+            MessageView.getInstance().writeln(Message.PLAYERS_TIED);
         }
     }
-    public void visit(HumanPlayer humanPlayer) {
+
+    public void visit(final HumanPlayer humanPlayer) {
         this.activePlayerView = new HumanPlayerView(humanPlayer);
     }
-    public void visit(RandomPlayer randomPlayer) {
+
+    public void visit(final RandomPlayer randomPlayer) {
         this.activePlayerView = new RandomPlayerView(randomPlayer);
     }
-    public void visit(MinMaxPlayer minMaxPlayer) {
+
+    public void visit(final MinMaxPlayer minMaxPlayer) {
         this.activePlayerView = new MinMaxPlayerView(minMaxPlayer);
     }
 }

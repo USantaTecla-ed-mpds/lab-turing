@@ -1,5 +1,6 @@
 package main.es.pbover.connect4.views;
 
+import main.es.pbover.connect4.models.Message;
 import main.es.pbover.connect4.models.Player;
 
 public abstract class PlayerView {
@@ -7,11 +8,15 @@ public abstract class PlayerView {
 
     public PlayerView(Player player) {
         this.player = player;
+
     }
 
-    public void writeWinner() {
-        String message = new ColorView(this.player.getColor()).toString() + Message.PLAYER_WIN.toString();
-        new Message(message).writeln();
+    protected void showWinner() {
+        MessageView.getInstance().writelnFormated(Message.PLAYER_WIN, this.player.getColor().getString());
+    }
+
+    protected void showPlayerTurn() {
+        MessageView.getInstance().writelnFormated(Message.TURN, this.getPlayer().getColor().getString());
     }
 
     public abstract int getColumn();
