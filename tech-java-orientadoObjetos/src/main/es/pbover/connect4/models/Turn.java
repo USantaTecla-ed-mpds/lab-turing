@@ -35,13 +35,13 @@ public class Turn {
     }
 
     public void addPlayer(Player player){
-        int i = 0;
-        while (i < this.players.length && this.players[i] != null) {
-            i++;
-        }
-        if (i < this.players.length) {
-            player.setColor(Color.values()[i]);
-            this.players[i] = player;
+        boolean setPlayer = false;
+        for (int i = 0; i < this.players.length && setPlayer == false; i++) {
+            if(this.players[i] == null){
+                player.setColor(Color.values()[i]);
+                this.players[i] = player;
+                setPlayer = true;
+            }
         }
     }
 }
