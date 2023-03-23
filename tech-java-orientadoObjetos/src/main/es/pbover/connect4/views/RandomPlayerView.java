@@ -1,6 +1,5 @@
 package main.es.pbover.connect4.views;
 
-import main.es.pbover.connect4.models.Message;
 import main.es.pbover.connect4.models.RandomPlayer;
 
 public class RandomPlayerView extends PlayerView {
@@ -12,7 +11,7 @@ public class RandomPlayerView extends PlayerView {
     public int getColumn() {
         super.showPlayerTurn();
         int column = ((RandomPlayer) this.player).getColumn();
-        MessageView.getInstance().writelnFormated(Message.SHOW_RANDOM_COLUMN, String.valueOf(column + 1));
+        MessageManager.getInstance().writelnFormatedMessage("SHOW_RANDOM_COLUMN", String.valueOf(column + 1));
         return column;
     }
 }

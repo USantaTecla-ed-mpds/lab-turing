@@ -1,11 +1,12 @@
 package main.es.pbover.connect4.views;
 
 import main.es.pbover.connect4.models.HumanPlayer;
-import main.es.pbover.connect4.models.Message;
 import main.es.pbover.connect4.models.MinMaxPlayer;
 import main.es.pbover.connect4.models.PlayerVisitor;
 import main.es.pbover.connect4.models.RandomPlayer;
 import main.es.pbover.connect4.models.Turn;
+import main.es.pbover.connect4.views.menu.ConfigTurnMenu;
+
 public class TurnView implements PlayerVisitor {
     private final Turn turn;
     private PlayerView activePlayerView;
@@ -13,6 +14,10 @@ public class TurnView implements PlayerVisitor {
     public TurnView(final Turn turn) {
         super();
         this.turn = turn;
+    }
+
+    public void configTurn() {
+        new ConfigTurnMenu(this.turn).interact();
     }
 
     public void play() {
@@ -24,7 +29,7 @@ public class TurnView implements PlayerVisitor {
         if ((this.turn.getBoard()).isWinner()) {
             this.activePlayerView.showWinner();
         } else {
-            MessageView.getInstance().writeln(Message.PLAYERS_TIED);
+            MessageManager.getInstance().writeln("PLAYERS_TIED");
         }
     }
 

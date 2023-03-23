@@ -3,11 +3,12 @@ package main.es.pbover.connect4.views.menu;
 import main.es.pbover.connect4.models.Player;
 import main.es.pbover.connect4.models.RandomPlayer;
 import main.es.pbover.connect4.models.Turn;
+import main.es.pbover.connect4.views.MessageManager;
 
 public class CreateRandomPlayerOption extends ConfigTurnOption{
 
     public CreateRandomPlayerOption(Turn turn) {
-        super("Random machine", turn);
+        super(MessageManager.getInstance().getMessage("RANDOM"), turn);
     }
 
     @Override

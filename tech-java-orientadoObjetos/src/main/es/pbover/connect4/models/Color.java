@@ -1,10 +1,12 @@
 package main.es.pbover.connect4.models;
 
+import main.es.pbover.connect4.views.MessageManager;
+
 public enum Color {
 
-    RED("Red"),
-    YELLOW("Yellow"),
-    NULL("White");
+    RED(MessageManager.getInstance().getMessage("RED")),
+    YELLOW(MessageManager.getInstance().getMessage("YELLOW")),
+    NULL(MessageManager.getInstance().getMessage("WHITE"));
 
     private String name;
 

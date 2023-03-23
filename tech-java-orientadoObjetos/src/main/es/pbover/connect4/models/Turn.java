@@ -11,6 +11,12 @@ public class Turn {
         this.players = new Player[NUMBER_PLAYERS];
     }
 
+    public void resetPlayers() {
+        for (int i = 0; i < this.players.length; i++){
+            this.players[i]=null;
+        }
+    }
+
     public void reset() {
         this.activePlayer = 0;
     }
@@ -34,13 +40,13 @@ public class Turn {
         return Turn.NUMBER_PLAYERS;
     }
 
-    public void addPlayer(Player player){
-        boolean setPlayer = false;
-        for (int i = 0; i < this.players.length && setPlayer == false; i++) {
-            if(this.players[i] == null){
+    public void addPlayer(Player player) {
+        boolean playerSetted = false;
+        for (int i = 0; i < this.players.length && playerSetted == false; i++) {
+            if (this.players[i] == null) {
                 player.setColor(Color.values()[i]);
                 this.players[i] = player;
-                setPlayer = true;
+                playerSetted = true;
             }
         }
     }
