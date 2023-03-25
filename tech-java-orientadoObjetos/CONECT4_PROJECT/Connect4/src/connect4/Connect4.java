@@ -9,11 +9,11 @@ import java.io.ObjectOutputStream;
 
 import connect4.models.Board;
 import connect4.models.Turn;
-import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.Console;
 import connect4.utils.Language;
 import connect4.utils.MessageManager;
 import connect4.utils.YesNoDialog;
+import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.views.BoardView;
 import connect4.views.TurnView;
 import connect4.views.menu.Connect4Menu;

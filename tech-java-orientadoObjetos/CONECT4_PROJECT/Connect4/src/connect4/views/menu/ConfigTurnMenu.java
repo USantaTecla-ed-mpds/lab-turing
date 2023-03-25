@@ -2,9 +2,9 @@ package connect4.views.menu;
 
 import connect4.models.Color;
 import connect4.models.Turn;
-import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.Console;
 import connect4.utils.MessageManager;
+import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.utils.menu.SequentialMenu;
 
 public class ConfigTurnMenu extends SequentialMenu {

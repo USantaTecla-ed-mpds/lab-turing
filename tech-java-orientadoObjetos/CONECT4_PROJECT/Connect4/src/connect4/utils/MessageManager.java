@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
-import connect4.models.exceptions.MessageNotFoundException;
+import connect4.utils.exceptions.MessageNotFoundException;
 
 public class MessageManager {
 

@@ -3,9 +3,9 @@ package connect4.views.menu;
 import java.io.IOException;
 
 import connect4.Connect4;
-import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.Console;
 import connect4.utils.MessageManager;
+import connect4.utils.exceptions.MessageNotFoundException;
 
 public class LoadGameOption extends Connect4Option {
 

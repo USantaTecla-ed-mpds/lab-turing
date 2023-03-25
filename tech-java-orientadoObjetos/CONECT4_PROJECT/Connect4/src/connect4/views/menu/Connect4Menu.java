@@ -1,7 +1,7 @@
 package connect4.views.menu;
 
 import connect4.Connect4;
-import connect4.models.exceptions.MessageNotFoundException;
+import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.utils.menu.QuitMenu;
 
 public class Connect4Menu extends QuitMenu {

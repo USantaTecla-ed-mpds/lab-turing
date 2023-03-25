@@ -2,7 +2,7 @@ package connect4.utils.menu;
 
 import java.io.IOException;
 
-import connect4.models.exceptions.MessageNotFoundException;
+import connect4.utils.exceptions.MessageNotFoundException;
 
 public abstract class DynamicMenu extends IterativeMenu {
 

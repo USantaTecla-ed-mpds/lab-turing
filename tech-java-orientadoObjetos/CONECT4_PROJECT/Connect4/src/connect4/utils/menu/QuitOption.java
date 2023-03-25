@@ -1,7 +1,7 @@
 package connect4.utils.menu;
 
-import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.MessageManager;
+import connect4.utils.exceptions.MessageNotFoundException;
 
 public class QuitOption extends Option {
 

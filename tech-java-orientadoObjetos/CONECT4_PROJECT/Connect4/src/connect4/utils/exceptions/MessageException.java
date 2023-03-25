@@ -1,4 +1,4 @@
-package connect4.models.exceptions;
+package connect4.utils.exceptions;
 
 public class MessageException extends Exception {
 
