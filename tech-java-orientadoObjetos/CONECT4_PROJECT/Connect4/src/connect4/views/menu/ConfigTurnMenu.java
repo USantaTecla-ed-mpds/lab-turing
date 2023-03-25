@@ -1,5 +1,7 @@
 package connect4.views.menu;
 
+import java.io.IOException;
+
 import connect4.models.Color;
 import connect4.models.Turn;
 import connect4.utils.Console;
@@ -31,7 +33,8 @@ public class ConfigTurnMenu extends SequentialMenu {
     }
 
     @Override
-    public void finalizeSequence() {
+    public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
+        super.interact();
         this.turn.reset();
     }
 

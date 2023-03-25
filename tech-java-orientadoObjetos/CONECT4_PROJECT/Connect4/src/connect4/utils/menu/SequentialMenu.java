@@ -26,8 +26,6 @@ public abstract class SequentialMenu extends Menu {
             this.interact_();
             this.counter++;
         }
-        this.finalizeSequence();
     }
 
-    protected abstract void finalizeSequence();
 }
