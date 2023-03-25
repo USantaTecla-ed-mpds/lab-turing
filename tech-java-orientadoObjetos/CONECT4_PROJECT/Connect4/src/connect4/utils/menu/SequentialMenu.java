@@ -1,5 +1,9 @@
 package connect4.utils.menu;
 
+import java.io.IOException;
+
+import connect4.models.exceptions.MessageNotFoundException;
+
 public abstract class SequentialMenu extends Menu {
 
     protected int steps;
@@ -16,12 +20,12 @@ public abstract class SequentialMenu extends Menu {
     }
 
     @Override
-    public void interact() {
+    public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
         this.addOptions();
-        do {
+        for (int i = 0; i < this.steps; i++) {
             this.interact_();
             this.counter++;
-        } while (this.counter < this.steps);
+        }
         this.finalizeSequence();
     }
 

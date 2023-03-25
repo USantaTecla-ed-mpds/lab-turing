@@ -1,6 +1,8 @@
 package connect4.models;
 
-public class Turn {
+import java.io.Serializable;
+
+public class Turn implements Serializable {
     final static int NUMBER_PLAYERS = 2;
     private Player[] players;
     private int activePlayer;

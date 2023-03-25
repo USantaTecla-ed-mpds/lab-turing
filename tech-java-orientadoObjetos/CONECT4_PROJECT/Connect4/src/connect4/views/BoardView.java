@@ -2,6 +2,7 @@ package connect4.views;
 
 import connect4.models.Board;
 import connect4.models.Coordinate;
+import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.MessageManager;
 
 public class BoardView {
@@ -13,7 +14,7 @@ public class BoardView {
 
     }
 
-    public void paintBoard() {
+    public void paintBoard() throws MessageNotFoundException {
         this.writeHorizontal();
         for (int i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
             MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
@@ -27,7 +28,7 @@ public class BoardView {
         this.writeHorizontal();
     }
 
-    private void writeHorizontal() {
+    private void writeHorizontal() throws MessageNotFoundException {
         for (int i = 0; i < BoardView.BLANK_SPACES * Coordinate.NUMBER_COLUMNS; i++) {
             MessageManager.getInstance().write("HORIZONTAL_LINE_SYMBOL");
         }

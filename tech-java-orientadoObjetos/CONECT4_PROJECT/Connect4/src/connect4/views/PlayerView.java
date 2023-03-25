@@ -1,6 +1,7 @@
 package connect4.views;
 
 import connect4.models.Player;
+import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.MessageManager;
 
 public abstract class PlayerView {
@@ -11,15 +12,15 @@ public abstract class PlayerView {
 
     }
 
-    protected void showWinner() {
+    protected void showWinner() throws MessageNotFoundException {
         MessageManager.getInstance().writeln("PLAYER_WIN", this.player.getColor().getString());
     }
 
-    protected void showPlayerTurn() {
+    protected void showPlayerTurn() throws MessageNotFoundException {
         MessageManager.getInstance().writeln("TURN", this.getPlayer().getColor().getString());
     }
 
-    public abstract int getColumn();
+    public abstract int getColumn() throws MessageNotFoundException;
 
     public Player getPlayer() {
         return this.player;

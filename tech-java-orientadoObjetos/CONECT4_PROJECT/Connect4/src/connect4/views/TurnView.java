@@ -5,6 +5,7 @@ import connect4.models.MinMaxPlayer;
 import connect4.models.PlayerVisitor;
 import connect4.models.RandomPlayer;
 import connect4.models.Turn;
+import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.MessageManager;
 
 public class TurnView implements PlayerVisitor {
@@ -16,12 +17,12 @@ public class TurnView implements PlayerVisitor {
         this.turn = turn;
     }
 
-    public void play() {
+    public void play() throws MessageNotFoundException {
         this.turn.getActivePlayer().accept(this);
         this.turn.play(this.activePlayerView.getColumn());
     }
 
-    public void writeResult() {
+    public void writeResult() throws MessageNotFoundException {
         if ((this.turn.getBoard()).isWinner()) {
             this.activePlayerView.showWinner();
         } else {

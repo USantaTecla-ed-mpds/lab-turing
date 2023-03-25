@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
+import connect4.models.exceptions.MessageNotFoundException;
+
 public class MessageManager {
 
     private Language language;
@@ -18,15 +20,7 @@ public class MessageManager {
     private MessageManager() {
     }
 
-    public static MessageManager getInstance(String relativePath) throws FileNotFoundException, IOException {
-        if (MessageManager.instance == null) {
-            MessageManager.instance = new MessageManager();
-        }
-        MessageManager.instance.setPath(relativePath);
-        return MessageManager.instance;
-    }
-
-    private void setPath(String path) {
+    public void setPath(String path) {
         this.relativePath = path;
     }
 
@@ -57,31 +51,42 @@ public class MessageManager {
         input.close();
     }
 
-    public String getMessage(String key) {
+    public String getMessage(String key) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         return this.messages.get(key);
     }
 
-    public String getFormatedMessage(String key, Object... values) {
+    public String getFormatedMessage(String key, Object... values) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         String formattedMessage = MessageFormat.format(this.messages.get(key), values);
         return formattedMessage;
     }
 
-    public void write(String key) {
+    public void write(String key) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         Console.getInstance().write(this.messages.get(key));
     }
 
-    public void write(String key, Object... values) {
+    public void write(String key, Object... values) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         String formattedMessage = MessageFormat.format(this.messages.get(key), values);
         Console.getInstance().write(formattedMessage);
     }
 
-    public void writeln(String key) {
+    public void writeln(String key) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         Console.getInstance().writeln(this.messages.get(key));
     }
 
-    public void writeln(String key, Object... values) {
+    public void writeln(String key, Object... values) throws MessageNotFoundException {
+        checkIfMessageExist(key);
         String formattedMessage = MessageFormat.format(this.messages.get(key), values);
         Console.getInstance().writeln(formattedMessage);
+    }
+
+    private void checkIfMessageExist(String key) throws MessageNotFoundException {
+        if (!this.messages.containsKey(key))
+            throw new MessageNotFoundException("Mensaje no encontrado", key);
     }
 
 }

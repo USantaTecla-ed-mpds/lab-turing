@@ -1,6 +1,7 @@
 package connect4.views;
 
 import connect4.models.MinMaxPlayer;
+import connect4.models.exceptions.MessageNotFoundException;
 import connect4.utils.MessageManager;
 
 public class MinMaxPlayerView extends PlayerView {
@@ -9,7 +10,7 @@ public class MinMaxPlayerView extends PlayerView {
         super(player);
     }
 
-    public int getColumn() {
+    public int getColumn() throws MessageNotFoundException {
         super.showPlayerTurn();
         int column = ((MinMaxPlayer) this.player).getColumn();
         MessageManager.getInstance().writeln("SHOW_MINMAX_COLUMN", String.valueOf(column + 1));

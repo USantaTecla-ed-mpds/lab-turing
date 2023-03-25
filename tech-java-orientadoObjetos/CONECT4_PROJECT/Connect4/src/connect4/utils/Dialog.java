@@ -1,34 +1,34 @@
 package connect4.utils;
 
-public abstract class IntDialog {
+public abstract class Dialog<E> {
+    protected String suffix;
     protected String message;
     public String errorMessage;
-    protected String suffix;
-    protected int answer;
+    protected E answer;
 
-    public IntDialog() {
+    public Dialog() {
         this.message = "";
-        this.suffix = "";
         this.errorMessage = "";
     }
 
-    public void read(String message) {
+    public void show(String message) {
+        this.message = message;
         boolean ok;
         do {
             Console.getInstance().write(message);
-            this.answer = this.readWithSuffix();
-            ok = this.isOk();
+            this.answer = this.askAnswer();
+            ok = this.isAnswerOk();
             if (!ok) {
                 Console.getInstance().writeln(this.errorMessage);
             }
         } while (!ok);
     }
 
-    public abstract int readWithSuffix();
+    protected abstract E askAnswer();
 
-    protected abstract boolean isOk();
+    protected abstract boolean isAnswerOk();
 
-    public int getAnswer() {
+    public E getAnswer() {
         return this.answer;
     }
 }

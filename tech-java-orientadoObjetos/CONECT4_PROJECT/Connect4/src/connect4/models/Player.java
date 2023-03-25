@@ -1,6 +1,8 @@
 package connect4.models;
 
-public abstract class Player {
+import java.io.Serializable;
+
+public abstract class Player implements Serializable{
     private Color color;
     private Board board;
 

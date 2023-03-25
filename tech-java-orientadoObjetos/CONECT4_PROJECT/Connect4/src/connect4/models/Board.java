@@ -1,6 +1,8 @@
 package connect4.models;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable{
 
     public static final int LINE_LENGTH = 4;
     private Color[][] colors;

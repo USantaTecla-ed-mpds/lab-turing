@@ -1,6 +1,9 @@
 package connect4.views.menu;
 
+import java.io.IOException;
+
 import connect4.Connect4;
+import connect4.models.exceptions.MessageNotFoundException;
 
 public class StartNewGameOption extends Connect4Option {
 
@@ -9,7 +12,7 @@ public class StartNewGameOption extends Connect4Option {
     }
 
     @Override
-    public void interact() {
+    public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
         new ConfigTurnMenu(this.connect4.getTurn()).interact();
     }
 
