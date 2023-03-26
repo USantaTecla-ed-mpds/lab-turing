@@ -58,14 +58,11 @@ public class Connect4 {
 
     public void play() throws MessageNotFoundException, IOException, ClassNotFoundException {
         this.boardView.paintBoard();
-
         do {
             this.turnView.play();
             this.boardView.paintBoard();
         } while (!this.board.isGameFinished());
-
         this.turnView.writeResult();
-
     }
 
     public void checkExit() throws MessageNotFoundException {
@@ -77,7 +74,8 @@ public class Connect4 {
             this.run();
     }
 
-    public static void main(final String[] args) throws FileNotFoundException, IOException, MessageNotFoundException {
+    public static void main(final String[] args)
+            throws FileNotFoundException, IOException, MessageNotFoundException {
         new Connect4().run();
     }
 

@@ -2,20 +2,20 @@ package connect4.utils.menu;
 
 import connect4.utils.exceptions.MessageNotFoundException;
 
-public abstract class SimpleMenu extends Menu {
+public abstract class QuitMenu extends Menu {
 
-    public SimpleMenu(String title) throws MessageNotFoundException {
+    public QuitMenu(String title) throws MessageNotFoundException {
         super(title);
 
     }
 
     @Override
     protected void showTitles() throws MessageNotFoundException {
-        this.addquitOption();
+        this.addQuitOption();
         super.showTitles();
     }
 
-    protected void addquitOption() {
+    protected void addQuitOption() throws MessageNotFoundException {
     }
 
 }

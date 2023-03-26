@@ -22,6 +22,7 @@ public abstract class SequentialMenu extends Menu {
     @Override
     public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
         this.addOptions();
+        
         for (int i = 0; i < this.steps; i++) {
             this.interact_();
             this.counter++;
