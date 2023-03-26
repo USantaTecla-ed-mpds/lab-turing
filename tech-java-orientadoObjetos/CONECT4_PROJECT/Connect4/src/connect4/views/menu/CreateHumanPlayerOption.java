@@ -1,8 +1,9 @@
 package connect4.views.menu;
 
-import connect4.models.HumanPlayer;
 import connect4.models.Player;
 import connect4.models.Turn;
+import connect4.models.creator.HumanPlayerCreator;
+import connect4.models.creator.PlayerCreator;
 import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.views.MessageManager;
 
@@ -14,7 +15,8 @@ public class CreateHumanPlayerOption extends ConfigTurnOption {
 
     @Override
     public void interact() {
-        Player activePlayer = new HumanPlayer(this.turn.getBoard());
+        PlayerCreator creator = new HumanPlayerCreator();
+        Player activePlayer = creator.createPlayer(this.turn.getBoard());
         this.turn.addPlayer(activePlayer);
     }
 }

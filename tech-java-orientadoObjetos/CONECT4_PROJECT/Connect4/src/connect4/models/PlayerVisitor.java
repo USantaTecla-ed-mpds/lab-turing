@@ -6,4 +6,5 @@ public interface PlayerVisitor {
     void visit(RandomPlayer randomPlayer);
 
     void visit(MinMaxPlayer minMaxPlayer);
+
 }

@@ -13,7 +13,6 @@ public class HumanPlayerView extends PlayerView {
     }
 
     public int getColumn() throws MessageNotFoundException {
-
         int column;
         boolean valid = false;
         do {
@@ -35,6 +34,7 @@ public class HumanPlayerView extends PlayerView {
             }
 
         } while (!valid);
+
         return column;
     }
 }
