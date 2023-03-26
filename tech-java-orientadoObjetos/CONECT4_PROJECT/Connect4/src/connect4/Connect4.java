@@ -20,7 +20,6 @@ public class Connect4 {
     private Turn turn;
     private BoardView boardView;
     private TurnView turnView;
-    private Connect4Menu connect4Menu;
     private final MessageManager messageManager;
     private final String resourcesPath = "resources/";
 
@@ -34,26 +33,26 @@ public class Connect4 {
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
         this.turnView = new TurnView(this);
-        this.connect4Menu = new Connect4Menu(this);
         this.connect4GameSaver = new Connect4GameSaver(this);
+    }
+
+    public static void main(final String[] args)
+            throws FileNotFoundException, IOException, MessageNotFoundException {
+        new Connect4().run();
     }
 
     private void run() {
         try {
-            this.connect4Menu = new Connect4Menu(this);
+            new Connect4Menu(this).interact();
             this.board.reset();
-            this.showMainMenu();
+            this.messageManager.writeln("GAME_TITLE");
+
         } catch (final MessageNotFoundException messageNotFoundException) {
             Console.getInstance().writeln(messageNotFoundException.getMessage());
         } catch (final Exception exception) {
             Console.getInstance().writeln(exception.getMessage());
         }
 
-    }
-
-    private void showMainMenu() throws MessageNotFoundException, IOException, ClassNotFoundException {
-        this.messageManager.writeln("GAME_TITLE");
-        this.connect4Menu.interact();
     }
 
     public void play() throws MessageNotFoundException, IOException, ClassNotFoundException {
@@ -72,11 +71,6 @@ public class Connect4 {
             System.exit(0);
         } else
             this.run();
-    }
-
-    public static void main(final String[] args)
-            throws FileNotFoundException, IOException, MessageNotFoundException {
-        new Connect4().run();
     }
 
     public void saveGame() throws MessageNotFoundException, IOException {
