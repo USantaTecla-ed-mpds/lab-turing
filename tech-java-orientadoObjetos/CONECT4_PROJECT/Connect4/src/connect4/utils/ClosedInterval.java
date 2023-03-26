@@ -28,4 +28,12 @@ public class ClosedInterval {
 		return true;
 	}
 
+	public int getMax() {
+		return this.max;
+	}
+
+	public int getMin() {
+		return this.min;
+	}
+
 }

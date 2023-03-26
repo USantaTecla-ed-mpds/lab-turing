@@ -1,14 +1,10 @@
 package connect4;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import connect4.models.Board;
 import connect4.models.Turn;
+import connect4.utils.Connect4GameSaver;
 import connect4.utils.Console;
 import connect4.utils.Language;
 import connect4.utils.MessageManager;
@@ -24,91 +20,105 @@ public class Connect4 {
     private Turn turn;
     private BoardView boardView;
     private TurnView turnView;
-    private final Connect4Menu connect4Menu;
-    private MessageManager messageManager;
+    private Connect4Menu connect4Menu;
+    private final MessageManager messageManager;
     private final String resourcesPath = "resources/";
-    private final String savedGamesPath = "history/";
+
+    private Connect4GameSaver connect4GameSaver;
 
     public Connect4() throws IOException, MessageNotFoundException {
         this.messageManager = MessageManager.getInstance();
         this.messageManager.setPath(this.resourcesPath);
         this.messageManager.setLanguage(Language.SPANISH);
-
         this.board = new Board();
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
-        this.turnView = new TurnView(this.turn);
+        this.turnView = new TurnView(this);
         this.connect4Menu = new Connect4Menu(this);
-
+        this.connect4GameSaver = new Connect4GameSaver(this);
     }
 
     private void run() {
-
         try {
-
-            do {
-                this.playGame();
-            } while (this.isResumed());
-
-        } catch (MessageNotFoundException messageNotFoundException) {
+            this.connect4Menu = new Connect4Menu(this);
+            this.board.reset();
+            this.showMainMenu();
+        } catch (final MessageNotFoundException messageNotFoundException) {
             Console.getInstance().writeln(messageNotFoundException.getMessage());
-        } catch (Exception exception) {
+        } catch (final Exception exception) {
             Console.getInstance().writeln(exception.getMessage());
         }
 
     }
 
-    private void playGame() throws MessageNotFoundException, IOException, ClassNotFoundException {
+    private void showMainMenu() throws MessageNotFoundException, IOException, ClassNotFoundException {
         this.messageManager.writeln("GAME_TITLE");
         this.connect4Menu.interact();
+    }
+
+    public void play() throws MessageNotFoundException, IOException, ClassNotFoundException {
         this.boardView.paintBoard();
+
         do {
             this.turnView.play();
             this.boardView.paintBoard();
-
-            final YesNoDialog saveDialog = new YesNoDialog();
-            saveDialog.show(this.messageManager.getMessage("SAVE_GAME"));
-            if (saveDialog.isAffirmative()) {
-                final String fileName = Console.getInstance()
-                        .readString(this.messageManager.getMessage("ENTER_FILE_NAME"));
-                this.saveGame(fileName);
-            }
         } while (!this.board.isGameFinished());
+
         this.turnView.writeResult();
+
     }
 
-    private boolean isResumed() throws MessageNotFoundException {
+    public void checkExit() throws MessageNotFoundException {
         final YesNoDialog yesNoDialog = new YesNoDialog();
-        yesNoDialog.show(this.messageManager.getMessage("RESUME"));
+        yesNoDialog.show(this.messageManager.getMessage("ASK_EXIT"));
         if (yesNoDialog.isAffirmative()) {
-            this.board.reset();
-        }
-        return yesNoDialog.isAffirmative();
+            System.exit(0);
+        } else
+            this.run();
     }
 
     public static void main(final String[] args) throws FileNotFoundException, IOException, MessageNotFoundException {
         new Connect4().run();
     }
 
+    public void saveGame() throws MessageNotFoundException, IOException {
+        final YesNoDialog saveDialog = new YesNoDialog();
+        saveDialog.show(this.messageManager.getMessage("SAVE_GAME"));
+        if (saveDialog.isAffirmative()) {
+            final String fileName = Console.getInstance()
+                    .readString(this.messageManager.getMessage("ENTER_FILE_NAME"));
+            this.connect4GameSaver.saveGame(fileName);
+        }
+    }
+
+    public void loadGame(String resourcesPath) throws ClassNotFoundException, IOException {
+        this.connect4GameSaver.loadGame(resourcesPath);
+    }
+
     public Turn getTurn() {
         return this.turn;
     }
 
-    public void saveGame(String fileName) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savedGamesPath + fileName))) {
-            oos.writeObject(board);
-            oos.writeObject(turn);
-        }
+    public Board getBoard() {
+        return this.board;
     }
 
-    public void loadGame(String fileName) throws IOException, ClassNotFoundException {
+    public BoardView getBoardView() {
+        return this.boardView;
+    }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savedGamesPath + fileName))) {
-            board = (Board) ois.readObject();
-            turn = (Turn) ois.readObject();
-            this.boardView = new BoardView(board);
-            this.turnView = new TurnView(turn);
-        }
+    public TurnView getTurnView() {
+        return this.turnView;
+    }
+
+    public void setTurn(Turn turn) {
+        this.turn = turn;
+        this.turnView = new TurnView(this);
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        this.boardView = new BoardView(board);
     }
 
 }

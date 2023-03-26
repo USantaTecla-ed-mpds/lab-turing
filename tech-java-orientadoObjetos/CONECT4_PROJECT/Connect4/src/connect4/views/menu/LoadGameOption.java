@@ -19,6 +19,8 @@ public class LoadGameOption extends Connect4Option {
                 .readString(MessageManager.getInstance().getMessage("ENTER_FILE_NAME"));
 
         this.connect4.loadGame(fileName);
+        this.connect4.play();
+
     }
 
 }

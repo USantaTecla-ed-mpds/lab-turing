@@ -1,12 +1,15 @@
 package connect4.utils;
 
+import connect4.utils.exceptions.MessageNotFoundException;
+
 public class YesNoDialog extends Dialog<Character> {
 
 	private final char acceptOptionCharacter = 'y';
 	private final char cancelOptionCharacter = 'n';
 
-	public YesNoDialog() {
-		this.suffix = "[y or n]: ";
+	public YesNoDialog() throws MessageNotFoundException {
+		this.suffix = MessageManager.getInstance().getMessage("YESNO_DIALOG_SUFIX");
+		this.errorMessage = MessageManager.getInstance().getMessage("YESNO_DIALOG_ERROR");
 	}
 
 	@Override

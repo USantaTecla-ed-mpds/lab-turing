@@ -1,5 +1,8 @@
 package connect4.views;
 
+import java.io.IOException;
+
+import connect4.Connect4;
 import connect4.models.HumanPlayer;
 import connect4.models.MinMaxPlayer;
 import connect4.models.PlayerVisitor;
@@ -9,17 +12,26 @@ import connect4.utils.MessageManager;
 import connect4.utils.exceptions.MessageNotFoundException;
 
 public class TurnView implements PlayerVisitor {
+    private final Connect4 connect4;
     private final Turn turn;
     private PlayerView activePlayerView;
 
-    public TurnView(final Turn turn) {
+    public TurnView(Connect4 connect4) {
         super();
-        this.turn = turn;
+        this.connect4 = connect4;
+        this.turn = connect4.getTurn();
     }
 
-    public void play() throws MessageNotFoundException {
+    public void play() throws MessageNotFoundException, IOException {
         this.turn.getActivePlayer().accept(this);
-        this.turn.play(this.activePlayerView.getColumn());
+
+        int column = this.activePlayerView.getColumn();
+
+        if (column == -1) {
+            this.connect4.saveGame();
+        } else {
+            this.turn.play(column);
+        }
     }
 
     public void writeResult() throws MessageNotFoundException {

@@ -19,7 +19,7 @@ public class ConfigTurnMenu extends SequentialMenu {
     }
 
     @Override
-    protected void addOptions() {
+    protected void addOptions() throws MessageNotFoundException {
         this.add(new CreateHumanPlayerOption(this.turn));
         this.add(new CreateRandomPlayerOption(this.turn));
         this.add(new CreateIAPlayerOption(this.turn));

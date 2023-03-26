@@ -51,14 +51,12 @@ public abstract class Menu {
         do {
             String msgAskOption = MessageManager.getInstance().getFormatedMessage("ASK_OPTION", this.options.size());
             answer = Console.getInstance().readInt(msgAskOption) - 1;
-            
+
             ok = 0 <= answer && answer <= this.options.size() - 1;
             if (!ok) {
                 MessageManager.getInstance().writeln("OPTION_ERROR");
             }
         } while (!ok);
-
-
         this.options.get(answer).interact();
     }
 
