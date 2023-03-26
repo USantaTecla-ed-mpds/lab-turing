@@ -8,13 +8,13 @@ import java.io.ObjectOutputStream;
 
 import connect4.Connect4;
 
-public class Connect4GameSaver {
+public class GamesManager {
 
     private final String savedGamesPath = "history/";
     private final String savedGameExtension = ".history";
     private Connect4 connect4;
 
-    public Connect4GameSaver(Connect4 connect4) {
+    public GamesManager(Connect4 connect4) {
         this.connect4 = connect4;
     }
 

@@ -3,7 +3,7 @@ package connect4;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import connect4.models.Board;
-import connect4.models.Connect4GameSaver;
+import connect4.models.GamesManager;
 import connect4.models.Turn;
 import connect4.utils.Console;
 import connect4.utils.Language;
@@ -23,7 +23,7 @@ public class Connect4 {
     private final MessageManager messageManager;
     private final String resourcesPath = "resources/";
 
-    private Connect4GameSaver connect4GameSaver;
+    private GamesManager connect4GameSaver;
 
     public Connect4() throws IOException, MessageNotFoundException {
         this.messageManager = MessageManager.getInstance();
@@ -33,7 +33,7 @@ public class Connect4 {
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
         this.turnView = new TurnView(this);
-        this.connect4GameSaver = new Connect4GameSaver(this);
+        this.connect4GameSaver = new GamesManager(this);
     }
 
     public static void main(final String[] args)
