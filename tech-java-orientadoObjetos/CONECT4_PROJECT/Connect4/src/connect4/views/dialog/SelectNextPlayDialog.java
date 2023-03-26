@@ -1,6 +1,10 @@
-package connect4.utils;
+package connect4.views.dialog;
 
+import connect4.utils.ClosedInterval;
+import connect4.utils.Console;
+import connect4.utils.Dialog;
 import connect4.utils.exceptions.MessageNotFoundException;
+import connect4.views.MessageManager;
 
 public class SelectNextPlayDialog extends Dialog<Character> {
 

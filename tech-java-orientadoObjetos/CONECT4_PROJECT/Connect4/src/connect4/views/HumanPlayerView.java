@@ -3,9 +3,8 @@ package connect4.views;
 import connect4.models.Coordinate;
 import connect4.models.HumanPlayer;
 import connect4.utils.ClosedInterval;
-import connect4.utils.SelectNextPlayDialog;
-import connect4.utils.MessageManager;
 import connect4.utils.exceptions.MessageNotFoundException;
+import connect4.views.dialog.SelectNextPlayDialog;
 
 public class HumanPlayerView extends PlayerView {
 

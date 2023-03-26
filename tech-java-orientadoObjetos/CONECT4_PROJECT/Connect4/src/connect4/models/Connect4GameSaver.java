@@ -1,4 +1,4 @@
-package connect4.utils;
+package connect4.models;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import connect4.Connect4;
-import connect4.models.Board;
-import connect4.models.Turn;
 
 public class Connect4GameSaver {
 

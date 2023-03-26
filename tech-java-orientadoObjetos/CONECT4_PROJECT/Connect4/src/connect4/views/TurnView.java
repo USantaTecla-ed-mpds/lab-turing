@@ -8,7 +8,6 @@ import connect4.models.MinMaxPlayer;
 import connect4.models.PlayerVisitor;
 import connect4.models.RandomPlayer;
 import connect4.models.Turn;
-import connect4.utils.MessageManager;
 import connect4.utils.exceptions.MessageNotFoundException;
 
 public class TurnView implements PlayerVisitor {

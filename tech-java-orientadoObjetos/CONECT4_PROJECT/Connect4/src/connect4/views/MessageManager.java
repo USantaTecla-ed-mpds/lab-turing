@@ -1,4 +1,4 @@
-package connect4.utils;
+package connect4.views;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
+import connect4.utils.Console;
+import connect4.utils.Language;
 import connect4.utils.exceptions.MessageNotFoundException;
 
 public class MessageManager {

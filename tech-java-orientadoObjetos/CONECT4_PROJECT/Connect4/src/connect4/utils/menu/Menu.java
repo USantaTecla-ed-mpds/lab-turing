@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connect4.utils.Console;
-import connect4.utils.MessageManager;
 import connect4.utils.exceptions.MessageNotFoundException;
+import connect4.views.MessageManager;
 
 public abstract class Menu {
 

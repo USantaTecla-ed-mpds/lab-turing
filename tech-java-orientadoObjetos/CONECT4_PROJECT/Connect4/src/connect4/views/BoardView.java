@@ -2,7 +2,6 @@ package connect4.views;
 
 import connect4.models.Board;
 import connect4.models.Coordinate;
-import connect4.utils.MessageManager;
 import connect4.utils.exceptions.MessageNotFoundException;
 
 public class BoardView {
