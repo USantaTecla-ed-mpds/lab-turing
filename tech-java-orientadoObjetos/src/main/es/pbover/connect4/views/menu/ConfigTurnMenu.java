@@ -23,7 +23,7 @@ public class ConfigTurnMenu extends SequentialMenu {
 
     @Override
     protected void showTitle() {
-        this.title = MessageManager.getInstance().getFormatedMessage("CONFIG_TURN_MENU_TITLE",Color.get(this.counter).getString());
+        this.title = MessageManager.getInstance().getMessage("CONFIG_TURN_MENU_TITLE",Color.get(this.counter).getString());
         super.showTitle();
     }
 

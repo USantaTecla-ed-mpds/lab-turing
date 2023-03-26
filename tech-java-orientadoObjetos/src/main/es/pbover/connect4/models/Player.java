@@ -4,11 +4,6 @@ public abstract class Player {
     private Color color;
     private Board board;
 
-    // public Player(Color color, Board board) {
-    //     this.color = color;
-    //     this.board = board;
-    // }
-
     public Player(Board board) {
         this.board = board;
     }
@@ -21,7 +16,7 @@ public abstract class Player {
         return this.color;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.color = color;
     }
 

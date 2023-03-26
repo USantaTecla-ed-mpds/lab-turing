@@ -5,7 +5,7 @@ import main.es.pbover.connect4Old.models.MinMaxPlayer;
 import main.es.pbover.connect4Old.models.PlayerVisitor;
 import main.es.pbover.connect4Old.models.RandomPlayer;
 import main.es.pbover.connect4Old.models.Turn;
-import main.es.pbover.utils.InIntervalDialog;
+import main.es.pbover.utils.ClosedIntervalDialog;
 
 public class TurnView implements PlayerVisitor {
     private Turn turn;
@@ -16,14 +16,14 @@ public class TurnView implements PlayerVisitor {
         this.turn = turn;
     }
     public void getNumberOfHumanPlayers() { 
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(0, this.turn.getNumberPlayers());
-        inIntervalDialog.read(Message.NUM_PLAYERS.toString());
-        this.turn.reset(inIntervalDialog.getAnswer());
+        ClosedIntervalDialog closedIntervalDialog = new ClosedIntervalDialog(0, this.turn.getNumberPlayers());
+        closedIntervalDialog.read(Message.NUM_PLAYERS.toString());
+        this.turn.reset(closedIntervalDialog.getAnswer());
     }
     public void getMachineTypePlayer() { 
-        InIntervalDialog inIntervalDialog = new InIntervalDialog(1, 2);
-        inIntervalDialog.read(Message.TYPE_MACHINE.toString());
-        this.turn.setTypeMachine(inIntervalDialog.getAnswer());
+        ClosedIntervalDialog closedIntervalDialog = new ClosedIntervalDialog(1, 2);
+        closedIntervalDialog.read(Message.TYPE_MACHINE.toString());
+        this.turn.setTypeMachine(closedIntervalDialog.getAnswer());
     }
 
     public void play() {

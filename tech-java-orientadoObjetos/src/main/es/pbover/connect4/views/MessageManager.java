@@ -49,7 +49,7 @@ public class MessageManager {
         return this.messages.get(key);
     }
 
-    public String getFormatedMessage(String key, Object... values) {
+    public String getMessage(String key, Object... values) {
         String formattedMessage = MessageFormat.format(this.messages.get(key), values);
         return formattedMessage;
     }
@@ -58,15 +58,16 @@ public class MessageManager {
         Console.getInstance().write(this.messages.get(key));
     }
 
+    public void write(String key, Object... values) {
+        Console.getInstance().write(MessageFormat.format(this.messages.get(key), values));
+
+    }
+
     public void writeln(String key) {
         Console.getInstance().writeln(this.messages.get(key));
     }
 
-    public void writeFormatedMessage(String key, Object... values) {
-        Console.getInstance().write(MessageFormat.format(this.messages.get(key), values));
-
-    }
-    public void writelnFormatedMessage(String key, Object... values) {
+    public void writeln(String key, Object... values) {
         Console.getInstance().writeln(MessageFormat.format(this.messages.get(key), values));
 
     }

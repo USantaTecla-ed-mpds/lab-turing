@@ -11,7 +11,7 @@ public class ColorView {
     }
 
     public void write() {
-        MessageManager.getInstance().writeFormatedMessage(
+        MessageManager.getInstance().write(
                 "PLAYER_COLOR",
                 String.valueOf(this.color.getCode()));
     }

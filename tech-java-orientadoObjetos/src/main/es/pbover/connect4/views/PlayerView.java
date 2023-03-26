@@ -11,11 +11,11 @@ public abstract class PlayerView {
     }
 
     protected void showWinner() {
-        MessageManager.getInstance().writelnFormatedMessage("PLAYER_WIN", this.player.getColor().getString());
+        MessageManager.getInstance().writeln("PLAYER_WIN", this.player.getColor().getString());
     }
 
     protected void showPlayerTurn() {
-        MessageManager.getInstance().writelnFormatedMessage("TURN", this.getPlayer().getColor().getString());
+        MessageManager.getInstance().writeln("TURN", this.getPlayer().getColor().getString());
     }
 
     public abstract int getColumn();

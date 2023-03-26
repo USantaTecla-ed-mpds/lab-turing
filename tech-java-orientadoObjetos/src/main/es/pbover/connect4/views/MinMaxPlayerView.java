@@ -9,9 +9,9 @@ public class MinMaxPlayerView extends PlayerView {
     }
 
     public int getColumn() {
-        super.showPlayerTurn();
+        this.showPlayerTurn();
         int column = ((MinMaxPlayer) this.player).getColumn();
-        MessageManager.getInstance().writelnFormatedMessage("SHOW_MINMAX_COLUMN", String.valueOf(column + 1));
+        MessageManager.getInstance().writeln("SHOW_MINMAX_COLUMN", String.valueOf(column + 1));
         return column;
     }
 }
