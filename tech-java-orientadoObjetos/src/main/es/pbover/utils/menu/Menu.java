@@ -7,7 +7,7 @@ import main.es.pbover.utils.Console;
 
 public abstract class Menu {
 
-    private String title;
+    protected String title;
     private List<Option> options;
 
     public Menu(String title) {
@@ -34,7 +34,7 @@ public abstract class Menu {
         }
     }
 
-    private void showTitle() {
+    protected void showTitle() {
         String string = "\n" + this.title + "\n";
         for (int i = 0; i < this.title.length(); i++) {
             string += "-";
