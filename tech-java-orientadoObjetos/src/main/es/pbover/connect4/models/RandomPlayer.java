@@ -1,6 +1,6 @@
 package main.es.pbover.connect4.models;
 
-public class RandomPlayer extends Player {
+public class RandomPlayer extends MachinePlayer {
     public RandomPlayer(Board board) {
         super(board);
     }

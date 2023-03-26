@@ -1,18 +1,20 @@
 package main.es.pbover.connect4.views;
 
-import main.es.pbover.connect4.models.Player;
+import main.es.pbover.connect4.models.MachinePlayer;
 
-public class MachinePlayerView<E> extends PlayerView {
+public abstract class MachinePlayerView extends PlayerView {
 
-    public MachinePlayerView(E player) {
+    public MachinePlayerView(MachinePlayer player) {
         super(player);
     }
 
     public int getColumn() {
         this.showPlayerTurn();
-        int column = ((E) this.player).getColumn();
-        MessageManager.getInstance().writeln("SHOW_"+E+"_COLUMN", String.valueOf(column + 1)); //
+        int column = ((MachinePlayer) this.player).getColumn();
+        this.showOptionSelected(column);
         return column;
     }
+
+    protected abstract void showOptionSelected(int column);
     
 }

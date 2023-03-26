@@ -1,6 +1,6 @@
 package main.es.pbover.connect4.models;
 
-public class MinMaxPlayer extends Player {
+public class MinMaxPlayer extends MachinePlayer {
     private final int maxSteps = 6;
     private static int MAX_COST = 2;
     private static int OTHER_COST = 0;
