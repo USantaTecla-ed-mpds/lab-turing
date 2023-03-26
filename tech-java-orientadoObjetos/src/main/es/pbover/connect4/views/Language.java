@@ -2,13 +2,13 @@ package main.es.pbover.connect4.views;
 
 public enum Language {
 
-    SPANISH("messages_es.properties"),
-    ENGLISH("messages_en.properties");
+    SPANISH("es"),
+    ENGLISH("en");
 
     private String fileName;
 
     private Language(String fileName) {
-        this.fileName = fileName;
+        this.fileName = "messages_"+fileName+".properties";
     }
 
     public String getFileName() {

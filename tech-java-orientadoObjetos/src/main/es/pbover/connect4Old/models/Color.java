@@ -6,10 +6,7 @@ public enum Color {
     YELLOW("Yellow"),
     NULL("White");
 
-    private String name;
-
     private Color(String name) {
-        this.name = name;
     }
 
     public static Color get(int ordinal) {
