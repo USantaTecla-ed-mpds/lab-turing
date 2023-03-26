@@ -8,7 +8,7 @@ public class MinMaxPlayerView extends MachinePlayerView {
         super(player);
     }
 
-    public void showOptionSelected(int column) {
+    public void showColumnSelected(int column) {
         MessageManager.getInstance().writeln("SHOW_MINMAX_COLUMN", String.valueOf(column + 1));
     }
 }

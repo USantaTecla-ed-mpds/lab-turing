@@ -11,10 +11,10 @@ public abstract class MachinePlayerView extends PlayerView {
     public int getColumn() {
         this.showPlayerTurn();
         int column = ((MachinePlayer) this.player).getColumn();
-        this.showOptionSelected(column);
+        this.showColumnSelected(column);
         return column;
     }
 
-    protected abstract void showOptionSelected(int column);
+    protected abstract void showColumnSelected(int column);
     
 }

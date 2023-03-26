@@ -8,9 +8,9 @@ import main.es.pbover.connect4.models.Turn;
 import main.es.pbover.connect4.views.BoardView;
 import main.es.pbover.connect4.views.TurnView;
 
-import main.es.pbover.connect4.views.Language;
 import main.es.pbover.connect4.views.MessageManager;
 import main.es.pbover.connect4.views.menu.Connect4Menu;
+import main.es.pbover.connect4.views.menu.SelectLanguageMenu;
 import main.es.pbover.utils.YesNoDialog;
 
 public class Connect4 {
@@ -21,7 +21,6 @@ public class Connect4 {
     private final TurnView turnView;
 
     public Connect4() throws FileNotFoundException, IOException {
-        MessageManager.getInstance().setLanguage(Language.SPANISH);
         this.board = new Board();
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
@@ -31,9 +30,7 @@ public class Connect4 {
 
     private void run() {
 
-        Connect4Menu connect4Menu = new Connect4Menu(this);
-        connect4Menu.interact();
-
+        new Connect4Menu(this).interact();
     }
 
     public void playGames() {
@@ -65,6 +62,7 @@ public class Connect4 {
     }
 
     public static void main(final String[] args) throws FileNotFoundException, IOException {
+        new SelectLanguageMenu("SELECT LANGUAGE:").interact();
         new Connect4().run();
     }
 
