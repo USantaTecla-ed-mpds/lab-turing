@@ -3,7 +3,7 @@ package connect4.views.menu;
 import java.io.IOException;
 
 import connect4.Connect4;
-import connect4.utils.Console;
+import connect4.models.GamesManager;
 import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.views.MessageManager;
 
@@ -15,11 +15,9 @@ public class LoadGameOption extends Connect4Option {
 
     @Override
     public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
-        final String fileName = Console.getInstance()
-                .readString(MessageManager.getInstance().getMessage("ENTER_FILE_NAME"));
 
-        this.connect4.loadGame(fileName);
-        this.connect4.play();
+        GamesManager.getInstance().showLoadGameDialog();
+        this.connect4.play(false);
 
     }
 

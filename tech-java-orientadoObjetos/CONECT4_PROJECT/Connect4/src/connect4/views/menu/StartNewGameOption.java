@@ -14,8 +14,7 @@ public class StartNewGameOption extends Connect4Option {
 
     @Override
     public void interact() throws MessageNotFoundException, ClassNotFoundException, IOException {
-        new ConfigTurnMenu(this.connect4.getTurn()).interact();
-        this.connect4.play();
+        this.connect4.play(true);
     }
 
 }

@@ -22,15 +22,20 @@ public class MessageManager {
     private MessageManager() {
     }
 
-    public void setPath(String path) {
-        this.relativePath = path;
-    }
-
     public static MessageManager getInstance() {
         if (MessageManager.instance == null) {
             MessageManager.instance = new MessageManager();
         }
         return MessageManager.instance;
+    }
+
+    public void initialize(String path, Language language) throws FileNotFoundException, IOException {
+        this.setRelativePath(path);
+        this.setLanguage(language);
+    }
+
+    private void setRelativePath(String path) {
+        this.relativePath = path;
     }
 
     public void setLanguage(Language language) throws FileNotFoundException, IOException {
@@ -58,7 +63,7 @@ public class MessageManager {
         return this.messages.get(key);
     }
 
-    public String getFormatedMessage(String key, Object... values) throws MessageNotFoundException {
+    public String getMessage(String key, Object... values) throws MessageNotFoundException {
         checkIfMessageExist(key);
         String formattedMessage = MessageFormat.format(this.messages.get(key), values);
         return formattedMessage;

@@ -17,6 +17,12 @@ public class Turn implements Serializable {
         this.activePlayer = 0;
     }
 
+    public void resetPlayers() {
+        for (int i = 0; i < this.players.length; i++) {
+            this.players[i] = null;
+        }
+    }
+
     public void play(int column) {
         this.players[this.activePlayer].play(column);
         if (!this.board.isGameFinished()) {

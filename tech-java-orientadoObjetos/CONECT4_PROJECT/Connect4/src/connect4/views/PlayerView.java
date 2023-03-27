@@ -1,5 +1,7 @@
 package connect4.views;
 
+import java.io.IOException;
+
 import connect4.models.Player;
 import connect4.utils.exceptions.MessageNotFoundException;
 
@@ -19,7 +21,7 @@ public abstract class PlayerView {
         MessageManager.getInstance().writeln("TURN", this.getPlayer().getColor().getString());
     }
 
-    public abstract int getColumn() throws MessageNotFoundException;
+    public abstract int getColumn() throws MessageNotFoundException, ClassNotFoundException, IOException;
 
     public Player getPlayer() {
         return this.player;

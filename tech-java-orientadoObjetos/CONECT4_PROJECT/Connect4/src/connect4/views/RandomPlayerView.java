@@ -10,8 +10,8 @@ public class RandomPlayerView extends MachinePlayerView {
     }
 
     @Override
-    public void showOptionSelected(int option) throws MessageNotFoundException {
-        MessageManager.getInstance().writeln("SHOW_RANDOM_COLUMN", option);
+    public void showColumnSelected(int column) throws MessageNotFoundException {
+        MessageManager.getInstance().writeln("SHOW_RANDOM_COLUMN", column);
     }
 
 }

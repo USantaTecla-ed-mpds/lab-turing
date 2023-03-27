@@ -10,7 +10,7 @@ import connect4.views.MessageManager;
 
 public abstract class Menu {
 
-    private String title;
+    protected String title;
     private List<Option> options;
 
     public Menu(String title) {
@@ -49,7 +49,7 @@ public abstract class Menu {
         int answer;
         boolean ok;
         do {
-            String msgAskOption = MessageManager.getInstance().getFormatedMessage("ASK_OPTION", this.options.size());
+            String msgAskOption = MessageManager.getInstance().getMessage("ASK_OPTION", this.options.size());
             answer = Console.getInstance().readInt(msgAskOption) - 1;
 
             ok = 0 <= answer && answer <= this.options.size() - 1;

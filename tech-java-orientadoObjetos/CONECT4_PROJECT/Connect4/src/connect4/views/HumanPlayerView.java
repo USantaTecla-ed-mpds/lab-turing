@@ -1,10 +1,10 @@
 package connect4.views;
 
-import connect4.models.Coordinate;
+import java.io.IOException;
+
 import connect4.models.HumanPlayer;
-import connect4.utils.ClosedInterval;
 import connect4.utils.exceptions.MessageNotFoundException;
-import connect4.views.dialog.SelectNextPlayDialog;
+import connect4.views.menu.TurnMenu;
 
 public class HumanPlayerView extends PlayerView {
 
@@ -12,28 +12,31 @@ public class HumanPlayerView extends PlayerView {
         super(player);
     }
 
-    public int getColumn() throws MessageNotFoundException {
-        int column;
-        boolean valid = false;
-        do {
-            super.showPlayerTurn();
+    public int getColumn() throws MessageNotFoundException, ClassNotFoundException, IOException {
 
-            ClosedInterval closedInterval = new ClosedInterval(1, Coordinate.NUMBER_COLUMNS);
-            SelectNextPlayDialog selectNextPlayDialog = new SelectNextPlayDialog(closedInterval, 'g');
-            selectNextPlayDialog.show(MessageManager.getInstance().getMessage("ASK_COLUMN_TO_DROP"));
+        TurnMenu turnMenu = new TurnMenu(MessageManager.getInstance().getMessage("TURN_MENU",
+                this.getPlayer().getColor().getString()));
 
-            if (Character.isDigit(selectNextPlayDialog.getAnswer())) {
-                column = Character.getNumericValue(selectNextPlayDialog.getAnswer()) - 1;
-                valid = !this.getPlayer().isComplete(column);
-                if (!valid) {
-                    MessageManager.getInstance().writeln("ERR_COMPLETED_COLUMN_TO_DROP");
-                }
-            } else {
-                valid = true;
-                column = -1;
-            }
+        turnMenu.interact();
 
-        } while (!valid);
+        int column = 1;
+        /*
+         * boolean valid = false;
+         * do {
+         * super.showPlayerTurn();
+         * ClosedInterval closedInterval = new ClosedInterval(1,
+         * Coordinate.NUMBER_COLUMNS);
+         * SelectCurrentPlayDialog selectCurrentPlayDialog = new
+         * SelectCurrentPlayDialog(closedInterval);
+         * selectCurrentPlayDialog.show(MessageManager.getInstance().getMessage(
+         * "ASK_COLUMN_TO_DROP"));
+         * column = selectCurrentPlayDialog.getAnswer() - 1;
+         * valid = !this.getPlayer().isComplete(column);
+         * if (!valid) {
+         * MessageManager.getInstance().writeln("ERR_COMPLETED_COLUMN_TO_DROP");
+         * }
+         * } while (!valid);
+         */
 
         return column;
     }

@@ -7,22 +7,24 @@ import connect4.views.MessageManager;
 
 public class Connect4Menu extends QuitMenu {
 
-    private Connect4 Connect4;
+    private Connect4 connect4;
 
     public Connect4Menu(Connect4 connect4) throws MessageNotFoundException {
         super(MessageManager.getInstance().getMessage("CONNECT4_MENU"));
-        this.Connect4 = connect4;
+        this.connect4 = connect4;
     }
 
     @Override
     protected void addOptions() throws MessageNotFoundException {
-        this.add(new StartNewGameOption(this.Connect4));
-        this.add(new LoadGameOption(this.Connect4));
+        this.add(new StartNewGameOption(this.connect4));
+        this.add(new LoadGameOption(this.connect4));
+        this.add(new SelectLanguageOption(this.connect4));
+
     }
 
     @Override
     protected void addQuitOption() throws MessageNotFoundException {
-        this.add(new QuitGameOption(this.Connect4));
+        this.add(new QuitGameOption(this.connect4));
     }
 
 }

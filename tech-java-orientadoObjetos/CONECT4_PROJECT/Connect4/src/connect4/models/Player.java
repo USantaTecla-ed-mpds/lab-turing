@@ -1,15 +1,13 @@
 package connect4.models;
 
+import java.io.IOException;
 import java.io.Serializable;
 
-public abstract class Player implements Serializable{
+import connect4.utils.exceptions.MessageNotFoundException;
+
+public abstract class Player implements Serializable {
     private Color color;
     private Board board;
-
-    // public Player(Color color, Board board) {
-    // this.color = color;
-    // this.board = board;
-    // }
 
     public Player(Board board) {
         this.board = board;
@@ -35,5 +33,5 @@ public abstract class Player implements Serializable{
         return this.board;
     }
 
-    public abstract void accept(PlayerVisitor visitor);
+    public abstract void accept(PlayerVisitor visitor) throws MessageNotFoundException, ClassNotFoundException, IOException;
 }

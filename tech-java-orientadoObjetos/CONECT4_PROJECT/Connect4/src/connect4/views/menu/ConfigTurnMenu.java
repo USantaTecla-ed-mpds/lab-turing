@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import connect4.models.Color;
 import connect4.models.Turn;
-import connect4.utils.Console;
 import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.utils.menu.SequentialMenu;
 import connect4.views.MessageManager;
@@ -25,11 +24,11 @@ public class ConfigTurnMenu extends SequentialMenu {
         this.add(new CreateIAPlayerOption(this.turn));
     }
 
+    @Override
     protected void showTitle() throws MessageNotFoundException {
-        String colorKey = Color.get(this.counter).toString();
-        String color = MessageManager.getInstance().getMessage(colorKey);
-        String msg = MessageManager.getInstance().getFormatedMessage("CONFIG_TURN_MENU_TITLE", color);
-        Console.getInstance().writeln(msg);
+        this.title = MessageManager.getInstance().getMessage("CONFIG_TURN_MENU_TITLE",
+                Color.get(this.counter).getString());
+        super.showTitle();
     }
 
     @Override

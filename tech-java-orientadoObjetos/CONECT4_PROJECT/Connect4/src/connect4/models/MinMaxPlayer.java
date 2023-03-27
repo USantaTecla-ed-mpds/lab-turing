@@ -1,5 +1,9 @@
 package connect4.models;
 
+import java.io.IOException;
+
+import connect4.utils.exceptions.MessageNotFoundException;
+
 public class MinMaxPlayer extends MachinePlayer {
     private final int maxSteps = 6;
     private static int MAX_COST = 2;
@@ -79,7 +83,7 @@ public class MinMaxPlayer extends MachinePlayer {
         return MinMaxPlayer.OTHER_COST;
     }
 
-    public void accept(PlayerVisitor visitor) {
+    public void accept(PlayerVisitor visitor) throws MessageNotFoundException, ClassNotFoundException, IOException {
         visitor.visit(this);
     }
 

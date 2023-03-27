@@ -23,17 +23,26 @@ public class Connect4 {
     private final MessageManager messageManager;
     private final String resourcesPath = "resources/";
 
-    private GamesManager connect4GameSaver;
+    private GamesManager gamesManager;
 
     public Connect4() throws IOException, MessageNotFoundException {
+
+        // Configure Messages
         this.messageManager = MessageManager.getInstance();
-        this.messageManager.setPath(this.resourcesPath);
-        this.messageManager.setLanguage(Language.SPANISH);
+        this.messageManager.initialize(this.resourcesPath, Language.SPANISH);
+
+        // Configure Game board and turns
         this.board = new Board();
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
-        this.turnView = new TurnView(this);
-        this.connect4GameSaver = new GamesManager(this);
+        this.turnView = new TurnView(this, this.turn);
+
+        // Configure Games Save / Restore manager
+        this.gamesManager = GamesManager.getInstance();
+        this.gamesManager.initalize(this);
+        this.gamesManager.setTurn(this.turn);
+        this.gamesManager.setBoard(this.board);
+
     }
 
     public static void main(final String[] args)
@@ -43,74 +52,49 @@ public class Connect4 {
 
     private void run() {
         try {
-            new Connect4Menu(this).interact();
-            this.board.reset();
             this.messageManager.writeln("GAME_TITLE");
-
+            new Connect4Menu(this).interact();
         } catch (final MessageNotFoundException messageNotFoundException) {
             Console.getInstance().writeln(messageNotFoundException.getMessage());
         } catch (final Exception exception) {
             Console.getInstance().writeln(exception.getMessage());
         }
-
     }
 
-    public void play() throws MessageNotFoundException, IOException, ClassNotFoundException {
+    public void play(boolean configureTurns) throws MessageNotFoundException, ClassNotFoundException, IOException {
+        do {
+            if (configureTurns)
+                this.turnView.configTurn();
+            this.playGame();
+        } while (this.isResumed());
+    }
+
+    private void playGame() throws MessageNotFoundException, IOException, ClassNotFoundException {
         this.boardView.paintBoard();
         do {
             this.turnView.play();
+
             this.boardView.paintBoard();
         } while (!this.board.isGameFinished());
         this.turnView.writeResult();
     }
 
-    public void checkExit() throws MessageNotFoundException {
+    private boolean isResumed() throws MessageNotFoundException, IOException {
         final YesNoDialog yesNoDialog = new YesNoDialog();
-        yesNoDialog.show(this.messageManager.getMessage("ASK_EXIT"));
+        yesNoDialog.show(MessageManager.getInstance().getMessage("RESUME"));
         if (yesNoDialog.isAffirmative()) {
-            System.exit(0);
+            this.board.reset();
+            this.turn.resetPlayers();
         } else
-            this.run();
+            this.gamesManager.showSaveGameDialog();
+        return yesNoDialog.isAffirmative();
     }
 
-    public void saveGame() throws MessageNotFoundException, IOException {
-        final YesNoDialog saveDialog = new YesNoDialog();
-        saveDialog.show(this.messageManager.getMessage("SAVE_GAME"));
-        if (saveDialog.isAffirmative()) {
-            final String fileName = Console.getInstance()
-                    .readString(this.messageManager.getMessage("ENTER_FILE_NAME"));
-            this.connect4GameSaver.saveGame(fileName);
-        }
-    }
-
-    public void loadGame(String resourcesPath) throws ClassNotFoundException, IOException {
-        this.connect4GameSaver.loadGame(resourcesPath);
-    }
-
-    public Turn getTurn() {
-        return this.turn;
-    }
-
-    public Board getBoard() {
-        return this.board;
-    }
-
-    public BoardView getBoardView() {
-        return this.boardView;
-    }
-
-    public TurnView getTurnView() {
-        return this.turnView;
-    }
-
-    public void setTurn(Turn turn) {
+    public void loadGameView(Board board, Turn turn) throws MessageNotFoundException {
         this.turn = turn;
-        this.turnView = new TurnView(this);
-    }
-
-    public void setBoard(Board board) {
         this.board = board;
         this.boardView = new BoardView(board);
+        this.turnView = new TurnView(this, turn);
     }
 
 }
