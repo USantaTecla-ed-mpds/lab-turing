@@ -2,7 +2,7 @@ package main.es.pbover.utils.menu;
 
 public abstract class QuitMenu extends Menu {
 
-    private QuitOption quitOption;
+    protected QuitOption quitOption;
 
     public QuitMenu(String title) {
         super(title);

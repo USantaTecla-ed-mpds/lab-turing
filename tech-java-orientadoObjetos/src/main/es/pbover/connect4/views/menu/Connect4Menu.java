@@ -17,6 +17,5 @@ public class Connect4Menu extends QuitMenu{
     protected void addOptions(){
         this.add(new StartNewGameOption(this.connect4));
         this.add(new LoadGameOption(this.connect4));
-       // this.add(new SetLanguageOption(this.connect4));
     }
 }

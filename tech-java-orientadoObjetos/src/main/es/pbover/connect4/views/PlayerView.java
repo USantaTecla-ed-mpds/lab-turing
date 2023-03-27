@@ -7,15 +7,15 @@ public abstract class PlayerView {
 
     public PlayerView(Player player) {
         this.player = player;
-
+        this.showPlayerTurn(); 
     }
 
     protected void showWinner() {
-        MessageManager.getInstance().writeln("PLAYER_WIN", this.player.getColor().getString());
+        MessageManager.getInstance().writeln("PLAYER_WIN", new ColorView(this.player.getColor()).toString());
     }
 
     protected void showPlayerTurn() {
-        MessageManager.getInstance().writeln("TURN", this.getPlayer().getColor().getString());
+        MessageManager.getInstance().writeln("TURN", new ColorView(this.player.getColor()).toString());
     }
 
     public abstract int getColumn();

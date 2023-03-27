@@ -2,7 +2,7 @@ package main.es.pbover.connect4.views.menu;
 
 import main.es.pbover.connect4.views.Language;
 
-public class SpanishOption extends SelectLanguageOption {
+public class SpanishOption extends LanguageOption {
 
     public SpanishOption() {
         super("SPANISH");

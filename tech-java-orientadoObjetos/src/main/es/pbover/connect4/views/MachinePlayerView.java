@@ -9,7 +9,6 @@ public abstract class MachinePlayerView extends PlayerView {
     }
 
     public int getColumn() {
-        this.showPlayerTurn();
         int column = ((MachinePlayer) this.player).getColumn();
         this.showColumnSelected(column);
         return column;

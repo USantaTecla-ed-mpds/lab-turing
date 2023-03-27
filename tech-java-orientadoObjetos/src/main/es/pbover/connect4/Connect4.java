@@ -4,32 +4,36 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import main.es.pbover.connect4.models.Board;
+import main.es.pbover.connect4.models.GameManager;
 import main.es.pbover.connect4.models.Turn;
 import main.es.pbover.connect4.views.BoardView;
 import main.es.pbover.connect4.views.TurnView;
 
 import main.es.pbover.connect4.views.MessageManager;
 import main.es.pbover.connect4.views.menu.Connect4Menu;
-import main.es.pbover.connect4.views.menu.SelectLanguageMenu;
+import main.es.pbover.connect4.views.menu.LanguageMenu;
 import main.es.pbover.utils.YesNoDialog;
 
 public class Connect4 {
 
-    private final Board board;
-    private final Turn turn;
-    private final BoardView boardView;
-    private final TurnView turnView;
+    private Board board;
+    private Turn turn;
+    private BoardView boardView;
+    private TurnView turnView;
+
+    private final GameManager gameManager;
 
     public Connect4() throws FileNotFoundException, IOException {
         this.board = new Board();
         this.boardView = new BoardView(this.board);
         this.turn = new Turn(this.board);
-        this.turnView = new TurnView(this.turn);
-
+        this.gameManager = new GameManager(this.board,this.turn);
+        this.turnView = new TurnView(this.turn,this.gameManager);
+        
     }
 
     private void run() {
-
+        new LanguageMenu("SELECT LANGUAGE:").interact();
         new Connect4Menu(this).interact();
     }
 
@@ -61,8 +65,19 @@ public class Connect4 {
         return yesNoDialog.isAffirmative();
     }
 
+    public GameManager getGameManager(){
+        return this.gameManager;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public void setTurn(Turn turn) {
+        this.turn = turn;
+    }
+
     public static void main(final String[] args) throws FileNotFoundException, IOException {
-        new SelectLanguageMenu("SELECT LANGUAGE:").interact();
         new Connect4().run();
     }
 

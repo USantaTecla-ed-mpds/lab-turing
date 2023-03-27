@@ -9,6 +9,11 @@ public class QuitOption extends Option {
         this.executed = false;
     }
 
+    public QuitOption(String title) {
+        super(title);
+        this.executed = false;
+    }
+
     @Override
     public void interact() {
         this.executed = true;

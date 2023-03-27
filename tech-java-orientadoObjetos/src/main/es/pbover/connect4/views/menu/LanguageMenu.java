@@ -2,10 +2,10 @@ package main.es.pbover.connect4.views.menu;
 
 import main.es.pbover.utils.menu.Menu;
 
-public class SelectLanguageMenu extends Menu{
+public class LanguageMenu extends Menu{
 
 
-    public SelectLanguageMenu(String title) {
+    public LanguageMenu(String title) {
         super(title);
     }
 

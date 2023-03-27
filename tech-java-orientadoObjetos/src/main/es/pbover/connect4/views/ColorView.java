@@ -5,18 +5,24 @@ import main.es.pbover.connect4.models.Color;
 public class ColorView {
     private final Color color;
 
-    public ColorView(final Color color) {
+    public ColorView(Color color) {
         this.color = color;
 
     }
 
+    public char getCode() {
+        if (this.color == Color.NULL) {
+            return ' ';
+        }
+        return MessageManager.getInstance().getMessage(this.color.name()).charAt(0);
+    }
+
     public void write() {
-        MessageManager.getInstance().write(
-                "PLAYER_COLOR",
-                String.valueOf(this.color.getCode()));
+        MessageManager.getInstance().write("PLAYER_COLOR", this.getCode());
     }
 
     public String toString() {
-        return this.color.getString();
+        return MessageManager.getInstance().getMessage(this.color.name());
     }
+
 }

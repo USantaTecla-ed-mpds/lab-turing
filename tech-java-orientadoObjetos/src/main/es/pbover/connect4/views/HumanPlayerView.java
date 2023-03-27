@@ -14,7 +14,6 @@ public class HumanPlayerView extends PlayerView {
         int column;
         boolean valid;
         do {
-            super.showPlayerTurn();
             ClosedIntervalDialog closedIntervalDialog = new ClosedIntervalDialog(1, Coordinate.NUMBER_COLUMNS);
             closedIntervalDialog.read(MessageManager.getInstance().getMessage("ASK_COLUMN_TO_DROP").toString());
             column = closedIntervalDialog.getAnswer() - 1;
