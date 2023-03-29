@@ -33,5 +33,6 @@ public abstract class Player implements Serializable {
         return this.board;
     }
 
-    public abstract void accept(PlayerVisitor visitor) throws MessageNotFoundException, ClassNotFoundException, IOException;
+    public abstract void accept(PlayerVisitor visitor)
+            throws MessageNotFoundException, ClassNotFoundException, IOException;
 }

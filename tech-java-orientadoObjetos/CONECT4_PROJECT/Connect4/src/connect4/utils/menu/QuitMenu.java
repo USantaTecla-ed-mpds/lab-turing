@@ -6,7 +6,6 @@ public abstract class QuitMenu extends Menu {
 
     public QuitMenu(String title) throws MessageNotFoundException {
         super(title);
-
     }
 
     @Override

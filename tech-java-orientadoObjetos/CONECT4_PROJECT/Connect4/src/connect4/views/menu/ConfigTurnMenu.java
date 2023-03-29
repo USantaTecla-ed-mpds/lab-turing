@@ -7,6 +7,9 @@ import connect4.models.Turn;
 import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.utils.menu.SequentialMenu;
 import connect4.views.MessageManager;
+import connect4.views.menu.option.CreateHumanPlayerOption;
+import connect4.views.menu.option.CreateIAPlayerOption;
+import connect4.views.menu.option.CreateRandomPlayerOption;
 
 public class ConfigTurnMenu extends SequentialMenu {
 

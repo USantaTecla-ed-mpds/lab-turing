@@ -3,7 +3,7 @@ package connect4.views;
 import connect4.models.MachinePlayer;
 import connect4.utils.exceptions.MessageNotFoundException;
 
-public abstract class MachinePlayerView extends PlayerView {
+public abstract class MachinePlayerView extends PlayerView  {
 
     public MachinePlayerView(MachinePlayer player) {
         super(player);

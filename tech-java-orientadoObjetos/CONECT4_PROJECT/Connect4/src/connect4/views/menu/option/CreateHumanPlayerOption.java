@@ -1,4 +1,4 @@
-package connect4.views.menu;
+package connect4.views.menu.option;
 
 import connect4.models.Player;
 import connect4.models.Turn;
@@ -7,7 +7,7 @@ import connect4.models.creator.PlayerCreator;
 import connect4.utils.exceptions.MessageNotFoundException;
 import connect4.views.MessageManager;
 
-public class CreateHumanPlayerOption extends ConfigTurnOption {
+public class CreateHumanPlayerOption extends TurnOption {
 
     public CreateHumanPlayerOption(Turn turn) throws MessageNotFoundException {
         super(MessageManager.getInstance().getMessage("HUMAN"), turn);

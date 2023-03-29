@@ -1,4 +1,4 @@
-package connect4.views.menu;
+package connect4.views.menu.option;
 
 import java.io.IOException;
 

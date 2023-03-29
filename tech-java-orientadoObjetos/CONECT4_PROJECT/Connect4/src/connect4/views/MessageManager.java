@@ -17,7 +17,7 @@ public class MessageManager {
     private Language language;
     private HashMap<String, String> messages = new HashMap<String, String>();
     private static MessageManager instance;
-    private String relativePath;
+    private final String path = "resources/";
 
     private MessageManager() {
     }
@@ -29,13 +29,8 @@ public class MessageManager {
         return MessageManager.instance;
     }
 
-    public void initialize(String path, Language language) throws FileNotFoundException, IOException {
-        this.setRelativePath(path);
+    public void initialize(Language language) throws FileNotFoundException, IOException {
         this.setLanguage(language);
-    }
-
-    private void setRelativePath(String path) {
-        this.relativePath = path;
     }
 
     public void setLanguage(Language language) throws FileNotFoundException, IOException {
@@ -45,7 +40,7 @@ public class MessageManager {
     }
 
     private void readFile() throws FileNotFoundException, IOException {
-        File file = new File(this.relativePath + this.language.getFileName());
+        File file = new File(this.path + this.language.getFileName());
         BufferedReader input = null;
         input = new BufferedReader(new FileReader(file));
         String line;

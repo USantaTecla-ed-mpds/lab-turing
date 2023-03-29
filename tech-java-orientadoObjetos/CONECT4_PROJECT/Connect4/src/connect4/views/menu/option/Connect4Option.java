@@ -1,4 +1,4 @@
-package connect4.views.menu;
+package connect4.views.menu.option;
 
 import connect4.Connect4;
 import connect4.utils.menu.Option;

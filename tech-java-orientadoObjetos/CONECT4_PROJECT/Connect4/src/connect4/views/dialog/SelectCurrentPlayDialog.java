@@ -13,9 +13,9 @@ public class SelectCurrentPlayDialog extends Dialog<Integer> {
     public SelectCurrentPlayDialog(ClosedInterval closedInterval) throws MessageNotFoundException {
         this.closedInterval = closedInterval;
         this.errorMessage = MessageManager.getInstance().getMessage(
-                "NEXT_PLAY_DIALOG_ERROR", closedInterval.getMin(), closedInterval.getMax());
+                "CURRENT_PLAY_DIALOG_ERROR", closedInterval.getMin(), closedInterval.getMax());
         this.suffix = MessageManager.getInstance()
-                .getMessage("NEXT_PLAY_DIALOG_SUFIX",
+                .getMessage("CURRENT_PLAY_DIALOG_SUFIX",
                         closedInterval.getMin(),
                         closedInterval.getMax());
     }

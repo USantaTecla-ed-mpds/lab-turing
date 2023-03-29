@@ -14,6 +14,8 @@ public class BoardView {
     }
 
     public void paintBoard() throws MessageNotFoundException {
+        try
+        {
         this.writeHorizontal();
         for (int i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
             MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
@@ -25,6 +27,8 @@ public class BoardView {
             MessageManager.getInstance().writeln("BLANK");
         }
         this.writeHorizontal();
+    }catch(Exception ex)
+    {ex.printStackTrace();}
     }
 
     private void writeHorizontal() throws MessageNotFoundException {
