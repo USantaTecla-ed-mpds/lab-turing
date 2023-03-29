@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import main.es.pbover.connect4.Connect4;
-
 public class GameManager {
 
     private Turn turn;
@@ -39,12 +37,12 @@ public class GameManager {
         }
     }
 
-    public void load(Connect4 connect4)  {
+    public void load()  {
         ObjectInputStream ois = null;
         try  {
             ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
-            connect4.setBoard((Board) ois.readObject());
-            connect4.setTurn((Turn) ois.readObject());
+         //   connect4.setBoard((Board) ois.readObject());
+          //  connect4.setTurn((Turn) ois.readObject());
         } catch (Exception e) {
             // TODO: handle exception
         } finally {

@@ -1,23 +1,19 @@
 package main.es.pbover.connect4.views;
 
-import main.es.pbover.connect4.models.GameManager;
 import main.es.pbover.connect4.models.HumanPlayer;
 import main.es.pbover.connect4.models.MinMaxPlayer;
 import main.es.pbover.connect4.models.PlayerVisitor;
 import main.es.pbover.connect4.models.RandomPlayer;
 import main.es.pbover.connect4.models.Turn;
 import main.es.pbover.connect4.views.menu.ConfigTurnMenu;
-import main.es.pbover.connect4.views.menu.SaveAndExitOrContinueMenu;
 
 public class TurnView implements PlayerVisitor {
     private final Turn turn;
     private PlayerView activePlayerView;
-    private GameManager gameManager;
 
-    public TurnView(final Turn turn, GameManager gameManager) {
+    public TurnView(final Turn turn) {
         super();
         this.turn = turn;
-        this.gameManager = gameManager;
     }
 
     public void configTurn() {
@@ -39,7 +35,6 @@ public class TurnView implements PlayerVisitor {
 
     public void visit(final HumanPlayer humanPlayer) {
         this.activePlayerView = new HumanPlayerView(humanPlayer);
-        new SaveAndExitOrContinueMenu(this.gameManager).interact();
     }
 
     public void visit(final RandomPlayer randomPlayer) {

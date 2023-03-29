@@ -1,17 +1,17 @@
 package main.es.pbover.connect4.views.menu;
 
-import main.es.pbover.connect4.Connect4;
+import main.es.pbover.connect4.views.GameView;
 import main.es.pbover.connect4.views.MessageManager;
 
-public class StartNewGameOption extends Connect4Option {
+public class StartNewGameOption extends GameOption {
 
-    public StartNewGameOption(Connect4 connect4) {
-        super(MessageManager.getInstance().getMessage("START"), connect4);
+    public StartNewGameOption(GameView gameView) {
+        super(MessageManager.getInstance().getMessage("START"),gameView);
     }
 
     @Override
     public void interact() {
-        this.connect4.playGames();
+        this.gameView.play();
     }
 
 }
