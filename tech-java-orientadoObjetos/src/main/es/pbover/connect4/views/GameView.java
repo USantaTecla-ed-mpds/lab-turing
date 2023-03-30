@@ -20,13 +20,12 @@ public class GameView {
     public void start() {
         new LanguageMenu("SELECT LANGUAGE:").interact();
        // new GameMenu(this).interact();
+       this.turnView.configTurn();
+       MessageManager.getInstance().writeln("GAME_TITLE");
+       this.boardView.writeln();
     }
 
      public void play() {
-        this.turnView.configTurn();
-        MessageManager.getInstance().writeln("GAME_TITLE");
-        this.boardView.writeln();
-
         do {
             this.turnView.play();
             this.boardView.writeln();
