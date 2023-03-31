@@ -1,10 +1,10 @@
-package main.es.pbover.parametrizado;
+package main.es.pbover.utils.framework;
 
-public abstract class GenericGameView<G> {
+public abstract class GameView<G> {
 
-    private G game;
+    protected G game;
 
-    public GenericGameView(G game) {
+    public GameView(G game) {
         this.game = game;
     }
 
