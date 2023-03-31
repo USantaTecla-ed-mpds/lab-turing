@@ -1,13 +1,17 @@
 package main.es.pbover.parametrizado;
 
-public class  GenericGame<G,V> {
+import main.es.pbover.connect4.models.Game;
+
+import main.es.pbover.parametrizado.GenericGameView;
+
+public class  GenericGame<G> {
   
         private G game;
-        private V gameView;
+        private GenericGameView<Game> gameView;
     
-        public GenericGame(G game, V gameView) {
+        public GenericGame(G game) {
             this.game = game;
-            this.gameView = (V) new Object(G);
+            this.gameView = new GenericGameView<Game>(this.game);
     
         }
     
