@@ -1,4 +1,4 @@
-package main.es.pbover.connect4Old.models;
+package models;
 
 public class MinMaxPlayer extends Player {
     private final int maxSteps = 6;

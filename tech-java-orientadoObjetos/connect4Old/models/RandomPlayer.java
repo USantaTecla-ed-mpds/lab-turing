@@ -1,4 +1,4 @@
-package main.es.pbover.connect4Old.models;
+package models;
 
 public class RandomPlayer extends Player {
     public RandomPlayer(Color color, Board board) {

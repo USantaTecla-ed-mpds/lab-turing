@@ -1,6 +1,6 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.utils.Console;
+import utils.Console;
 
 public class Message {
     public static Message TITLE = new Message("--- CONNECT 4 ---");

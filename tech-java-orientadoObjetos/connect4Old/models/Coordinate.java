@@ -1,6 +1,6 @@
-package main.es.pbover.connect4Old.models;
+package models;
 
-import main.es.pbover.utils.ClosedInterval;
+import utils.ClosedInterval;
 
 public class Coordinate {
     public static Coordinate ORIGIN = new Coordinate(0, 0);

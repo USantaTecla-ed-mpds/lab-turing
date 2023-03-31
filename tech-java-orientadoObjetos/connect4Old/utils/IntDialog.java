@@ -1,6 +1,6 @@
-package main.es.labturing.utils.views;
+package utils;
 
-import main.es.labturing.connect4.views.MessageManager;
+import views.Message;
 
 public abstract class IntDialog {
     protected String message;
@@ -17,11 +17,11 @@ public abstract class IntDialog {
     public void read(String message) {
         boolean ok;
         do {
-            MessageManager.getInstance().write(message);
+            new Message(message).write();
             this.answer = this.readWithSuffix();
             ok = this.isOk();
             if (!ok) {
-                MessageManager.getInstance().writeln(this.errorMessage);
+                new Message(this.errorMessage).writeln();
             }
         } while (!ok);
     }

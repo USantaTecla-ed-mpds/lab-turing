@@ -1,8 +1,8 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.connect4Old.models.Coordinate;
-import main.es.pbover.connect4Old.models.HumanPlayer;
-import main.es.pbover.utils.ClosedIntervalDialog;
+import models.Coordinate;
+import models.HumanPlayer;
+import utils.ClosedIntervalDialog;
 
 public class HumanPlayerView extends PlayerView{
 

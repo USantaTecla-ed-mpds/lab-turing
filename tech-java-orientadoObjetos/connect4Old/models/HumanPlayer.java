@@ -1,4 +1,4 @@
-package main.es.pbover.connect4Old.models;
+package models;
 
 public class HumanPlayer extends Player {
     public HumanPlayer(Color color, Board board) {

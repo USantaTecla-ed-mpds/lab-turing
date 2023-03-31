@@ -1,7 +1,7 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.connect4Old.models.RandomPlayer;
-import main.es.pbover.utils.Console;
+import models.RandomPlayer;
+import utils.Console;
 
 public class RandomPlayerView extends PlayerView{
 

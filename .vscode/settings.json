@@ -1,7 +1,7 @@
 {
     "java.project.sourcePaths": [
         "tech-java-orientadoObjetos/src",
-        "tech-java-basadoObjetos/src",
-        "tech-java-orientadoObjetos/basic/src/main/java"
+        "tech-java-orientadoObjetos/basic_tictactoe/src/main/java",
+        "tech-java-orientadoObjetos/connect4Old"
     ]
 }

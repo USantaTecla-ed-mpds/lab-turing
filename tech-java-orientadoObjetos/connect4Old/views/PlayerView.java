@@ -1,6 +1,6 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.connect4Old.models.Player;
+import models.Player;
 
 public abstract class PlayerView {
     protected Player player;

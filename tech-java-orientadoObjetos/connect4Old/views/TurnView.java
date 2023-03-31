@@ -1,11 +1,11 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.connect4Old.models.HumanPlayer;
-import main.es.pbover.connect4Old.models.MinMaxPlayer;
-import main.es.pbover.connect4Old.models.PlayerVisitor;
-import main.es.pbover.connect4Old.models.RandomPlayer;
-import main.es.pbover.connect4Old.models.Turn;
-import main.es.pbover.utils.ClosedIntervalDialog;
+import models.HumanPlayer;
+import models.MinMaxPlayer;
+import models.PlayerVisitor;
+import models.RandomPlayer;
+import models.Turn;
+import utils.ClosedIntervalDialog;
 
 public class TurnView implements PlayerVisitor {
     private Turn turn;

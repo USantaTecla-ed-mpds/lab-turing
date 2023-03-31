@@ -1,7 +1,7 @@
-package main.es.pbover.connect4Old.views;
+package views;
 
-import main.es.pbover.connect4Old.models.Board;
-import main.es.pbover.connect4Old.models.Coordinate;
+import models.Board;
+import models.Coordinate;
 
 public class BoardView {
     static int BLANK_SPACES = 4;

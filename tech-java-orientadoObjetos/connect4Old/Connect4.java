@@ -1,11 +1,11 @@
-package main.es.pbover.connect4Old;
 
-import main.es.pbover.connect4Old.models.Board;
-import main.es.pbover.connect4Old.models.Turn;
-import main.es.pbover.connect4Old.views.BoardView;
-import main.es.pbover.connect4Old.views.Message;
-import main.es.pbover.connect4Old.views.TurnView;
-import main.es.pbover.utils.YesNoDialog;
+
+import models.Board;
+import models.Turn;
+import views.BoardView;
+import views.Message;
+import views.TurnView;
+import utils.YesNoDialog;
 
 public class Connect4 {
     
