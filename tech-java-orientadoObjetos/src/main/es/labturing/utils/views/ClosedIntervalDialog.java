@@ -10,7 +10,7 @@ public class ClosedIntervalDialog extends IntDialog {
     public ClosedIntervalDialog(int min, int max) {
         super();
         this.closedInterval = new ClosedInterval(min, max);
-        this.errorMessage = "The value must be between " + min + " and " + max;
+        this.errorMessageKey = "ERR_INVALID_COLUMN_TO_DROP";
         this.suffix = "? [" +
                 min + "-" +
                 max + "]: ";

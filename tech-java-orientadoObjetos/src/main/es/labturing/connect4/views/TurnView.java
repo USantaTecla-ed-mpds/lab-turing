@@ -22,7 +22,7 @@ public class TurnView implements PlayerVisitor {
     }
 
     public void play() {
-        this.turn.getActivePlayer().accept(this);
+        this.turn.getActivePlayer().accept(this);//
         this.turn.play(this.activePlayerView.getColumn());
     }
 

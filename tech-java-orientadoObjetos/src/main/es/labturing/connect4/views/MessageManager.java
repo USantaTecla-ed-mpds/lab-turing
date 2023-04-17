@@ -32,9 +32,8 @@ public class MessageManager {
     }
 
     private void readFile() throws FileNotFoundException, IOException { // pasar como parametro path
-        String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
-        File file = new File(path + this.language.getFileName());
-        BufferedReader input = new BufferedReader(new FileReader(file));
+        String path = "tech-java-orientadoObjetos/src/main/es/labturing/connect4/resources/";
+        BufferedReader input = new BufferedReader(new FileReader(path+this.language.getFileName()));
         String line;
         while ((line = input.readLine()) != null) {
             String[] separated = line.split("=");
