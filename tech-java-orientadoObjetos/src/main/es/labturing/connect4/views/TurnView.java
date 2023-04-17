@@ -10,8 +10,9 @@ import main.es.labturing.connect4.views.menu.ConfigTurnMenu;
 public class TurnView implements PlayerVisitor {
     private final Turn turn;
     private PlayerView activePlayerView;
+    private PlayerViewPrototype playerViewPrototype;
 
-    public TurnView(final Turn turn) {
+    public TurnView(Turn turn) {
         super();
         this.turn = turn;
     }
@@ -33,15 +34,15 @@ public class TurnView implements PlayerVisitor {
         }
     }
 
-    public void visit(final HumanPlayer humanPlayer) {
+    public void visit(HumanPlayer humanPlayer) {
         this.activePlayerView = new HumanPlayerView(humanPlayer);
     }
 
-    public void visit(final RandomPlayer randomPlayer) {
+    public void visit(RandomPlayer randomPlayer) {
         this.activePlayerView = new RandomPlayerView(randomPlayer);
     }
 
-    public void visit(final MinMaxPlayer minMaxPlayer) {
+    public void visit(MinMaxPlayer minMaxPlayer) {
         this.activePlayerView = new MinMaxPlayerView(minMaxPlayer);
     }
 }
