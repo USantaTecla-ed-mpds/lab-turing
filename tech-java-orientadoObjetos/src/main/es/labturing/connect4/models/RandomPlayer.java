@@ -5,10 +5,6 @@ public class RandomPlayer extends MachinePlayer {
         super(board);
     }
 
-    public void accept(PlayerVisitor visitor) {
-        visitor.visit(this);
-    }
-
     public int getColumn() {
         int column;
         do {

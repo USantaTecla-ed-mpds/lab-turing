@@ -1,13 +1,9 @@
 package main.es.labturing.connect4.views;
 
-import main.es.labturing.connect4.models.HumanPlayer;
-import main.es.labturing.connect4.models.MinMaxPlayer;
-import main.es.labturing.connect4.models.PlayerVisitor;
-import main.es.labturing.connect4.models.RandomPlayer;
 import main.es.labturing.connect4.models.Turn;
 import main.es.labturing.connect4.views.menu.ConfigTurnMenu;
 
-public class TurnView implements PlayerVisitor {
+public class TurnView {
     private final Turn turn;
     private PlayerView activePlayerView;
     private PlayerViewPrototype playerViewPrototype;
@@ -22,7 +18,8 @@ public class TurnView implements PlayerVisitor {
     }
 
     public void play() {
-        this.turn.getActivePlayer().accept(this);//
+        this.playerViewPrototype = new PlayerViewPrototype(this.turn);
+        this.activePlayerView = this.playerViewPrototype.createView(this.turn.getType());
         this.turn.play(this.activePlayerView.getColumn());
     }
 
@@ -32,17 +29,5 @@ public class TurnView implements PlayerVisitor {
         } else {
             MessageManager.getInstance().writeln("PLAYERS_TIED");
         }
-    }
-
-    public void visit(HumanPlayer humanPlayer) {
-        this.activePlayerView = new HumanPlayerView(humanPlayer);
-    }
-
-    public void visit(RandomPlayer randomPlayer) {
-        this.activePlayerView = new RandomPlayerView(randomPlayer);
-    }
-
-    public void visit(MinMaxPlayer minMaxPlayer) {
-        this.activePlayerView = new MinMaxPlayerView(minMaxPlayer);
     }
 }

@@ -1,7 +1,6 @@
 package main.es.labturing.connect4.views;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class MessageManager {
         this.readFile();
     }
 
-    private void readFile() throws FileNotFoundException, IOException { // pasar como parametro path
+    private void readFile() throws FileNotFoundException, IOException {
         String path = "tech-java-orientadoObjetos/src/main/es/labturing/connect4/resources/";
         BufferedReader input = new BufferedReader(new FileReader(path+this.language.getFileName()));
         String line;

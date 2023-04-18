@@ -1,11 +1,11 @@
 package main.es.labturing.connect4.views;
 
-import main.es.labturing.connect4.models.MinMaxPlayer;
+import main.es.labturing.connect4.models.Turn;
 
 public class MinMaxPlayerView extends MachinePlayerView {
 
-    public MinMaxPlayerView(MinMaxPlayer player) {
-        super(player);
+    public MinMaxPlayerView(Turn turn) {
+        super(turn);
     }
 
     public void showColumnSelected(int column) {

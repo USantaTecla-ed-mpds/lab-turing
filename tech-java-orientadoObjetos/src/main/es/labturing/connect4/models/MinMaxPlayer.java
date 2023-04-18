@@ -1,5 +1,7 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.PlayerType;
+
 public class MinMaxPlayer extends MachinePlayer {
     private final int maxSteps = 6;
     private static int MAX_COST = 2;
@@ -8,6 +10,7 @@ public class MinMaxPlayer extends MachinePlayer {
 
     public MinMaxPlayer(Board board) {
         super(board);
+        this.type = PlayerType.MINMAX;
     }
 
     public int getColumn() {
@@ -77,10 +80,6 @@ public class MinMaxPlayer extends MachinePlayer {
             }
         }
         return MinMaxPlayer.OTHER_COST;
-    }
-
-    public void accept(PlayerVisitor visitor) {
-        visitor.visit(this);
     }
 
 }
