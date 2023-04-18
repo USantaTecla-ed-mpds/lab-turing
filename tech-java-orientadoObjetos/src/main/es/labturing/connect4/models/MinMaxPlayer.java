@@ -7,6 +7,7 @@ public class MinMaxPlayer extends MachinePlayer {
     private static int MAX_COST = 2;
     private static int OTHER_COST = 0;
     private static int MIN_COST = -2;
+    private DraftBoard draftBoard;
 
     public MinMaxPlayer(Board board) {
         super(board);
@@ -14,13 +15,14 @@ public class MinMaxPlayer extends MachinePlayer {
     }
 
     public int getColumn() {
-        int[] uncompletedColumns = this.getBoard().getUncompletedColumns();
+        this.draftBoard = (DraftBoard) this.getBoard();
+        int[] uncompletedColumns = this.draftBoard.getUncompletedColumns();
         int bestColumn = uncompletedColumns[(int) Math.floor(Math.random() * uncompletedColumns.length)];
         int maxCost = MinMaxPlayer.MIN_COST;
         for (int column : uncompletedColumns) {
-            this.getBoard().dropToken(column, this.getColor());
+            this.draftBoard.dropToken(column, this.getColor());
             int minCost = this.getMinCost(0);
-            this.getBoard().removeTop(column);
+            this.draftBoard.removeTop(column);
             if (minCost > maxCost) {
                 maxCost = minCost;
                 bestColumn = column;
@@ -35,10 +37,10 @@ public class MinMaxPlayer extends MachinePlayer {
             return this.getCost(false);
         }
         int minCost = MinMaxPlayer.MAX_COST;
-        for (int column : this.getBoard().getUncompletedColumns()) {
-            this.getBoard().dropToken(column, this.getColor().getOpposite());
+        for (int column : this.draftBoard.getUncompletedColumns()) {
+            this.draftBoard.dropToken(column, this.getColor().getOpposite());
             int maxCost = this.getMaxCost(steps + 1);
-            this.getBoard().removeTop(column);
+            this.draftBoard.removeTop(column);
             if (maxCost < minCost)
                 minCost = maxCost;
         }
@@ -50,10 +52,10 @@ public class MinMaxPlayer extends MachinePlayer {
             return this.getCost(true);
         }
         int maxCost = MinMaxPlayer.MIN_COST;
-        for (int column : this.getBoard().getUncompletedColumns()) {
-            this.getBoard().dropToken(column, this.getColor());
+        for (int column : this.draftBoard.getUncompletedColumns()) {
+            this.draftBoard.dropToken(column, this.getColor());
             int cost = this.getMinCost(steps + 1);
-            this.getBoard().removeTop(column);
+            this.draftBoard.removeTop(column);
             if (cost > maxCost)
                 maxCost = cost;
         }
@@ -61,18 +63,18 @@ public class MinMaxPlayer extends MachinePlayer {
     }
 
     private boolean isEnd(int steps) {
-        return steps == this.maxSteps || this.getBoard().isGameFinished() || this.getBoard().isAlmostWinner();
+        return steps == this.maxSteps || this.draftBoard.isGameFinished() || this.draftBoard.isAlmostWinner();
     }
 
     private int getCost(boolean isOpposite) {
-        if (this.getBoard().isWinner()) {
+        if (this.draftBoard.isWinner()) {
             if (isOpposite) {
                 return MinMaxPlayer.MIN_COST;
             } else {
                 return MinMaxPlayer.MAX_COST;
             }
         }
-        if (this.getBoard().isAlmostWinner()) {
+        if (this.draftBoard.isAlmostWinner()) {
             if (isOpposite) {
                 return MinMaxPlayer.MIN_COST / 2;
             } else {

@@ -7,7 +7,6 @@ public abstract class PlayerView {
 
     public PlayerView(Turn turn) {
         this.turn = turn;
-        this.showPlayerTurn(); 
     }
 
     protected void showWinner() {
