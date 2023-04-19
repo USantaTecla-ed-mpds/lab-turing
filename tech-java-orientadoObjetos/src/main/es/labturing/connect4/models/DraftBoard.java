@@ -2,10 +2,11 @@ package main.es.labturing.connect4.models;
 
 public class DraftBoard extends Board {
 
-    public DraftBoard (Board board){
-    this.colors = board.getColors().clone();
-    this.lastDrop = board.getLastDrop();
+    public DraftBoard(Board board) {
+        this.colors = board.getColors().clone();
+        this.lastDrop = board.getLastDrop();
     }
+
     public boolean isAlmostWinner() {
         if (this.lastDrop == null) {
             return false;
