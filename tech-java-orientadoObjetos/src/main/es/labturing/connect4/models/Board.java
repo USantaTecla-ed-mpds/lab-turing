@@ -3,7 +3,7 @@ package main.es.labturing.connect4.models;
 public class Board {
 
     public static final int LINE_LENGTH = 4;
-    private Color[][] colors;
+    protected Color[][] colors;
     protected Coordinate lastDrop;
 
     public Board() {
@@ -80,7 +80,7 @@ public class Board {
                 if (this.isConnect4(line)) {
                     return true;
                 }
-                line.shift(direction);
+                line.shift();
             }
         }
         return false;
@@ -104,6 +104,14 @@ public class Board {
 
     public void setColor(Coordinate coordinate, Color color) {
         this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
+
+    public Color[][] getColors() {
+        return this.colors;
+    }
+
+    public Coordinate getLastDrop() {
+        return this.lastDrop;
     }
 
 }
