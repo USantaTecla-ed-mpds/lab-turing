@@ -48,24 +48,6 @@ public class Board {
         return !this.isEmptyPosition(new Coordinate(Coordinate.NUMBER_ROWS - 1, column));
     }
 
-    public int[] getUncompletedColumns() {
-        int counter = 0;
-        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isCompleteColumn(i)) {
-                counter++;
-            }
-        }
-        int[] uncompletedColumns = new int[counter];
-        counter = 0;
-        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
-            if (!this.isCompleteColumn(i)) {
-                uncompletedColumns[counter] = i;
-                counter++;
-            }
-        }
-        return uncompletedColumns;
-    }
-
     public boolean isGameFinished() {
         return this.isComplete() || this.isWinner();
     }
@@ -100,10 +82,6 @@ public class Board {
 
     public Color getColor(Coordinate coordinate) {
         return this.colors[coordinate.getRow()][coordinate.getColumn()];
-    }
-
-    public void setColor(Coordinate coordinate, Color color) {
-        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
     }
 
     public Color[][] getColors() {

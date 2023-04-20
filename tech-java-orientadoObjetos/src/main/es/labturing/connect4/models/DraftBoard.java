@@ -46,4 +46,27 @@ public class DraftBoard extends Board {
         }
         return coordinate;
     }
+
+    private void setColor(Coordinate coordinate, Color color) {
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
+
+    public int[] getUncompletedColumns() {
+        int counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isCompleteColumn(i)) {
+                counter++;
+            }
+        }
+        int[] uncompletedColumns = new int[counter];
+        counter = 0;
+        for (int i = 0; i < Coordinate.NUMBER_COLUMNS; i++) {
+            if (!this.isCompleteColumn(i)) {
+                uncompletedColumns[counter] = i;
+                counter++;
+            }
+        }
+        return uncompletedColumns;
+    }
+
 }
