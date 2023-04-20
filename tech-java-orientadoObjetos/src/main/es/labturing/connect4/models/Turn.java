@@ -5,7 +5,7 @@ import main.es.labturing.connect4.types.PlayerType;
 public class Turn {
     final static int NUMBER_PLAYERS = 2;
     private Player[] players;
-    private int activePlayer;
+    private int activePlayerIndex;
     private Board board;
 
     public Turn(Board board) {
@@ -14,24 +14,24 @@ public class Turn {
     }
 
     public void resetPlayers() {
-        for (int i = 0; i < this.players.length; i++){
-            this.players[i]=null;
+        for (int i = 0; i < this.players.length; i++) {
+            this.players[i] = null;
         }
     }
 
     public void reset() {
-        this.activePlayer = 0;
+        this.activePlayerIndex = 0;
     }
 
     public void play(int column) {
-        this.players[this.activePlayer].play(column);
+        this.players[this.activePlayerIndex].play(column);
         if (!this.board.isGameFinished()) {
-            this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
+            this.activePlayerIndex = (this.activePlayerIndex + 1) % Turn.NUMBER_PLAYERS;
         }
     }
 
     public Player getActivePlayer() {
-        return this.players[this.activePlayer];
+        return this.players[this.activePlayerIndex];
     }
 
     public Board getBoard() {
@@ -52,7 +52,24 @@ public class Turn {
             }
         }
     }
+
     public PlayerType getType() {
         return this.getActivePlayer().getType();
+    }
+
+    public int getActivePlayerIndex() {
+        return this.activePlayerIndex;
+    }
+
+    public void setActivePlayerIndex(int activePlayerIndex) {
+        this.activePlayerIndex = activePlayerIndex;
+    }
+
+    public Player[] getPlayers() {
+        return this.players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
     }
 }

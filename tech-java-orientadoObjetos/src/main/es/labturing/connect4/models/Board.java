@@ -92,4 +92,12 @@ public class Board {
         return this.lastDrop;
     }
 
+    public void setColors(Color[][] colors) {
+        this.colors = colors;
+    }
+
+    public void setLastDrop(Coordinate lastDrop) {
+        this.lastDrop = lastDrop;
+    }
+
 }
