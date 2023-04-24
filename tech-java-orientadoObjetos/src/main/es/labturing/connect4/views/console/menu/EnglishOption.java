@@ -1,4 +1,4 @@
-package main.es.labturing.connect4.views.menu;
+package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.views.Language;
 

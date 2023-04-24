@@ -1,19 +1,27 @@
 package main.es.labturing.connect4;
 
+import main.es.labturing.connect4.controllers.PlayController;
+import main.es.labturing.connect4.controllers.ResumeController;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.models.Game;
-import main.es.labturing.connect4.views.GameView;
+import main.es.labturing.connect4.views.console.GameView;
 import main.es.labturing.utils.framework.GameApp;
 
-public class Connect4 extends GameApp<Game, GameView> {
+public abstract class Connect4 extends GameApp<Game, GameView> {
+
+    protected StartController startController;
+    protected PlayController playController;
+    protected ResumeController resumeController;
 
     public Connect4() {
         this.game = new Game();
-        this.gameView = new GameView(this.game);
+        this.startController = new StartController(this.game);
+        this.playController = new PlayController(this.game);
+        this.resumeController = new ResumeController(this.game);
+        this.gameView = this.createView();
 
     }
 
-    public static void main(final String[] args) {
-        new Connect4().play();
-    }
+    protected abstract GameView createView();
 
 }

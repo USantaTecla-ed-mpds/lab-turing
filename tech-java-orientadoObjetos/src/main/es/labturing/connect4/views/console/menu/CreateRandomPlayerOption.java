@@ -1,8 +1,8 @@
-package main.es.labturing.connect4.views.menu;
+package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.models.RandomPlayer;
 import main.es.labturing.connect4.models.Turn;
-import main.es.labturing.connect4.views.MessageManager;
+import main.es.labturing.connect4.views.console.MessageManager;
 
 public class CreateRandomPlayerOption extends ConfigTurnOption {
 

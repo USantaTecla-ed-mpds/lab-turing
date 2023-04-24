@@ -1,7 +1,7 @@
-package main.es.labturing.connect4.views;
+package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.models.Turn;
-import main.es.labturing.connect4.views.menu.ConfigTurnMenu;
+import main.es.labturing.connect4.views.console.menu.ConfigTurnMenu;
 
 public class TurnView {
     private final Turn turn;

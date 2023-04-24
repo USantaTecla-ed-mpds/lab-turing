@@ -1,6 +1,6 @@
 package main.es.labturing.utils.views;
 
-import main.es.labturing.connect4.views.MessageManager;
+import main.es.labturing.connect4.views.console.MessageManager;
 
 public abstract class IntDialog {
     protected String key;

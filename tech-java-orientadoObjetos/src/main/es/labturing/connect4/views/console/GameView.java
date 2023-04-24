@@ -1,7 +1,10 @@
-package main.es.labturing.connect4.views;
+package main.es.labturing.connect4.views.console;
 
+import main.es.labturing.connect4.controllers.PlayController;
+import main.es.labturing.connect4.controllers.ResumeController;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.models.Game;
-import main.es.labturing.connect4.views.menu.LanguageMenu;
+import main.es.labturing.connect4.views.console.menu.LanguageMenu;
 import main.es.labturing.utils.views.YesNoDialog;
 
 public class GameView extends main.es.labturing.utils.framework.GameView<Game> {
@@ -9,8 +12,8 @@ public class GameView extends main.es.labturing.utils.framework.GameView<Game> {
     private BoardView boardView;
     private TurnView turnView;
 
-    public GameView(Game game) {
-        super(game);
+    public GameView(StartController startController, PlayController playController, ResumeController resumeController) {
+        super(startController,playController,resumeController);
         new LanguageMenu("SELECT LANGUAGE:").interact();
         this.boardView = new BoardView(game.getBoard());
         this.turnView = new TurnView(game.getTurn());

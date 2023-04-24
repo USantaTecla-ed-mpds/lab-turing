@@ -1,4 +1,4 @@
-package main.es.labturing.connect4.views;
+package main.es.labturing.connect4.views.console;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
+import main.es.labturing.connect4.views.Language;
 import main.es.labturing.utils.views.Console;
 
 public class MessageManager {

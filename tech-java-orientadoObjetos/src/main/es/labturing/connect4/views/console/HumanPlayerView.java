@@ -1,4 +1,4 @@
-package main.es.labturing.connect4.views;
+package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.models.Coordinate;
 import main.es.labturing.connect4.models.Turn;
