@@ -53,7 +53,7 @@ public class Turn {
         }
     }
 
-    public PlayerType getType() {
+    public PlayerType getActivePlayerType() {
         return this.getActivePlayer().getType();
     }
 

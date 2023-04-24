@@ -10,10 +10,11 @@ public abstract class PlayerView {
     }
 
     protected void showWinner() {
-        MessageManager.getInstance().writeln("PLAYER_WIN", new ColorView(this.turn.getActivePlayer().getColor()).toString());
+        MessageManager.getInstance().writeln("PLAYER_WIN",
+                new ColorView(this.turn.getActivePlayer().getColor()).toString());
     }
 
-    protected void showPlayerTurn() {
+    protected void showPlayerColor() {
         MessageManager.getInstance().writeln("TURN", new ColorView(this.turn.getActivePlayer().getColor()).toString());
     }
 

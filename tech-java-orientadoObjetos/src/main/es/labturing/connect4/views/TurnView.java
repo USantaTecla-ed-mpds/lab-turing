@@ -11,17 +11,17 @@ public class TurnView {
     public TurnView(Turn turn) {
         super();
         this.turn = turn;
-        
+        this.configTurn();
+        this.playerViewPrototype = new PlayerViewPrototype(this.turn);
     }
 
     public void configTurn() {
         new ConfigTurnMenu(this.turn).interact();
-        this.playerViewPrototype = new PlayerViewPrototype(this.turn);
     }
 
     public void play() {
-        this.activePlayerView = this.playerViewPrototype.createView(this.turn.getType());
-        this.activePlayerView.showPlayerTurn();
+        this.activePlayerView = this.playerViewPrototype.createView(this.turn.getActivePlayerType());
+        this.activePlayerView.showPlayerColor();
         this.turn.play(this.activePlayerView.getColumn());
     }
 

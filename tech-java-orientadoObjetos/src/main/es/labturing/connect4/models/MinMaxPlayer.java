@@ -7,15 +7,14 @@ public class MinMaxPlayer extends MachinePlayer {
     private static int MAX_COST = 2;
     private static int OTHER_COST = 0;
     private static int MIN_COST = -2;
-    private DraftBoard draftBoard;
+    private MinMaxDraftBoard draftBoard;
 
     public MinMaxPlayer(Board board) {
         super(board);
-        this.type = PlayerType.MINMAX;
     }
 
     public int getColumn() {
-        this.draftBoard = new DraftBoard(this.getBoard());
+        this.draftBoard = new MinMaxDraftBoard(this.getBoard());
         int[] uncompletedColumns = this.draftBoard.getUncompletedColumns();
         int bestColumn = uncompletedColumns[(int) Math.floor(Math.random() * uncompletedColumns.length)];
         int maxCost = MinMaxPlayer.MIN_COST;
@@ -82,6 +81,10 @@ public class MinMaxPlayer extends MachinePlayer {
             }
         }
         return MinMaxPlayer.OTHER_COST;
+    }
+
+    protected PlayerType getType() {
+        return PlayerType.MINMAX;
     }
 
 }

@@ -1,8 +1,8 @@
 package main.es.labturing.connect4.models;
 
-public class DraftBoard extends Board {
+public class MinMaxDraftBoard extends Board {
 
-    public DraftBoard(Board board) {
+    public MinMaxDraftBoard(Board board) {
         this.colors = board.getColors().clone();
         this.lastDrop = board.getLastDrop();
     }
@@ -12,8 +12,8 @@ public class DraftBoard extends Board {
             return false;
         }
         for (Direction direction : Direction.halfValues()) {
-            Line line = new Line(this.lastDrop, direction, DraftBoard.LINE_LENGTH - 1);
-            for (int i = 0; i < DraftBoard.LINE_LENGTH - 1; i++) {
+            Line line = new Line(this.lastDrop, direction, MinMaxDraftBoard.LINE_LENGTH - 1);
+            for (int i = 0; i < MinMaxDraftBoard.LINE_LENGTH - 1; i++) {
                 if (this.isConnect3(line)) {
                     return true;
                 }
@@ -24,7 +24,7 @@ public class DraftBoard extends Board {
     }
 
     private boolean isConnect3(Line line) {
-        for (int i = 0; i < DraftBoard.LINE_LENGTH - 1; i++) {
+        for (int i = 0; i < MinMaxDraftBoard.LINE_LENGTH - 1; i++) {
             if (!line.getCoordinate(i).isValid()) {
                 return false;
             }
