@@ -3,45 +3,29 @@ package main.es.labturing.connect4.views.console;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
 import main.es.labturing.connect4.controllers.StartController;
-import main.es.labturing.connect4.models.Game;
-import main.es.labturing.connect4.views.console.menu.LanguageMenu;
-import main.es.labturing.utils.views.YesNoDialog;
 
-public class GameView extends main.es.labturing.utils.framework.GameView<Game> {
+public class GameView
+        extends main.es.labturing.utils.framework.GameView<StartController, PlayController, ResumeController> {
 
     private BoardView boardView;
     private TurnView turnView;
 
     public GameView(StartController startController, PlayController playController, ResumeController resumeController) {
-        super(startController,playController,resumeController);
-        new LanguageMenu("SELECT LANGUAGE:").interact();
-        this.boardView = new BoardView(game.getBoard());
-        this.turnView = new TurnView(game.getTurn());
-
+        super(startController, playController, resumeController);
+        this.boardView = new BoardView(this.startController.getGame().getBoard());
+        this.turnView = new TurnView(this.startController.getGame().getTurn());
     }
 
-    public void start() {  
-        // new GameMenu(this).interact();
-        MessageManager.getInstance().writeln("GAME_TITLE");
-        this.boardView.writeln();
+    public void start() {
+        this.startController.interact(this.boardView);
     }
 
     public void play() {
-        do {
-            this.turnView.play();
-            this.boardView.writeln();
-        } while (!this.boardView.isGameFinished());
-        this.turnView.writeResult();
+        this.playController.interact(this.turnView, this.boardView);
     }
 
     public boolean resume() {
-        YesNoDialog yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(MessageManager.getInstance().getMessage("RESUME"));
-        if (yesNoDialog.isAffirmative()) {
-            this.game.reset();
-            this.turnView.configTurn();
-        }
-        return yesNoDialog.isAffirmative();
+        return this.resumeController.interact(this.turnView);
     }
 
 }

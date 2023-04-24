@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ConsoleConnect4",
+            "request": "launch",
+            "mainClass": "main.es.labturing.connect4.ConsoleConnect4",
+            "projectName": "lab-turing_7e42dc7e"
+        },
+        {
+            "type": "java",
             "name": "Connect4",
             "request": "launch",
             "mainClass": "main.es.labturing.connect4.Connect4",

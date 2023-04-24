@@ -1,11 +1,15 @@
 package main.es.labturing.utils.framework;
 
-public abstract class GameView<G> {
+public abstract class GameView<S, P, R> {
 
-    protected G game;
+    protected S startController;
+    protected P playController;
+    protected R resumeController;
 
-    public GameView(G game) {
-        this.game = game;
+    public GameView(S startController, P playController, R resumeController) {
+        this.startController = startController;
+        this.playController = playController;
+        this.resumeController = resumeController;
     }
 
     public abstract void start();

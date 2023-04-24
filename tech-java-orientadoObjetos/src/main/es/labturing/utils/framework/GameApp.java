@@ -1,6 +1,6 @@
 package main.es.labturing.utils.framework;
 
-public class GameApp<G, V extends GameView<G>> {
+public class GameApp<G, V extends GameView> {
 
     protected G game;
     protected V gameView;
