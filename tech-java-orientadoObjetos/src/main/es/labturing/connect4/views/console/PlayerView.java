@@ -1,21 +1,21 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.models.Turn;
+import main.es.labturing.connect4.controllers.PlayController;
 
 public abstract class PlayerView {
-    protected Turn turn;
+    protected PlayController playController;
 
-    public PlayerView(Turn turn) {
-        this.turn = turn;
+    public PlayerView(PlayController playController) {
+        this.playController = playController;
     }
 
     protected void showWinner() {
         MessageManager.getInstance().writeln("PLAYER_WIN",
-                new ColorView(this.turn.getActivePlayer().getColor()).toString());
+                new ColorView(this.playController.getActivePlayerColor()).toString());
     }
 
     protected void showPlayerColor() {
-        MessageManager.getInstance().writeln("TURN", new ColorView(this.turn.getActivePlayer().getColor()).toString());
+        MessageManager.getInstance().writeln("TURN", new ColorView(this.playController.getActivePlayerColor()).toString());
     }
 
     public abstract int getColumn();

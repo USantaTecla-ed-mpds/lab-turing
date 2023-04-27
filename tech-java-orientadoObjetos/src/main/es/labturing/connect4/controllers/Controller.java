@@ -9,9 +9,5 @@ public abstract class Controller {
     Controller(Game game) {
         this.game = game;
     }
-
-    public Game getGame() {
-        return this.game;
-    }
-
+    
 }

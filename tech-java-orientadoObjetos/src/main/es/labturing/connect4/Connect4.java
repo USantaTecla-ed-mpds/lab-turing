@@ -1,8 +1,8 @@
 package main.es.labturing.connect4;
 
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
-import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.models.Game;
 import main.es.labturing.connect4.views.console.GameView;
 import main.es.labturing.utils.framework.GameApp;

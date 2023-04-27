@@ -1,17 +1,16 @@
 package main.es.labturing.connect4.views.console.menu;
 
-import main.es.labturing.connect4.models.HumanPlayer;
-import main.es.labturing.connect4.models.Turn;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.views.console.MessageManager;
 
 public class CreateHumanPlayerOption extends ConfigTurnOption{
 
-    public CreateHumanPlayerOption(Turn turn) {
-        super(MessageManager.getInstance().getMessage("HUMAN"), turn);
+    public CreateHumanPlayerOption(StartController startController) {
+        super(MessageManager.getInstance().getMessage("HUMAN"), startController);
     }
 
     @Override
     public void interact() {
-        this.turn.addPlayer(new HumanPlayer(this.turn.getBoard()));
+        this.startController.addHumanPlayer();
     }
 }

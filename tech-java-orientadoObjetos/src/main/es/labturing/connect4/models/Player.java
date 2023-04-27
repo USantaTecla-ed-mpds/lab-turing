@@ -4,7 +4,7 @@ import main.es.labturing.connect4.types.PlayerType;
 
 public abstract class Player {
     private Color color;
-    private Board board;
+    protected Board board;
 
     public Player(Board board) {
         this.board = board;
@@ -30,6 +30,6 @@ public abstract class Player {
         return this.board;
     }
 
-    protected abstract PlayerType getType();
+    public abstract PlayerType getType();
 
 }

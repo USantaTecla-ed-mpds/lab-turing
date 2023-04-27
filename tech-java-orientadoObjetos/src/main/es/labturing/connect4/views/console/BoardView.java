@@ -1,14 +1,15 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.models.Board;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.models.Coordinate;
 
 public class BoardView {
     static int BLANK_SPACES = 4;
-    private final Board board;
 
-    public BoardView(final Board board) {
-        this.board = board;
+    private StartController startController;
+
+    public BoardView(StartController startController) {
+        this.startController = startController;
     }
 
     public void writeln() {
@@ -17,7 +18,7 @@ public class BoardView {
             MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
 
             for (int j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                new ColorView(this.board.getColor(new Coordinate(i, j))).write();
+                new ColorView(this.startController.getBoardColor(new Coordinate(i, j))).write();
                 MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
             }
             MessageManager.getInstance().writeln("BLANK");
@@ -30,10 +31,6 @@ public class BoardView {
             MessageManager.getInstance().write("HORIZONTAL_LINE_SYMBOL");
         }
         MessageManager.getInstance().writeln("HORIZONTAL_LINE_SYMBOL");
-    }
-
-    public boolean isGameFinished() {
-        return this.board.isGameFinished();
     }
 
 }

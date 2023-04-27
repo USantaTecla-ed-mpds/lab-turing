@@ -3,7 +3,7 @@ package main.es.labturing.connect4.models;
 public class MinMaxDraftBoard extends Board {
 
     public MinMaxDraftBoard(Board board) {
-        this.colors = board.getColors().clone();
+        this.colors = board.getColors();
         this.lastDrop = board.getLastDrop();
     }
 

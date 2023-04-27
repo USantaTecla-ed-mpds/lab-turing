@@ -6,10 +6,10 @@ public class GameState {
     private Turn turn;
 
     public GameState(Board board,Turn turn){
-        this.board.setColors(board.getColors().clone());
-        this.board.setLastDrop(board.getLastDrop());
-        this.turn.setPlayers(turn.getPlayers().clone());
-        this.turn.setActivePlayerIndex(turn.getActivePlayerIndex());
+      //  this.board.setColors(board.getColors().clone());
+      //  this.board.setLastDrop(board.getLastDrop());
+      //  this.turn.setPlayers(turn.getPlayers().clone());
+      //  this.turn.setActivePlayerIndex(turn.getActivePlayerIndex());
     }
 
     public Board getBoard() {

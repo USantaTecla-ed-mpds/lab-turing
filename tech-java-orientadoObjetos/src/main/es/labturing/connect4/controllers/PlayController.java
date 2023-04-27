@@ -1,8 +1,9 @@
 package main.es.labturing.connect4.controllers;
 
+import main.es.labturing.connect4.models.Color;
 import main.es.labturing.connect4.models.Game;
-import main.es.labturing.connect4.views.console.BoardView;
-import main.es.labturing.connect4.views.console.TurnView;
+import main.es.labturing.connect4.models.MachinePlayer;
+import main.es.labturing.connect4.types.PlayerType;
 
 public class PlayController extends Controller {
 
@@ -10,12 +11,33 @@ public class PlayController extends Controller {
         super(game);
     }
 
-    public void interact(TurnView turnView, BoardView boardView) {
-        do {
-            turnView.play();
-            boardView.writeln();
-        } while (!boardView.isGameFinished());
-        turnView.writeResult();
+    public void play(int column) {
+        this.game.getTurn().play(column);
+    }
+
+    public boolean isWinner() {
+        return this.game.getBoard().isWinner();
+    }
+
+    public int getActiveMachineColumn() {
+        MachinePlayer machinePlayer = (MachinePlayer) this.game.getTurn().getActivePlayer();
+        return machinePlayer.getColumn();
+    }
+
+    public PlayerType getActivePlayerType() {
+        return this.game.getTurn().getActivePlayer().getType();
+    }
+
+    public Color getActivePlayerColor() {
+        return this.game.getTurn().getActivePlayer().getColor();
+    }
+
+    public boolean isActivePlayerComplete(int column) {
+        return this.game.getTurn().getActivePlayer().isComplete(column);
+    }
+
+    public boolean isGameFinished() {
+        return this.game.getBoard().isGameFinished();
     }
 
 }

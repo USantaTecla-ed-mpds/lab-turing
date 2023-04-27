@@ -8,7 +8,7 @@ public class HumanPlayer extends Player {
 
     }
 
-    protected PlayerType getType() {
+    public PlayerType getType() {
         return PlayerType.HUMAN;
     }
 

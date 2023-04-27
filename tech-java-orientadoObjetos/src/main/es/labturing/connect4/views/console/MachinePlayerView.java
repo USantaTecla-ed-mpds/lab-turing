@@ -1,16 +1,15 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.models.MachinePlayer;
-import main.es.labturing.connect4.models.Turn;
+import main.es.labturing.connect4.controllers.PlayController;
 
 public abstract class MachinePlayerView extends PlayerView {
 
-    public MachinePlayerView(Turn turn) {
-        super(turn);
+    public MachinePlayerView(PlayController playController) {
+        super(playController);
     }
 
     public int getColumn() {
-        int column = ((MachinePlayer) this.turn.getActivePlayer()).getColumn();
+        int column = this.playController.getActiveMachineColumn();
         this.showColumnSelected(column);
         return column;
     }

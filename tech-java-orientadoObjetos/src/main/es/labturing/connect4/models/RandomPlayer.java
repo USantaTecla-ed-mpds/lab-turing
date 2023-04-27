@@ -15,7 +15,7 @@ public class RandomPlayer extends MachinePlayer {
         return column;
     }
 
-    protected PlayerType getType() {
+    public PlayerType getType() {
         return PlayerType.RANDOM;
     }
 

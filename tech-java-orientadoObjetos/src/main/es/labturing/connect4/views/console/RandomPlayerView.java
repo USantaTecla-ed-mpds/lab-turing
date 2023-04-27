@@ -1,11 +1,11 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.models.Turn;
+import main.es.labturing.connect4.controllers.PlayController;
 
 public class RandomPlayerView extends MachinePlayerView {
 
-    public RandomPlayerView(Turn turn) {
-        super(turn);
+    public RandomPlayerView(PlayController playController) {
+        super(playController);
     }
 
     public void showColumnSelected(int column) {

@@ -1,5 +1,6 @@
 package main.es.labturing.connect4.views.console;
 
+import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.models.Turn;
 import main.es.labturing.connect4.types.PlayerType;
 
@@ -9,11 +10,11 @@ public class PlayerViewPrototype {
 
     private HashMap<PlayerType, PlayerView> playerViewsMap;
 
-    PlayerViewPrototype(Turn turn) {
+    PlayerViewPrototype(PlayController playController) {
         this.playerViewsMap = new HashMap<>();
-        this.playerViewsMap.put(PlayerType.HUMAN, new HumanPlayerView(turn));
-        this.playerViewsMap.put(PlayerType.RANDOM, new RandomPlayerView(turn));
-        this.playerViewsMap.put(PlayerType.MINMAX, new MinMaxPlayerView(turn));
+        this.playerViewsMap.put(PlayerType.HUMAN, new HumanPlayerView(playController));
+        this.playerViewsMap.put(PlayerType.RANDOM, new RandomPlayerView(playController));
+        this.playerViewsMap.put(PlayerType.MINMAX, new MinMaxPlayerView(playController));
     }
 
     PlayerView createView(PlayerType playerType) {

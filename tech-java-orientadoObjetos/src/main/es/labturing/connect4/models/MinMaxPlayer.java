@@ -14,7 +14,7 @@ public class MinMaxPlayer extends MachinePlayer {
     }
 
     public int getColumn() {
-        this.draftBoard = new MinMaxDraftBoard(this.getBoard());
+        this.draftBoard = new MinMaxDraftBoard(this.board);
         int[] uncompletedColumns = this.draftBoard.getUncompletedColumns();
         int bestColumn = uncompletedColumns[(int) Math.floor(Math.random() * uncompletedColumns.length)];
         int maxCost = MinMaxPlayer.MIN_COST;
@@ -83,7 +83,7 @@ public class MinMaxPlayer extends MachinePlayer {
         return MinMaxPlayer.OTHER_COST;
     }
 
-    protected PlayerType getType() {
+    public PlayerType getType() {
         return PlayerType.MINMAX;
     }
 
