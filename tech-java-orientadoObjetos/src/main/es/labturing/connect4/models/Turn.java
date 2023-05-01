@@ -1,23 +1,29 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.PlayerType;
+
 public class Turn {
     final static int NUMBER_PLAYERS = 2;
+    private PlayerPrototype playerPrototype;
     private Player[] players;
     private int activePlayerIndex;
     private Board board;
 
     public Turn(Board board) {
         this.board = board;
+        this.playerPrototype = new PlayerPrototype(this.board);
         this.players = new Player[NUMBER_PLAYERS];
+
     }
 
     public void resetPlayers() {
         for (int i = 0; i < this.players.length; i++) {
             this.players[i] = null;
         }
+        this.resetPlayersIndex();
     }
 
-    public void reset() {
+    public void resetPlayersIndex() {
         this.activePlayerIndex = 0;
     }
 
@@ -28,7 +34,8 @@ public class Turn {
         }
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(PlayerType playerType) {
+        Player player = this.playerPrototype.createModel(playerType);
         boolean playerSetted = false;
         for (int i = 0; i < this.players.length && playerSetted == false; i++) {
             if (this.players[i] == null) {

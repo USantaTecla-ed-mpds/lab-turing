@@ -30,6 +30,8 @@ public abstract class Player {
         return this.board;
     }
 
+    public abstract Player clone();
+
     public abstract PlayerType getType();
 
 }

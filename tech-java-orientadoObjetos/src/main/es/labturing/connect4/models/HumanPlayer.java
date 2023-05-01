@@ -8,6 +8,12 @@ public class HumanPlayer extends Player {
 
     }
 
+    public HumanPlayer clone() {
+        HumanPlayer clone = new HumanPlayer (this.board);
+        clone.setColor(this.getColor());
+        return clone;
+    }
+
     public PlayerType getType() {
         return PlayerType.HUMAN;
     }

@@ -47,8 +47,8 @@ public class ConfigTurnMenu extends SequentialMenu {
     }
 
     public void interact() {
+        this.startController.resetPlayers();
         super.interact();
-        this.startController.resetPlayersIndex();
     }
 
 }

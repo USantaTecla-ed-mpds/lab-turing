@@ -1,7 +1,6 @@
 package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.models.Turn;
 import main.es.labturing.connect4.types.PlayerType;
 
 import java.util.HashMap;
@@ -18,6 +17,6 @@ public class PlayerViewPrototype {
     }
 
     PlayerView createView(PlayerType playerType) {
-        return this.playerViewsMap.get(playerType);
+        return  this.playerViewsMap.get(playerType);
     }
 }

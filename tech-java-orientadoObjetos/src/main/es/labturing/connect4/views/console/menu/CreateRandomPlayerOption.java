@@ -1,6 +1,7 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.connect4.views.console.MessageManager;
 
 public class CreateRandomPlayerOption extends ConfigTurnOption {
@@ -11,6 +12,6 @@ public class CreateRandomPlayerOption extends ConfigTurnOption {
 
     @Override
     public void interact() {
-        this.startController.addRandomPlayer();
+        this.startController.addPlayer(PlayerType.RANDOM);
     }
 }

@@ -1,6 +1,7 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.connect4.views.console.MessageManager;
 
 public class CreateMinMaxPlayerOption extends ConfigTurnOption {
@@ -11,7 +12,7 @@ public class CreateMinMaxPlayerOption extends ConfigTurnOption {
 
     @Override
     public void interact() {
-        this.startController.addMinMaxPlayer();
+        this.startController.addPlayer(PlayerType.MINMAX);
     }
 
 }
