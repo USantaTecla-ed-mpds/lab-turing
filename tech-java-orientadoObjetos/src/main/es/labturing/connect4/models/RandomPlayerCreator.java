@@ -6,5 +6,5 @@ public class RandomPlayerCreator implements PlayerCreator {
     public RandomPlayer create(Board board) {
         return new RandomPlayer(board);
     }
-    
+
 }
