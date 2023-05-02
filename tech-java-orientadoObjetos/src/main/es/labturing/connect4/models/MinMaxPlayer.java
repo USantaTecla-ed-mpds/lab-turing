@@ -83,12 +83,6 @@ public class MinMaxPlayer extends MachinePlayer {
         return MinMaxPlayer.OTHER_COST;
     }
 
-    public MinMaxPlayer clone() {
-        MinMaxPlayer clone = new MinMaxPlayer(this.board);
-        clone.setColor(this.getColor());
-        return clone;
-    }
-
     public PlayerType getType() {
         return PlayerType.MINMAX;
     }

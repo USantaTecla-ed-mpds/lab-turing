@@ -26,12 +26,6 @@ public abstract class Player {
         return this.board.isCompleteColumn(column);
     }
 
-    public Board getBoard() {
-        return this.board;
-    }
-
-    public abstract Player clone();
-
     public abstract PlayerType getType();
 
 }

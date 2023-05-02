@@ -15,12 +15,6 @@ public class RandomPlayer extends MachinePlayer {
         return column;
     }
 
-    public MinMaxPlayer clone() {
-        MinMaxPlayer clone = new MinMaxPlayer(this.board);
-        clone.setColor(this.getColor());
-        return clone;
-    }
-
     public PlayerType getType() {
         return PlayerType.RANDOM;
     }

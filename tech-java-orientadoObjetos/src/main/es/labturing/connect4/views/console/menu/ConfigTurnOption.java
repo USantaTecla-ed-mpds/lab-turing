@@ -11,4 +11,5 @@ public abstract class ConfigTurnOption extends Option {
         super(title);
         this.startController = startController;
     }
+
 }

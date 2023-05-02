@@ -14,4 +14,5 @@ public class CreateHumanPlayerOption extends ConfigTurnOption {
     public void interact() {
         this.startController.addPlayer(PlayerType.HUMAN);
     }
+
 }

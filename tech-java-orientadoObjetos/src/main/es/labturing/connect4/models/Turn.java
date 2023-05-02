@@ -4,16 +4,15 @@ import main.es.labturing.connect4.types.PlayerType;
 
 public class Turn {
     final static int NUMBER_PLAYERS = 2;
-    private PlayerPrototype playerPrototype;
     private Player[] players;
     private int activePlayerIndex;
     private Board board;
+    private PlayersFactory playersFactory;
 
     public Turn(Board board) {
         this.board = board;
-        this.playerPrototype = new PlayerPrototype(this.board);
         this.players = new Player[NUMBER_PLAYERS];
-
+        this.playersFactory = new PlayersFactory();
     }
 
     public void resetPlayers() {
@@ -35,7 +34,7 @@ public class Turn {
     }
 
     public void addPlayer(PlayerType playerType) {
-        Player player = this.playerPrototype.createModel(playerType);
+        Player player = this.playersFactory.getPlayerCreator(playerType).create(this.board);
         boolean playerSetted = false;
         for (int i = 0; i < this.players.length && playerSetted == false; i++) {
             if (this.players[i] == null) {
