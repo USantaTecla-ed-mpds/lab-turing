@@ -20,6 +20,7 @@ public abstract class Connect4 extends GameApp<Game, GameView> {
         this.startController = new StartController(this.game);
         this.playController = new PlayController(this.game);
         this.resumeController = new ResumeController(this.game);
+        this.undoRedoController = new UndoRedoController(this.game);
         this.gameView = this.createView();
 
     }
