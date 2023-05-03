@@ -1,6 +1,7 @@
 package main.es.labturing.connect4;
 
 import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.controllers.UndoRedoController;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
 import main.es.labturing.connect4.models.Game;
@@ -12,6 +13,7 @@ public abstract class Connect4 extends GameApp<Game, GameView> {
     protected StartController startController;
     protected PlayController playController;
     protected ResumeController resumeController;
+    protected UndoRedoController undoRedoController;
 
     public Connect4() {
         this.game = new Game();

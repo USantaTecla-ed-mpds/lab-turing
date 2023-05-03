@@ -49,4 +49,8 @@ public class Coordinate {
             return false;
         return this.column == coordinate.column && this.row == coordinate.row;
     }
+
+    public Coordinate clone(){
+        return new Coordinate(this.row, this.column);
+    }
 }

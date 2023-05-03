@@ -57,4 +57,13 @@ public class Turn {
         return this.activePlayerIndex;
     }
 
+    public TurnState getState(){
+        return new TurnState(players, activePlayerIndex);
+    }
+
+    public void setState(TurnState turnState){
+        this.players = turnState.getPlayers();
+        this.activePlayerIndex = turnState.getActivePlayerIndex();
+    }
+
 }

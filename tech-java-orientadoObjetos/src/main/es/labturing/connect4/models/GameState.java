@@ -2,22 +2,19 @@ package main.es.labturing.connect4.models;
 
 public class GameState {
 
-    private Board board;
-    private Turn turn;
+    private BoardState boardState;
+    private TurnState turnState;
 
-    public GameState(Board board,Turn turn){
-      //  this.board.setColors(board.getColors().clone());
-      //  this.board.setLastDrop(board.getLastDrop());
-      //  this.turn.setPlayers(turn.getPlayers().clone());
-      //  this.turn.setActivePlayerIndex(turn.getActivePlayerIndex());
+    public GameState(BoardState boardState,TurnState turnState){
+        this.boardState = boardState;
+        this.turnState = turnState;
     }
 
-    public Board getBoard() {
-        return board;
+    public BoardState getBoardState() {
+        return this.boardState;
     }
 
-    public Turn getTurn() {
-        return turn;
+    public TurnState getTurnState() {
+        return this.turnState;
     }
-    
 }

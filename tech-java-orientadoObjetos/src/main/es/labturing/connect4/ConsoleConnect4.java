@@ -6,7 +6,7 @@ public class ConsoleConnect4 extends Connect4 {
 
 	@Override
 	protected GameView createView() {
-		return new GameView(this.startController, this.playController, this.resumeController);
+		return new GameView(this.startController, this.playController, this.resumeController, this.undoRedoController);
 	}
 
 	public static void main(String[] args) {

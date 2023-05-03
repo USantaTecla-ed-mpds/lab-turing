@@ -92,4 +92,12 @@ public class Board {
         return this.lastDrop;
     }
 
+    public BoardState getState(){
+        return new BoardState(colors, lastDrop);
+    }
+
+    public void setState(BoardState boardState){
+        this.colors = boardState.getColors();
+        this.lastDrop = boardState.getLastDrop();
+    }
 }

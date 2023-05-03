@@ -2,6 +2,7 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Color;
 import main.es.labturing.connect4.models.Game;
+import main.es.labturing.connect4.models.GameState;
 import main.es.labturing.connect4.models.MachinePlayer;
 import main.es.labturing.connect4.types.PlayerType;
 
@@ -38,6 +39,10 @@ public class PlayController extends Controller {
 
     public boolean isGameFinished() {
         return this.game.getBoard().isGameFinished();
+    }
+
+    public GameState getState(){
+        return this.game.getState();
     }
 
 }

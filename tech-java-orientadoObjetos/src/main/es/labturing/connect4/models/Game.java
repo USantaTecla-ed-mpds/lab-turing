@@ -23,4 +23,10 @@ public class Game {
         return turn;
     }
 
+    public GameState getState(){
+        BoardState boardState = this.board.getState();
+        TurnState turnState = this.turn.getState();
+        return new GameState(boardState, turnState);
+    }
+
 }
