@@ -1,7 +1,6 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.models.GameManager;
 import main.es.labturing.connect4.views.console.PlayerView;
 import main.es.labturing.utils.views.menu.Option;
 
@@ -19,7 +18,7 @@ public class PlayOption extends Option{
     @Override
     public void interact() {
         this.playController.play(this.playerView.getColumn());
-        GameManager.getInstance().registry(this.playController.getState());
+        this.playController.registry(this.playController.getState());
     }
     
 }

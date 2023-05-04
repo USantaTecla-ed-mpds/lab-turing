@@ -29,4 +29,9 @@ public class Game {
         return new GameState(boardState, turnState);
     }
 
+    public void setState(GameState gameState) {
+        this.board.setState(gameState.getBoardState());
+        this.turn.setState(gameState.getTurnState());
+    }
+
 }
