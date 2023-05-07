@@ -28,4 +28,5 @@ public class GameState {
         TurnState turnState = this.turnState.clone();
         return new GameState(boardState, turnState);
     }
+    
 }

@@ -10,12 +10,16 @@ import java.util.List;
 
 public class GameManager {
 
-    List<GameState> gameStates = new ArrayList<>();
+    private List<GameState> gameStates;
     private static GameManager instance = null;
-    private int firstPrevious = 0;
+    private int firstPrevious;
+    private boolean firstState;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
     private GameManager() {
+        this.gameStates = new ArrayList<>();
+        this.firstPrevious = 1;
+        this.firstState = false;
     }
 
     public static GameManager getInstance() {
@@ -26,9 +30,7 @@ public class GameManager {
     }
 
     public void registry(GameState gameState) {
-        if (this.firstPrevious == 0) {
-            this.firstPrevious++;
-        }
+        this.firstState = true;
         if (this.firstPrevious == 1) {
             this.gameStates.add(0, gameState);
         } else {
@@ -111,7 +113,7 @@ public class GameManager {
     }
 
     public boolean isUndoable() {
-        return this.firstPrevious >= 1;
+        return this.firstPrevious >= 1 && this.firstState;
     }
 
     public boolean isRedoable() {
