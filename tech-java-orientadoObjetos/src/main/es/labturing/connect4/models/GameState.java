@@ -10,11 +10,22 @@ public class GameState {
         this.turnState = turnState;
     }
 
+    public GameState(GameState gameState){
+        this.boardState = gameState.boardState;
+        this.turnState = gameState.turnState;
+    }
+
     public BoardState getBoardState() {
         return this.boardState;
     }
 
     public TurnState getTurnState() {
         return this.turnState;
+    }
+
+    public GameState clone(){
+        BoardState boardState = this.boardState.clone();
+        TurnState turnState = this.turnState.clone();
+        return new GameState(boardState, turnState);
     }
 }

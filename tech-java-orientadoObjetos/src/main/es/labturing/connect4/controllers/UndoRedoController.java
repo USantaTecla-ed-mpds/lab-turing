@@ -16,8 +16,18 @@ public class UndoRedoController extends Controller {
         this.game.getTurn().setState(gameState.getTurnState());
     }
 
-    public void redo(GameState gameState){
+    public void redo(){
+        GameState gameState = GameManager.getInstance().getRedoneState();
+        this.game.getBoard().setState(gameState.getBoardState());
+        this.game.getTurn().setState(gameState.getTurnState());  
+    }
 
+    public boolean isUndoable(){
+        return GameManager.getInstance().isUndoable();
+    }
+
+    public boolean isRedoable(){
+        return GameManager.getInstance().isRedoable();
     }
     
 }

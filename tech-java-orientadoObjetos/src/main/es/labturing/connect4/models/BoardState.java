@@ -24,4 +24,8 @@ public class BoardState {
         return this.lastDrop;
     }
 
+    public BoardState clone(){
+        return new BoardState(this.colors, this.lastDrop);
+    }
+
 }

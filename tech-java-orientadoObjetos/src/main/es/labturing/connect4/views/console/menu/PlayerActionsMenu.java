@@ -11,7 +11,7 @@ public class PlayerActionsMenu extends Menu{
     private PlayerView playerView;
 
     public PlayerActionsMenu(UndoRedoController undoRedoController, PlayerView playerView, PlayController playController){
-        super("A fuego SaveAndExit or Undo or Drop menu");
+        super("Menu Guardar&Salir, undo/redo, o tirar");
         this.undoRedoController = undoRedoController;
         this.playController = playController;
         this.playerView = playerView; 
@@ -19,8 +19,13 @@ public class PlayerActionsMenu extends Menu{
 
     @Override
     protected void addOptions(){
-        //this.add(new SaveAndExitOption());
-        this.add(new UndoOption(this.undoRedoController));
+        //this.add(new SaveAndExitOption(this.undoRedoController or this.playerActionsController)); //TODO: descomentar para dejar salvar y salir
+        if(this.undoRedoController.isUndoable()){
+            this.add(new UndoOption(this.undoRedoController));
+        }
+        if(this.undoRedoController.isRedoable()){
+            this.add(new RedoOption(this.undoRedoController));
+        }
         this.add(new PlayOption(this.playController, this.playerView));
     }
 }

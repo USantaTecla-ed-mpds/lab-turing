@@ -17,7 +17,7 @@ public class SaveAndExitOrContinueMenu extends QuitMenu{
     }
     @Override
     protected void addOptions(){
-        this.add(new SaveAndExitOption(this.gameManager));
+        //this.add(new SaveAndExitOption(this.gameManager));
     }
 
 }

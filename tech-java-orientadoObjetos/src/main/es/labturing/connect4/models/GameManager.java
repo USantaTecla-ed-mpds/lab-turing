@@ -5,11 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameManager {
 
-    Stack<GameState> gameStates = new Stack<GameState>();
+    List<GameState> gameStates = new ArrayList<>();
     private static GameManager instance = null;
     private int firstPrevious = 0;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
@@ -25,11 +26,24 @@ public class GameManager {
     }
 
     public void registry(GameState gameState) {
-        //aquí va el bucle for
-        this.gameStates.add(gameState);
-        this.firstPrevious++;
-        // TRAZA//
+        if (this.firstPrevious == 0) {
+            this.firstPrevious++;
+        }
+        if (this.firstPrevious == 1) {
+            this.gameStates.add(0, gameState);
+        } else {
+            for (int i = 0; i < this.firstPrevious - 1; i++) {
+                this.gameStates.remove(0);
+            }
+            this.gameStates.add(0, gameState);
+            this.firstPrevious = 1;
+        }
+        //this.trazaMetodoParaBorrar();
+    }
+
+    private void trazaMetodoParaBorrar() {
         int counter = 0;
+        System.out.println("SIZE: " + this.gameStates.size());
         for (GameState element : this.gameStates) {
             System.out.println(" Memento numero " + counter++ + " " + element);
             for (int i = 0; i < element.getBoardState().getColors().length; i++) {
@@ -41,46 +55,46 @@ public class GameManager {
         }
     }
 
-    public GameState getUndoneState(){
-        System.out.println("firstPrevious: " + this.firstPrevious);
-        this.firstPrevious--;
-        return this.gameStates.get(firstPrevious - 1);
+    public GameState getUndoneState() {
+        GameState gameState = new GameState(this.gameStates.get(this.firstPrevious).clone());
+        this.firstPrevious++;
+        return gameState;
     }
 
-    public void redo(){}
+    public GameState getRedoneState() {
+        this.firstPrevious--;
+        GameState gameState = new GameState(this.gameStates.get(this.firstPrevious - 1).clone());
+        return gameState;
+    }
 
-    public void save(){
+    public void save() {
         ObjectOutputStream oos = null;
         try {
             oos = new ObjectOutputStream(new FileOutputStream(this.path + "savedgame.dat"));
-            // oos.writeObject(this.board);
-            // oos.writeObject(this.turn);
-            oos.writeObject(this.gameStates.peek().getBoardState());
-            oos.writeObject(this.gameStates.peek().getTurnState());
+            oos.writeObject(this.gameStates.get(0).getBoardState());
+            oos.writeObject(this.gameStates.get(0).getTurnState());
         } catch (Exception e) {
             // TODO: handle exception
         } finally {
             if (oos != null) {
                 try {
-                  oos.close();
+                    oos.close();
                 } catch (IOException ex) {
-                  System.out.println("IOException al cerrar: " + ex.getMessage());
+                    System.out.println("IOException al cerrar: " + ex.getMessage());
                 }
             }
         }
     }
 
-    public GameState load()  {
+    public GameState load() {
         ObjectInputStream ois = null;
         BoardState boardState = null;
         TurnState turnState = null;
         GameState gameState = null;
-        try  {
+        try {
             ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
-        //    connect4.setBoard((Board) ois.readObject());
-        //    connect4.setTurn((Turn) ois.readObject());
-        boardState = (BoardState) ois.readObject();
-        turnState = (TurnState) ois.readObject();
+            boardState = (BoardState) ois.readObject();
+            turnState = (TurnState) ois.readObject();
         } catch (Exception e) {
             // TODO: handle exception
         } finally {
@@ -89,7 +103,7 @@ public class GameManager {
                     ois.close();
                     gameState = new GameState(boardState, turnState);
                 } catch (IOException ex) {
-                  System.out.println("IOException al cerrar: " + ex.getMessage());
+                    System.out.println("IOException al cerrar: " + ex.getMessage());
                 }
             }
         }
@@ -97,11 +111,11 @@ public class GameManager {
     }
 
     public boolean isUndoable() {
-		return this.firstPrevious < this.gameStates.size() - 1;
-	}
+        return this.firstPrevious >= 1;
+    }
 
-	public boolean isRedoable() {
-		return this.firstPrevious >= 1;
-	}
-    
+    public boolean isRedoable() {
+        return this.firstPrevious > 1;
+    }
+
 }

@@ -20,4 +20,8 @@ public class TurnState {
     public int getActivePlayerIndex() {
         return this.activePlayerIndex;
     }
+
+    public TurnState clone(){
+        return new TurnState(this.players, this.activePlayerIndex);
+    }
 }
