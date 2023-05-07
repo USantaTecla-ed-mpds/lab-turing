@@ -9,7 +9,6 @@ public class ConsoleConnect4 extends Connect4 {
 		return new GameView(this.startController, this.playController, this.resumeController, this.undoRedoController);
 	}
 	
-	
 	public static void main(String[] args) {
 		new ConsoleConnect4().play();
 	}
