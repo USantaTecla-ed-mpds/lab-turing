@@ -2,15 +2,15 @@ package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.UndoRedoController;
-import main.es.labturing.connect4.views.console.PlayerView;
+import main.es.labturing.connect4.views.console.HumanPlayerView;
 import main.es.labturing.utils.views.menu.Menu;
 
 public class PlayerActionsMenu extends Menu {
     private UndoRedoController undoRedoController;
     private PlayController playController;
-    private PlayerView playerView;
+    private HumanPlayerView playerView;
 
-    public PlayerActionsMenu(UndoRedoController undoRedoController, PlayerView playerView,
+    public PlayerActionsMenu(UndoRedoController undoRedoController, HumanPlayerView playerView,
             PlayController playController) {
         super("Player Actions Menus(msg):");
         this.undoRedoController = undoRedoController;

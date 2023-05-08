@@ -8,7 +8,11 @@ public abstract class MachinePlayerView extends PlayerView {
         super(playController);
     }
 
-    public int getColumn() {
+    public void play(){
+        this.playController.play(this.getColumn());
+    }
+
+    private int getColumn() {
         int column = this.playController.getActiveMachineColumn();
         this.showColumnSelected(column);
         return column;

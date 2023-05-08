@@ -93,7 +93,7 @@ public class Board {
     }
 
     public BoardState getState(){
-        return new BoardState(colors, lastDrop);
+        return new BoardState(this.colors, this.lastDrop);
     }
 
     public void setState(BoardState boardState){

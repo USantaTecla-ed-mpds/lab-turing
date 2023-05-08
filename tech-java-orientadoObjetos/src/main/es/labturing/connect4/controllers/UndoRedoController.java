@@ -2,7 +2,6 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Game;
 import main.es.labturing.connect4.models.GameManager;
-import main.es.labturing.connect4.models.GameState;
 
 public class UndoRedoController extends Controller {
 
@@ -10,17 +9,19 @@ public class UndoRedoController extends Controller {
 
     public UndoRedoController(Game game) {
         super(game);
-        this.gameManager = new GameManager();
+        
+    }
+
+    public void createGameManager() {
+        this.gameManager = new GameManager(this.game);
     }
 
     public void undo() {
-        GameState gameState = this.gameManager.getUndoneState();
-        this.game.setState(gameState);
+        this.game.setState(this.gameManager.getUndoneState());
     }
 
     public void redo() {
-        GameState gameState = this.gameManager.getRedoneState();
-        this.game.setState(gameState);
+        this.game.setState(this.gameManager.getRedoneState());
     }
 
     public void registry() {

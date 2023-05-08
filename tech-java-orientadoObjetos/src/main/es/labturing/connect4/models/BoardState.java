@@ -12,8 +12,9 @@ public class BoardState {
                 this.colors[i][j] = colors[i][j];
             }
         }
-
-        this.lastDrop = lastDrop.clone();
+        if(lastDrop != null) {
+            this.lastDrop = lastDrop.clone();
+        }
     }
 
     public Color[][] getColors() {
@@ -22,6 +23,10 @@ public class BoardState {
 
     public Coordinate getLastDrop() {
         return this.lastDrop;
+    }
+
+    public BoardState clone() {
+        return new BoardState(this.colors, this.lastDrop);
     }
 
 }

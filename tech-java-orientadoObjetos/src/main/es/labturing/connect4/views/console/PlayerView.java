@@ -18,6 +18,6 @@ public abstract class PlayerView {
         MessageManager.getInstance().writeln("TURN", new ColorView(this.playController.getActivePlayerColor()).toString());
     }
 
-    public abstract int getColumn();
+    public abstract void play();
 
 }

@@ -14,9 +14,10 @@ public class GameManager {
     private int firstPrevious;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
-    public GameManager() {
+    public GameManager(Game game) {
         this.firstPrevious = 0;
         this.gameStates = new ArrayList<GameState>();
+        this.gameStates.add(this.firstPrevious,game.getState());
     }
 
     public void registry(Game game) {
@@ -30,12 +31,12 @@ public class GameManager {
 
     public GameState getUndoneState() {
         this.firstPrevious++;
-        return this.gameStates.get(firstPrevious);
+        return this.gameStates.get(firstPrevious).clone();
     }
 
     public GameState getRedoneState() {
         this.firstPrevious--;
-        return this.gameStates.get(firstPrevious);
+        return this.gameStates.get(firstPrevious).clone();
 
     }
 
