@@ -14,7 +14,6 @@ public class PlayController extends Controller {
 
     public void play(int column) {
         this.game.getTurn().play(column);
-        //this.game. registry
     }
 
     public boolean isWinner() {
@@ -42,7 +41,7 @@ public class PlayController extends Controller {
         return this.game.getBoard().isGameFinished();
     }
 
-    public GameState getState(){
+    public GameState getState() {
         return this.game.getState();
     }
 

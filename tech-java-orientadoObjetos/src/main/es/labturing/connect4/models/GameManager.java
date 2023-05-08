@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class GameManager {
 
     List<GameState> gameStates = new ArrayList<GameState>();
- //   private static GameManager instance = null;
     private Game game;
     private int firstPrevious = 0;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
@@ -19,13 +18,6 @@ public class GameManager {
     public GameManager(Game game) {
         this.game = game;
     }
-
-/*    public static GameManager getInstance() {
-        if (GameManager.instance == null) {
-            GameManager.instance = new GameManager(game);
-        }
-        return GameManager.instance;
-    }*/
 
     public void registry() {
         for (int i = 0; i < this.firstPrevious; i++) {
@@ -58,7 +50,8 @@ public class GameManager {
     public void save() {
         ObjectOutputStream oos = null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream(this.path + "savedgame.dat"));
+            oos = new ObjectOutputStream(new FileOutputStream(this.path +
+                    "savedgame.dat"));
             // oos.writeObject(this.board);
             // oos.writeObject(this.turn);
             oos.writeObject(this.gameStates.get(firstPrevious).getBoardState());
@@ -82,7 +75,8 @@ public class GameManager {
         TurnState turnState = null;
         GameState gameState = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
+            ois = new ObjectInputStream(new FileInputStream(this.path +
+                    "savedgame.dat"));
             // connect4.setBoard((Board) ois.readObject());
             // connect4.setTurn((Turn) ois.readObject());
             boardState = (BoardState) ois.readObject();
