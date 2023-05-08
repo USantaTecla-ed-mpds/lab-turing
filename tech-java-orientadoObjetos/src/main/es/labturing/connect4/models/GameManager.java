@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    List<GameState> gameStates = new ArrayList<GameState>();
-    private Game game;
-    private int firstPrevious = 0;
+    List<GameState> gameStates;
+    private int firstPrevious;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
-    public GameManager(Game game) {
-        this.game = game;
+    public GameManager() {
+        this.firstPrevious = 0;
+        this.gameStates = new ArrayList<GameState>();
     }
 
-    public void registry() {
+    public void registry(Game game) {
         for (int i = 0; i < this.firstPrevious; i++) {
             this.gameStates.remove(0);
         }
@@ -52,10 +52,8 @@ public class GameManager {
         try {
             oos = new ObjectOutputStream(new FileOutputStream(this.path +
                     "savedgame.dat"));
-            // oos.writeObject(this.board);
-            // oos.writeObject(this.turn);
-            oos.writeObject(this.gameStates.get(firstPrevious).getBoardState());
-            oos.writeObject(this.gameStates.get(firstPrevious).getTurnState());
+            oos.writeObject(this.gameStates.get(firstPrevious));
+           
         } catch (Exception e) {
             // TODO: handle exception
         } finally {
@@ -69,31 +67,25 @@ public class GameManager {
         }
     }
 
-    public GameState load() {
+    public void load(Game game) {
         ObjectInputStream ois = null;
-        BoardState boardState = null;
-        TurnState turnState = null;
         GameState gameState = null;
         try {
             ois = new ObjectInputStream(new FileInputStream(this.path +
                     "savedgame.dat"));
-            // connect4.setBoard((Board) ois.readObject());
-            // connect4.setTurn((Turn) ois.readObject());
-            boardState = (BoardState) ois.readObject();
-            turnState = (TurnState) ois.readObject();
+            gameState = (GameState) ois.readObject();
         } catch (Exception e) {
             // TODO: handle exception
         } finally {
             if (ois != null) {
                 try {
                     ois.close();
-                    gameState = new GameState(boardState, turnState);
+                    game.setState(gameState);
                 } catch (IOException ex) {
                     System.out.println("IOException al cerrar: " + ex.getMessage());
                 }
             }
         }
-        return gameState;
     }
 
 }

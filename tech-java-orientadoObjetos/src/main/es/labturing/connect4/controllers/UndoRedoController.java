@@ -10,7 +10,7 @@ public class UndoRedoController extends Controller {
 
     public UndoRedoController(Game game) {
         super(game);
-        this.gameManager = new GameManager(this.game);
+        this.gameManager = new GameManager();
     }
 
     public void undo() {
@@ -24,7 +24,12 @@ public class UndoRedoController extends Controller {
     }
 
     public void registry() {
-        this.gameManager.registry();
+        this.gameManager.registry(this.game);
+
+    }
+
+    public void load() {
+        this.gameManager.load(this.game);
     }
 
     public boolean isUndoable() {
