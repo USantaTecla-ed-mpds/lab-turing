@@ -29,16 +29,20 @@ public class UndoRedoController extends Controller {
 
     }
 
-    public void load() {
-        this.gameManager.load(this.game);
-    }
-
     public boolean isUndoable() {
         return this.gameManager.isUndoable();
     }
 
     public boolean isRedoable() {
         return this.gameManager.isRedoable();
+    }
+
+    public void load() {
+        this.gameManager.load(this.game);
+    }
+
+    public void save() {
+        this.gameManager.save();
     }
 
 }

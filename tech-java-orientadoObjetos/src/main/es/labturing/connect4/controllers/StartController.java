@@ -1,8 +1,8 @@
 package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Game;
+import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
-import main.es.labturing.connect4.models.Color;
 import main.es.labturing.connect4.models.Coordinate;
 
 public class StartController extends Controller {

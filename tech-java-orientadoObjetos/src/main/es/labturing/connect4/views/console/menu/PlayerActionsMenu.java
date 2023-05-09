@@ -3,6 +3,7 @@ package main.es.labturing.connect4.views.console.menu;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.UndoRedoController;
 import main.es.labturing.connect4.views.console.HumanPlayerView;
+import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.utils.views.menu.Menu;
 
 public class PlayerActionsMenu extends Menu {
@@ -12,7 +13,7 @@ public class PlayerActionsMenu extends Menu {
 
     public PlayerActionsMenu(UndoRedoController undoRedoController, HumanPlayerView playerView,
             PlayController playController) {
-        super("Player Actions Menus(msg):");
+        super(MessageManager.getInstance().getMessage("PLAYER_ACTIONS_TITLE"));
         this.undoRedoController = undoRedoController;
         this.playController = playController;
         this.playerView = playerView;

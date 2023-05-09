@@ -1,6 +1,6 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.models.Color;
+import main.es.labturing.connect4.types.Color;
 
 public class ColorView {
     private final Color color;

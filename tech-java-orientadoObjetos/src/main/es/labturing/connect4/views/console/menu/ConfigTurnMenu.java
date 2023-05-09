@@ -1,7 +1,7 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.StartController;
-import main.es.labturing.connect4.models.Color;
+import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.views.console.ColorView;
 import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.utils.views.Console;

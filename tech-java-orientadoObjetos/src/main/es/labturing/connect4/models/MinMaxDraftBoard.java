@@ -1,5 +1,7 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.Color;
+
 public class MinMaxDraftBoard extends Board {
 
     public MinMaxDraftBoard(Board board) {

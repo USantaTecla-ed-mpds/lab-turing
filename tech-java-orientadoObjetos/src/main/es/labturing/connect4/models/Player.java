@@ -1,5 +1,6 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 
 public abstract class Player {
