@@ -68,7 +68,10 @@ public class MessageManager {
 
     public void writeln(String key, Object... values) {
         Console.getInstance().writeln(MessageFormat.format(this.messages.get(key), values));
+    }
 
+    public Language getLanguage(){
+        return this.language;
     }
 
 }

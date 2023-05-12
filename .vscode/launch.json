@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GraphicConnect4",
+            "request": "launch",
+            "mainClass": "main.es.labturing.connect4.GraphicConnect4",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
             "name": "ConsoleConnect4",
             "request": "launch",
             "mainClass": "main.es.labturing.connect4.ConsoleConnect4",

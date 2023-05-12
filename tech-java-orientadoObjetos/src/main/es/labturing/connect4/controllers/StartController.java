@@ -31,4 +31,8 @@ public class StartController extends Controller {
         return this.game.getBoard().getColor(coordinate);
     }
 
+    public boolean isAllPlayersSetted(){
+        return this.game.getTurn().isAllPlayersSetted();
+    }
+
 }

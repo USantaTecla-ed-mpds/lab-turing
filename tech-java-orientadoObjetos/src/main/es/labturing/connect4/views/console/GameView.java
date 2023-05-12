@@ -4,11 +4,11 @@ import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.controllers.UndoRedoController;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
+import main.es.labturing.connect4.views.View;
 import main.es.labturing.connect4.views.console.menu.LanguageMenu;
 import main.es.labturing.utils.views.YesNoDialog;
 
-public class GameView
-        extends main.es.labturing.utils.framework.GameView<StartController, PlayController, ResumeController, UndoRedoController> {
+public class GameView extends View{
 
     private BoardView boardView;
     private TurnView turnView;
@@ -19,6 +19,7 @@ public class GameView
         this.turnView = new TurnView(startController, playController, undoRedoController);
     }
 
+    @Override
     public void start() {
         new LanguageMenu("SELECT LANGUAGE:").interact();
         this.turnView.configTurn();
@@ -26,6 +27,7 @@ public class GameView
         this.boardView.writeln();
     }
 
+    @Override
     public void play() {
         do {
             turnView.play();
@@ -34,6 +36,7 @@ public class GameView
         turnView.writeResult();
     }
 
+    @Override
     public boolean resume() {
         YesNoDialog yesNoDialog = new YesNoDialog();
         yesNoDialog.read(MessageManager.getInstance().getMessage("RESUME"));

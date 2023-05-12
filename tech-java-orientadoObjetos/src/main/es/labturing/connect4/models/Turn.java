@@ -66,4 +66,14 @@ public class Turn {
         this.activePlayerIndex = turnState.getActivePlayerIndex();
     }
 
+    public boolean isAllPlayersSetted(){
+        for (Player player : this.players) {
+            System.out.println("player: " + player);
+            if(player == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
