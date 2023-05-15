@@ -13,68 +13,107 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.models.Color;
+import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.connect4.views.Language;
 import main.es.labturing.connect4.views.console.MessageManager;
 
 public class StartView extends JFrame implements ItemListener{
 
     private StartController startController;
-    private JComboBox<Language> languagesComboBox = new JComboBox<Language>();
-    private JComboBox<String> PlayersComboBox = new JComboBox<String>();
+    private JComboBox<Language> languagesComboBox;
+    private JComboBox<PlayerType> playersComboBox;
+    private boolean languageSetted;
+    private boolean playersSetted;
+    private JPanel languagePanel;
+    private JPanel playerPanel;
     
     public StartView (StartController startController){
         super("Connect4(msg)");
+        this.languagesComboBox  = new JComboBox<Language>();
+        this.playersComboBox = new JComboBox<PlayerType>();
         this.startController = startController;
-		this.setSize(400, 200);
+		this.setSize(400, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setLayout(new GridBagLayout());
         this.setLocationRelativeTo(null);
 		this.setVisible(true);
+        this.languageSetted = false;
+        this.playersSetted = false;
+        this.languagePanel = new JPanel();
+        this.playerPanel = new JPanel();
     }
 
     public void interact(){
-        JPanel startPanelLanguage = new JPanel();
+        this.configLanguagePanel();
+        do{
+            System.out.println("dentro del while; " + this.languageSetted);
+            this.languagePanel.setVisible(true);
+        }while(!this.languageSetted);
+        this.languagePanel.setVisible(false);
 
+        System.out.println("despues del while; " + this.languageSetted);
+
+        for (int i = 0; i < Color.values().length; i++) {
+            if(Color.values()[i] != Color.NULL){
+                this.configPlayersPanel(Color.values()[i]);
+                do{
+                    System.out.println("CONFIGURO PLAYER: " + Color.values()[i]);
+                    this.playerPanel.setVisible(true);
+                }while(!this.playersSetted);
+                this.playersSetted = false;
+            }
+        }
+        this.playerPanel.setVisible(false);
+        JOptionPane.showMessageDialog(null, "start game!");
+
+        //boolean config = false;
+        // do{
+        //     if(MessageManager.getInstance().getLanguage() == null){
+            //        
+        //     } else if(!this.startController.isAllPlayersSetted()){
+        //         startlanguagePanel.setVisible(false);
+        //         playerPanel.setVisible(true);  
+        //     } else {
+        //         config = true;
+        //     }
+        // }while(!config);
+    }
+
+    private void configLanguagePanel(){
         JLabel languageLabel = new JLabel("Language configuration");
 		languageLabel.setBounds(50, 100, 80, 25);
-        startPanelLanguage.add(languageLabel);
-
+        this.languagePanel.add(languageLabel);
         this.languagesComboBox.setBounds(10,10,80,20);
         this.languagesComboBox.addItem(null);
-        this.languagesComboBox.addItem(Language.SPANISH);  
-        this.languagesComboBox.addItem(Language.ENGLISH);
-        //TODO refactor addItems disponibles en Language
+        for (int i = 0; i < Language.values().length; i++) {
+            this.languagesComboBox.addItem(Language.values()[i]);
+        }
         this.languagesComboBox.addItemListener(this);
-        startPanelLanguage.add(this.languagesComboBox);
+        this.languagePanel.add(this.languagesComboBox);
+        this.languagePanel.setVisible(false);
+        this.getContentPane().add(this.languagePanel);
+    }
 
-        this.getContentPane().add(startPanelLanguage);
+    private void configPlayersPanel(Color color){
+        this.getContentPane().removeAll();
+        this.playerPanel.removeAll();
+        JLabel playerColor = new JLabel("Select " + color.toString() + " player type");
+		playerColor.setBounds(50, 100, 80, 25);
+        this.playerPanel.add(playerColor);
+        this.addPlayerTypes();
+        this.playerPanel.setVisible(false);
+        this.getContentPane().add(this.playerPanel);
+    }
 
-        JPanel startPanelPlayer = new JPanel();
-        JLabel playerRed = new JLabel("Select red player type");
-        JLabel playerYellow = new JLabel("Select yellow player type");
-		playerRed.setBounds(50, 100, 80, 25);
-		playerYellow.setBounds(50, 100, 80, 25);
-
-        startPanelPlayer.add(playerRed);
-        startPanelPlayer.add(playerYellow);
-
-        this.getContentPane().add(startPanelPlayer);
-        startPanelPlayer.setVisible(false);
-        
-        boolean config = false;
-        do{
-            if(MessageManager.getInstance().getLanguage() == null){
-                startPanelLanguage.setVisible(true);
-                
-            } else if(!this.startController.isAllPlayersSetted()){
-                startPanelLanguage.setVisible(false);
-                startPanelPlayer.setVisible(true);  
-            } else {
-                config = true;
-            }
-        }while(!config);
-
-        this.setSize(400, 400);
+    private void addPlayerTypes(){
+        this.playersComboBox.removeAllItems();
+        this.playersComboBox.addItem(null);
+        for (int i = 0; i < PlayerType.values().length; i++) {
+            this.playersComboBox.addItem(PlayerType.values()[i]);
+        }
+        this.playersComboBox.addItemListener(this);
+        this.playerPanel.add(this.playersComboBox);
     }
 
     @Override
@@ -82,11 +121,20 @@ public class StartView extends JFrame implements ItemListener{
         if (e.getSource() == this.languagesComboBox) {
 
             Language selectedLanguage = (Language) this.languagesComboBox.getSelectedItem();
-            try{
-                MessageManager.getInstance().setLanguage(selectedLanguage);
-            } catch(IOException ex){
-                ex.printStackTrace();
-            }
+            if(selectedLanguage != null){
+                try{
+                    MessageManager.getInstance().setLanguage(selectedLanguage);
+                    this.languageSetted = true;
+                } catch(IOException ex){
+                    ex.printStackTrace();
+                }
+            }   
+        }
+
+        if(e.getSource() == this.playersComboBox){
+            PlayerType selectedPlayerType = (PlayerType) this.playersComboBox.getSelectedItem();
+            this.startController.addPlayer(selectedPlayerType);
+            this.playersSetted = true;
         }
     }
 }
