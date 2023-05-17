@@ -7,16 +7,20 @@ import main.es.labturing.connect4.controllers.ResumeController;
 import main.es.labturing.connect4.views.console.menu.LanguageMenu;
 import main.es.labturing.utils.views.YesNoDialog;
 
-public class GameView
-        extends main.es.labturing.utils.framework.GameView<StartController, PlayController, ResumeController, UndoRedoController> {
+public class GameView implements main.es.labturing.utils.framework.GameView {
 
+    private PlayController playController;
+    private ResumeController resumeController;
     private BoardView boardView;
     private TurnView turnView;
 
-    public GameView(StartController startController, PlayController playController, ResumeController resumeController, UndoRedoController undoRedoController) {
-        super(startController, playController, resumeController, undoRedoController);  
+
+    public GameView(StartController startController, PlayController playController,
+    ResumeController resumeController, UndoRedoController undoRedoController) {
+        this.playController = playController;
+        this.resumeController = resumeController;
         this.boardView = new BoardView(startController);
-        this.turnView = new TurnView(startController, playController, undoRedoController);
+        this.turnView = new TurnView(startController, this.playController, undoRedoController);
     }
 
     public void start() {

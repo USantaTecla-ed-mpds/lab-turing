@@ -5,7 +5,7 @@ public class GameApp<G, V extends GameView> {
     protected G game;
     protected V gameView;
 
-    protected void play() {
+    protected void interact() {
         do {
             this.gameView.start();
             this.gameView.play();

@@ -21,10 +21,12 @@ public abstract class Connect4 extends GameApp<Game, GameView> {
         this.playController = new PlayController(this.game);
         this.resumeController = new ResumeController(this.game);
         this.undoRedoController = new UndoRedoController(this.game);
-        this.gameView = this.createView();
+        this.gameView = this.createView(this.startController, this.playController, this.resumeController,
+                this.undoRedoController);
 
     }
 
-    protected abstract GameView createView();
+    protected abstract GameView createView(StartController startController, PlayController playController,
+            ResumeController resumeController, UndoRedoController undoRedoController);
 
 }
