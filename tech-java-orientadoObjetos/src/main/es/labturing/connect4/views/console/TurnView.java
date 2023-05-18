@@ -1,37 +1,30 @@
 package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.controllers.StartController;
-import main.es.labturing.connect4.controllers.UndoRedoController;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.views.console.menu.ConfigTurnMenu;
 
 public class TurnView {
-    private StartController startController;
-    private PlayController playController;
-    private UndoRedoController undoRedoController;
+
     private PlayerView activePlayerView;
     private PlayerViewPrototype playerViewPrototype;
 
-    public TurnView(StartController startController, PlayController playController,
-            UndoRedoController undoRedoController) {
-        this.startController = startController;
-        this.playController = playController;
-        this.undoRedoController = undoRedoController;
-        this.playerViewPrototype = new PlayerViewPrototype(this.playController, this.undoRedoController);
+    public TurnView() {
+       // this.playerViewPrototype = new PlayerViewPrototype(this.playController, this.undoRedoController); //Pasar a startController
     }
 
-    public void configTurn() {
-        new ConfigTurnMenu(this.startController).interact();
-        this.undoRedoController.createGameManager();
+    public void configTurn(StartController startController) {
+        new ConfigTurnMenu(startController).interact();
+        startController.resetGameManager();
     }
 
-    public void play() {
-        this.activePlayerView = this.playerViewPrototype.createView(this.playController.getActivePlayerType());
+    public void play(PlayController playController) {
+        this.activePlayerView = this.playerViewPrototype.createView(playController.getActivePlayerType());
         this.activePlayerView.showPlayerColor();
         this.activePlayerView.play();
     }
 
-    public void writeResult() {
+    public void writeResult(PlayController playController) {
         if (playController.isWinner()) {
             this.activePlayerView.showWinner();
         } else {

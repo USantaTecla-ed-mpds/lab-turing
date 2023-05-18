@@ -1,24 +1,21 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.controllers.Controller;
 import main.es.labturing.connect4.models.Coordinate;
 
 public class BoardView {
     static int BLANK_SPACES = 4;
 
-    private StartController startController;
-
-    public BoardView(StartController startController) {
-        this.startController = startController;
+    public BoardView() {
     }
 
-    public void writeln() {
+    public void writeln(Controller controller) {
         this.writeHorizontal();
         for (int i = Coordinate.NUMBER_ROWS - 1; i >= 0; i--) {
             MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
 
             for (int j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
-                new ColorView(this.startController.getBoardColor(new Coordinate(i, j))).write();
+                new ColorView(controller.getColor(new Coordinate(i, j))).write();
                 MessageManager.getInstance().write("VERTICAL_LINE_SYMBOL");
             }
             MessageManager.getInstance().writeln("BLANK");

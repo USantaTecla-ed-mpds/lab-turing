@@ -10,11 +10,17 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    List<GameState> gameStates;
+    private Game game;
+    private List<GameState> gameStates;
     private int firstPrevious;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
     public GameManager(Game game) {
+        this.game = game;
+        this.reset();
+    }
+
+    public void reset() {
         this.firstPrevious = 0;
         this.gameStates = new ArrayList<GameState>();
         this.gameStates.add(this.firstPrevious,game.getState());

@@ -2,11 +2,12 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Session;
 import main.es.labturing.connect4.models.StageValue;
+import main.es.labturing.utils.framework.AcceptorController;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Logic {
+public class Logic implements main.es.labturing.utils.framework.Logic {
 
     private Session session;
     private Map<StageValue, AcceptorController> controllers;

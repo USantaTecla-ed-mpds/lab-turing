@@ -1,5 +1,8 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.Color;
+import main.es.labturing.connect4.types.PlayerType;
+
 public class Session {
 
     private Stage stage;
@@ -15,6 +18,10 @@ public class Session {
     public void reset() {
         this.game.reset();
         this.stage.reset();
+        this.resetGameManager();
+    }
+
+    public void resetGameManager() {
         this.gameManager.reset();
     }
 
@@ -34,12 +41,25 @@ public class Session {
         return this.gameManager.isRedoable();
     }
 
-    public void undo() {
-        this.gameManager.undo();
+    public void addPlayer(PlayerType playerType) {
+        this.game.addPlayer(playerType);
     }
 
-    public void redo() {
-        this.gameManager.redo();
+    public void resetPlayers() {
+        this.game.resetPlayers();
+    }
+
+    public void resetPlayersIndex() {
+        this.game.resetPlayersIndex();
+        ;
+    }
+
+    public int getNumberPlayers() {
+        return this.game.getNumberPlayers();
+    }
+
+    public Color getColor(Coordinate coordinate) {
+        return this.game.getColor(coordinate);
     }
 
 }

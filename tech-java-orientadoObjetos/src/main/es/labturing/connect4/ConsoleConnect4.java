@@ -9,10 +9,8 @@ import main.es.labturing.connect4.views.console.GameView;
 public class ConsoleConnect4 extends Connect4 {
 
 	@Override
-	protected GameView createView(StartController startController, PlayController playController,
-	ResumeController resumeController, UndoRedoController undoRedoController) {
-		return new GameView(this.startController, this.playController,
-		this.resumeController, this.undoRedoController);
+	protected GameView createView() {
+		return new GameView();
 	}
 
 	public static void main(String[] args) {

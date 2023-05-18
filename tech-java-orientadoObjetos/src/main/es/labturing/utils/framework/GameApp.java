@@ -1,14 +1,17 @@
 package main.es.labturing.utils.framework;
 
-public class GameApp<G, V extends GameView> {
+public abstract class GameApp<L extends Logic, V extends ControllersVisitor> {
 
-    protected G game;
+    protected L logic;
     protected V gameView;
 
     protected void interact() {
+        AcceptorController acceptorController;
         do {
-            this.gameView.start();
-            this.gameView.play();
-        } while (this.gameView.resume());
+            acceptorController = this.logic.getController();
+            if (acceptorController != null)
+                acceptorController.accept(this.gameView);
+        } while (acceptorController != null);
     }
+
 }

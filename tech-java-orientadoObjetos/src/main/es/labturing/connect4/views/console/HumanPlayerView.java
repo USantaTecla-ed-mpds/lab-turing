@@ -26,7 +26,7 @@ public class HumanPlayerView extends PlayerView {
             ClosedIntervalDialog closedIntervalDialog = new ClosedIntervalDialog(1, Coordinate.NUMBER_COLUMNS);
             closedIntervalDialog.read("ASK_COLUMN_TO_DROP");
             column = closedIntervalDialog.getAnswer() - 1;
-            valid = !this.playController.isActivePlayerComplete(column);
+            valid = !this.playController.isColumnComplete(column);
             if (!valid) {
                 MessageManager.getInstance().writeln("ERR_COMPLETED_COLUMN_TO_DROP");
             }
