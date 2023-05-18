@@ -2,18 +2,13 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Game;
 import main.es.labturing.connect4.models.GameManager;
+import main.es.labturing.connect4.models.Session;
 
 public class UndoRedoController extends Controller {
 
-    private GameManager gameManager;
-
-    public UndoRedoController(Game game) {
-        super(game);
+    public UndoRedoController(Session session) {
+        super(session);
         
-    }
-
-    public void createGameManager() {
-        this.gameManager = new GameManager(this.game);
     }
 
     public void undo() {
