@@ -47,18 +47,16 @@ public class StartView extends JFrame implements ItemListener{
     public void interact(){
         this.configLanguagePanel();
         do{
-            System.out.println("dentro del while; " + this.languageSetted);
             this.languagePanel.setVisible(true);
+            System.out.println("test");
         }while(!this.languageSetted);
         this.languagePanel.setVisible(false);
 
-        System.out.println("despues del while; " + this.languageSetted);
-
         for (int i = 0; i < Color.values().length; i++) {
             if(Color.values()[i] != Color.NULL){
+                JOptionPane.showMessageDialog(null, Color.values()[i]);
                 this.configPlayersPanel(Color.values()[i]);
                 do{
-                    System.out.println("CONFIGURO PLAYER: " + Color.values()[i]);
                     this.playerPanel.setVisible(true);
                 }while(!this.playersSetted);
                 this.playersSetted = false;
