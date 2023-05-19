@@ -50,6 +50,7 @@ public class PlayController extends Controller implements AcceptorController {
     }
 
     public void nextStage() {
+        this.session.nextStage();
     }
 
 }
