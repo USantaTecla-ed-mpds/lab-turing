@@ -29,16 +29,37 @@ public class Session {
         this.stage.next();
     }
 
-    public StageValue getValueState() {
+    public StageValue getValueStage() {
         return this.stage.getValueStage();
     }
 
-    public boolean undoable() {
+    public boolean isUndoable() {
         return this.gameManager.isUndoable();
     }
 
-    public boolean redoable() {
+    public boolean isRedoable() {
         return this.gameManager.isRedoable();
+    }
+
+    public void undo() {
+        this.game.setState(this.gameManager.getUndoneState());
+    }
+
+    public void redo() {
+        this.game.setState(this.gameManager.getRedoneState());
+    }
+
+    public void registry() {
+        this.gameManager.registry(this.game);
+
+    }
+
+    public void load() {
+        this.gameManager.load(this.game);
+    }
+
+    public void save() {
+        this.gameManager.save();
     }
 
     public void addPlayer(PlayerType playerType) {
@@ -56,6 +77,38 @@ public class Session {
 
     public int getNumberPlayers() {
         return this.game.getNumberPlayers();
+    }
+
+    public void play(int column) {
+        this.game.play(column);
+    }
+
+    public boolean isWinner() {
+        return this.game.isWinner();
+    }
+
+    public int getActiveMachineColumn() {
+        return this.game.getActiveMachineColumn();
+    }
+
+    public PlayerType getActivePlayerType() {
+        return this.game.getActivePlayerType();
+    }
+
+    public Color getActivePlayerColor() {
+        return this.game.getActivePlayerColor();
+    }
+
+    public boolean isColumnComplete(int column) {
+        return this.game.isColumnComplete(column);
+    }
+
+    public boolean isGameFinished() {
+        return this.game.isGameFinished();
+    }
+
+    public GameState getState() {
+        return this.game.getState();
     }
 
     public Color getColor(Coordinate coordinate) {

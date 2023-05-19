@@ -52,7 +52,8 @@ public class GameView implements ControllersVisitor {
         playController.nextStage();
     }
 	public boolean visit(ResumeController resumeController){
-
+        this.resume(resumeController);
+        resumeController.nextStage();    
         return true;
     }
 
