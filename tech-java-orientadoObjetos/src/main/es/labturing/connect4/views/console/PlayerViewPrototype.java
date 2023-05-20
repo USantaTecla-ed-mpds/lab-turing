@@ -1,7 +1,6 @@
 package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.controllers.RedoController;
 import main.es.labturing.connect4.types.PlayerType;
 
 import java.util.HashMap;

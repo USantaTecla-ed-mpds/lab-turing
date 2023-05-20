@@ -23,7 +23,6 @@ public class GameView implements ControllersVisitor {
         new GameMenu(this.turnView, startController).interact();
         MessageManager.getInstance().writeln("GAME_TITLE");
         this.boardView.writeln(startController);
-        startController.nextStage();
     }
 
     private void play(PlayController playController) {

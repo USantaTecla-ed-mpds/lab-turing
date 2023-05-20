@@ -4,7 +4,6 @@ import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.connect4.views.console.TurnView;
 import main.es.labturing.utils.views.menu.Menu;
-import main.es.labturing.utils.views.menu.QuitMenu;
 
 public class GameMenu extends Menu{
 
@@ -20,6 +19,8 @@ public class GameMenu extends Menu{
     @Override
     protected void addOptions(){
         this.add(new StartNewGameOption(this.turnView, startController));
-        this.add(new LoadGameOption(this.startController));
+        if(this.startController.isGamePersisted()){
+            this.add(new LoadGameOption(this.startController));
+        }
     }
 }

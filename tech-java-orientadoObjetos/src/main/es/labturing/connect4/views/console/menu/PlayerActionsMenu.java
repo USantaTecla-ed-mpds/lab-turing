@@ -18,7 +18,7 @@ public class PlayerActionsMenu extends Menu {
 
     @Override
     protected void addOptions() {
-        // this.add(new SaveAndExitOption());
+        this.add(new SaveAndExitOption(this.playController));
         this.add(new PlayOption(this.playController, this.playerView));
         if (this.playController.isUndoable()) {
             this.add(new UndoOption(this.playController));

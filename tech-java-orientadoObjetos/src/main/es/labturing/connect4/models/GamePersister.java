@@ -1,5 +1,6 @@
 package main.es.labturing.connect4.models;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.io.ObjectOutputStream;
 
 public class GamePersister {
 
-    private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
+    private final String path = "tech-java-orientadoObjetos/src/main/es/labturing/connect4/resources/";
     private Game game;
 
     public GamePersister(Game game){
@@ -18,9 +19,7 @@ public class GamePersister {
     public void save(GameState gameState) {
         ObjectOutputStream oos = null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream(this.path +
-                    "savedgame.dat"));
-            //oos.writeObject(this.gameStates.get(firstPrevious));
+            oos = new ObjectOutputStream(new FileOutputStream(this.path + "savedgame.dat"));
             oos.writeObject(gameState);
            
         } catch (Exception e) {
@@ -40,8 +39,7 @@ public class GamePersister {
         ObjectInputStream ois = null;
         GameState gameState = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream(this.path +
-                    "savedgame.dat"));
+            ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
             gameState = (GameState) ois.readObject();
         } catch (Exception e) {
             // TODO: handle exception
@@ -55,5 +53,10 @@ public class GamePersister {
                 }
             }
         }
+    }
+
+    public boolean isGamePersisted(){
+        File file = new File(this.path + "savedgame.dat");
+        return file.exists();
     }
 }

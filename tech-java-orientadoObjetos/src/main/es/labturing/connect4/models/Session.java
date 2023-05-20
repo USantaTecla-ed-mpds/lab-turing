@@ -53,7 +53,6 @@ public class Session {
 
     public void registry() {
         this.gameRegistry.registry(this.game);
-
     }
 
     public void load() {
@@ -74,7 +73,6 @@ public class Session {
 
     public void resetPlayersIndex() {
         this.game.resetPlayersIndex();
-        ;
     }
 
     public int getNumberPlayers() {
@@ -115,6 +113,10 @@ public class Session {
 
     public Color getColor(Coordinate coordinate) {
         return this.game.getColor(coordinate);
+    }
+
+    public boolean isGamePersisted(){
+        return this.gamePersister.isGamePersisted();
     }
 
 }

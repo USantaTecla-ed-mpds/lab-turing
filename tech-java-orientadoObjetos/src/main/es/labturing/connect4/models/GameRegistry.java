@@ -1,10 +1,5 @@
 package main.es.labturing.connect4.models;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -55,6 +50,6 @@ public class GameRegistry {
     }
 
     public GameState getLastGameState(){
-        return this.gameStates.get(this.firstPrevious);
+        return this.gameStates.get(this.firstPrevious).clone();
     }
 }

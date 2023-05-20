@@ -9,12 +9,13 @@ public class SaveAndExitOption extends Option {
     private PlayController playController;
 
     public SaveAndExitOption(PlayController playController) {
-        super(MessageManager.getInstance().getMessage("SAVE AND EXIT"));
+        super(MessageManager.getInstance().getMessage("SAVE_AND_EXIT"));
         this.playController = playController;
     }
 
     public void interact() {
         this.playController.save();
+        System.exit(0);
     }
     
 }

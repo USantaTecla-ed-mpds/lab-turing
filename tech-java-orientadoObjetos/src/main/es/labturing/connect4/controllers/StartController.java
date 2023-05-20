@@ -42,4 +42,8 @@ public class StartController extends Controller implements AcceptorController {
     public void load(){
         this.session.load();
     }
+
+    public boolean isGamePersisted(){
+        return this.session.isGamePersisted();
+    }
 }
