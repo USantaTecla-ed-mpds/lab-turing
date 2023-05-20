@@ -1,20 +1,17 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.controllers.UndoRedoController;
+import main.es.labturing.connect4.controllers.RedoController;
 import main.es.labturing.connect4.views.console.HumanPlayerView;
 import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.utils.views.menu.Menu;
 
 public class PlayerActionsMenu extends Menu {
-    private UndoRedoController undoRedoController;
     private PlayController playController;
     private HumanPlayerView playerView;
 
-    public PlayerActionsMenu(UndoRedoController undoRedoController, HumanPlayerView playerView,
-            PlayController playController) {
+    public PlayerActionsMenu(HumanPlayerView playerView, PlayController playController) {
         super(MessageManager.getInstance().getMessage("PLAYER_ACTIONS_TITLE"));
-        this.undoRedoController = undoRedoController;
         this.playController = playController;
         this.playerView = playerView;
     }
@@ -22,12 +19,12 @@ public class PlayerActionsMenu extends Menu {
     @Override
     protected void addOptions() {
         // this.add(new SaveAndExitOption());
-        this.add(new PlayOption(this.playController, this.playerView, this.undoRedoController));
-        if (this.undoRedoController.isUndoable()) {
-            this.add(new UndoOption(this.undoRedoController));
+        this.add(new PlayOption(this.playController, this.playerView));
+        if (this.playController.isUndoable()) {
+            this.add(new UndoOption(this.playController));
         }
-        if (this.undoRedoController.isRedoable()) {
-            this.add(new RedoOption(this.undoRedoController));
+        if (this.playController.isRedoable()) {
+            this.add(new RedoOption(this.playController));
         }
 
     }

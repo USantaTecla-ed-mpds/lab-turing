@@ -7,7 +7,7 @@ import main.es.labturing.connect4.views.console.menu.ConfigTurnMenu;
 public class TurnView {
 
     private PlayerView activePlayerView;
-    private PlayerViewPrototype playerViewPrototype;
+    //private PlayerViewPrototype playerViewPrototype;
 
     public TurnView() {
        // this.playerViewPrototype = new PlayerViewPrototype(this.playController, this.undoRedoController); //Pasar a startController
@@ -15,11 +15,12 @@ public class TurnView {
 
     public void configTurn(StartController startController) {
         new ConfigTurnMenu(startController).interact();
-        startController.resetGameManager();
+        startController.resetGameRegistry();
     }
 
     public void play(PlayController playController) {
-        this.activePlayerView = this.playerViewPrototype.createView(playController.getActivePlayerType());
+        //this.activePlayerView = this.playerViewPrototype.createView(playController.getActivePlayerType());
+        this.activePlayerView = playController.createPlayerView();
         this.activePlayerView.showPlayerColor();
         this.activePlayerView.play();
     }

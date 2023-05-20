@@ -1,22 +1,25 @@
 package main.es.labturing.connect4.views.console.menu;
 
-import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.views.console.GameView;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.views.console.MessageManager;
+import main.es.labturing.connect4.views.console.TurnView;
+import main.es.labturing.utils.views.menu.Menu;
 import main.es.labturing.utils.views.menu.QuitMenu;
 
-public class GameMenu extends QuitMenu{
+public class GameMenu extends Menu{
 
-    private GameView gameView;
+    private TurnView turnView;
+    private StartController startController;
 
-    public GameMenu(GameView gameView) {
+    public GameMenu(TurnView turnView, StartController startController) {
         super(MessageManager.getInstance().getMessage("GAME_MENU_TITLE"));
-        this.gameView = gameView;
+        this.turnView = turnView;
+        this.startController = startController;
     }
 
     @Override
     protected void addOptions(){
-        this.add(new StartNewGameOption(this.gameView, ));
-      //  this.add(new LoadGameOption(this.gameView));
+        this.add(new StartNewGameOption(this.turnView, startController));
+        this.add(new LoadGameOption(this.startController));
     }
 }

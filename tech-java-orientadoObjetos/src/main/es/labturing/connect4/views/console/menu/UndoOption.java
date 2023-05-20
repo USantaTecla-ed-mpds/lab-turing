@@ -1,21 +1,21 @@
 package main.es.labturing.connect4.views.console.menu;
 
-import main.es.labturing.connect4.controllers.UndoRedoController;
+import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.utils.views.menu.Option;
 
 public class UndoOption extends Option {
 
-    private UndoRedoController undoRedoController;
+    private PlayController playController;
 
-    public UndoOption(UndoRedoController undoRedoController) {
+    public UndoOption(PlayController playController) {
         super(MessageManager.getInstance().getMessage("UNDO"));
-        this.undoRedoController = undoRedoController;
+        this.playController = playController;
     }
 
     @Override
     public void interact() {
-        this.undoRedoController.undo();
+        this.playController.undo();
     }
 
 }

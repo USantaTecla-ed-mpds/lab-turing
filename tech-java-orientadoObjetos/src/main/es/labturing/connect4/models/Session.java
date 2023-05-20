@@ -7,22 +7,24 @@ public class Session {
 
     private Stage stage;
     private Game game;
-    private GameManager gameManager;
+    private GameRegistry gameRegistry;
+    private GamePersister gamePersister;
 
     public Session() {
         this.stage = new Stage();
         this.game = new Game();
-        this.gameManager = new GameManager(game);
+        this.gameRegistry = new GameRegistry(game);
+        this.gamePersister = new GamePersister(game);
     }
 
     public void reset() {
         this.game.reset();
         this.stage.reset();
-        this.resetGameManager();
+        this.resetGameRegistry();
     }
 
-    public void resetGameManager() {
-        this.gameManager.reset();
+    public void resetGameRegistry() {
+        this.gameRegistry.reset();
     }
 
     public void nextStage() {
@@ -34,32 +36,32 @@ public class Session {
     }
 
     public boolean isUndoable() {
-        return this.gameManager.isUndoable();
+        return this.gameRegistry.isUndoable();
     }
 
     public boolean isRedoable() {
-        return this.gameManager.isRedoable();
+        return this.gameRegistry.isRedoable();
     }
 
     public void undo() {
-        this.game.setState(this.gameManager.getUndoneState());
+        this.game.setState(this.gameRegistry.getUndoneState());
     }
 
     public void redo() {
-        this.game.setState(this.gameManager.getRedoneState());
+        this.game.setState(this.gameRegistry.getRedoneState());
     }
 
     public void registry() {
-        this.gameManager.registry(this.game);
+        this.gameRegistry.registry(this.game);
 
     }
 
     public void load() {
-        this.gameManager.load(this.game);
+        this.gamePersister.load();
     }
 
     public void save() {
-        this.gameManager.save();
+        this.gamePersister.save(this.gameRegistry.getLastGameState());
     }
 
     public void addPlayer(PlayerType playerType) {

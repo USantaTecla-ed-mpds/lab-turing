@@ -5,21 +5,19 @@ import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.utils.framework.AcceptorController;
 import main.es.labturing.utils.framework.ControllersVisitor;
 
-
 public class StartController extends Controller implements AcceptorController {
 
     public StartController(Session session) {
         super(session);
     }
 
-    public void resetGameManager() {
-        this.session.resetGameManager();
+    public void resetGameRegistry() {
+        this.session.resetGameRegistry();
     }
 
     public void addPlayer(PlayerType playerType) {
         this.session.addPlayer(playerType);
     }
-
 
     public void resetPlayers() {
         this.session.resetPlayers();
@@ -38,6 +36,10 @@ public class StartController extends Controller implements AcceptorController {
     }
 
     public void nextStage() {
+        this.session.nextStage();
     }
 
+    public void load(){
+        this.session.load();
+    }
 }

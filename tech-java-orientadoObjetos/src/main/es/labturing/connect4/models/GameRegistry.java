@@ -8,14 +8,14 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GameManager {
+public class GameRegistry {
 
     private Game game;
     private List<GameState> gameStates;
     private int firstPrevious;
     private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
-    public GameManager(Game game) {
+    public GameRegistry(Game game) {
         this.game = game;
         this.reset();
     }
@@ -54,45 +54,7 @@ public class GameManager {
         return this.firstPrevious >= 1;
     }
 
-    public void save() {
-        ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(new FileOutputStream(this.path +
-                    "savedgame.dat"));
-            oos.writeObject(this.gameStates.get(firstPrevious));
-           
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally {
-            if (oos != null) {
-                try {
-                    oos.close();
-                } catch (IOException ex) {
-                    System.out.println("IOException al cerrar: " + ex.getMessage());
-                }
-            }
-        }
+    public GameState getLastGameState(){
+        return this.gameStates.get(this.firstPrevious);
     }
-
-    public void load(Game game) {
-        ObjectInputStream ois = null;
-        GameState gameState = null;
-        try {
-            ois = new ObjectInputStream(new FileInputStream(this.path +
-                    "savedgame.dat"));
-            gameState = (GameState) ois.readObject();
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally {
-            if (ois != null) {
-                try {
-                    ois.close();
-                    game.setState(gameState);
-                } catch (IOException ex) {
-                    System.out.println("IOException al cerrar: " + ex.getMessage());
-                }
-            }
-        }
-    }
-
 }

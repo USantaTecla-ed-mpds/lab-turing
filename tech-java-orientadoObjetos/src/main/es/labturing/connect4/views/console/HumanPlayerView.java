@@ -1,22 +1,19 @@
 package main.es.labturing.connect4.views.console;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.controllers.UndoRedoController;
+import main.es.labturing.connect4.controllers.RedoController;
 import main.es.labturing.connect4.models.Coordinate;
 import main.es.labturing.connect4.views.console.menu.PlayerActionsMenu;
 import main.es.labturing.utils.views.ClosedIntervalDialog;
 
 public class HumanPlayerView extends PlayerView {
 
-    private UndoRedoController undoRedoController;
-
-    public HumanPlayerView(PlayController playController, UndoRedoController undoRedoController) {
+    public HumanPlayerView(PlayController playController) {
         super(playController);
-        this.undoRedoController = undoRedoController;
     }
 
     public void play() {
-        new PlayerActionsMenu(this.undoRedoController, this, this.playController).interact();
+        new PlayerActionsMenu(this, this.playController).interact();
     }
 
     public int getColumn() {

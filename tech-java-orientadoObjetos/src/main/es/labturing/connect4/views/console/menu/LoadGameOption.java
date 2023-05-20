@@ -1,22 +1,22 @@
 package main.es.labturing.connect4.views.console.menu;
 
-import main.es.labturing.connect4.controllers.UndoRedoController;
-import main.es.labturing.connect4.views.console.GameView;
+import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.views.console.MessageManager;
+import main.es.labturing.utils.views.menu.Option;
 
-public class LoadGameOption extends GameOption{
+public class LoadGameOption extends Option{
 
-    private UndoRedoController undoRedoController;
+    private StartController startController;
 
-    public LoadGameOption(GameView gameView, UndoRedoController undoRedoController) {
-        super(MessageManager.getInstance().getMessage("LOAD"),gameView);
-        this.undoRedoController = undoRedoController;
+    public LoadGameOption(StartController startController) {
+        super(MessageManager.getInstance().getMessage("LOAD"));
+        this.startController = startController;
 
     }
 
     @Override
     public void interact() {
-        this.undoRedoController.load();
+        this.startController.load();
     }
     
 }
