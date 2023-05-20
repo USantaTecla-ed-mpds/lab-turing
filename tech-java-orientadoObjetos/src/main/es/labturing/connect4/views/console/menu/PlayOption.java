@@ -1,7 +1,6 @@
 package main.es.labturing.connect4.views.console.menu;
 
 import main.es.labturing.connect4.controllers.PlayController;
-import main.es.labturing.connect4.controllers.RedoController;
 import main.es.labturing.connect4.views.console.HumanPlayerView;
 import main.es.labturing.connect4.views.console.MessageManager;
 import main.es.labturing.utils.views.menu.Option;
