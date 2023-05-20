@@ -1,8 +1,10 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.connect4.types.Color;
 
-public class BoardState {
+public class BoardState implements Serializable{
 
     private Color[][] colors;
     private Coordinate lastDrop;

@@ -1,9 +1,11 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 
-public abstract class Player {
+public abstract class Player implements Serializable{
     private Color color;
     protected Board board;
 

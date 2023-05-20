@@ -42,7 +42,7 @@ public class GamePersister {
             ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
             gameState = (GameState) ois.readObject();
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("EXCEPCION: " + e.getMessage());
         } finally {
             if (ois != null) {
                 try {

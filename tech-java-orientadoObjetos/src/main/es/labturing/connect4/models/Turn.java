@@ -1,9 +1,11 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 
-public class Turn {
+public class Turn implements Serializable{
     final static int NUMBER_PLAYERS = 2;
     private Player[] players;
     private int activePlayerIndex;

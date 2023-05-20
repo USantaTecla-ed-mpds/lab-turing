@@ -1,8 +1,10 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.connect4.types.Color;
 
-public class Board {
+public class Board implements Serializable{
 
     public static final int LINE_LENGTH = 4;
     protected Color[][] colors;

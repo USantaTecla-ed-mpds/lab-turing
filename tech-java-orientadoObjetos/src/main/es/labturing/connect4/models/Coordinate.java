@@ -1,8 +1,10 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.utils.models.ClosedInterval;
 
-public class Coordinate {
+public class Coordinate implements Serializable{
     public static Coordinate ORIGIN = new Coordinate(0, 0);
     public static int NUMBER_ROWS = 6;
     private static ClosedInterval ROWS = new ClosedInterval(0, Coordinate.NUMBER_ROWS - 1);

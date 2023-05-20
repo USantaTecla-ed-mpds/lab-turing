@@ -1,6 +1,8 @@
 package main.es.labturing.connect4.models;
 
-public class GameState {
+import java.io.Serializable;
+
+public class GameState implements Serializable{
 
     private BoardState boardState;
     private TurnState turnState;

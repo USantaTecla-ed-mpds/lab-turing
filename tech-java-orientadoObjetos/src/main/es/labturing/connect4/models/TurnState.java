@@ -1,6 +1,8 @@
 package main.es.labturing.connect4.models;
 
-public class TurnState {
+import java.io.Serializable;
+
+public class TurnState implements Serializable{
 
     private Player[] players;
     private int activePlayerIndex;
