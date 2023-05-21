@@ -10,14 +10,12 @@ import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class PlayController extends Controller implements AcceptorController {
 
-    private UndoController undoController;
-    private RedoController redoController;
+    private InGameOptionsController inGameOptionsController;
     private PlayerViewPrototype playerViewPrototype;
 
     public PlayController(Session session) {
         super(session);
-        this.undoController = new UndoController(session);
-        this.redoController = new RedoController(session);
+        this.inGameOptionsController = new InGameOptionsController(session);
         this.playerViewPrototype = new PlayerViewPrototype(this);
     }
 
@@ -53,10 +51,6 @@ public class PlayController extends Controller implements AcceptorController {
         return this.session.getState();
     }
 
-    public void accept(ControllersVisitor controllerVisitor) {
-        controllerVisitor.visit(this);
-    }
-
     public void nextStage() {
         this.session.nextStage();
     }
@@ -66,26 +60,30 @@ public class PlayController extends Controller implements AcceptorController {
     }
 
     public boolean isUndoable(){
-        return this.undoController.isUndoable();
+        return this.inGameOptionsController.isUndoable();
     }
 
     public boolean isRedoable(){
-        return this.redoController.isRedoable();
+        return this.inGameOptionsController.isRedoable();
     }
 
     public void undo(){
-        this.undoController.undo();
+        this.inGameOptionsController.undo();
     }
 
     public void redo(){
-        this.redoController.redo();
+        this.inGameOptionsController.redo();
     }
 
     public void load(){
-        this.session.load();
+        this.inGameOptionsController.load();
     }
 
     public void save(){
-        this.session.save();
+        this.inGameOptionsController.save();
+    }
+
+    public void accept(ControllersVisitor controllerVisitor) {
+        controllerVisitor.visit(this);
     }
 }
