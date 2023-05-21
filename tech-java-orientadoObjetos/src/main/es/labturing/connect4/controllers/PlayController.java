@@ -75,10 +75,6 @@ public class PlayController extends Controller implements AcceptorController {
         this.inGameOptionsController.redo();
     }
 
-    public void load(){
-        this.inGameOptionsController.load();
-    }
-
     public void save(){
         this.inGameOptionsController.save();
     }

@@ -7,8 +7,11 @@ import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class StartController extends Controller implements AcceptorController {
 
+    private LoadController loadController;
+
     public StartController(Session session) {
         super(session);
+        this.loadController = new LoadController(session);
     }
 
     public void resetGameRegistry() {
@@ -31,19 +34,19 @@ public class StartController extends Controller implements AcceptorController {
         return this.session.getNumberPlayers();
     }
 
-    public void accept(ControllersVisitor controllerVisitor) {
-        controllerVisitor.visit(this);
-    }
-
     public void nextStage() {
         this.session.nextStage();
     }
 
     public void load(){
-        this.session.load();
+        this.loadController.load();
     }
 
     public boolean isGamePersisted(){
         return this.session.isGamePersisted();
+    }
+
+    public void accept(ControllersVisitor controllerVisitor) {
+        controllerVisitor.visit(this);
     }
 }

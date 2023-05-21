@@ -7,14 +7,12 @@ public class InGameOptionsController extends Controller{
     private UndoController undoController;
     private RedoController redoController;
     private SaveController saveController;
-    private LoadController loadController;
 
     InGameOptionsController(Session session) {
         super(session);
         this.undoController = new UndoController(session);
         this.redoController = new RedoController(session);
         this.saveController = new SaveController(session);
-        this.loadController = new LoadController(session);
     }
 
     public boolean isUndoable(){
@@ -31,10 +29,6 @@ public class InGameOptionsController extends Controller{
 
     public void redo(){
         this.redoController.redo();
-    }
-
-    public void load(){
-        this.loadController.load();
     }
 
     public void save(){
