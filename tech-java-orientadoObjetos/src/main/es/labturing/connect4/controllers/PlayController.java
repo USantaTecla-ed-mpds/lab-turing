@@ -19,8 +19,8 @@ public class PlayController extends Controller implements AcceptorController {
         this.playerViewPrototype = new PlayerViewPrototype(this);
     }
 
-    public void dropToken(int column) {
-        this.inGameActionsController.dropToken(column);
+    public PlayerView createPlayerView(){
+        return playerViewPrototype.createView(this.session.getActivePlayerType());
     }
 
     public boolean isWinner() {
@@ -29,10 +29,6 @@ public class PlayController extends Controller implements AcceptorController {
 
     public int getActiveMachineColumn() {
         return this.session.getActiveMachineColumn();
-    }
-
-    public PlayerView createPlayerView(){
-        return playerViewPrototype.createView(this.session.getActivePlayerType());
     }
 
     public Color getActivePlayerColor() {
@@ -77,6 +73,10 @@ public class PlayController extends Controller implements AcceptorController {
 
     public void saveAndExit(){
         this.inGameActionsController.saveAndExit();
+    }
+
+    public void dropToken(int column) {
+        this.inGameActionsController.dropToken(column);
     }
 
     public void accept(ControllersVisitor controllerVisitor) {
