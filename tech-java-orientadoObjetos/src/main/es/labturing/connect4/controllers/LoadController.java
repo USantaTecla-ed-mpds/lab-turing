@@ -10,6 +10,7 @@ public class LoadController extends Controller{
 
     public void load(){
         this.session.load();
+        this.session.resetRegistry();
     }
     
 }

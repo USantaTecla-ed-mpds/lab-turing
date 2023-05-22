@@ -10,17 +10,17 @@ import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class PlayController extends Controller implements AcceptorController {
 
-    private InGameOptionsController inGameOptionsController;
+    private InGameActionsController inGameActionsController;
     private PlayerViewPrototype playerViewPrototype;
 
     public PlayController(Session session) {
         super(session);
-        this.inGameOptionsController = new InGameOptionsController(session);
+        this.inGameActionsController = new InGameActionsController(session);
         this.playerViewPrototype = new PlayerViewPrototype(this);
     }
 
-    public void play(int column) {
-        this.session.play(column);
+    public void dropToken(int column) {
+        this.inGameActionsController.dropToken(column);
     }
 
     public boolean isWinner() {
@@ -60,23 +60,23 @@ public class PlayController extends Controller implements AcceptorController {
     }
 
     public boolean isUndoable(){
-        return this.inGameOptionsController.isUndoable();
+        return this.inGameActionsController.isUndoable();
     }
 
     public boolean isRedoable(){
-        return this.inGameOptionsController.isRedoable();
+        return this.inGameActionsController.isRedoable();
     }
 
     public void undo(){
-        this.inGameOptionsController.undo();
+        this.inGameActionsController.undo();
     }
 
     public void redo(){
-        this.inGameOptionsController.redo();
+        this.inGameActionsController.redo();
     }
 
-    public void save(){
-        this.inGameOptionsController.save();
+    public void saveAndExit(){
+        this.inGameActionsController.saveAndExit();
     }
 
     public void accept(ControllersVisitor controllerVisitor) {

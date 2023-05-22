@@ -15,7 +15,7 @@ public class StartController extends Controller implements AcceptorController {
     }
 
     public void resetGameRegistry() {
-        this.session.resetGameRegistry();
+        this.session.resetRegistry();
     }
 
     public void addPlayer(PlayerType playerType) {

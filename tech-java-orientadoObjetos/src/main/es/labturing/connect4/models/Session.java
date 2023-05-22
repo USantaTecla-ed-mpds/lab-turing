@@ -7,24 +7,24 @@ public class Session {
 
     private Stage stage;
     private Game game;
-    private GameRegistry gameRegistry;
-    private GamePersister gamePersister;
+    private Registry registry;
+    private Persist persist;
 
     public Session() {
         this.stage = new Stage();
         this.game = new Game();
-        this.gameRegistry = new GameRegistry(game);
-        this.gamePersister = new GamePersister(game);
+        this.registry = new Registry(game);
+        this.persist = new Persist(game);
     }
 
     public void reset() {
         this.game.reset();
         this.stage.reset();
-        this.resetGameRegistry();
+        this.resetRegistry();
     }
 
-    public void resetGameRegistry() {
-        this.gameRegistry.reset();
+    public void resetRegistry() {
+        this.registry.reset();
     }
 
     public void nextStage() {
@@ -36,31 +36,31 @@ public class Session {
     }
 
     public boolean isUndoable() {
-        return this.gameRegistry.isUndoable();
+        return this.registry.isUndoable();
     }
 
     public boolean isRedoable() {
-        return this.gameRegistry.isRedoable();
+        return this.registry.isRedoable();
     }
 
     public void undo() {
-        this.game.setState(this.gameRegistry.getUndoneState());
+        this.game.setState(this.registry.getUndoneState());
     }
 
     public void redo() {
-        this.game.setState(this.gameRegistry.getRedoneState());
+        this.game.setState(this.registry.getRedoneState());
     }
 
     public void registry() {
-        this.gameRegistry.registry(this.game);
+        this.registry.registry(this.game);
     }
 
     public void load() {
-        this.gamePersister.load();
+        this.persist.load();
     }
 
     public void save() {
-        this.gamePersister.save(this.gameRegistry.getLastGameState());
+        this.persist.save(this.registry.getLastGameState());
     }
 
     public void addPlayer(PlayerType playerType) {
@@ -79,8 +79,8 @@ public class Session {
         return this.game.getNumberPlayers();
     }
 
-    public void play(int column) {
-        this.game.play(column);
+    public void dropToken(int column) {
+        this.game.dropToken(column);
     }
 
     public boolean isWinner() {
@@ -116,7 +116,6 @@ public class Session {
     }
 
     public boolean isGamePersisted(){
-        return this.gamePersister.isGamePersisted();
+        return this.persist.isGamePersisted();
     }
-
 }

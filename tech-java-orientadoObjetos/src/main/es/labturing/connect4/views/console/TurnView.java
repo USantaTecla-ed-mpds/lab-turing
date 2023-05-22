@@ -19,7 +19,7 @@ public class TurnView {
     public void play(PlayController playController) {
         this.activePlayerView = playController.createPlayerView();
         this.activePlayerView.showPlayerColor();
-        this.activePlayerView.play();
+        this.activePlayerView.dropToken();
     }
 
     public void writeResult(PlayController playController) {

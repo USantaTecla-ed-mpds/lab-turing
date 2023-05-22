@@ -3,14 +3,13 @@ package main.es.labturing.connect4.models;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GameRegistry {
+public class Registry {
 
     private Game game;
     private List<GameState> gameStates;
     private int firstPrevious;
-    private final String path = "tech-java-orientadoObjetos/src/main/es/pbover/connect4/resources/";
 
-    public GameRegistry(Game game) {
+    public Registry(Game game) {
         this.game = game;
         this.reset();
     }

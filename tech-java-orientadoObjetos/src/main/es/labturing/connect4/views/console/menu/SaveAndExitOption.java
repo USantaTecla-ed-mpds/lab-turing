@@ -14,8 +14,7 @@ public class SaveAndExitOption extends Option {
     }
 
     public void interact() {
-        this.playController.save();
-        System.exit(0);
+        this.playController.saveAndExit();
     }
     
 }

@@ -8,8 +8,8 @@ public abstract class MachinePlayerView extends PlayerView {
         super(playController);
     }
 
-    public void play(){
-        this.playController.play(this.getColumn());
+    public void dropToken(){
+        this.playController.dropToken(this.getColumn());
     }
 
     private int getColumn() {

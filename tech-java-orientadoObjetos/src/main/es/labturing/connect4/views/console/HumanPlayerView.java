@@ -11,7 +11,7 @@ public class HumanPlayerView extends PlayerView {
         super(playController);
     }
 
-    public void play() {
+    public void dropToken() {
         new PlayerActionsMenu(this, this.playController).interact();
     }
 

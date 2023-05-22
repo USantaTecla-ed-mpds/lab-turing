@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class GamePersister {
+public class Persist {
 
     private final String path = "tech-java-orientadoObjetos/src/main/es/labturing/connect4/resources/";
     private Game game;
 
-    public GamePersister(Game game){
+    public Persist(Game game){
         this.game = game;
     }
     

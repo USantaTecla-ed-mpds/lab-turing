@@ -29,8 +29,8 @@ public class Turn implements Serializable{
         this.activePlayerIndex = 0;
     }
 
-    public void play(int column) {
-        this.players[this.activePlayerIndex].play(column);
+    public void dropToken(int column) {
+        this.players[this.activePlayerIndex].dropToken(column);
         if (!this.board.isGameFinished()) {
             this.activePlayerIndex = (this.activePlayerIndex + 1) % Turn.NUMBER_PLAYERS;
         }

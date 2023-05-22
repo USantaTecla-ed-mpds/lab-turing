@@ -13,7 +13,7 @@ public abstract class Player implements Serializable{
         this.board = board;
     }
 
-    public void play(int column) {
+    public void dropToken(int column) {
         this.board.dropToken(column, this.color);
     }
 
@@ -30,5 +30,4 @@ public abstract class Player implements Serializable{
     }
 
     public abstract PlayerType getType();
-
 }

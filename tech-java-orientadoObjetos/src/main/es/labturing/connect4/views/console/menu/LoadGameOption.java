@@ -17,7 +17,6 @@ public class LoadGameOption extends Option{
     @Override
     public void interact() {
         this.startController.load();
-        startController.resetGameRegistry();
     }
     
 }

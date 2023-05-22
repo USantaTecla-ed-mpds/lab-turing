@@ -46,8 +46,8 @@ public class Game {
         return this.turn.getNumberPlayers();
     }
 
-    public void play(int column) {
-        this.turn.play(column);
+    public void dropToken(int column) {
+        this.turn.dropToken(column);
     }
 
     public int getActiveMachineColumn() {

@@ -18,13 +18,12 @@ public class PlayerActionsMenu extends Menu {
     @Override
     protected void addOptions() {
         this.add(new SaveAndExitOption(this.playController));
-        this.add(new PlayOption(this.playController, this.playerView));
+        this.add(new DropOption(this.playController, this.playerView));
         if (this.playController.isUndoable()) {
             this.add(new UndoOption(this.playController));
         }
         if (this.playController.isRedoable()) {
             this.add(new RedoOption(this.playController));
         }
-
     }
 }
