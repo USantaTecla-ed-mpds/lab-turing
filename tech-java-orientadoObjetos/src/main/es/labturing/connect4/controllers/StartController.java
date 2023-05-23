@@ -34,10 +34,6 @@ public class StartController extends Controller implements AcceptorController {
         return this.session.getNumberPlayers();
     }
 
-    public void nextStage() {
-        this.session.nextStage();
-    }
-
     public void load(){
         this.loadController.load();
     }

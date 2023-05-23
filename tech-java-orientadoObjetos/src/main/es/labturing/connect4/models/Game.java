@@ -27,6 +27,7 @@ public class Game {
     }
 
     public Color getColor(Coordinate coordinate) {
+        System.out.println(this.board);
         return this.board.getColor(coordinate);
     }
 
@@ -38,8 +39,9 @@ public class Game {
         this.turn.resetPlayers();
     }
 
-    public void resetPlayersIndex () {
-        this.turn.resetPlayersIndex();;
+    public void resetPlayersIndex() {
+        this.turn.resetPlayersIndex();
+        ;
     }
 
     public int getNumberPlayers() {
@@ -75,5 +77,4 @@ public class Game {
         this.board.setState(gameState.getBoardState());
         this.turn.setState(gameState.getTurnState());
     }
-
 }

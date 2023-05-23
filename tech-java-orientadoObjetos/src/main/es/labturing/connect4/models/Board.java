@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import main.es.labturing.connect4.types.Color;
 
-public class Board implements Serializable{
+public class Board implements Serializable {
 
     public static final int LINE_LENGTH = 4;
     protected Color[][] colors;
@@ -96,11 +96,11 @@ public class Board implements Serializable{
         return this.lastDrop;
     }
 
-    public BoardState getState(){
+    public BoardState getState() {
         return new BoardState(this.colors, this.lastDrop);
     }
 
-    public void setState(BoardState boardState){
+    public void setState(BoardState boardState) {
         this.colors = boardState.getColors();
         this.lastDrop = boardState.getLastDrop();
     }

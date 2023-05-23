@@ -12,7 +12,7 @@ public abstract class Controller {
         this.session = session;
     }
 
-    public void nextState() {
+    public void nextStage() {
         this.session.nextStage();
     }
 

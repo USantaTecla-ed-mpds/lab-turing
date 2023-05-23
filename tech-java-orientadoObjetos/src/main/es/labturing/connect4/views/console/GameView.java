@@ -3,6 +3,7 @@ package main.es.labturing.connect4.views.console;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
 import main.es.labturing.connect4.controllers.StartController;
+import main.es.labturing.connect4.models.StageValue;
 import main.es.labturing.connect4.views.console.menu.GameMenu;
 import main.es.labturing.connect4.views.console.menu.LanguageMenu;
 import main.es.labturing.utils.framework.ControllersVisitor;
@@ -28,16 +29,20 @@ public class GameView implements ControllersVisitor {
     private void play(PlayController playController) {
         do {
             turnView.play(playController);
-            boardView.writeln(playController);
-        } while (!playController.isGameFinished());
-        turnView.writeResult(playController);
+            if (playController.getStageValue() == StageValue.IN_GAME) {
+                boardView.writeln(playController);
+            }
+        } while (playController.getStageValue() == StageValue.IN_GAME && !playController.isGameFinished());
+        if (playController.getStageValue() == StageValue.IN_GAME) {
+            turnView.writeResult(playController);
+        }
     }
 
     private boolean resume(ResumeController resumeController) {
         YesNoDialog yesNoDialog = new YesNoDialog();
         yesNoDialog.read(MessageManager.getInstance().getMessage("RESUME"));
         if (yesNoDialog.isAffirmative()) {
-            resumeController.reset();//stage reset
+            resumeController.reset();
         }
         return yesNoDialog.isAffirmative();
     }
@@ -47,14 +52,14 @@ public class GameView implements ControllersVisitor {
         startController.nextStage();
     }
 
-	public void visit(PlayController playController) {
+    public void visit(PlayController playController) {
         this.play(playController);
         playController.nextStage();
     }
 
-	public boolean visit(ResumeController resumeController){
+    public boolean visit(ResumeController resumeController) {
         this.resume(resumeController);
-        resumeController.nextStage();    
+        resumeController.nextStage();
         return true;
     }
 }

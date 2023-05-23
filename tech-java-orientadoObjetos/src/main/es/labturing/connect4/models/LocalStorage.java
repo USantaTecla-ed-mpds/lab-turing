@@ -47,7 +47,7 @@ public class LocalStorage implements Storage{
             if (ois != null) {
                 try {
                     ois.close();
-                    this.session.setState(gameState);
+                    this.session.setState(gameState.clone());
                 } catch (IOException ex) {
                     System.out.println("IOException al cerrar: " + ex.getMessage());
                 }

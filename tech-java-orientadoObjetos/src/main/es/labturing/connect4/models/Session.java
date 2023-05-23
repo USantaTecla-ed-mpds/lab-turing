@@ -56,6 +56,7 @@ public class Session {
     public void load() {
         Storage storage = new LocalStorage(this);
         storage.load();
+
     }
 
     public void save() {
@@ -63,7 +64,7 @@ public class Session {
         storage.save();
     }
 
-    public boolean isGamePersisted(){
+    public boolean isGamePersisted() {
         Storage storage = new LocalStorage(this);
         return storage.isGamePersisted();
     }
@@ -120,7 +121,8 @@ public class Session {
         return this.game.getColor(coordinate);
     }
 
-    public void setState(GameState gameState){
+    public void setState(GameState gameState) {
         this.game.setState(gameState);
     }
+
 }

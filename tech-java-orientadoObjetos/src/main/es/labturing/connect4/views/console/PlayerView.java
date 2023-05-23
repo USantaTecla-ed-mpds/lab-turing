@@ -3,7 +3,7 @@ package main.es.labturing.connect4.views.console;
 import main.es.labturing.connect4.controllers.PlayController;
 
 public abstract class PlayerView {
-    
+
     public PlayerView() {
     }
 

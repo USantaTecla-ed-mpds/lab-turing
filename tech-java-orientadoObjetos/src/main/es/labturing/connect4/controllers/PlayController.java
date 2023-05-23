@@ -2,6 +2,8 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.GameState;
 import main.es.labturing.connect4.models.Session;
+import main.es.labturing.connect4.models.Stage;
+import main.es.labturing.connect4.models.StageValue;
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.utils.framework.AcceptorController;
@@ -16,7 +18,7 @@ public class PlayController extends Controller implements AcceptorController {
         this.playerActionsController = new PlayerActionsController(session);
     }
 
-    public PlayerType getActivePlayerType(){
+    public PlayerType getActivePlayerType() {
         return this.session.getActivePlayerType();
     }
 
@@ -44,31 +46,31 @@ public class PlayController extends Controller implements AcceptorController {
         return this.session.getState();
     }
 
-    public void nextStage() {
-        this.session.nextStage();
+    public StageValue getStageValue() {
+        return this.session.getValueStage();
     }
 
-    public void registry(){
+    public void registry() {
         this.session.registry();
     }
 
-    public boolean isUndoable(){
+    public boolean isUndoable() {
         return this.playerActionsController.isUndoable();
     }
 
-    public boolean isRedoable(){
+    public boolean isRedoable() {
         return this.playerActionsController.isRedoable();
     }
 
-    public void undo(){
+    public void undo() {
         this.playerActionsController.undo();
     }
 
-    public void redo(){
+    public void redo() {
         this.playerActionsController.redo();
     }
 
-    public void saveAndExit(){
+    public void saveAndExit() {
         this.playerActionsController.saveAndExit();
     }
 
@@ -79,4 +81,5 @@ public class PlayController extends Controller implements AcceptorController {
     public void accept(ControllersVisitor controllerVisitor) {
         controllerVisitor.visit(this);
     }
+
 }
