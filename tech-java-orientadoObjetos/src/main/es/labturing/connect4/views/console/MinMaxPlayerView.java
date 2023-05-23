@@ -1,11 +1,8 @@
 package main.es.labturing.connect4.views.console;
 
-import main.es.labturing.connect4.controllers.PlayController;
-
 public class MinMaxPlayerView extends MachinePlayerView {
 
-    public MinMaxPlayerView(PlayController playController) {
-        super(playController);
+    public MinMaxPlayerView() {
     }
 
     public void showColumnSelected(int column) {

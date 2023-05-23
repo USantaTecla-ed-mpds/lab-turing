@@ -3,21 +3,19 @@ package main.es.labturing.connect4.views.console;
 import main.es.labturing.connect4.controllers.PlayController;
 
 public abstract class PlayerView {
-    protected PlayController playController;
-
-    public PlayerView(PlayController playController) {
-        this.playController = playController;
+    
+    public PlayerView() {
     }
 
-    protected void showWinner() {
+    protected void showWinner(PlayController playController) {
         MessageManager.getInstance().writeln("PLAYER_WIN",
-                new ColorView(this.playController.getActivePlayerColor()).toString());
+                new ColorView(playController.getActivePlayerColor()).toString());
     }
 
-    protected void showPlayerColor() {
-        MessageManager.getInstance().writeln("TURN", new ColorView(this.playController.getActivePlayerColor()).toString());
+    protected void showPlayerColor(PlayController playController) {
+        MessageManager.getInstance().writeln("TURN", new ColorView(playController.getActivePlayerColor()).toString());
     }
 
-    public abstract void dropToken();
+    public abstract void play(PlayController playController);
 
 }

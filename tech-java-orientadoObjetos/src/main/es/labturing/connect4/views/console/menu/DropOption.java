@@ -18,6 +18,6 @@ public class DropOption extends Option {
 
     @Override
     public void interact() {
-        this.playController.dropToken(this.playerView.getColumn());
+        this.playController.dropToken(this.playerView.getColumn(this.playController));
     }
 }

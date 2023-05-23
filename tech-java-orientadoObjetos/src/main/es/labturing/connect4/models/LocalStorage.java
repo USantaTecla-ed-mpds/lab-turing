@@ -7,20 +7,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Persist {
+public class LocalStorage implements Storage{
 
     private final String path = "tech-java-orientadoObjetos/src/main/es/labturing/connect4/resources/";
-    private Game game;
+    private Session session;
 
-    public Persist(Game game){
-        this.game = game;
+    public LocalStorage(Session session){
+        this.session = session;
     }
     
-    public void save(GameState gameState) {
+    public void save() {
         ObjectOutputStream oos = null;
         try {
             oos = new ObjectOutputStream(new FileOutputStream(this.path + "savedgame.dat"));
-            oos.writeObject(gameState);
+            oos.writeObject(this.session.getState());
            
         } catch (Exception e) {
             // TODO: handle exception
@@ -47,7 +47,7 @@ public class Persist {
             if (ois != null) {
                 try {
                     ois.close();
-                    this.game.setState(gameState);
+                    this.session.setState(gameState);
                 } catch (IOException ex) {
                     System.out.println("IOException al cerrar: " + ex.getMessage());
                 }

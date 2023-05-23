@@ -4,16 +4,15 @@ import main.es.labturing.connect4.controllers.PlayController;
 
 public abstract class MachinePlayerView extends PlayerView {
 
-    public MachinePlayerView(PlayController playController) {
-        super(playController);
+    public MachinePlayerView() {
     }
 
-    public void dropToken(){
-        this.playController.dropToken(this.getColumn());
+    public void play(PlayController playController){
+        playController.dropToken(this.getColumn(playController));
     }
 
-    private int getColumn() {
-        int column = this.playController.getActiveMachineColumn();
+    private int getColumn(PlayController playController) {
+        int column = playController.getActiveMachineColumn();
         this.showColumnSelected(column);
         return column;
     }

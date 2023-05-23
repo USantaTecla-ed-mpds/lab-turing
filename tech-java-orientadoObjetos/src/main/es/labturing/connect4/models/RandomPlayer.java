@@ -19,4 +19,9 @@ public class RandomPlayer extends MachinePlayer {
         return PlayerType.RANDOM;
     }
 
+    @Override
+    public MachinePlayer clone() {
+        return new RandomPlayer(this.board);
+    }
+
 }

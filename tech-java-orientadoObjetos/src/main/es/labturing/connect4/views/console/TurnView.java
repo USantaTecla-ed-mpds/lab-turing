@@ -7,8 +7,10 @@ import main.es.labturing.connect4.views.console.menu.ConfigTurnMenu;
 public class TurnView {
 
     private PlayerView activePlayerView;
+    private PlayerViewPrototype playerViewPrototype;
 
     public TurnView() {
+        this.playerViewPrototype = new PlayerViewPrototype();
     }
 
     public void configTurn(StartController startController) {
@@ -17,14 +19,14 @@ public class TurnView {
     }
 
     public void play(PlayController playController) {
-        this.activePlayerView = playController.createPlayerView();
-        this.activePlayerView.showPlayerColor();
-        this.activePlayerView.dropToken();
+        this.activePlayerView = playerViewPrototype.createView(playController.getActivePlayerType());
+        this.activePlayerView.showPlayerColor(playController);
+        this.activePlayerView.play(playController);
     }
 
     public void writeResult(PlayController playController) {
         if (playController.isWinner()) {
-            this.activePlayerView.showWinner();
+            this.activePlayerView.showWinner(playController);
         } else {
             MessageManager.getInstance().writeln("PLAYERS_TIED");
         }

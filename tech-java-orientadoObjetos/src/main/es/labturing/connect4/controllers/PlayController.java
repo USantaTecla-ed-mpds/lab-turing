@@ -3,24 +3,21 @@ package main.es.labturing.connect4.controllers;
 import main.es.labturing.connect4.models.GameState;
 import main.es.labturing.connect4.models.Session;
 import main.es.labturing.connect4.types.Color;
-import main.es.labturing.connect4.views.console.PlayerView;
-import main.es.labturing.connect4.views.console.PlayerViewPrototype;
+import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.utils.framework.AcceptorController;
 import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class PlayController extends Controller implements AcceptorController {
 
-    private InGameActionsController inGameActionsController;
-    private PlayerViewPrototype playerViewPrototype;
+    private PlayerActionsController playerActionsController;
 
     public PlayController(Session session) {
         super(session);
-        this.inGameActionsController = new InGameActionsController(session);
-        this.playerViewPrototype = new PlayerViewPrototype(this);
+        this.playerActionsController = new PlayerActionsController(session);
     }
 
-    public PlayerView createPlayerView(){
-        return playerViewPrototype.createView(this.session.getActivePlayerType());
+    public PlayerType getActivePlayerType(){
+        return this.session.getActivePlayerType();
     }
 
     public boolean isWinner() {
@@ -56,27 +53,27 @@ public class PlayController extends Controller implements AcceptorController {
     }
 
     public boolean isUndoable(){
-        return this.inGameActionsController.isUndoable();
+        return this.playerActionsController.isUndoable();
     }
 
     public boolean isRedoable(){
-        return this.inGameActionsController.isRedoable();
+        return this.playerActionsController.isRedoable();
     }
 
     public void undo(){
-        this.inGameActionsController.undo();
+        this.playerActionsController.undo();
     }
 
     public void redo(){
-        this.inGameActionsController.redo();
+        this.playerActionsController.redo();
     }
 
     public void saveAndExit(){
-        this.inGameActionsController.saveAndExit();
+        this.playerActionsController.saveAndExit();
     }
 
     public void dropToken(int column) {
-        this.inGameActionsController.dropToken(column);
+        this.playerActionsController.dropToken(column);
     }
 
     public void accept(ControllersVisitor controllerVisitor) {

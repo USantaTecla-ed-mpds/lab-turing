@@ -2,14 +2,14 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Session;
 
-public class InGameActionsController extends Controller{
+public class PlayerActionsController extends Controller{
 
     private UndoController undoController;
     private RedoController redoController;
     private SaveAndExitController saveAndExitController;
     private DropTokenController dropTokenController;
 
-    InGameActionsController(Session session) {
+    PlayerActionsController(Session session) {
         super(session);
         this.undoController = new UndoController(session);
         this.redoController = new RedoController(session);

@@ -10,12 +10,12 @@ public class Turn implements Serializable{
     private Player[] players;
     private int activePlayerIndex;
     private Board board;
-    private PlayersFactory playersFactory;
+    private PlayersPrototype playersPrototype;
 
     public Turn(Board board) {
         this.board = board;
         this.players = new Player[NUMBER_PLAYERS];
-        this.playersFactory = new PlayersFactory();
+        this.playersPrototype = new PlayersPrototype(this.board);
     }
 
     public void resetPlayers() {
@@ -37,7 +37,7 @@ public class Turn implements Serializable{
     }
 
     public void addPlayer(PlayerType playerType) {
-        Player player = this.playersFactory.getPlayerCreator(playerType).create(this.board);
+        Player player = this.playersPrototype.getPlayer(playerType);
         boolean playerSetted = false;
         for (int i = 0; i < this.players.length && playerSetted == false; i++) {
             if (this.players[i] == null) {

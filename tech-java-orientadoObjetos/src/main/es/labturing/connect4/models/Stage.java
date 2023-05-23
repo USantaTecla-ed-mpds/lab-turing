@@ -5,6 +5,7 @@ public class Stage {
 
     public Stage() {
         this.reset();
+        System.out.println("STAGE ACTUAL: " + this.stageValue.toString());
     }
 
     public void reset() {
@@ -15,6 +16,7 @@ public class Stage {
         assert this.stageValue != StageValue.EXIT;
         
         this.stageValue = StageValue.values()[this.stageValue.ordinal() + 1];
+        System.out.println("STAGE ACTUAL: " + this.stageValue.toString());
     }
 
     public StageValue getValueStage() {

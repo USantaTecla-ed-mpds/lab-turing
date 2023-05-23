@@ -12,4 +12,9 @@ public class HumanPlayer extends Player {
         return PlayerType.HUMAN;
     }
 
+    @Override
+    public HumanPlayer clone() {
+        return new HumanPlayer(this.board);
+    }
+
 }

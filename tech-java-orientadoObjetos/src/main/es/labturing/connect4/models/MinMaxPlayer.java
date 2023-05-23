@@ -87,4 +87,9 @@ public class MinMaxPlayer extends MachinePlayer {
         return PlayerType.MINMAX;
     }
 
+    @Override
+    public MachinePlayer clone() {
+        return new MinMaxPlayer(this.board);
+    }
+
 }

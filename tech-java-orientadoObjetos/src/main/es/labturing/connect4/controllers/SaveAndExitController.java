@@ -10,7 +10,8 @@ public class SaveAndExitController extends Controller{
 
     public void save(){
         this.session.save();
-        System.exit(0);
+        this.session.nextStage();
+        this.session.nextStage();
     } 
     
 }

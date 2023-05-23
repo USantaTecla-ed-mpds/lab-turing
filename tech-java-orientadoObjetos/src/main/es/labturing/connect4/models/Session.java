@@ -8,13 +8,11 @@ public class Session {
     private Stage stage;
     private Game game;
     private Registry registry;
-    private Persist persist;
 
     public Session() {
         this.stage = new Stage();
         this.game = new Game();
         this.registry = new Registry(game);
-        this.persist = new Persist(game);
     }
 
     public void reset() {
@@ -56,11 +54,18 @@ public class Session {
     }
 
     public void load() {
-        this.persist.load();
+        Storage storage = new LocalStorage(this);
+        storage.load();
     }
 
     public void save() {
-        this.persist.save(this.registry.getLastGameState());
+        Storage storage = new LocalStorage(this);
+        storage.save();
+    }
+
+    public boolean isGamePersisted(){
+        Storage storage = new LocalStorage(this);
+        return storage.isGamePersisted();
     }
 
     public void addPlayer(PlayerType playerType) {
@@ -115,7 +120,7 @@ public class Session {
         return this.game.getColor(coordinate);
     }
 
-    public boolean isGamePersisted(){
-        return this.persist.isGamePersisted();
+    public void setState(GameState gameState){
+        this.game.setState(gameState);
     }
 }

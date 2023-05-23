@@ -29,5 +29,7 @@ public abstract class Player implements Serializable{
         return this.board.isCompleteColumn(column);
     }
 
+    public abstract Player clone();
+
     public abstract PlayerType getType();
 }
