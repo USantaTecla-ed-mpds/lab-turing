@@ -1,4 +1,4 @@
-package main.es.labturing.connect4.models;
+package main.es.labturing.connect4.storage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import main.es.labturing.connect4.models.GameState;
+import main.es.labturing.connect4.models.Session;
 
 public class LocalStorage implements Storage{
 

@@ -1,5 +1,7 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.types.StageValue;
+
 public class Stage {
     private StageValue stageValue;
 

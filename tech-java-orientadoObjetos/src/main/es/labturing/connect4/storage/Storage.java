@@ -1,4 +1,4 @@
-package main.es.labturing.connect4.models;
+package main.es.labturing.connect4.storage;
 
 public interface Storage {
 

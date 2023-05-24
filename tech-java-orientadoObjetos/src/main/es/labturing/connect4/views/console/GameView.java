@@ -3,7 +3,7 @@ package main.es.labturing.connect4.views.console;
 import main.es.labturing.connect4.controllers.PlayController;
 import main.es.labturing.connect4.controllers.ResumeController;
 import main.es.labturing.connect4.controllers.StartController;
-import main.es.labturing.connect4.models.StageValue;
+import main.es.labturing.connect4.types.StageValue;
 import main.es.labturing.connect4.views.console.menu.GameMenu;
 import main.es.labturing.connect4.views.console.menu.LanguageMenu;
 import main.es.labturing.utils.framework.ControllersVisitor;

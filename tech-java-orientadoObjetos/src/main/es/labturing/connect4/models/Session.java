@@ -1,7 +1,10 @@
 package main.es.labturing.connect4.models;
 
+import main.es.labturing.connect4.storage.LocalStorage;
+import main.es.labturing.connect4.storage.Storage;
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
+import main.es.labturing.connect4.types.StageValue;
 
 public class Session {
 
