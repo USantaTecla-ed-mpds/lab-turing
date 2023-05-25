@@ -59,7 +59,6 @@ public class Session {
     public void load() {
         Storage storage = new LocalStorage(this);
         storage.load();
-
     }
 
     public void save() {
@@ -133,8 +132,8 @@ public class Session {
     }
 
     public void setGame(Game game) {
-        this.game= game;
+        this.game = game;
         this.resetRegistry();
-    } 
+    }
 
 }
