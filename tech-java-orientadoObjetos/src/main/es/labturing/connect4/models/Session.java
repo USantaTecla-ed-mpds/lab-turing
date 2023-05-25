@@ -136,4 +136,12 @@ public class Session {
         this.resetRegistry();
     }
 
+    public Registry getRegistry() {
+        return this.registry;
+    }
+
+    public void setRegistry(Registry registry) {
+        this.registry = registry;
+    }
+
 }

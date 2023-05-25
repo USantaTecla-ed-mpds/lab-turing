@@ -1,9 +1,10 @@
 package main.es.labturing.connect4.models;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Registry {
+public class Registry implements Serializable {
 
     private Game game;
     private List<GameState> gameStates;

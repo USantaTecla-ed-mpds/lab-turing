@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import main.es.labturing.connect4.models.Game;
+import main.es.labturing.connect4.models.Registry;
 import main.es.labturing.connect4.models.Session;
 
 public class LocalStorage implements Storage{
@@ -24,6 +25,7 @@ public class LocalStorage implements Storage{
         try {
             oos = new ObjectOutputStream(new FileOutputStream(this.path + "savedgame.dat"));
             oos.writeObject(this.session.getGame());
+            oos.writeObject(this.session.getRegistry());
            
         } catch (Exception e) {
             // TODO: handle exception
@@ -41,9 +43,11 @@ public class LocalStorage implements Storage{
     public void load() {
         ObjectInputStream ois = null;
         Game game = null;
+        Registry registry = null;
         try {
             ois = new ObjectInputStream(new FileInputStream(this.path + "savedgame.dat"));
             game = (Game) ois.readObject();
+            registry = (Registry) ois.readObject();
         } catch (Exception e) {
             System.out.println("EXCEPCION: " + e.getMessage());
         } finally {
@@ -51,6 +55,7 @@ public class LocalStorage implements Storage{
                 try {
                     ois.close();
                     this.session.setGame(game);
+                    this.session.setRegistry(registry);
                 } catch (IOException ex) {
                     System.out.println("IOException al cerrar: " + ex.getMessage());
                 }
