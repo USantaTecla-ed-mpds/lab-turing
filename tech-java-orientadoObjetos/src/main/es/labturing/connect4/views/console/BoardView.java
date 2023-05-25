@@ -21,6 +21,8 @@ public class BoardView {
             MessageManager.getInstance().writeln("BLANK");
         }
         this.writeHorizontal();
+        System.out.println(controller.getBoard()); 
+
     }
 
     private void writeHorizontal() {

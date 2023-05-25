@@ -128,4 +128,8 @@ public class Session {
         this.game.setState(gameState);
     }
 
+    public Board getBoard() {
+        return this.game.getBoard();
+    }
+
 }

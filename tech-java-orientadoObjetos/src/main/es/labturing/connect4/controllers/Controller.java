@@ -1,5 +1,6 @@
 package main.es.labturing.connect4.controllers;
 
+import main.es.labturing.connect4.models.Board;
 import main.es.labturing.connect4.models.Coordinate;
 import main.es.labturing.connect4.models.Session;
 import main.es.labturing.connect4.types.Color;
@@ -18,6 +19,10 @@ public abstract class Controller {
 
     public Color getColor(Coordinate coordinate) {
         return this.session.getColor(coordinate);
+    }
+
+    public Board getBoard() {
+        return this.session.getBoard();
     }
 
 }

@@ -27,7 +27,6 @@ public class Game {
     }
 
     public Color getColor(Coordinate coordinate) {
-        System.out.println(this.board);
         return this.board.getColor(coordinate);
     }
 
@@ -76,5 +75,9 @@ public class Game {
     public void setState(GameState gameState) {
         this.board.setState(gameState.getBoardState());
         this.turn.setState(gameState.getTurnState());
+    }
+
+    public Board getBoard() {
+        return this.board;
     }
 }
