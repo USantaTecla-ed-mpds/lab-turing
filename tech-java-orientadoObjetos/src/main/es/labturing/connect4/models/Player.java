@@ -15,7 +15,6 @@ public abstract class Player implements Serializable{
 
     public void dropToken(int column) {
         this.board.dropToken(column, this.color);
-        System.out.println(this.board);
     }
 
     public Color getColor() {

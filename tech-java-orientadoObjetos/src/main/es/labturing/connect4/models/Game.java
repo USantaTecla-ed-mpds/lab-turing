@@ -1,9 +1,11 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
+
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 
-public class Game {
+public class Game implements Serializable{
 
     private Board board;
     private Turn turn;
@@ -77,7 +79,4 @@ public class Game {
         this.turn.setState(gameState.getTurnState());
     }
 
-    public Board getBoard() {
-        return this.board;
-    }
 }

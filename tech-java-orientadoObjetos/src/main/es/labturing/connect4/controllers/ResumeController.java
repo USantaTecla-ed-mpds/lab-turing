@@ -1,8 +1,6 @@
 package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Session;
-import main.es.labturing.utils.framework.AcceptorController;
-import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class ResumeController extends Controller implements AcceptorController {
 

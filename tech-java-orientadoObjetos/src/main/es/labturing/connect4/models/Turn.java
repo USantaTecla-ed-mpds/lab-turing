@@ -5,7 +5,7 @@ import java.io.Serializable;
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 
-public class Turn implements Serializable{
+public class Turn implements Serializable {
     final static int NUMBER_PLAYERS = 2;
     private Player[] players;
     private int activePlayerIndex;
@@ -52,19 +52,19 @@ public class Turn implements Serializable{
         return this.players[this.activePlayerIndex];
     }
 
-    public int getNumberPlayers() {
-        return Turn.NUMBER_PLAYERS;
-    }
-
     public int getActivePlayerIndex() {
         return this.activePlayerIndex;
     }
 
-    public TurnState getState(){
+    public int getNumberPlayers() {
+        return Turn.NUMBER_PLAYERS;
+    }
+
+    public TurnState getState() {
         return new TurnState(players, activePlayerIndex);
     }
 
-    public void setState(TurnState turnState){
+    public void setState(TurnState turnState) {
         this.players = turnState.getPlayers();
         this.activePlayerIndex = turnState.getActivePlayerIndex();
     }

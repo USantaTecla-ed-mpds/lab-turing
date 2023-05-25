@@ -1,10 +1,13 @@
 package main.es.labturing.connect4;
 
+import main.es.labturing.connect4.controllers.AcceptorController;
+import main.es.labturing.connect4.controllers.ControllersVisitor;
 import main.es.labturing.connect4.controllers.Logic;
-import main.es.labturing.connect4.views.console.GameView;
-import main.es.labturing.utils.framework.GameApp;
 
-public abstract class Connect4 extends GameApp<Logic, GameView> {
+public abstract class Connect4 {
+
+    protected Logic logic;
+    protected ControllersVisitor gameView;
 
     public Connect4() {
         this.logic = new Logic();
@@ -12,6 +15,15 @@ public abstract class Connect4 extends GameApp<Logic, GameView> {
 
     }
 
-    protected abstract GameView createView();
+    protected void interact() {
+        AcceptorController acceptorController;
+        do {
+            acceptorController = this.logic.getController();
+            if (acceptorController != null)
+                acceptorController.accept(this.gameView);
+        } while (acceptorController != null);
+    }
+
+    protected abstract ControllersVisitor createView();
 
 }

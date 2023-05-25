@@ -6,10 +6,10 @@ import main.es.labturing.connect4.controllers.StartController;
 import main.es.labturing.connect4.types.StageValue;
 import main.es.labturing.connect4.views.console.menu.GameMenu;
 import main.es.labturing.connect4.views.console.menu.LanguageMenu;
-import main.es.labturing.utils.framework.ControllersVisitor;
+import main.es.labturing.connect4.controllers.ControllersVisitor;
 import main.es.labturing.utils.views.YesNoDialog;
 
-public class GameView implements ControllersVisitor {
+public class GameView extends ControllersVisitor implements main.es.labturing.connect4.views.GameView {
 
     private BoardView boardView;
     private TurnView turnView;
@@ -46,20 +46,21 @@ public class GameView implements ControllersVisitor {
         }
         return yesNoDialog.isAffirmative();
     }
-
+    @Override
     public void visit(StartController startController) {
         this.start(startController);
         startController.nextStage();
     }
-
+    @Override
     public void visit(PlayController playController) {
         this.play(playController);
         playController.nextStage();
     }
-
+    @Override
     public boolean visit(ResumeController resumeController) {
         this.resume(resumeController);
         resumeController.nextStage();
         return true;
     }
+
 }

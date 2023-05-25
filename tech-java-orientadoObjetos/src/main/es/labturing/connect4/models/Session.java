@@ -116,20 +116,25 @@ public class Session {
         return this.game.isGameFinished();
     }
 
-    public GameState getState() {
-        return this.game.getState();
-    }
-
     public Color getColor(Coordinate coordinate) {
         return this.game.getColor(coordinate);
+    }
+
+    public GameState getState() {
+        return this.game.getState();
     }
 
     public void setState(GameState gameState) {
         this.game.setState(gameState);
     }
 
-    public Board getBoard() {
-        return this.game.getBoard();
+    public Game getGame() {
+        return this.game;
     }
+
+    public void setGame(Game game) {
+        this.game= game;
+        this.resetRegistry();
+    } 
 
 }

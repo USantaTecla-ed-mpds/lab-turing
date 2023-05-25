@@ -2,12 +2,9 @@ package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.GameState;
 import main.es.labturing.connect4.models.Session;
-import main.es.labturing.connect4.models.Stage;
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.connect4.types.StageValue;
-import main.es.labturing.utils.framework.AcceptorController;
-import main.es.labturing.utils.framework.ControllersVisitor;
 
 public class PlayController extends Controller implements AcceptorController {
 

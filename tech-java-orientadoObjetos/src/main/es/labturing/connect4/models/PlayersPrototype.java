@@ -1,11 +1,12 @@
 package main.es.labturing.connect4.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import main.es.labturing.connect4.types.PlayerType;
 
-public class PlayersPrototype {
+public class PlayersPrototype implements Serializable {
 
     private Map<PlayerType, Player> playersMap;
 
