@@ -36,6 +36,10 @@ public class Session {
         return this.stage.getValueStage();
     }
 
+    public void setStageValue(StageValue stageValue) {
+        this.stage.setStageValue(stageValue);
+    }
+
     public boolean isUndoable() {
         return this.registry.isUndoable();
     }

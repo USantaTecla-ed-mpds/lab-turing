@@ -22,4 +22,8 @@ public class Stage {
     public StageValue getValueStage() {
         return this.stageValue;
     }
+
+    public void setStageValue(StageValue stageValue) {
+        this.stageValue = stageValue;
+    }
 }

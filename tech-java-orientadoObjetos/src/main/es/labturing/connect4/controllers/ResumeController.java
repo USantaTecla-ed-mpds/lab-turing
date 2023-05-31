@@ -22,7 +22,7 @@ public class ResumeController extends Controller implements AcceptorController {
     }
 
     public void setStageExit() {
-        this.session.nextStage();
+        this.session.setStageValue(StageValue.EXIT);
     }
 
 }
