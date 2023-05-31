@@ -1,6 +1,7 @@
 package main.es.labturing.connect4.controllers;
 
 import main.es.labturing.connect4.models.Session;
+import main.es.labturing.connect4.types.StageValue;
 
 public class ResumeController extends Controller implements AcceptorController {
 
@@ -18,6 +19,10 @@ public class ResumeController extends Controller implements AcceptorController {
 
     public void nextStage() {
         this.session.reset();
+    }
+
+    public void setStageExit() {
+        this.session.nextStage();
     }
 
 }

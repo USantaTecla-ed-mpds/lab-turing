@@ -6,6 +6,6 @@ public abstract class ControllersVisitor {
 
 	public abstract void visit(PlayController playController);
 
-	public abstract boolean visit(ResumeController resumeController);
+	public abstract void visit(ResumeController resumeController);
 
 }

@@ -46,21 +46,27 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
         }
         return yesNoDialog.isAffirmative();
     }
+
     @Override
     public void visit(StartController startController) {
         this.start(startController);
         startController.nextStage();
     }
+
     @Override
     public void visit(PlayController playController) {
         this.play(playController);
         playController.nextStage();
     }
+
     @Override
-    public boolean visit(ResumeController resumeController) {
-        this.resume(resumeController);
-        resumeController.nextStage();
-        return true;
+    public void visit(ResumeController resumeController) {
+        if (this.resume(resumeController)) {
+            resumeController.nextStage();
+        } else {
+            resumeController.setStageExit();
+        }
+
     }
 
 }
