@@ -69,4 +69,8 @@ public class Turn implements Serializable {
         this.activePlayerIndex = turnState.getActivePlayerIndex();
     }
 
+    public void setActivePlayerIndex(int activePlayerIndex) {
+        this.activePlayerIndex = activePlayerIndex;
+    }
+
 }

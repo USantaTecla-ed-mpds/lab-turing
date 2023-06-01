@@ -88,6 +88,10 @@ public class Board implements Serializable {
         return this.colors[coordinate.getRow()][coordinate.getColumn()];
     }
 
+    public void setColor(Color color, Coordinate coordinate) {
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
+
     public Color[][] getColors() {
         return this.colors;
     }
@@ -103,5 +107,9 @@ public class Board implements Serializable {
     public void setState(BoardState boardState) {
         this.colors = boardState.getColors();
         this.lastDrop = boardState.getLastDrop();
+    }
+
+    public void setLastDrop(Coordinate coordinate) {
+        this.lastDrop = coordinate;
     }
 }

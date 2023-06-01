@@ -1,11 +1,11 @@
 package main.es.labturing.connect4.daos;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 
 interface DAO {
 
-	void save (FileOutputStream fileOutputStream);
+	void save (FileWriter fileWriter);
 	
 	void load (BufferedReader bufferedReader);
 	

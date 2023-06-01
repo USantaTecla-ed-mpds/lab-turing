@@ -5,26 +5,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import main.es.labturing.connect4.models.Board;
-
+import main.es.labturing.connect4.models.Coordinate;
+import main.es.labturing.connect4.types.Color;
 
 class BoardDAO implements DAO {
 
-    private Board board;
+	private Board board;
 
-    BoardDAO(Board board) {
+	BoardDAO(Board board) {
 		this.board = board;
 	}
 
-    public void save(FileWriter fileWriter) {
+	public void save(FileWriter fileWriter) {
 		try {
-			for (Coordinate[] coordinatesPlayer : this.board.getCoordinates()) {
-				for (Coordinate coordinate : coordinatesPlayer) {
-					if (coordinate == null) {
-						fileWriter.write(Board.EMPTY + "\n");
-					} else {
-						fileWriter.write(coordinate.getRow() + "." + coordinate.getColumn() + "\n");
-					}
+			for (int i = 0; i < Coordinate.NUMBER_ROWS; i++) {
+				for (int j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
+					fileWriter.write(this.board.getColor(new Coordinate(i, j)).toString() + "\n");
 				}
+			}
+			if (this.board.getLastDrop() != null) {
+				fileWriter.write(this.board.getLastDrop().getRow() + "." + this.board.getLastDrop().getColumn() + "\n");
+			} else {
+				fileWriter.write("-" + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -33,23 +35,26 @@ class BoardDAO implements DAO {
 
 	public void load(BufferedReader bufferedReader) {
 		try {
-			for (int i = 0; i < Turn.NUM_PLAYERS; i++) {
-				for (int j = 0; j < Coordinate.DIMENSION; j++) {
-					String tokenCoordinate = bufferedReader.readLine();
-					if ("-".equals(tokenCoordinate)) {
-                        this.board.setCoordinate(i, j, null);
-					} else {
-                        String[] coordinatesString = tokenCoordinate.split("\\.");
-                        this.board.setCoordinate(i, j, new Coordinate(Integer.parseInt(coordinatesString[0]),
-                        Integer.parseInt(coordinatesString[1])));
-					}
+			for (int i = 0; i < Coordinate.NUMBER_ROWS; i++) {
+				for (int j = 0; j < Coordinate.NUMBER_COLUMNS; j++) {
+					String color = bufferedReader.readLine();
+					this.board.setColor(Color.valueOf(color), new Coordinate(i, j));
 				}
 			}
+			String lastDropCoordinate = bufferedReader.readLine();
+			if ("-".equals(lastDropCoordinate)) {
+				this.board.setLastDrop(null);
+			} else {
+				String[] coordinatesString = lastDropCoordinate.split("\\.");
+				this.board.setLastDrop(new Coordinate(Integer.parseInt(coordinatesString[0]),
+				Integer.parseInt(coordinatesString[1])));
+			}
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-    
+
 }

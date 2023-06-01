@@ -11,11 +11,12 @@ public class Session {
     private Stage stage;
     private Game game;
     private Registry registry;
+    private String name;
 
     public Session() {
         this.stage = new Stage();
         this.game = new Game();
-        this.registry = new Registry(game);
+        this.registry = new Registry(this.game);
     }
 
     public void reset() {
@@ -26,6 +27,10 @@ public class Session {
 
     public void resetRegistry() {
         this.registry.reset();
+    }
+
+    public void registry() {
+        this.registry.registry(this.game);
     }
 
     public void nextStage() {
@@ -56,9 +61,6 @@ public class Session {
         this.game.setState(this.registry.getRedoneState());
     }
 
-    public void registry() {
-        this.registry.registry(this.game);
-    }
 
     public void load() {
         Storage storage = new LocalStorage(this);
@@ -137,15 +139,18 @@ public class Session {
 
     public void setGame(Game game) {
         this.game = game;
-        this.resetRegistry();
     }
 
-    public Registry getRegistry() {
-        return this.registry;
-    }
+    public boolean hasName() {
+		return this.name != null;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setRegistry(Registry registry) {
-        this.registry = registry;
-    }
+	public String getName() {
+		return this.name;
+	}
 
 }

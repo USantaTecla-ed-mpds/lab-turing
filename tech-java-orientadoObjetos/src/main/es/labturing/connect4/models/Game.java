@@ -79,4 +79,12 @@ public class Game implements Serializable{
         this.turn.setState(gameState.getTurnState());
     }
 
+    public Board getBoard() {
+        return this.board;
+    }
+
+    public Turn getTurn() {
+        return this.turn;
+    }
+
 }
