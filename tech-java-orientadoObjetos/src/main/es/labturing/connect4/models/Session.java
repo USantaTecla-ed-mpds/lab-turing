@@ -35,6 +35,7 @@ public class Session {
 
     public void nextStage() {
         this.stage.next();
+        System.out.println(this.stage.getValueStage().toString());
     }
 
     public StageValue getValueStage() {

@@ -39,7 +39,9 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
         } while (playController.getStageValue() == StageValue.IN_GAME && !playController.isGameFinished());
         if (playController.getStageValue() == StageValue.IN_GAME) {
             turnView.writeResult(playController);
+            playController.nextStage();
         }
+        
     }
 
     private void saveAndOrExit(SaveController saveController){
@@ -83,7 +85,6 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
     @Override
     public void visit(PlayController playController) {
         this.play(playController);
-        playController.nextStage();
     }
 
     @Override
