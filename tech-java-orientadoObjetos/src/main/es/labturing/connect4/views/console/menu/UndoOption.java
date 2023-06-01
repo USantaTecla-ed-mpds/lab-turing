@@ -18,4 +18,9 @@ public class UndoOption extends Option {
         this.playController.undo();
     }
 
+    @Override
+    public boolean isActive(){
+        return this.playController.isUndoable();
+    }
+
 }

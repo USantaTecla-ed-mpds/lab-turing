@@ -18,4 +18,8 @@ public class RedoOption extends Option {
         this.playController.redo();
     }
 
+    @Override
+    public boolean isActive(){
+        return this.playController.isRedoable();
+    }
 }

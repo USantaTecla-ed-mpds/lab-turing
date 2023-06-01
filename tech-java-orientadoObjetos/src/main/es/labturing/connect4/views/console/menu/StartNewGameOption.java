@@ -18,6 +18,7 @@ public class StartNewGameOption extends Option {
 
     @Override
     public void interact() {
+        this.startController.start();
         this.turnView.configTurn(this.startController);
     }
 

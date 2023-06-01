@@ -17,12 +17,8 @@ public class ResumeController extends Controller implements AcceptorController {
         controllerVisitor.visit(this);
     }
 
-    public void nextStage() {
-        this.session.reset();
-    }
-
-    public void setStageExit() {
-        this.session.setStageValue(StageValue.EXIT);
+    public void setStage(StageValue stageValue){
+        this.session.setStageValue(stageValue);
     }
 
 }

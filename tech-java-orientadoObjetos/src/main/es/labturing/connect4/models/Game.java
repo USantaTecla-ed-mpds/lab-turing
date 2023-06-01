@@ -46,7 +46,7 @@ public class Game implements Serializable{
     }
 
     public int getNumberPlayers() {
-        return this.turn.getNumberPlayers();
+        return Turn.NUMBER_PLAYERS;
     }
 
     public void dropToken(int column) {

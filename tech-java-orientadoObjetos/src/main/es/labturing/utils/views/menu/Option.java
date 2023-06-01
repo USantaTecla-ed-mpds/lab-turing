@@ -20,4 +20,8 @@ public abstract class Option {
         return this.title;
     }
 
+    protected boolean isActive(){
+        return true;
+    }
+
 }

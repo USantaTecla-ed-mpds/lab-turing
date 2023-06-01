@@ -14,9 +14,14 @@ public class LoadGameOption extends Option{
 
     }
 
+    @Override 
+    public boolean isActive(){
+        return this.startController.getGamesNames().length != 0;
+    }
+
     @Override
     public void interact() {
-        this.startController.load();
+        new GameSelectMenu(this.startController).interact();
     }
     
 }

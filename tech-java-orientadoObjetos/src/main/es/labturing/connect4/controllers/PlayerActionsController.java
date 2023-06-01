@@ -6,13 +6,11 @@ public class PlayerActionsController extends Controller {
 
     private UndoController undoController;
     private RedoController redoController;
-    private SaveAndExitController saveAndExitController;
 
     PlayerActionsController(Session session) {
         super(session);
         this.undoController = new UndoController(session);
         this.redoController = new RedoController(session);
-        this.saveAndExitController = new SaveAndExitController(session);
     }
 
     public boolean isUndoable() {
@@ -29,10 +27,6 @@ public class PlayerActionsController extends Controller {
 
     public void redo() {
         this.redoController.redo();
-    }
-
-    public void saveAndExit() {
-        this.saveAndExitController.save();
     }
 
     public void dropToken(int column) {

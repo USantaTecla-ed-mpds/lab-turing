@@ -1,13 +1,21 @@
 package main.es.labturing.connect4.controllers;
 
+import main.es.labturing.connect4.daos.SessionDAO;
 import main.es.labturing.connect4.models.Session;
 import main.es.labturing.connect4.types.PlayerType;
 
 
 public class StartController extends Controller implements AcceptorController {
 
-    public StartController(Session session) {
+    private SessionDAO sessionDAO;
+
+    public StartController(Session session, SessionDAO sessionDAO) {
         super(session);
+        this.sessionDAO = sessionDAO; 
+    }
+
+    public void start(){
+        this.sessionDAO.associate(this.session);
     }
 
     public void resetGameRegistry() {
@@ -31,8 +39,8 @@ public class StartController extends Controller implements AcceptorController {
         return this.session.getNumberPlayers();
     }
 
-    public void load() {
-        this.session.load();
+    public void load(String name) {
+        this.sessionDAO.load(name);
         this.session.resetRegistry();
     }
 
@@ -42,5 +50,9 @@ public class StartController extends Controller implements AcceptorController {
 
     public void accept(ControllersVisitor controllerVisitor) {
         controllerVisitor.visit(this);
+    }
+
+    public String[] getGamesNames(){
+        return this.sessionDAO.getGamesNames();
     }
 }

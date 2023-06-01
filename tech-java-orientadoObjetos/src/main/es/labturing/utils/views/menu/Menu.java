@@ -30,7 +30,9 @@ public abstract class Menu {
     protected void showTitles() {
         this.showTitle();
         for (int i = 0; i < this.options.size(); i++) {
-            this.options.get(i).showTitle(i + 1);
+            if(this.options.get(i).isActive()){
+                this.options.get(i).showTitle(i + 1);
+            }
         }
     }
 
