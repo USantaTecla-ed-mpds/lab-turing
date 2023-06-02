@@ -28,6 +28,7 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
         new GameMenu(this.turnView, startController).interact();
         MessageManager.getInstance().writeln("GAME_TITLE");
         this.boardView.writeln(startController);
+        startController.nextStage();
     }
 
     private void play(PlayController playController) {
@@ -79,7 +80,7 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
     @Override
     public void visit(StartController startController) {
         this.start(startController);
-        startController.nextStage();
+
     }
 
     @Override

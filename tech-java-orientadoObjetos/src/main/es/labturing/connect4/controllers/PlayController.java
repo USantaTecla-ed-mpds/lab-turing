@@ -67,10 +67,6 @@ public class PlayController extends Controller implements AcceptorController {
         this.playerActionsController.redo();
     }
 
-    // public void saveAndExit() {
-    //     this.playerActionsController.saveAndExit();
-    // }
-
     public void dropToken(int column) {
         this.playerActionsController.dropToken(column);
     }

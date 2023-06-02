@@ -19,8 +19,7 @@ public class GameMenu extends Menu{
     @Override
     protected void addOptions(){
         this.add(new StartNewGameOption(this.turnView, startController));
-        if(this.startController.isGamePersisted()){
-            this.add(new LoadGameOption(this.startController));
-        }
+        this.add(new LoadGameOption(this.startController));
+
     }
 }

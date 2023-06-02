@@ -1,7 +1,5 @@
 package main.es.labturing.connect4.models;
 
-import main.es.labturing.connect4.storage.LocalStorage;
-import main.es.labturing.connect4.storage.Storage;
 import main.es.labturing.connect4.types.Color;
 import main.es.labturing.connect4.types.PlayerType;
 import main.es.labturing.connect4.types.StageValue;
@@ -60,22 +58,6 @@ public class Session {
 
     public void redo() {
         this.game.setState(this.registry.getRedoneState());
-    }
-
-
-    public void load() {
-        Storage storage = new LocalStorage(this);
-        storage.load();
-    }
-
-    public void save() {
-        Storage storage = new LocalStorage(this);
-        storage.save();
-    }
-
-    public boolean isGamePersisted() {
-        Storage storage = new LocalStorage(this);
-        return storage.isGamePersisted();
     }
 
     public void addPlayer(PlayerType playerType) {

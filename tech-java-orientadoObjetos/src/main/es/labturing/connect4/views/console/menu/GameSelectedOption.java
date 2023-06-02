@@ -15,6 +15,7 @@ public class GameSelectedOption extends Option{
     @Override
     public void interact() {
         this.startController.load(this.title);
+        System.out.println("Cargada");
         this.startController.start();
     }
 

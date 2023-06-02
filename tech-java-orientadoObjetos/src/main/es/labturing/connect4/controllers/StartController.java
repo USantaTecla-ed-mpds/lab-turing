@@ -3,6 +3,7 @@ package main.es.labturing.connect4.controllers;
 import main.es.labturing.connect4.daos.SessionDAO;
 import main.es.labturing.connect4.models.Session;
 import main.es.labturing.connect4.types.PlayerType;
+import main.es.labturing.connect4.types.StageValue;
 
 
 public class StartController extends Controller implements AcceptorController {
@@ -39,20 +40,18 @@ public class StartController extends Controller implements AcceptorController {
         return this.session.getNumberPlayers();
     }
 
-    public void load(String name) {
-        this.sessionDAO.load(name);
-        this.session.resetRegistry();
+    public String[] getGamesNames(){
+        return this.sessionDAO.getGamesNames();
     }
 
-    public boolean isGamePersisted() {
-        return this.session.isGamePersisted();
+    public void load(String name) {
+        this.sessionDAO.associate(this.session);
+        this.sessionDAO.load(name);
+        this.session.resetRegistry();
+        this.session.setStageValue(StageValue.INITIAL);
     }
 
     public void accept(ControllersVisitor controllerVisitor) {
         controllerVisitor.visit(this);
-    }
-
-    public String[] getGamesNames(){
-        return this.sessionDAO.getGamesNames();
     }
 }
