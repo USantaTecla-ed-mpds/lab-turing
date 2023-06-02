@@ -2,7 +2,6 @@ package main.es.labturing.connect4.daos;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import main.es.labturing.connect4.models.Game;
 
@@ -21,13 +20,13 @@ class GameDAO implements DAO {
     }
 
     public void save(FileWriter fileWriter) {
-            this.boardDAO.save(fileWriter);
-            this.turnDAO.save(fileWriter);
+        this.boardDAO.save(fileWriter);
+        this.turnDAO.save(fileWriter);
     }
 
     public void load(BufferedReader bufferedReader) {
-            this.boardDAO.load(bufferedReader);
-            this.turnDAO.load(bufferedReader);
+        this.boardDAO.load(bufferedReader);
+        this.turnDAO.load(bufferedReader);
     }
 
 }

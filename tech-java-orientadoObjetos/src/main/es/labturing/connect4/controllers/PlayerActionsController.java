@@ -31,6 +31,5 @@ public class PlayerActionsController extends Controller {
 
     public void dropToken(int column) {
         this.session.dropToken(column);
-        this.session.registry();
     } 
 }

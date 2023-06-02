@@ -40,14 +40,14 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
         } while (playController.getStageValue() == StageValue.IN_GAME && !playController.isGameFinished());
         if (playController.getStageValue() == StageValue.IN_GAME) {
             turnView.writeResult(playController);
-            playController.nextStage();
+            playController.setStageValue(StageValue.RESUME);
         }
         
     }
 
     private void saveAndOrExit(SaveController saveController){
         YesNoDialog yesNoDialog = new YesNoDialog();
-        yesNoDialog.read("¿quiere salvar?_MESSAGE");
+        yesNoDialog.read(MessageManager.getInstance().getMessage("SAVE"));
         String name = null;
 		if (yesNoDialog.isAffirmative()) {
 			if (saveController.hasName()) {
@@ -55,10 +55,10 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
 			} else {
 				boolean exists = false;
 				do {
-					name = Console.getInstance().readString("Ponga el nombre del archivo_MESSAGE");
+					name = Console.getInstance().readString(MessageManager.getInstance().getMessage("GAME_NAME"));
 					exists = saveController.exists(name);
 					if (exists) {
-						Console.getInstance().writeln("Archivo ya existe_MESSAGE");
+						Console.getInstance().writeln(MessageManager.getInstance().getMessage("ERROR_GAME_NAME"));
 					}
 				} while (exists);
 				saveController.save(name);
@@ -73,7 +73,7 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
         if (yesNoDialog.isAffirmative()) {
             resumeController.reset();
         } else {
-            resumeController.setStage(StageValue.EXIT);
+            resumeController.setStageValue(StageValue.EXIT);
         }
     }
 
@@ -91,7 +91,6 @@ public class GameView extends ControllersVisitor implements main.es.labturing.co
     @Override
     public void visit(SaveController saveController) {
         this.saveAndOrExit(saveController);
-        //AQUI GESTIONAR EL STAGE... A EXIT DIRECTAMENTE?
     }
 
     @Override

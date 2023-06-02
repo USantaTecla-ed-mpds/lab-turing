@@ -33,7 +33,6 @@ public class Session {
 
     public void nextStage() {
         this.stage.next();
-        System.out.println(this.stage.getValueStage().toString());
     }
 
     public StageValue getValueStage() {
@@ -125,15 +124,15 @@ public class Session {
     }
 
     public boolean hasName() {
-		return this.name != null;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+        return this.name != null;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
 }
