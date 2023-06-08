@@ -1,51 +1,73 @@
-package main.cat.plagues;
+package main.es.labturing.plaguesStats.src.main.cat.plagues;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalendarEventDAO {
 
-    private static final String DIRECTORY = "./src/main/resources";
+    private static final String DIRECTORY = "./tech-java-orientadoObjetos/src/main/es/labturing/plaguesStats/src/main/resources";
     private static final String FILE = "datosLimited.ics";
     private static final File directory = new File(CalendarEventDAO.DIRECTORY);
-    private final int calendarEventLines = 12;
+    private File file;
+    private List<CalendarEvent> calendarEvents;
     private List<String> lineList;
+    private final Map<Tag, String> methodsMap = new HashMap<Tag, String>();
 
-    public List<CalendarEvent> read() {
-        File file = new File(CalendarEventDAO.directory, CalendarEventDAO.FILE);
-        List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
-        this.createFormatedLines(file);
-        CalendarEvent calendarEvent = new CalendarEvent();
-        int linesCounter = 0;
-        for (String line : this.lineList) {
-            if (linesCounter < calendarEventLines) {
-                String separated[] = line.split(":", 2);
-                String methodString = "set" + separated[0];
-                linesCounter++;
-                if (linesCounter != calendarEventLines) {
-                    try {
-                        Method method = calendarEvent.getClass().getMethod(methodString, String.class);
-                        method.invoke(calendarEvent, separated[1]);
-                    } catch (Exception e) {
-                        System.out.println("error java reflexion: " + e.getMessage());
-                    }
-                } else {
-                    calendarEvents.add(calendarEvent);
-                    linesCounter = 0;
-                    calendarEvent = new CalendarEvent();
-                }
-            }
-        }
-        return calendarEvents;
+    public CalendarEventDAO() {
+        this.methodsMap.put(Tag.dateStart, "setStart");
+        this.methodsMap.put(Tag.dateEnd, "setEnd");
+        this.methodsMap.put(Tag.allDayDateStart, "setStart");
+        this.methodsMap.put(Tag.allDayDateEnd, "setEnd");
+        this.methodsMap.put(Tag.timeStamp, "setTimeStamp");
+        this.methodsMap.put(Tag.created, "setCreated");
+        this.methodsMap.put(Tag.status, "setStatus");
+        this.methodsMap.put(Tag.summary, "setSummary");
+        this.file = new File(CalendarEventDAO.directory, CalendarEventDAO.FILE);
+        this.calendarEvents = new ArrayList<CalendarEvent>();
     }
 
-    private void createFormatedLines(File file) {
+    public List<CalendarEvent> read() {
+
+        this.createFormatedLines();
+
+        boolean isEventBegin = false;
+        CalendarEvent calendarEvent = new CalendarEvent();
+
+        for (String line : this.lineList) {
+            if (line.equals(Tag.beginEvent.getTagString())) {
+                isEventBegin = true;
+            } else if (line.equals(Tag.endEvent.getTagString())) {
+                calendarEvents.add(calendarEvent);
+                calendarEvent = new CalendarEvent();
+                isEventBegin = false;
+            }
+            if (isEventBegin) {
+                String separated[] = line.split(":", 2);
+                String methodString = separated[0];
+                if (Tag.get(methodString) != null && this.methodsMap.containsKey(Tag.get(methodString))) {
+                    try {
+                        Method method = calendarEvent.getClass().getMethod(methodsMap.get(Tag.get(methodString)),
+                                String.class);
+                        method.invoke(calendarEvent, separated[1]);
+                    } catch (Exception e) {
+                        System.out.println("Error reflect: " + e.getMessage());
+                    }
+                }
+            }
+
+        }
+        return this.calendarEvents;
+    }
+
+    private void createFormatedLines() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new FileReader(this.file));
             int lineCounter = 0;
             String line;
             this.lineList = new ArrayList<String>();

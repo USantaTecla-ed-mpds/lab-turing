@@ -1,4 +1,4 @@
-package main.es.labturing.decorator;
+package main.es.labturing.dessignPaterns.decorator;
 
 public interface Message {
     

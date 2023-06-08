@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "main.es.labturing.dessignPaterns.decorator.Client",
+            "projectName": "lab-turing_fcff0119"
+        },
+        {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "main.es.labturing.plaguesStats.src.main.cat.plagues.Client",
+            "projectName": "lab-turing_fcff0119"
+        },
+        {
+            "type": "java",
             "name": "ConsoleConnect4",
             "request": "launch",
             "mainClass": "main.es.labturing.connect4.ConsoleConnect4",

@@ -51,7 +51,7 @@ public class StartController extends Controller implements AcceptorController {
         this.session.setStageValue(StageValue.INITIAL);
     }
 
-    public void accept(ControllersVisitor controllerVisitor) {
-        controllerVisitor.visit(this);
+    public void accept(ControllersVisitor controllersVisitor) {
+        controllersVisitor.visit(this);
     }
 }

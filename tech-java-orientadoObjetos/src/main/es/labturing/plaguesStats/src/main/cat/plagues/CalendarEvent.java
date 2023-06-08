@@ -1,64 +1,51 @@
-package main.cat.plagues;
+package main.es.labturing.plaguesStats.src.main.cat.plagues;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CalendarEvent {
 
-    private int sequence;
-    private boolean status;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
+    private LocalDate timeStamp;
+    private LocalDate created;
+    private String status;
     private String summary;
-    private boolean transparency;
-    public String end;
-    public String begin;
-    public String dateStart;
-    public String dateEnd;
-    public String timeStamp;
-    public String UID;
-    public String created;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-    public String getSummary(){
+    public String getSummary() {
         return this.summary;
     }
 
-    public void setSEQUENCE(String sequence) {
-        this.sequence = Integer.parseInt(sequence);
+    public LocalDate getStart() {
+        return this.dateStart;
     }
-    public void setSTATUS(String status) {
-        if(status.equals("CONFIRMED")){
-            this.status = true;
-        } else {
-            this.status = false;
-        }
+
+    public void setStart(String dateStart) {
+        this.dateStart = LocalDate.parse(dateStart.substring(0, 8), this.formatter);
     }
-    public void setSUMMARY(String summary) {
+
+    public void setEnd(String dateEnd) {
+
+        this.dateEnd = LocalDate.parse(dateEnd.substring(0, 8), this.formatter);
+    }
+
+    public void setTimeStamp(String timeStamp) {
+
+        this.timeStamp = LocalDate.parse(timeStamp.substring(0, 8), this.formatter);
+    }
+
+    public void setCreated(String created) {
+
+        this.created = LocalDate.parse(created.substring(0, 8), this.formatter);
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSummary(String summary) {
         this.summary = summary;
     }
-    public void setTRANSP(String transparency) {
-        if(transparency.equals("OPAQUE")){
-            this.transparency = false;
-        } else {
-            this.transparency = true;
-        }
-    }
-    public void setEND(String end) {
-        this.end = end;
-    }
-    public void setBEGIN(String begin) {
-        this.begin = begin;
-    }
-    public void setDTSTART(String dateStart) {
-        //LocalDate date = LocalDate.parse(dateStart, DateTimeFormatter.ISO_INSTANT);
-        this.dateStart = dateStart;
-    }
-    public void setDTEND(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-    public void setDTSTAMP(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-    public void setUID(String uID) {
-        UID = uID;
-    }
-    public void setCREATED(String created) {
-        this.created = created;
-    }
-    
+
 }

@@ -1,4 +1,4 @@
-package main.cat.plagues;
+package main.es.labturing.plaguesStats.src.main.cat.plagues;
 
 import java.util.List;
 
@@ -13,9 +13,12 @@ public class Client {
     public void run(){
         CalendarEventDAO calendarEventDAO = new CalendarEventDAO();
         this.CalendarEventList = calendarEventDAO.read(); 
-        for (CalendarEvent calendar : this.CalendarEventList) {
-            System.out.println(calendar.getSummary());
+        //Check
+        for (CalendarEvent event : this.CalendarEventList) {
+            System.out.println(event.getSummary());
+            System.out.println(event.getStart());
         }
+        //App
     }
     
 }

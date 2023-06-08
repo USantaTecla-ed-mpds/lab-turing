@@ -1,14 +1,14 @@
 package main.es.labturing.connect4;
 
 import main.es.labturing.connect4.controllers.AcceptorController;
-import main.es.labturing.connect4.controllers.ControllersVisitor;
 import main.es.labturing.connect4.controllers.Logic;
 import main.es.labturing.connect4.daos.SessionDAO;
+import main.es.labturing.connect4.views.GameView;
 
 public abstract class Connect4 {
 
     protected Logic logic;
-    protected ControllersVisitor gameView;
+    protected GameView gameView;
 
     public Connect4() {
         this.logic = new Logic(new SessionDAO());
@@ -25,6 +25,6 @@ public abstract class Connect4 {
         } while (acceptorController != null);
     }
 
-    protected abstract ControllersVisitor createView();
+    protected abstract GameView createView();
 
 }
