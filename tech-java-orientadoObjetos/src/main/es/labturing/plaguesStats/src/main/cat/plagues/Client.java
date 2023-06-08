@@ -15,10 +15,17 @@ public class Client {
         this.CalendarEventList = calendarEventDAO.read(); 
         //Check
         for (CalendarEvent event : this.CalendarEventList) {
-            System.out.println(event.getSummary());
-            System.out.println(event.getData());
+            //System.out.println(event.getSummary());
+            //System.out.println(event.getData());
         }
+
         //App
+        FilterChain filterChain = new FilterChain();
+        for (CalendarEvent event : this.CalendarEventList) {
+            System.out.println(filterChain.filter((event.getSummary())));
+        }
+
+        
     }
     
 }
