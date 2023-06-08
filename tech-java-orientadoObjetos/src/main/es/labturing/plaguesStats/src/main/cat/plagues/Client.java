@@ -16,7 +16,7 @@ public class Client {
         //Check
         for (CalendarEvent event : this.CalendarEventList) {
             System.out.println(event.getSummary());
-            System.out.println(event.getStart());
+            System.out.println(event.getData());
         }
         //App
     }

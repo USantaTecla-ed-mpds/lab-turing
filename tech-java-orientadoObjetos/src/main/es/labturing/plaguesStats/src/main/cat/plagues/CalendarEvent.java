@@ -11,33 +11,34 @@ public class CalendarEvent {
     private LocalDate created;
     private String status;
     private String summary;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public String getSummary() {
         return this.summary;
     }
 
-    public LocalDate getStart() {
-        return this.dateStart;
+    public String getData() {
+        return "Status: " + this.status + " /Start: " + this.dateStart + " /End: " + this.dateEnd + " /TimeStamp: " + this.timeStamp + " /Created: " + this.created;
     }
 
     public void setStart(String dateStart) {
-        this.dateStart = LocalDate.parse(dateStart.substring(0, 8), this.formatter);
+
+        this.dateStart = LocalDate.parse(dateStart.substring(0, 8), this.FORMATTER);
     }
 
     public void setEnd(String dateEnd) {
 
-        this.dateEnd = LocalDate.parse(dateEnd.substring(0, 8), this.formatter);
+        this.dateEnd = LocalDate.parse(dateEnd.substring(0, 8), this.FORMATTER);
     }
 
     public void setTimeStamp(String timeStamp) {
 
-        this.timeStamp = LocalDate.parse(timeStamp.substring(0, 8), this.formatter);
+        this.timeStamp = LocalDate.parse(timeStamp.substring(0, 8), this.FORMATTER);
     }
 
     public void setCreated(String created) {
 
-        this.created = LocalDate.parse(created.substring(0, 8), this.formatter);
+        this.created = LocalDate.parse(created.substring(0, 8), this.FORMATTER);
     }
 
     public void setStatus(String status) {
