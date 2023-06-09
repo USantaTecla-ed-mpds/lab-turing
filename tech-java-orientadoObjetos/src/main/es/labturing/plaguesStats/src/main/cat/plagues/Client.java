@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Client {
 
-    private List<CalendarEvent> CalendarEventList;
+    private List<CalendarEvent> CalendarEvents;
 
     public static void main(String[] args) {
         new Client().run();
@@ -12,20 +12,13 @@ public class Client {
 
     public void run(){
         CalendarEventDAO calendarEventDAO = new CalendarEventDAO();
-        this.CalendarEventList = calendarEventDAO.read(); 
-        //Check
-        for (CalendarEvent event : this.CalendarEventList) {
-            //System.out.println(event.getSummary());
-            //System.out.println(event.getData());
-        }
-
-        //App
+        this.CalendarEvents = calendarEventDAO.read(); 
         FilterChain filterChain = new FilterChain();
-        for (CalendarEvent event : this.CalendarEventList) {
-            System.out.println(filterChain.filter((event.getSummary())));
-        }
+        List<CalendarEvent> CalendarEventsModified = filterChain.filter(2014, this.CalendarEvents);
 
-        
+        for (CalendarEvent calendarEvent : CalendarEventsModified) {
+            System.out.println(calendarEvent.getDateStart() + " : " + calendarEvent.getSummary());  
+        }  
     }
     
 }

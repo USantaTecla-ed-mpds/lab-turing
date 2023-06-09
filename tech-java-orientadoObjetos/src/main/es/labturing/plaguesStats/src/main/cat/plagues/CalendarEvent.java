@@ -21,6 +21,10 @@ public class CalendarEvent {
         return "Status: " + this.status + " /Start: " + this.dateStart + " /End: " + this.dateEnd + " /TimeStamp: " + this.timeStamp + " /Created: " + this.created;
     }
 
+    public LocalDate getDateStart(){
+        return this.dateStart;
+    }
+
     public void setStart(String dateStart) {
 
         this.dateStart = LocalDate.parse(dateStart.substring(0, 8), this.FORMATTER);
