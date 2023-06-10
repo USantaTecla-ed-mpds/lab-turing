@@ -26,8 +26,12 @@ public class CalendarEvent {
     }
 
     public void setStart(String dateStart) {
+        if(dateStart == null){
+            System.out.println("setDate: " + dateStart);
 
+        }
         this.dateStart = LocalDate.parse(dateStart.substring(0, 8), this.FORMATTER);
+
     }
 
     public void setEnd(String dateEnd) {

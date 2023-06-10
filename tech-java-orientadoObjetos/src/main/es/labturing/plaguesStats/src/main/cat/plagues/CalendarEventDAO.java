@@ -12,7 +12,7 @@ import java.util.Map;
 public class CalendarEventDAO {
 
     private static final String DIRECTORY = "./tech-java-orientadoObjetos/src/main/es/labturing/plaguesStats/src/main/resources";
-    private static final String FILE = "datosLimited.ics";
+    private static final String FILE = "datos.ics";
     private static final File directory = new File(CalendarEventDAO.DIRECTORY);
     private File file;
     private List<CalendarEvent> calendarEvents;

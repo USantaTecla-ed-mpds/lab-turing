@@ -14,11 +14,22 @@ public class Client {
         CalendarEventDAO calendarEventDAO = new CalendarEventDAO();
         this.CalendarEvents = calendarEventDAO.read(); 
         FilterChain filterChain = new FilterChain();
-        List<CalendarEvent> CalendarEventsModified = filterChain.filter(2014, this.CalendarEvents);
+        FilterParameters filterParameters = new FilterParameters(2023, "edu");
+        List<CalendarEvent> CalendarEventsModified = filterChain.filter(filterParameters, this.CalendarEvents);
 
-        for (CalendarEvent calendarEvent : CalendarEventsModified) {
-            System.out.println(calendarEvent.getDateStart() + " : " + calendarEvent.getSummary());  
-        }  
+        // int counter = 0;
+        // for (CalendarEvent calendarEvent : CalendarEventsModified) {
+        //     counter++;
+        //     System.out.println(counter + ". " + calendarEvent.getDateStart() + " : " + calendarEvent.getSummary());  
+        // } 
+        
+        System.out.println("Total events for year " 
+                        + filterParameters.getYear() 
+                        + " and word \"" 
+                        + filterParameters.getSearchWord()
+                        + "\" : "
+                        + CalendarEventsModified.size()
+                        );
     }
     
 }

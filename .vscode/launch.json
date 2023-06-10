@@ -4,6 +4,27 @@
             "type": "java",
             "name": "Client",
             "request": "launch",
+            "mainClass": "main.es.labturing.plaguesStats.src.main.cat.plagues3.Client",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "main.es.labturing.plaguesStats.src.main.cat.plagues.Client",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "main.es.labturing.plaguesStats.src.main.cat.plagues2.Client",
+            "projectName": "lab-turing_d6061bc5"
+        },
+        {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
             "mainClass": "main.es.labturing.dessignPaterns.decorator.Client",
             "projectName": "lab-turing_fcff0119"
         },

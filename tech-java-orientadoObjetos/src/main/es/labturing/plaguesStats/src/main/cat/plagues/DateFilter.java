@@ -1,25 +1,20 @@
 package main.es.labturing.plaguesStats.src.main.cat.plagues;
 
-import java.util.ArrayList;
-import java.util.List;
+public class DateFilter implements Responsable {
 
-public class DateFilter implements Resposable{
+    private Responsable next;
 
-    private Resposable next;
-
-    public DateFilter(Resposable responsable){
+    public DateFilter(Responsable responsable) {
         this.next = responsable;
     }
 
     @Override
-    public List<CalendarEvent> filter(int year, List<CalendarEvent> calendarEvents) {
-        List<CalendarEvent> modified = new ArrayList<CalendarEvent>();
-
-        for (CalendarEvent calendarEvent : calendarEvents) {
-            if(calendarEvent.getDateStart().getYear() == year){
-                modified.add(calendarEvent);
+    public CalendarEvent filter(FilterParameters filterParameters, CalendarEvent calendarEvent) {
+        if(calendarEvent.getDateStart() != null){
+            if (calendarEvent.getDateStart().getYear() == filterParameters.getYear()) {
+                return this.next.filter(filterParameters, calendarEvent);
             }
         }
-        return next.filter(year, modified); 
+        return null;
     }
 }
