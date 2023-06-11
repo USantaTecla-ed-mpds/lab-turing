@@ -10,12 +10,10 @@ public class AddAsterisc implements Responsable {
 
     @Override
     public CalendarEvent filter(FilterParameters filterParameters, CalendarEvent calendarEvent) {
-        if(calendarEvent.getSummary() != null){
-            String modified = "* " + calendarEvent.getSummary();
-            calendarEvent.setSummary(modified);
+        if (calendarEvent.getSummary() != null) {
+            calendarEvent.setSummary(calendarEvent.getSummary() + " *");
             return this.next.filter(filterParameters, calendarEvent);
         }
         return null;
     }
-
 }

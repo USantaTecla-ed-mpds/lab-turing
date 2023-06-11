@@ -5,28 +5,30 @@ import java.util.List;
 
 public class FilterChain {
 
-    private Responsable collector;
+    private EndFilterChain endFilterChain;
     private Responsable addAsterisc;
-    private Responsable searchString;
+    private Responsable containsWord;
+    private Responsable firstLetterUpperCase;
     private Responsable toLowerCase;
     private Responsable dateFilter;
 
-    public FilterChain(){
-        this.collector = new Collector();
-        this.addAsterisc = new AddAsterisc(collector);
-        this.searchString = new SearchString(addAsterisc);
-        this.toLowerCase = new ToLowerCase(searchString);
-        this.dateFilter = new DateFilter(toLowerCase);
+    public FilterChain() {
+        this.endFilterChain = new EndFilterChain();
+        this.addAsterisc = new AddAsterisc(this.endFilterChain);
+        this.firstLetterUpperCase = new FirstLetterUpperCase(this.addAsterisc);
+        this.containsWord = new ContainsWord(this.firstLetterUpperCase);
+        this.toLowerCase = new ToLowerCase(this.containsWord);
+        this.dateFilter = new DateFilter(this.toLowerCase);
     }
 
-    public List<CalendarEvent> filter(FilterParameters filterParameters, List<CalendarEvent> calendarEvents){
+    public List<CalendarEvent> filter(FilterParameters filterParameters, List<CalendarEvent> calendarEvents) {
         List<CalendarEvent> modified = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent : calendarEvents) {
-            if(this.dateFilter.filter(filterParameters, calendarEvent) != null){
+            if (this.dateFilter.filter(filterParameters, calendarEvent) != null) {
                 modified.add(this.dateFilter.filter(filterParameters, calendarEvent));
             }
         }
         return modified;
     }
-    
+
 }

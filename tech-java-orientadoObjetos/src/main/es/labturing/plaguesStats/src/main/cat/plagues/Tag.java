@@ -26,8 +26,8 @@ public enum Tag {
     }
 
     public static Tag get(String tagString) {
-        for(Tag t : Tag.values()){
-            if(t.tagString.equals(tagString)){
+        for (Tag t : Tag.values()) {
+            if (t.tagString.equals(tagString)) {
                 return t;
             }
         }

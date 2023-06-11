@@ -18,15 +18,16 @@ public class CalendarEvent {
     }
 
     public String getData() {
-        return "Status: " + this.status + " /Start: " + this.dateStart + " /End: " + this.dateEnd + " /TimeStamp: " + this.timeStamp + " /Created: " + this.created;
+        return "Status: " + this.status + " /Start: " + this.dateStart + " /End: " + this.dateEnd + " /TimeStamp: "
+                + this.timeStamp + " /Created: " + this.created;
     }
 
-    public LocalDate getDateStart(){
+    public LocalDate getDateStart() {
         return this.dateStart;
     }
 
     public void setStart(String dateStart) {
-        if(dateStart == null){
+        if (dateStart == null) {
             System.out.println("setDate: " + dateStart);
 
         }

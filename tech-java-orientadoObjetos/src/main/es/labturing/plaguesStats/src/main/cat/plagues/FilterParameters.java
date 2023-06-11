@@ -5,7 +5,7 @@ public class FilterParameters {
     private int year;
     private String searchWord;
 
-    public FilterParameters(int year, String searchWord){
+    public FilterParameters(int year, String searchWord) {
         this.year = year;
         this.searchWord = searchWord;
     }
@@ -25,5 +25,5 @@ public class FilterParameters {
     public void setSearchWord(String searchWord) {
         this.searchWord = searchWord;
     }
-    
+
 }
