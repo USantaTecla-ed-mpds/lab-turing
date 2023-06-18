@@ -11,6 +11,7 @@ public class FilterChain {
     private Responsable firstLetterUpperCase;
     private Responsable toLowerCase;
     private Responsable dateFilter;
+    private Responsable startFilterChain;
 
     public FilterChain() {
         this.endFilterChain = new EndFilterChain();
@@ -19,13 +20,16 @@ public class FilterChain {
         this.containsWord = new ContainsWord(this.firstLetterUpperCase);
         this.toLowerCase = new ToLowerCase(this.containsWord);
         this.dateFilter = new DateFilter(this.toLowerCase);
+        this.startFilterChain = new StartFilterChain(this.dateFilter);
     }
 
     public List<CalendarEvent> filter(FilterParameters filterParameters, List<CalendarEvent> calendarEvents) {
         List<CalendarEvent> modified = new ArrayList<CalendarEvent>();
-        for (CalendarEvent calendarEvent : calendarEvents) {
-            if (this.dateFilter.filter(filterParameters, calendarEvent) != null) {
-                modified.add(this.dateFilter.filter(filterParameters, calendarEvent));
+
+        for (int i = 0; i < calendarEvents.size(); i++) {
+            CalendarEvent calendarEvent = this.startFilterChain.filter(filterParameters, calendarEvents.get(i));
+            if(calendarEvent != null){
+                modified.add(calendarEvent);
             }
         }
         return modified;
